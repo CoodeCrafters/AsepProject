@@ -388,56 +388,55 @@ footer {
 
   <!-- Domain Carousel Section -->
   <section class="domain-carousel">
-    <button class="carousel-arrow left" onclick="moveLeft()">←</button>
-    <div class="domain-container" id="domainContainer">
-     <div class="domain">
-  <h3>Mathematics</h3>
-  <p>Unravel the Patterns of the Universe</p>
-</div>
-<div class="domain">
-  <h3>Physics</h3>
-  <p>Dive into the Laws of Nature</p>
-</div>
-<div class="domain">
-  <h3>Python</h3>
-  <p>Code Your Way to Innovation</p>
-</div>
-<div class="domain">
-  <h3>Chemistry</h3>
-  <p>Unlock the Secrets of Matter</p>
-</div>
-<div class="domain">
-  <h3>Biology</h3>
-  <p>Explore the Wonders of Life</p>
-</div>
-<div class="domain">
-  <h3>History</h3>
-  <p>Step Back into the Chronicles of Time</p>
-</div>
-<div class="domain">
-  <h3>Literature</h3>
-  <p>Immerse in the World of Words</p>
-</div>
-<div class="domain">
-  <h3>Computer Science</h3>
-  <p>Empower Your Future with Technology</p>
-</div>
-<div class="domain">
-  <h3>Economics</h3>
-  <p>Understand the Science of Wealth</p>
-</div>
-<div class="domain">
-  <h3>Astronomy</h3>
-  <p>Reach for the Stars and Beyond</p>
-</div>
-      <div class="domain">
-        <h3>Art & Design</h3>
-        <p>Creative inspirations and design</p>
-      </div>
-          </div>
-    <button class="carousel-arrow right" onclick="moveRight()">→</button>
-  </section>
-
+  <button class="carousel-arrow left" onclick="moveLeft()">←</button>
+  <div class="domain-container" id="domainContainer">
+    <div class="domain" onclick="openDomain('Mathematics')">
+      <h3>Mathematics</h3>
+      <p>Unravel the Patterns of the Universe</p>
+    </div>
+    <div class="domain" onclick="openDomain('Physics')">
+      <h3>Physics</h3>
+      <p>Dive into the Laws of Nature</p>
+    </div>
+    <div class="domain" onclick="openDomain('Python')">
+      <h3>Python</h3>
+      <p>Code Your Way to Innovation</p>
+    </div>
+    <div class="domain" onclick="openDomain('Chemistry')">
+      <h3>Chemistry</h3>
+      <p>Unlock the Secrets of Matter</p>
+    </div>
+    <div class="domain" onclick="openDomain('Biology')">
+      <h3>Biology</h3>
+      <p>Explore the Wonders of Life</p>
+    </div>
+    <div class="domain" onclick="openDomain('History')">
+      <h3>History</h3>
+      <p>Step Back into the Chronicles of Time</p>
+    </div>
+    <div class="domain" onclick="openDomain('Literature')">
+      <h3>Literature</h3>
+      <p>Immerse in the World of Words</p>
+    </div>
+    <div class="domain" onclick="openDomain('Computer Science')">
+      <h3>Computer Science</h3>
+      <p>Empower Your Future with Technology</p>
+    </div>
+    <div class="domain" onclick="openDomain('Economics')">
+      <h3>Economics</h3>
+      <p>Understand the Science of Wealth</p>
+    </div>
+    <div class="domain" onclick="openDomain('Astronomy')">
+      <h3>Astronomy</h3>
+      <p>Reach for the Stars and Beyond</p>
+    </div>
+    <div class="domain" onclick="openDomain('Art & Design')">
+      <h3>Art & Design</h3>
+      <p>Creative inspirations and design</p>
+    </div>
+  </div>
+  <button class="carousel-arrow right" onclick="moveRight()">→</button>
+</section>
 
 
 <footer>
@@ -534,6 +533,11 @@ function showNotifications() {
     const notificationBox = document.getElementById('notification-box');
     notificationBox.style.display = notificationBox.style.display === 'block' ? 'none' : 'block';
 }
+
+ // Function to handle domain click
+  function openDomain(selectedDomain) {
+    window.location.href = `./resultsofdomain.html?domain=${selectedDomain}`;
+  }
   </script>
 
 </body>
