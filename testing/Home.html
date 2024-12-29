@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central E-Library</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* General Styling */
+    :root {
+      --bs-primary: #103125;
+      --bs-secondary: #1A503E;
+      --bs-success: #0D7751;
+      --bs-light-bg: #f8f9fa;
+      --bs-dark-bg: #222;
+      --bs-white: #fff;
+      --bs-gray: #666;
+      --bs-body-bg: #fff;
+      --bs-body-color: #444;
+      --bs-link-color: #2196f3;
+      --bs-link-hover-color: #1a78c2;
+      --bs-font-sans-serif: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      --bs-body-font-size: 1rem;
+      --bs-body-font-weight: 400;
+      --bs-body-line-height: 1.5;
+    }
+
+    body {
+      font-family: var(--bs-font-sans-serif);
+      background-color: var(--bs-body-bg);
+      margin: 0;
+      padding: 0;
+      color: var(--bs-body-color);
+      overflow-x: hidden;
+    }
+
+    /* Header Section */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      background-color: var(--bs-primary);
+      color: var(--bs-white);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .header .logo {
+      font-size: 1.8em;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: var(--bs-white);
+    }
+
+    .menu-bar {
+      display: flex;
+      gap: 30px;
+    }
+
+    .menu-bar a {
+      color: var(--bs-white);
+      text-decoration: none;
+      font-size: 1.1em;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .menu-bar a:hover {
+      background: var(--bs-secondary);
+      transform: scale(1.1);
+    }
+
+    /* Search Panel */
+    .search-panel {
+      position: relative;
+      background: url('./1200x400.webp') no-repeat center center/cover;
+      padding: 80px 20px;
+      text-align: center;
+      color: var(--bs-white);
+    }
+
+    .search-panel h2 {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .search-panel input,
+    .search-panel select,
+    .search-panel button {
+      padding: 10px 20px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 5px;
+      margin: 10px 0;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .search-panel input:focus,
+    .search-panel select:focus {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+
+    .search-panel button {
+      cursor: pointer;
+      background-color: var(--bs-primary);
+      color: var(--bs-white);
+      border: none;
+    }
+
+    .search-panel button:hover {
+      background-color: var(--bs-secondary);
+      transform: scale(1.1);
+    }
+
+    /* Domain Carousel Section */
+    .domain-carousel {
+      position: relative;
+      display: flex;
+      overflow: hidden;
+      width: 100%;
+      margin: 40px 0;
+    }
+
+    .domain-container {
+      display: flex;
+      transition: transform 0.8s ease-in-out; /* Smooth scrolling transition */
+    }
+
+    .domain {
+      padding: 20px;
+      margin: 3px 15px; /* Margin including y-axis */
+      background-color: var(--bs-light-bg);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 250px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .domain:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .domain h3 {
+      margin-bottom: 10px;
+      font-size: 1.5em;
+      color: var(--bs-primary);
+    }
+
+    .domain p {
+      font-size: 1.1em;
+      color: var(--bs-secondary);
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: var(--bs-white);
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    .carousel-arrow.left {
+      left: 10px;
+    }
+
+    .carousel-arrow.right {
+      right: 10px;
+    }
+
+    /* Responsiveness */
+    @media (max-width: 768px) {
+      .domain {
+        width: 200px;
+      }
+    }
+.notification-box {
+    font-family: 'monotype', monospace;
+    color: #fff;
+    position: fixed; /* Change to fixed for positioning */
+    top: 10%; /* Adjust to your preference */
+    right: 10px; /* Move it to the right */
+    width: 300px; /* Adjust the width */
+    height: 400px; /* Set fixed height */
+    overflow: hidden;
+    border: 1px solid #4b6cb7;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: #1e1e1e;
+    display: block;
+    z-index: 1000; /* Ensure it appears above other content */
+}
+
+.neon-lights-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.neon-light-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgb(202, 240, 228), rgb(124, 248, 186));
+    animation: neonGlow 2s linear infinite alternate, neonBlow 6s linear infinite;
+    z-index: -1;
+}
+
+.notification-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    animation: scrollNotifications 20s linear infinite;
+}
+
+.notification {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+@keyframes neonGlow {
+    0% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes neonBlow {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes scrollNotifications {
+    0% {
+        transform: translateY(100%); /* Start below */
+    }
+    100% {
+        transform: translateY(-100%); /* Move above */
+    }
+}
+
+/* General Footer Styling */
+footer {
+  background: #cfe7ed;
+  color: #000000;
+  padding: 40px 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-container div {
+  flex: 1;
+  margin: 10px;
+  min-width: 250px;
+}
+
+.footer-container h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.footer-container h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 2px;
+  background: #ff6347;
+  margin-top: 5px;
+  transition: width 0.4s ease-in-out;
+}
+
+.footer-container h2:hover::after {
+  width: 100px;
+}
+
+.footer-container p,
+.footer-container a {
+  font-size: 14px;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.footer-container a {
+  color: #ff6347;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-container a:hover {
+  color: #fff;
+}
+
+/* Social Media Links */
+.social-media-section a {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border: 1px solid #ff6347;
+  border-radius: 4px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.social-media-section a:hover {
+  background: #ff6347;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+/* Animation */
+footer {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header class="header">
+    <div class="logo">Central E-Library</div>
+    <nav class="menu-bar">
+      <a href="#">Home</a>
+      <a href="#">Contact Us</a>
+      <a href="#">About Us</a>
+    </nav>
+  </header>
+
+  <!-- Search Panel -->
+  <section class="search-panel">
+    <h2>Find Your Next Book</h2>
+    <input type="text" placeholder="Search by Title, Author, ISBN">
+    <select>
+      <option value="all">All Categories</option>
+      <option value="fiction">Fiction</option>
+      <option value="science">Science</option>
+      <option value="history">History</option>
+    </select>
+    <button onclick="searchBook()">Search</button>
+  </section>
+
+  <!-- Domain Carousel Section -->
+  <section class="domain-carousel">
+  <button class="carousel-arrow left" onclick="moveLeft()">←</button>
+  <div class="domain-container" id="domainContainer">
+    <div class="domain" onclick="openDomain('Mathematics')">
+      <h3>Mathematics</h3>
+      <p>Unravel the Patterns of the Universe</p>
+    </div>
+    <div class="domain" onclick="openDomain('Physics')">
+      <h3>Physics</h3>
+      <p>Dive into the Laws of Nature</p>
+    </div>
+    <div class="domain" onclick="openDomain('Python')">
+      <h3>Python</h3>
+      <p>Code Your Way to Innovation</p>
+    </div>
+    <div class="domain" onclick="openDomain('Chemistry')">
+      <h3>Chemistry</h3>
+      <p>Unlock the Secrets of Matter</p>
+    </div>
+    <div class="domain" onclick="openDomain('Biology')">
+      <h3>Biology</h3>
+      <p>Explore the Wonders of Life</p>
+    </div>
+    <div class="domain" onclick="openDomain('History')">
+      <h3>History</h3>
+      <p>Step Back into the Chronicles of Time</p>
+    </div>
+    <div class="domain" onclick="openDomain('Literature')">
+      <h3>Literature</h3>
+      <p>Immerse in the World of Words</p>
+    </div>
+    <div class="domain" onclick="openDomain('Computer Science')">
+      <h3>Computer Science</h3>
+      <p>Empower Your Future with Technology</p>
+    </div>
+    <div class="domain" onclick="openDomain('Economics')">
+      <h3>Economics</h3>
+      <p>Understand the Science of Wealth</p>
+    </div>
+    <div class="domain" onclick="openDomain('Astronomy')">
+      <h3>Astronomy</h3>
+      <p>Reach for the Stars and Beyond</p>
+    </div>
+    <div class="domain" onclick="openDomain('Art & Design')">
+      <h3>Art & Design</h3>
+      <p>Creative inspirations and design</p>
+    </div>
+  </div>
+  <button class="carousel-arrow right" onclick="moveRight()">→</button>
+</section>
+
+
+<footer>
+  <div class="footer-container">
+    <div class="about-section">
+      <h2>About Us</h2>
+      <p>
+        Welcome to our library, a treasure trove of knowledge and resources. We
+        strive to foster a love for learning and reading by providing access to
+        an extensive collection of books, digital content, and community programs.
+      </p>
+    </div>
+    <div class="contact-section">
+      <h2>Contact Us</h2>
+      <p><strong>Address:</strong> 123 Knowledge Lane, Booksville</p>
+      <p><strong>Phone:</strong> +1 234 567 890</p>
+      <p><strong>Email:</strong> contact@ourlibrary.com</p>
+    </div>
+    <div class="social-media-section">
+      <h2>Follow Us</h2>
+      <a href="#" class="social-link">Facebook</a>
+      <a href="#" class="social-link">Twitter</a>
+      <a href="#" class="social-link">Instagram</a>
+      <a href="#" class="social-link">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Our Library. All Rights Reserved.</p>
+  </div>
+</footer>
+  <script>
+    // Move left or right in the carousel
+    let currentIndex = 0; // Start at the first domain
+    const domainContainer = document.getElementById('domainContainer');
+    const domains = document.querySelectorAll('.domain');
+    const domainWidth = domains[0].offsetWidth + 30; // Width of a single domain including margin
+
+    // Duplicate first domain and append at the end for continuous scrolling
+    const firstClone = domainContainer.firstElementChild.cloneNode(true);
+    domainContainer.appendChild(firstClone);
+
+    const totalDomains = domains.length + 1; // Include the clone
+
+    // Function to move carousel to the right (continuous scrolling)
+    function moveRight() {
+      currentIndex++;
+      domainContainer.style.transform = `translateX(-${currentIndex * domainWidth}px)`;
+      domainContainer.style.transition = "transform 0.8s ease-in-out";
+
+      // When the last domain reaches the end, reset to the first one
+      if (currentIndex === totalDomains - 1) {
+        setTimeout(() => {
+          domainContainer.style.transition = "none"; // Disable transition temporarily
+          domainContainer.style.transform = `translateX(0px)`; // Reset position
+          currentIndex = 0; // Reset index
+        }, 800); // Match the transition duration
+      }
+    }
+
+    // Function to move carousel to the left
+    function moveLeft() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        domainContainer.style.transform = `translateX(-${currentIndex * domainWidth}px)`;
+        domainContainer.style.transition = "transform 0.8s ease-in-out";
+      }
+    }
+
+    // Auto slide every 5 seconds
+    setInterval(() => {
+      if (currentIndex < totalDomains - 1) {
+        moveRight();
+      } else {
+        currentIndex = -1; // Reset to the start
+        moveRight();
+      }
+    }, 5000); // Change domain every 5 seconds
+
+    // Search Book Functionality (for demonstration)
+    function searchBook() {
+      alert('Search functionality is not yet implemented.');
+    }
+
+window.addEventListener("scroll", () => {
+  const footer = document.querySelector("footer");
+  const rect = footer.getBoundingClientRect();
+
+  if (rect.top < window.innerHeight && rect.bottom >= 0) {
+    footer.style.animation = "fadeIn 1.5s ease-in-out";
+  }
+});
+
+function showNotifications() {
+    const notificationBox = document.getElementById('notification-box');
+    notificationBox.style.display = notificationBox.style.display === 'block' ? 'none' : 'block';
+}
+
+ // Function to handle domain click
+  function openDomain(selectedDomain) {
+    window.location.href = `./resultsofdomains.html?domain=${selectedDomain}`;
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+  const token = localStorage.getItem('userToken');
+
+  if (!token) {
+    // Token not found, redirect to login
+    alert('Please log in to access this page.');
+    window.location.href = './login.html';
+  }
+
+  // Optionally, fetch user-specific data using the token
+  console.log('Token found. User is authenticated.');
+});
+function openDomain(selectedDomain) {
+  // Save the selected domain in localStorage or a global variable
+  localStorage.setItem('selectedDomain', selectedDomain);
+
+  // Redirect to resultofhtml
+  window.location.href = './resultofhtml.html';
+}
+function logout() {
+  firebase.auth().signOut().then(() => {
+    // Clear token from localStorage
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('selectedDomain');
+
+    // Redirect to login page
+    alert('Logged out successfully.');
+    window.location.href = './login.html';
+  }).catch(error => {
+    console.error('Logout Error:', error.message);
+  });
+}
+
+  </script>
+
+</body>
+</html>
