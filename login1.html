@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E Library Login</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script>
+      // Initialize Firebase App and Authentication
+      const firebaseConfig = {
+        apiKey: "AIzaSyD2UawbUSvZgheQ89kQT9FvL-UZfu1UxZo",
+        authDomain: "asep-project-f4b23.firebaseapp.com",
+        projectId: "asep-project-f4b23",
+        storageBucket: "asep-project-f4b23.firebasestorage.app",
+        messagingSenderId: "404098472129",
+        appId: "1:404098472129:web:2eaa5d9240f8d732d59c40",
+        measurementId: "G-580RFQEW5V"
+      };
+
+      // Initialize Firebase
+      const app = firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+
+      // Google Sign-In
+      const provider = new firebase.auth.GoogleAuthProvider();
+
+      function handleGoogleLogin() {
+        auth.signInWithPopup(provider)
+          .then((result) => {
+            const user = result.user;
+            const email = user.email;
+
+            // Restrict login to the domain @vit.edu
+            const allowedDomain = "vit.edu";
+            if (email.split("@")[1] === allowedDomain) {
+              console.log("Login successful!");
+              alert("Welcome to VIT Portal!");
+              window.location.href = "/dashboard.html"; // Replace with your URL
+            } else {
+              console.error("Unauthorized domain");
+              alert("Only users with the '@vit.edu' domain are allowed to log in.");
+              auth.signOut();
+            }
+          })
+          .catch((error) => {
+            console.error("Login failed:", error.message);
+            alert("Login failed. Please try again.");
+          });
+      }
+
+      // Handle regular login button click
+      function handleLoginClick(event) {
+        event.preventDefault();
+        alert("The Login option is under maintenance. Use the option 'Browse without Sign In'");
+      }
+
+      // Redirect to Home.html when "Browse without Sign In" is clicked
+      function redirectToHome() {
+        window.location.href = "Home.html";
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <form action="">
+        <h1>Login</h1>
+
+        <div class="input-box">
+          <input type="text" placeholder="Username" required />
+        </div>
+        <div class="input-box">
+          <input type="password" placeholder="Password" required />
+        </div>
+
+        <div class="remember-forgot">
+          <label><input type="checkbox" /> Remember me</label>
+          <a href="#">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn" onclick="handleLoginClick(event)">Login</button>
+
+        <button type="button" class="btn google-login" onclick="handleGoogleLogin()">
+          <i class='bx bxl-google'></i> Login with Google
+        </button>
+
+        <div class="register-link">
+          <p>Don't have an account? <a href="#">Register here!</a></p>
+        </div>
+
+        <button type="button" class="btn" onclick="redirectToHome()">Browse without Sign In</button>
+      </form>
+    </div>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: #f5f5f5;
+      }
+
+      .container {
+        background: #fff;
+        padding: 20px 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .input-box {
+        margin: 10px 0;
+      }
+
+      .input-box input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .btn {
+        display: inline-block;
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        background-color: #0056b3;
+      }
+
+      .google-login {
+        background-color: #db4437;
+      }
+
+      .google-login:hover {
+        background-color: #c23321;
+      }
+
+      .btn i {
+        margin-right: 8px;
+      }
+
+      .remember-forgot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+      }
+
+      .register-link p {
+        font-size: 14px;
+      }
+
+      .register-link a {
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      .register-link a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </body>
+</html>
