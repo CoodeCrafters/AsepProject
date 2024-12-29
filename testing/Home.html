@@ -538,31 +538,28 @@ function showNotifications() {
     notificationBox.style.display = notificationBox.style.display === 'block' ? 'none' : 'block';
 }
 
- // Function to handle domain click
-  function openDomain(selectedDomain) {
-    window.location.href = `./resultsofdomain.html?domain=${selectedDomain}`;
-  }
-  document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
+  // Firebase initialization
+  firebase.initializeApp({
+    apiKey: "AIzaSyD2UawbUSvZgheQ89kQT9FvL-UZfu1UxZo",
+        authDomain: "asep-project-f4b23.firebaseapp.com",
+        projectId: "asep-project-f4b23",
+        storageBucket: "asep-project-f4b23.appspot.com",
+        messagingSenderId: "404098472129",
+        appId: "1:404098472129:web:2eaa5d9240f8d732d59c40",
+        measurementId: "G-580RFQEW5V"
+  });
+
   const token = localStorage.getItem('userToken');
 
   if (!token) {
     // Token not found, redirect to login
     alert('Please log in to access this page.');
     window.location.href = './login.html';
+  } else {
+    console.log('Token found. User is authenticated.');
   }
-
-  // Optionally, fetch user-specific data using the token
-  console.log('Token found. User is authenticated.');
 });
-firebase.initializeApp({
-    apiKey: "AIzaSyD2UawbUSvZgheQ89kQT9FvL-UZfu1UxZo",
-    authDomain: "asep-project-f4b23.firebaseapp.com",
-    projectId: "asep-project-f4b23",
-    storageBucket: "asep-project-f4b23.appspot.com",
-    messagingSenderId: "404098472129",
-    appId: "1:404098472129:web:2eaa5d9240f8d732d59c40",
-    measurementId: "G-580RFQEW5V"
-    });
 
 function logout() {
   firebase.auth().signOut().then(() => {
