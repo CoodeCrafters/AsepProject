@@ -551,6 +551,15 @@ function showNotifications() {
   // Optionally, fetch user-specific data using the token
   console.log('Token found. User is authenticated.');
 });
+firebase.initializeApp({
+    apiKey: "AIzaSyD2UawbUSvZgheQ89kQT9FvL-UZfu1UxZo",
+    authDomain: "asep-project-f4b23.firebaseapp.com",
+    projectId: "asep-project-f4b23",
+    storageBucket: "asep-project-f4b23.appspot.com",
+    messagingSenderId: "404098472129",
+    appId: "1:404098472129:web:2eaa5d9240f8d732d59c40",
+    measurementId: "G-580RFQEW5V"
+    });
 
 function logout() {
   firebase.auth().signOut().then(() => {
