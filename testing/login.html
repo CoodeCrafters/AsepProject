@@ -16,7 +16,7 @@
         apiKey: "AIzaSyD2UawbUSvZgheQ89kQT9FvL-UZfu1UxZo",
         authDomain: "asep-project-f4b23.firebaseapp.com",
         projectId: "asep-project-f4b23",
-        storageBucket: "asep-project-f4b23.firebasestorage.app",
+        storageBucket: "asep-project-f4b23.appspot.com",
         messagingSenderId: "404098472129",
         appId: "1:404098472129:web:2eaa5d9240f8d732d59c40",
         measurementId: "G-580RFQEW5V"
@@ -25,10 +25,9 @@
       // Initialize Firebase
       const app = firebase.initializeApp(firebaseConfig);
       const auth = firebase.auth();
-
-      // Google Sign-In
       const provider = new firebase.auth.GoogleAuthProvider();
 
+      // Google Sign-In
       function handleGoogleLogin() {
         auth.signInWithPopup(provider)
           .then((result) => {
@@ -38,18 +37,19 @@
             // Restrict login to the domain @vit.edu
             const allowedDomain = "vit.edu";
             if (email.split("@")[1] === allowedDomain) {
-              console.log("Login successful!");
-              alert("Welcome to VIT Portal!");
-              window.location.href = "./Home.html"; // Replace with your URL
+              user.getIdToken().then(token => {
+                localStorage.setItem("userToken", token); // Store token
+                alert("Welcome to VIT Portal!");
+                window.location.href = "./Home.html"; // Redirect to Home
+              });
             } else {
-              console.error("Unauthorized domain");
               alert("Only users with the '@vit.edu' domain are allowed to log in.");
               auth.signOut();
             }
           })
           .catch((error) => {
-            console.error("Login failed:", error.message);
             alert("Login failed. Please try again.");
+            console.error("Login failed:", error.message);
           });
       }
 
@@ -63,24 +63,11 @@
       function redirectToHome() {
         window.location.href = "Home.html";
       }
-firebase.auth().signInWithEmailAndPassword(email, password)
-  .then(userCredential => {
-    // Get the user token
-    userCredential.user.getIdToken().then(token => {
-      // Store token in localStorage
-      localStorage.setItem('userToken', token);
 
-      // Redirect to Home.html
-      window.location.href = './Home.html';
-    });
-  })
-  .catch(error => {
-    console.error('Login Error:', error.message);
-    alert('Login failed. Please try again.');
-  });
-
+      // Add logout logic if necessary (optional)
     </script>
     <style>
+      /* Styling: Same as before, no changes. */
       body {
         font-family: 'Poppins', sans-serif;
         margin: 0;
