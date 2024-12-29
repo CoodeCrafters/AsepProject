@@ -472,6 +472,60 @@ footer {
   </div>
 </footer>
   <script>
+     document.addEventListener('DOMContentLoaded', () => {
+      // Initialize Firebase
+      firebase.initializeApp({
+        apiKey: "AIzaSyD2UawbUSvZgheQ89kQT9FvL-UZfu1UxZo",
+        authDomain: "asep-project-f4b23.firebaseapp.com",
+        projectId: "asep-project-f4b23",
+        storageBucket: "asep-project-f4b23.appspot.com",
+        messagingSenderId: "404098472129",
+        appId: "1:404098472129:web:2eaa5d9240f8d732d59c40",
+        measurementId: "G-580RFQEW5V"
+      });
+
+      const token = localStorage.getItem('userToken');
+
+      if (!token) {
+        // Token not found, redirect to login
+        alert('Please log in to access this page.');
+        window.location.href = './login.html';
+      } else {
+        console.log('Token found. User is authenticated.');
+      }
+    });
+
+    // Function to handle logout
+    function logout() {
+      firebase.auth().signOut().then(() => {
+        // Clear token from localStorage
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('selectedDomain');
+
+        // Clear the page content and display logout message
+        document.body.innerHTML = ''; // Clear all content
+        const logoutMessage = `
+          <div style="text-align: center; margin-top: 100px;">
+            <h1>😊</h1>
+            <h2>Dear User,</h2>
+            <p>You are successfully signed out!!</p>
+            <p>Thank you for choosing and using us!!</p>
+            <p>We hope you visit us again!!</p>
+            <p>Best Regards,</p>
+            <p>Central Library</p>
+          </div>
+        `;
+        document.body.innerHTML = logoutMessage; // Display the logout message
+
+        // Redirect to login page after 5 seconds
+        setTimeout(() => {
+          window.location.href = './login.html';
+        }, 5000); // Redirect after 5 seconds
+      }).catch(error => {
+        console.error('Logout Error:', error.message);
+        alert('Logout failed, please try again.');
+      });
+    }
     // Move left or right in the carousel
     let currentIndex = 0; // Start at the first domain
     const domainContainer = document.getElementById('domainContainer');
@@ -537,60 +591,6 @@ function showNotifications() {
     const notificationBox = document.getElementById('notification-box');
     notificationBox.style.display = notificationBox.style.display === 'block' ? 'none' : 'block';
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  // Firebase initialization
-  firebase.initializeApp({
-    apiKey: "AIzaSyD2UawbUSvZgheQ89kQT9FvL-UZfu1UxZo",
-        authDomain: "asep-project-f4b23.firebaseapp.com",
-        projectId: "asep-project-f4b23",
-        storageBucket: "asep-project-f4b23.appspot.com",
-        messagingSenderId: "404098472129",
-        appId: "1:404098472129:web:2eaa5d9240f8d732d59c40",
-        measurementId: "G-580RFQEW5V"
-  });
-
-  const token = localStorage.getItem('userToken');
-
-  if (!token) {
-    // Token not found, redirect to login
-    alert('Please log in to access this page.');
-    window.location.href = './login.html';
-  } else {
-    console.log('Token found. User is authenticated.');
-  }
-});
-
-function logout() {
-  firebase.auth().signOut().then(() => {
-    // Clear token from localStorage
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('selectedDomain');
-
-    // Redirect to login page
-    document.body.innerHTML = ''; // Clear all content
-    const logoutMessage = `
-      <div style="text-align: center; margin-top: 100px;">
-        <h1>😊</h1>
-        <h2>Dear User,</h2>
-        <p>You are successfully signed out!!</p>
-        <p>Thank you for choosing and using us!!</p>
-        <p>We hope you visit us again!!</p>
-        <p>Best Regards,</p>
-        <p>Central Library</p>
-      </div>
-    `;
-    document.body.innerHTML = logoutMessage; // Display the logout message
-
-    // Redirect after a few seconds
-    setTimeout(() => {
-      window.location.href = './login.html';
-    }, 15000); // Redirect after 5 seconds
-  }).catch(error => {
-    console.error('Logout Error:', error.message);
-  });
-}
-
 
   </script>
 
