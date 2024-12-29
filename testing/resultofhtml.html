@@ -414,31 +414,7 @@
     return;
   }
 
-  // Send token to backend for validation
-  fetch('https://your-backend-url/validate', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({ domain: selectedDomain })
-  })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Unauthorized access');
-      }
-      return response.json();
-    })
-    .then(data => {
-      // Display or link the PDF
-      const pdfContainer = document.getElementById('pdfContainer');
-      pdfContainer.innerHTML = `<iframe src="${data.pdfLink}" width="100%" height="600px"></iframe>`;
-    })
-    .catch(error => {
-      console.error('Access denied:', error.message);
-      alert('You are not authorized to access this content.');
-      window.location.href = './login.html';
-    });
+  
 });
 function logout() {
   firebase.auth().signOut().then(() => {
