@@ -559,12 +559,29 @@ function logout() {
     localStorage.removeItem('selectedDomain');
 
     // Redirect to login page
-    alert('Logged out successfully.');
-    window.location.href = './login.html';
+    document.body.innerHTML = ''; // Clear all content
+    const logoutMessage = `
+      <div style="text-align: center; margin-top: 100px;">
+        <h1>😊</h1>
+        <h2>Dear User,</h2>
+        <p>You are successfully signed out!!</p>
+        <p>Thank you for choosing and using us!!</p>
+        <p>We hope you visit us again!!</p>
+        <p>Best Regards,</p>
+        <p>Central Library</p>
+      </div>
+    `;
+    document.body.innerHTML = logoutMessage; // Display the logout message
+
+    // Redirect after a few seconds
+    setTimeout(() => {
+      window.location.href = './login.html';
+    }, 15000); // Redirect after 5 seconds
   }).catch(error => {
     console.error('Logout Error:', error.message);
   });
 }
+
 
   </script>
 
