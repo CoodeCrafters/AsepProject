@@ -39,7 +39,7 @@
             if (email.split("@")[1] === allowedDomain) {
               user.getIdToken().then(token => {
                 localStorage.setItem("userToken", token); // Store token
-                alert("Welcome to VIT Portal!");
+               
                 window.location.href = "./Home.html"; // Redirect to Home
               });
             } else {
