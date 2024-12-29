@@ -550,13 +550,7 @@ function showNotifications() {
   // Optionally, fetch user-specific data using the token
   console.log('Token found. User is authenticated.');
 });
-function openDomain(selectedDomain) {
-  // Save the selected domain in localStorage or a global variable
-  localStorage.setItem('selectedDomain', selectedDomain);
 
-  // Redirect to resultofhtml
-  window.location.href = './resultofhtml.html';
-}
 function logout() {
   firebase.auth().signOut().then(() => {
     // Clear token from localStorage
