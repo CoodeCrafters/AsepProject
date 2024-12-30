@@ -455,7 +455,7 @@ footer {
       <a href="#">Home</a>
       <a href="#">Contact Us</a>
       <a href="#">About Us</a>
-      <a href="#" id="profile-link" onclick="openProfileModal()">Profile</a>
+      <a href="profile.html">Profile</a>
       <a href="#" onclick="logout()">Logout</a>
     </nav>
   </header>
@@ -698,45 +698,7 @@ function logout() {
   }, 30000); // Redirect after 30 seconds
 }
 
-function openProfileModal() {
-  document.getElementById('profile-modal').style.display = 'flex';
-}
 
-function closeProfileModal() {
-  document.getElementById('profile-modal').style.display = 'none';
-}
-
-function saveProfile() {
-  const profileData = {
-    name: document.getElementById('name').value,
-    email: document.getElementById('email').value,
-    contact: document.getElementById('contact').value,
-    prn: document.getElementById('prn').value,
-    branch: document.getElementById('branch').value,
-    division: document.getElementById('division').value,
-    roll: document.getElementById('roll').value,
-  };
-
-  // Save to local storage
-  localStorage.setItem('profile', JSON.stringify(profileData));
-
-  alert('Profile saved successfully!');
-  closeProfileModal();
-}
-
-// Optional: Preload saved data
-window.onload = () => {
-  const savedProfile = JSON.parse(localStorage.getItem('profile'));
-  if (savedProfile) {
-    document.getElementById('name').value = savedProfile.name || '';
-    document.getElementById('email').value = savedProfile.email || '';
-    document.getElementById('contact').value = savedProfile.contact || '';
-    document.getElementById('prn').value = savedProfile.prn || '';
-    document.getElementById('branch').value = savedProfile.branch || '';
-    document.getElementById('division').value = savedProfile.division || '';
-    document.getElementById('roll').value = savedProfile.roll || '';
-  }
-};
 
 
   </script>
