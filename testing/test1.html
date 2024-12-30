@@ -216,8 +216,10 @@
   padding: 20px;
   border: 2px solid transparent; /* Default transparent border */
   border-radius: 10px; /* Rounded corners for a polished look */
-  transition: border 0.4s ease-in-out, transform 0.3s ease-in-out, background 0.3s;
+  transition: border 0.4s ease-in-out, transform 0.3s ease-in-out, background 0.3s ease-in-out;
 }
+
+
 
 .footer-container h2 {
   font-size: 20px;
@@ -279,11 +281,11 @@
   font-size: 13px;
 }
 
-/* Highlight Animation for Contact Us and About Us */
+/* Highlight Animation */
 .highlighted {
-  background: #f5f5f5; /* Light background to emphasize */
-  border: 2px solid #007bff; /* Blue border */
-  transform: scale(1.05); /* Slight zoom effect */
+  background: #f5f5f5; /* Light background for emphasis */
+  border: 2px solid #007bff; /* Blue border for highlighting */
+  transform: scale(1.05); /* Slight zoom for emphasis */
 }
 
 /* Fade In Animation */
@@ -305,9 +307,10 @@
     <header class="header">
         <div class="logo">Central E-Library</div>
         <nav class="menu-bar">
+          <a href="./Home.html">Home</a>  
           <a href="#" onclick="scrollToSection('contact-section', 'red')">Contact Us</a>
           <a href="#" onclick="scrollToSection('about-section', 'blue')">About Us</a>
-          <a href="./Home.html">Home</a>
+         
           <a href="#" onclick="logout()">Logout</a>
         </nav>
       </header>
@@ -667,7 +670,11 @@ function scrollToSection(sectionId, color) {
   section.style.border = `2px solid ${color}`;
   setTimeout(() => section.classList.remove('highlighted'), 5000); // Remove highlight after 3 seconds
 }
-
+// Remove border entirely after 20 seconds
+setTimeout(() => {
+    section.style.border = '2px solid transparent';
+  }, 20000); // 20 seconds delay
+}
 
 
   </script>
