@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="./profile.css">
   <link rel="stylesheet" href="./headerfooter.css">
 
-<script defer src="script.js"></script>
+  <script defer src="script.js"></script>
 </head>
 <body>
   <!-- Menu bar dynamically loaded -->
@@ -44,6 +44,11 @@
 
       <button type="button" id="submit-btn" disabled onclick="saveProfile()">Save Profile</button>
     </form>
+
+    <!-- Note section -->
+    <p class="note">
+      <strong>Note:</strong> Once the data is approved by the Librarian, you can access the content.
+    </p>
   </main>
 
   <!-- Footer dynamically loaded -->
@@ -108,6 +113,21 @@
 
       alert('Profile saved successfully!');
     }
+
+    // Load previously saved data on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedData = JSON.parse(localStorage.getItem('profileData'));
+      if (savedData) {
+        document.getElementById('name').value = savedData.name || '';
+        document.getElementById('email').value = savedData.email || '';
+        document.getElementById('contact').value = savedData.contact || '';
+        document.getElementById('prn').value = savedData.prn || '';
+        document.getElementById('branch').value = savedData.branch || '';
+        document.getElementById('division').value = savedData.division || '';
+        document.getElementById('roll').value = savedData.roll || '';
+        updateProgress();
+      }
+    });
   </script>
 </body>
 </html>
