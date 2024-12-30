@@ -70,5 +70,3 @@ function logout() {
         section.style.border = '2px solid transparent';
       }, 20000);
     }
-  });
-  
