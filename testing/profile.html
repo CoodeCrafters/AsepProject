@@ -51,8 +51,8 @@
       <button type="button" id="submit-btn" disabled onclick="saveProfile()">Save Profile</button>
     </form>
 
-    <!-- Display saved profile data directly inside the form -->
-    <div id="saved-profile-container">
+    <!-- Display saved profile data -->
+    <div class="saved-profile" style="display: none;">
       <h2>Saved Profile</h2>
       <p><strong>Name:</strong> <span id="saved-name"></span></p>
       <p><strong>Email:</strong> <span id="saved-email"></span></p>
@@ -133,7 +133,7 @@
 
       localStorage.setItem('profileData', JSON.stringify(profileData));
 
-      // Display saved profile data directly in the form
+      // Display saved profile data
       document.getElementById('saved-name').innerText = name;
       document.getElementById('saved-email').innerText = email;
       document.getElementById('saved-contact').innerText = contact;
@@ -142,7 +142,7 @@
       document.getElementById('saved-division').innerText = division;
       document.getElementById('saved-roll').innerText = roll;
 
-      document.querySelector('#saved-profile-container').style.display = 'block';
+      document.querySelector('.saved-profile').style.display = 'block';
       alert('Profile saved successfully!');
     }
 
@@ -166,7 +166,7 @@
         document.getElementById('saved-division').innerText = savedProfileData.division;
         document.getElementById('saved-roll').innerText = savedProfileData.roll;
 
-        document.querySelector('#saved-profile-container').style.display = 'block';
+        document.querySelector('.saved-profile').style.display = 'block';
       }
     });
   </script>
