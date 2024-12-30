@@ -1,3 +1,51 @@
+<style>
+    body {
+      font-family: var(--bs-font-sans-serif);
+      background-color: var(--bs-body-bg);
+      margin: 0;
+      padding: 0;
+      color: var(--bs-body-color);
+      overflow-x: hidden;
+    }
+
+    /* Header Section */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      background-color: var(--bs-primary);
+      color: var(--bs-white);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .header .logo {
+      font-size: 1.8em;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: var(--bs-white);
+    }
+
+    .menu-bar {
+      display: flex;
+      gap: 30px;
+    }
+
+    .menu-bar a {
+      color: var(--bs-white);
+      text-decoration: none;
+      font-size: 1.1em;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .menu-bar a:hover {
+      background: var(--bs-secondary);
+      transform: scale(1.1);
+    }
+</style>
+
 <!-- Header Section -->
 <div class="header">
     <div class="logo">Central E-Library</div>
