@@ -362,7 +362,89 @@ footer {
     opacity: 1;
     transform: translateY(0);
   }
-}  </style>
+} 
+/* Modal Overlay */
+.profile-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Modal Content */
+.profile-modal {
+  background: #fff;
+  padding: 20px;
+  width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: slideIn 0.5s ease-in-out;
+}
+
+/* Form Styling */
+#profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#profile-form label {
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+}
+
+#profile-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+#profile-form button {
+  padding: 10px 15px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+#profile-form button:hover {
+  background: #0056b3;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+</style>
 </head>
 <body>
 
@@ -373,6 +455,7 @@ footer {
       <a href="#">Home</a>
       <a href="#">Contact Us</a>
       <a href="#">About Us</a>
+      <a href="#" id="profile-link" onclick="openProfileModal()">Profile</a>
       <a href="#" onclick="logout()">Logout</a>
     </nav>
   </header>
@@ -471,6 +554,37 @@ footer {
     <p>© 2024 Our Library. All Rights Reserved.</p>
   </div>
 </footer>
+<!-- Profile Modal -->
+<div class="profile-modal-overlay" id="profile-modal">
+  <div class="profile-modal">
+    <h2>Profile Information</h2>
+    <form id="profile-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" required />
+
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" placeholder="Enter your email" required />
+
+      <label for="contact">Contact No:</label>
+      <input type="tel" id="contact" placeholder="Enter your contact no." required />
+
+      <label for="prn">PRN No:</label>
+      <input type="text" id="prn" placeholder="Enter your PRN No" required />
+
+      <label for="branch">Branch:</label>
+      <input type="text" id="branch" placeholder="Enter your branch" required />
+
+      <label for="division">Division:</label>
+      <input type="text" id="division" placeholder="Enter your division" required />
+
+      <label for="roll">Roll No:</label>
+      <input type="number" id="roll" placeholder="Enter your roll no" required />
+
+      <button type="button" onclick="saveProfile()">Save Profile</button>
+      <button type="button" onclick="closeProfileModal()">Close</button>
+    </form>
+  </div>
+</div>
   <script>
     // Move left or right in the carousel
     let currentIndex = 0; // Start at the first domain
@@ -584,6 +698,45 @@ function logout() {
   }, 30000); // Redirect after 30 seconds
 }
 
+function openProfileModal() {
+  document.getElementById('profile-modal').style.display = 'flex';
+}
+
+function closeProfileModal() {
+  document.getElementById('profile-modal').style.display = 'none';
+}
+
+function saveProfile() {
+  const profileData = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    contact: document.getElementById('contact').value,
+    prn: document.getElementById('prn').value,
+    branch: document.getElementById('branch').value,
+    division: document.getElementById('division').value,
+    roll: document.getElementById('roll').value,
+  };
+
+  // Save to local storage
+  localStorage.setItem('profile', JSON.stringify(profileData));
+
+  alert('Profile saved successfully!');
+  closeProfileModal();
+}
+
+// Optional: Preload saved data
+window.onload = () => {
+  const savedProfile = JSON.parse(localStorage.getItem('profile'));
+  if (savedProfile) {
+    document.getElementById('name').value = savedProfile.name || '';
+    document.getElementById('email').value = savedProfile.email || '';
+    document.getElementById('contact').value = savedProfile.contact || '';
+    document.getElementById('prn').value = savedProfile.prn || '';
+    document.getElementById('branch').value = savedProfile.branch || '';
+    document.getElementById('division').value = savedProfile.division || '';
+    document.getElementById('roll').value = savedProfile.roll || '';
+  }
+};
 
 
   </script>
