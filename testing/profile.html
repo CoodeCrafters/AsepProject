@@ -21,39 +21,49 @@
     </div>
 
     <form id="profile-form">
-      <label for="name">Name:</label>
-      <input type="text" id="name" placeholder="Enter your name" required oninput="updateProgress()">
+      <!-- Left Column -->
+      <div class="half-width">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name" required oninput="updateProgress()">
 
-      <label for="email">Email Address:</label>
-      <input type="email" id="email" placeholder="Enter your email" required oninput="updateProgress()">
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" placeholder="Enter your email" required oninput="updateProgress()">
 
-      <label for="contact">Contact No:</label>
-      <input type="tel" id="contact" placeholder="Enter your contact no." required oninput="updateProgress()">
+        <label for="contact">Contact No:</label>
+        <input type="tel" id="contact" placeholder="Enter your contact no." required oninput="updateProgress()">
 
-      <label for="prn">PRN No:</label>
-      <input type="text" id="prn" placeholder="Enter your PRN No" required oninput="updateProgress()">
+        <label for="prn">PRN No:</label>
+        <input type="text" id="prn" placeholder="Enter your PRN No" required oninput="updateProgress()">
+      </div>
 
-      <label for="branch">Branch:</label>
-      <input type="text" id="branch" placeholder="Enter your branch" required oninput="updateProgress()">
+      <!-- Right Column -->
+      <div class="half-width">
+        <label for="branch">Branch:</label>
+        <input type="text" id="branch" placeholder="Enter your branch" required oninput="updateProgress()">
 
-      <label for="division">Division:</label>
-      <input type="text" id="division" placeholder="Enter your division" required oninput="updateProgress()">
+        <label for="division">Division:</label>
+        <input type="text" id="division" placeholder="Enter your division" required oninput="updateProgress()">
 
-      <label for="roll">Roll No:</label>
-      <input type="number" id="roll" placeholder="Enter your roll no" required oninput="updateProgress()">
+        <label for="roll">Roll No:</label>
+        <input type="number" id="roll" placeholder="Enter your roll no" required oninput="updateProgress()">
+      </div>
 
       <button type="button" id="submit-btn" disabled onclick="saveProfile()">Save Profile</button>
     </form>
 
-    <div id="saved-profile" style="margin-top: 20px; display: none;">
+    <div class="saved-profile">
       <h2>Saved Profile</h2>
-      <p><strong>Name:</strong> <span id="display-name"></span></p>
-      <p><strong>Email Address:</strong> <span id="display-email"></span></p>
-      <p><strong>Contact No:</strong> <span id="display-contact"></span></p>
-      <p><strong>PRN No:</strong> <span id="display-prn"></span></p>
-      <p><strong>Branch:</strong> <span id="display-branch"></span></p>
-      <p><strong>Division:</strong> <span id="display-division"></span></p>
-      <p><strong>Roll No:</strong> <span id="display-roll"></span></p>
+      <p><strong>Name:</strong> <span id="saved-name"></span></p>
+      <p><strong>Email:</strong> <span id="saved-email"></span></p>
+      <p><strong>Contact No:</strong> <span id="saved-contact"></span></p>
+      <p><strong>PRN No:</strong> <span id="saved-prn"></span></p>
+      <p><strong>Branch:</strong> <span id="saved-branch"></span></p>
+      <p><strong>Division:</strong> <span id="saved-division"></span></p>
+      <p><strong>Roll No:</strong> <span id="saved-roll"></span></p>
+    </div>
+
+    <div class="note">
+      <p><strong>Note:</strong> Once the data is approved by the Librarian, you can access the content.</p>
     </div>
   </main>
 
@@ -97,18 +107,13 @@
 
     // Save profile function
     function saveProfile() {
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const contact = document.getElementById('contact').value.trim();
-      const prn = document.getElementById('prn').value.trim();
-      const branch = document.getElementById('branch').value.trim();
-      const division = document.getElementById('division').value.trim();
-      const roll = document.getElementById('roll').value.trim();
-
-      if (!name || !email || !contact || !prn || !branch || !division || !roll) {
-        alert('Please fill out all fields.');
-        return;
-      }
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const contact = document.getElementById('contact').value;
+      const prn = document.getElementById('prn').value;
+      const branch = document.getElementById('branch').value;
+      const division = document.getElementById('division').value;
+      const roll = document.getElementById('roll').value;
 
       const profileData = {
         name,
@@ -122,30 +127,40 @@
 
       localStorage.setItem('profileData', JSON.stringify(profileData));
 
+      // Display saved profile data
+      document.getElementById('saved-name').innerText = name;
+      document.getElementById('saved-email').innerText = email;
+      document.getElementById('saved-contact').innerText = contact;
+      document.getElementById('saved-prn').innerText = prn;
+      document.getElementById('saved-branch').innerText = branch;
+      document.getElementById('saved-division').innerText = division;
+      document.getElementById('saved-roll').innerText = roll;
+
+      document.querySelector('.saved-profile').style.display = 'block';
       alert('Profile saved successfully!');
-      displaySavedProfile(profileData);
     }
 
-    // Display saved profile data
-    function displaySavedProfile(profileData) {
-      document.getElementById('saved-profile').style.display = 'block';
-      document.getElementById('display-name').textContent = profileData.name;
-      document.getElementById('display-email').textContent = profileData.email;
-      document.getElementById('display-contact').textContent = profileData.contact;
-      document.getElementById('display-prn').textContent = profileData.prn;
-      document.getElementById('display-branch').textContent = profileData.branch;
-      document.getElementById('display-division').textContent = profileData.division;
-      document.getElementById('display-roll').textContent = profileData.roll;
-    }
-
-    // Load saved profile data if exists
+    // Check and populate saved profile data if available
     document.addEventListener('DOMContentLoaded', () => {
-      const savedProfile = JSON.parse(localStorage.getItem('profileData'));
+      const savedProfileData = JSON.parse(localStorage.getItem('profileData'));
+      if (savedProfileData) {
+        document.getElementById('name').value = savedProfileData.name;
+        document.getElementById('email').value = savedProfileData.email;
+        document.getElementById('contact').value = savedProfileData.contact;
+        document.getElementById('prn').value = savedProfileData.prn;
+        document.getElementById('branch').value = savedProfileData.branch;
+        document.getElementById('division').value = savedProfileData.division;
+        document.getElementById('roll').value = savedProfileData.roll;
 
-      if (savedProfile) {
-        displaySavedProfile(savedProfile);
-        // Hide the form if profile is already saved
-        document.getElementById('profile-form').style.display = 'none';
+        document.getElementById('saved-name').innerText = savedProfileData.name;
+        document.getElementById('saved-email').innerText = savedProfileData.email;
+        document.getElementById('saved-contact').innerText = savedProfileData.contact;
+        document.getElementById('saved-prn').innerText = savedProfileData.prn;
+        document.getElementById('saved-branch').innerText = savedProfileData.branch;
+        document.getElementById('saved-division').innerText = savedProfileData.division;
+        document.getElementById('saved-roll').innerText = savedProfileData.roll;
+
+        document.querySelector('.saved-profile').style.display = 'block';
       }
     });
   </script>
