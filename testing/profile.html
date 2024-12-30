@@ -51,8 +51,8 @@
       <button type="button" id="submit-btn" disabled onclick="saveProfile()">Save Profile</button>
     </form>
 
-    <!-- Display saved profile data -->
-    <div class="saved-profile" style="display: none;">
+    <!-- Saved profile data displayed directly within the form -->
+    <div id="saved-profile">
       <h2>Saved Profile</h2>
       <p><strong>Name:</strong> <span id="saved-name"></span></p>
       <p><strong>Email:</strong> <span id="saved-email"></span></p>
@@ -133,7 +133,7 @@
 
       localStorage.setItem('profileData', JSON.stringify(profileData));
 
-      // Display saved profile data
+      // Display saved profile data directly within the form
       document.getElementById('saved-name').innerText = name;
       document.getElementById('saved-email').innerText = email;
       document.getElementById('saved-contact').innerText = contact;
@@ -141,9 +141,6 @@
       document.getElementById('saved-branch').innerText = branch;
       document.getElementById('saved-division').innerText = division;
       document.getElementById('saved-roll').innerText = roll;
-
-      document.querySelector('.saved-profile').style.display = 'block';
-      alert('Profile saved successfully!');
     }
 
     // Check and populate saved profile data if available
@@ -158,6 +155,7 @@
         document.getElementById('division').value = savedProfileData.division;
         document.getElementById('roll').value = savedProfileData.roll;
 
+        // Display the saved data directly inside the form fields
         document.getElementById('saved-name').innerText = savedProfileData.name;
         document.getElementById('saved-email').innerText = savedProfileData.email;
         document.getElementById('saved-contact').innerText = savedProfileData.contact;
@@ -165,8 +163,6 @@
         document.getElementById('saved-branch').innerText = savedProfileData.branch;
         document.getElementById('saved-division').innerText = savedProfileData.division;
         document.getElementById('saved-roll').innerText = savedProfileData.roll;
-
-        document.querySelector('.saved-profile').style.display = 'block';
       }
     });
   </script>
