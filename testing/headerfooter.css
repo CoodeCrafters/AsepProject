@@ -159,3 +159,21 @@ footer {
     transform: translateY(0);
   }
 } 
+/* Highlight Animation for Contact Us and About Us */
+.highlighted {
+  background: #f5f5f5; /* Light background to emphasize */
+  border: 2px solid #007bff; /* Blue border */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
