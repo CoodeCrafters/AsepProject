@@ -1,29 +1,65 @@
-function loadDynamicContent() {
+async function loadFooterAndSetupScroll() {
     try {
-      // Load menu dynamically
-      fetch('menu.html')
-        .then(response => {
-          if (!response.ok) throw new Error('Menu not loaded');
-          return response.text();
-        })
-        .then(menuContent => {
-          document.getElementById('menu-container').innerHTML = menuContent;
-        });
+      // Load the footer content dynamically
+      const footerResponse = await fetch('footer.html');
+      if (!footerResponse.ok) throw new Error('Failed to load footer');
+      const footerHTML = await footerResponse.text();
   
-      // Load footer dynamically
-      fetch('footer.html')
-        .then(response => {
-          if (!response.ok) throw new Error('Footer not loaded');
-          return response.text();
-        })
-        .then(footerContent => {
-          document.getElementById('footer-container').innerHTML = footerContent;
-        });
+      // Create a temporary container to parse and extract sections
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = footerHTML;
   
+      // Extract the about and contact sections
+      const aboutSection = tempDiv.querySelector('.about-section');
+      const contactSection = tempDiv.querySelector('.contact-section');
+  
+      // Append these sections to your main document (if not already present)
+      if (aboutSection && !document.body.contains(aboutSection)) {
+        document.body.appendChild(aboutSection);
+      }
+      if (contactSection && !document.body.contains(contactSection)) {
+        document.body.appendChild(contactSection);
+      }
     } catch (error) {
-      console.error('Error loading dynamic content:', error);
+      console.error('Error loading footer sections:', error);
     }
-}
+  }
+  
+  // Call this function to ensure the sections are added before scrolling
+  loadFooterAndSetupScroll();
+  
+  function scrollToSection(sectionId, color) {
+    const section = document.getElementById(sectionId);
+  
+    if (!section) {
+      console.warn(`Section with ID '${sectionId}' not found.`);
+      return;
+    }
+  
+    // Remove highlighting from all sections
+    document.querySelectorAll('.about-section, .contact-section').forEach((sec) => {
+      sec.style.border = '2px solid transparent'; // Reset border
+      sec.classList.remove('highlighted'); // Remove animation class
+    });
+  
+    // Scroll to the section smoothly
+    section.scrollIntoView({ behavior: 'smooth' });
+  
+    // Apply the highlight effect
+    section.classList.add('highlighted');
+    section.style.border = `2px solid ${color}`; // Apply border color
+  
+    // Remove highlight effect after 5 seconds
+    setTimeout(() => {
+      section.classList.remove('highlighted');
+    }, 5000);
+  
+    // Remove border after 20 seconds
+    setTimeout(() => {
+      section.style.border = '2px solid transparent';
+    }, 20000);
+  }
+  
 
 function logout() {
       // Clear token from localStorage
@@ -71,29 +107,3 @@ function logout() {
     // Reset the inactivity timer when the user interacts
     resetInactivityTimer(); // Initial timer reset
   
-    function scrollToSection(sectionId, color) {
-      const section = document.getElementById(sectionId);
-  
-      // Remove highlighting from all sections
-      document.querySelectorAll('.about-section, .contact-section').forEach((sec) => {
-        sec.style.border = '2px solid transparent'; // Reset border
-        sec.classList.remove('highlighted'); // Remove animation class
-      });
-  
-      // Scroll to the section smoothly
-      section.scrollIntoView({ behavior: 'smooth' });
-  
-      // Apply the highlight effect
-      section.classList.add('highlighted');
-      section.style.border = `2px solid ${color}`; // Apply border color
-  
-      // Remove highlight effect after 5 seconds
-      setTimeout(() => {
-        section.classList.remove('highlighted');
-      }, 5000);
-  
-      // Remove border after 20 seconds
-      setTimeout(() => {
-        section.style.border = '2px solid transparent';
-      }, 20000);
-    }
