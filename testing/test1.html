@@ -195,11 +195,12 @@
     }
 
     /* General Footer Styling */
-footer {
+    footer {
   background: #cfe7ed;
   color: #000000;
   padding: 40px 20px;
   font-family: 'Arial', sans-serif;
+  animation: fadeIn 1.5s ease-in-out;
 }
 
 .footer-container {
@@ -212,6 +213,10 @@ footer {
   flex: 1;
   margin: 10px;
   min-width: 250px;
+  padding: 20px;
+  border: 2px solid transparent; /* Default transparent border */
+  border-radius: 10px; /* Rounded corners for a polished look */
+  transition: border 0.4s ease-in-out, transform 0.3s ease-in-out, background 0.3s;
 }
 
 .footer-container h2 {
@@ -274,11 +279,14 @@ footer {
   font-size: 13px;
 }
 
-/* Animation */
-footer {
-  animation: fadeIn 1.5s ease-in-out;
+/* Highlight Animation for Contact Us and About Us */
+.highlighted {
+  background: #f5f5f5; /* Light background to emphasize */
+  border: 2px solid #007bff; /* Blue border */
+  transform: scale(1.05); /* Slight zoom effect */
 }
 
+/* Fade In Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -289,6 +297,7 @@ footer {
     transform: translateY(0);
   }
 }
+
   </style>
   
 </head>
@@ -346,7 +355,7 @@ footer {
 
   <footer>
     <div class="footer-container">
-      <div class="about-section">
+      <div class="about-section" id="about-section">
         <h2>About Us</h2>
         <p>
           Welcome to our library, a treasure trove of knowledge and resources. We
@@ -354,7 +363,7 @@ footer {
           an extensive collection of books, digital content, and community programs.
         </p>
       </div>
-      <div class="contact-section">
+      <div class="contact-section" id="contact-section">
         <h2>Contact Us</h2>
         <p><strong>Address:</strong> 123 Knowledge Lane, Booksville</p>
         <p><strong>Phone:</strong> +1 234 567 890</p>
@@ -640,6 +649,25 @@ function resetInactivityTimer() {
 
 // Reset the inactivity timer when the user interacts
 resetInactivityTimer(); // Initial timer reset
+
+
+function scrollToSection(sectionId, color) {
+  const section = document.getElementById(sectionId);
+
+  // Remove highlighting from other sections
+  document.querySelectorAll('.about-section, .contact-section').forEach(sec => {
+    sec.style.border = '2px solid transparent'; // Reset border
+    sec.classList.remove('highlighted'); // Remove highlight effect
+  });
+
+  // Scroll to the section smoothly
+  section.scrollIntoView({ behavior: 'smooth' });
+
+  // Highlight the section with animations and border
+  section.classList.add('highlighted');
+  section.style.border = `2px solid ${color}`;
+  setTimeout(() => section.classList.remove('highlighted'), 5000); // Remove highlight after 3 seconds
+}
 
 
 
