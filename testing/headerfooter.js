@@ -1,6 +1,4 @@
-
-  
-    function logout() {
+function logout() {
       // Clear token from localStorage
       localStorage.removeItem('userToken');
       localStorage.removeItem('selectedDomain');
