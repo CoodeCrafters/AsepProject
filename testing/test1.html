@@ -353,6 +353,25 @@
   
 
   <script>
+     // Load the menu and footer dynamically
+     async function loadDynamicContent() {
+      try {
+        const menuResponse = await fetch('menu.html');
+        if (!menuResponse.ok) throw new Error('Menu not loaded');
+        const menuContent = await menuResponse.text();
+        document.getElementById('menu-container').innerHTML = menuContent;
+
+        const footerResponse = await fetch('footer.html');
+        if (!footerResponse.ok) throw new Error('Footer not loaded');
+        const footerContent = await footerResponse.text();
+        document.getElementById('footer-container').innerHTML = footerContent;
+      } catch (error) {
+        console.error('Error loading dynamic content:', error);
+      }
+    }
+
+    // Call the function to load the dynamic content
+    loadDynamicContent();
     const resourceData = [
       {
         domain: "Mathematics",
