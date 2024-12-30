@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="./profile.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <!-- Menu bar dynamically loaded -->
+  <div id="menu-container"></div>
+
+  <!-- Profile Content -->
+  <main>
+    <h1>Profile</h1>
+    <div id="progress-bar-container">
+      <div id="progress-bar"></div>
+    </div>
+
+    <form id="profile-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" required oninput="updateProgress()">
+
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" placeholder="Enter your email" required oninput="updateProgress()">
+
+      <label for="contact">Contact No:</label>
+      <input type="tel" id="contact" placeholder="Enter your contact no." required oninput="updateProgress()">
+
+      <label for="prn">PRN No:</label>
+      <input type="text" id="prn" placeholder="Enter your PRN No" required oninput="updateProgress()">
+
+      <label for="branch">Branch:</label>
+      <input type="text" id="branch" placeholder="Enter your branch" required oninput="updateProgress()">
+
+      <label for="division">Division:</label>
+      <input type="text" id="division" placeholder="Enter your division" required oninput="updateProgress()">
+
+      <label for="roll">Roll No:</label>
+      <input type="number" id="roll" placeholder="Enter your roll no" required oninput="updateProgress()">
+
+      <button type="button" id="submit-btn" disabled onclick="saveProfile()">Save Profile</button>
+    </form>
+  </main>
+
+  <!-- Footer dynamically loaded -->
+  <div id="footer-container"></div>
+
+  <script>
+    // Load the menu and footer dynamically
+    document.getElementById('menu-container').innerHTML = await fetch('menu.html').then(res => res.text());
+    document.getElementById('footer-container').innerHTML = await fetch('footer.html').then(res => res.text());
+
+    // Update progress bar function
+    function updateProgress() {
+      const form = document.getElementById('profile-form');
+      const inputs = form.querySelectorAll('input');
+      const filledFields = Array.from(inputs).filter(input => input.value.trim() !== '').length;
+      const totalFields = inputs.length;
+
+      const progress = (filledFields / totalFields) * 100;
+      document.getElementById('progress-bar').style.width = `${progress}%`;
+
+      // Enable or disable submit button based on form completion
+      document.getElementById('submit-btn').disabled = filledFields < totalFields;
+    }
+
+    // Save profile function
+    function saveProfile() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const contact = document.getElementById('contact').value;
+      const prn = document.getElementById('prn').value;
+      const branch = document.getElementById('branch').value;
+      const division = document.getElementById('division').value;
+      const roll = document.getElementById('roll').value;
+
+      const profileData = {
+        name,
+        email,
+        contact,
+        prn,
+        branch,
+        division,
+        roll,
+      };
+
+      localStorage.setItem('profileData', JSON.stringify(profileData));
+
+      alert('Profile saved successfully!');
+    }
+  </script>
+</body>
+</html>

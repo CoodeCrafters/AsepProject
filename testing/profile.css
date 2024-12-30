@@ -1,0 +1,76 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  #progress-bar-container {
+    background-color: #e0e0e0;
+    height: 5px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  #progress-bar {
+    background-color: #28a745; /* Green progress bar */
+    height: 100%;
+    width: 0;
+  }
+  
+  #submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #submit-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  #submit-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+  
