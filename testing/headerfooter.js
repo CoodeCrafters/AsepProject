@@ -23,6 +23,7 @@ function loadDynamicContent() {
     } catch (error) {
       console.error('Error loading dynamic content:', error);
     }
+}
 
 function logout() {
       // Clear token from localStorage
