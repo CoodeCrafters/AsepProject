@@ -1,3 +1,29 @@
+function loadDynamicContent() {
+    try {
+      // Load menu dynamically
+      fetch('menu.html')
+        .then(response => {
+          if (!response.ok) throw new Error('Menu not loaded');
+          return response.text();
+        })
+        .then(menuContent => {
+          document.getElementById('menu-container').innerHTML = menuContent;
+        });
+  
+      // Load footer dynamically
+      fetch('footer.html')
+        .then(response => {
+          if (!response.ok) throw new Error('Footer not loaded');
+          return response.text();
+        })
+        .then(footerContent => {
+          document.getElementById('footer-container').innerHTML = footerContent;
+        });
+  
+    } catch (error) {
+      console.error('Error loading dynamic content:', error);
+    }
+
 function logout() {
       // Clear token from localStorage
       localStorage.removeItem('userToken');
