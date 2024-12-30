@@ -7,7 +7,7 @@
       align-items: center;
       padding: 20px 30px;
       background-color: var(--bs-primary);
-      background-color: #28a745; /* Green background */
+      background-color: #05470c; /* Green background */
       color: var(--bs-white);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
