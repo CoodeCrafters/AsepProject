@@ -1,4 +1,4 @@
-<style>
+
     body {
       font-family: var(--bs-font-sans-serif);
       background-color: var(--bs-body-bg);
@@ -141,4 +141,3 @@ footer {
     transform: translateY(0);
   }
 } 
-</style>
