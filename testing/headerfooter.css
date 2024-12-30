@@ -57,11 +57,16 @@ body {
   transition: background 0.3s ease, transform 0.3s ease;
 }
 
+
 .menu-bar a:hover {
   background: var(--bs-secondary);
   transform: scale(1.1);
 }
 
+/* Additional Utility Classes */
+.active {
+  background-color: var(--bs-secondary);
+}
 
     
     /* General Footer Styling */
