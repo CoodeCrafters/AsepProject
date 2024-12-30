@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile</title>
   <link rel="stylesheet" href="./profile.css">
-  <script defer src="script.js"></script>
+
+<script defer src="script.js"></script>
 </head>
 <body>
   <!-- Menu bar dynamically loaded -->
@@ -49,8 +50,24 @@
 
   <script>
     // Load the menu and footer dynamically
-    document.getElementById('menu-container').innerHTML = await fetch('menu.html').then(res => res.text());
-    document.getElementById('footer-container').innerHTML = await fetch('footer.html').then(res => res.text());
+    async function loadDynamicContent() {
+      try {
+        const menuResponse = await fetch('menu.html');
+        if (!menuResponse.ok) throw new Error('Menu not loaded');
+        const menuContent = await menuResponse.text();
+        document.getElementById('menu-container').innerHTML = menuContent;
+
+        const footerResponse = await fetch('footer.html');
+        if (!footerResponse.ok) throw new Error('Footer not loaded');
+        const footerContent = await footerResponse.text();
+        document.getElementById('footer-container').innerHTML = footerContent;
+      } catch (error) {
+        console.error('Error loading dynamic content:', error);
+      }
+    }
+
+    // Call the function to load the dynamic content
+    loadDynamicContent();
 
     // Update progress bar function
     function updateProgress() {
