@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    .search-panel {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      align-items: center;
+      position: relative;
+    }
+    .search-panel input, .search-panel select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      flex: 1;
+    }
+    .search-panel button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .search-panel button:hover {
+      background-color: #0056b3;
+    }
+    .search-panel .suggestions {
+      position: absolute;
+      top: 40px;
+      left: 0;
+      width: 100%;
+      max-height: 200px;
+      overflow-y: auto;
+      background: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+    .search-panel .suggestions div {
+      padding: 8px;
+      cursor: pointer;
+    }
+    .search-panel .suggestions div:hover {
+      background-color: #f0f0f0;
+    }
+    .filter-panel {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+      align-items: center;
+    }
+    .book-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .book-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      width: 250px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .book-card:hover {
+      transform: translateY(-5px);
+    }
+    .book-card img {
+      max-width: 100%;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .book-card h3 {
+      font-size: 18px;
+      margin: 5px 0;
+      color: #555;
+    }
+    .book-card p {
+      color: #777;
+    }
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .popup {
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 500px;
+      width: 80%;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .popup img {
+      max-width: 300px; /* Restrict the image width */
+      height: auto;
+      margin-bottom: 20px;
+    }
+    .popup h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .popup p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    .popup button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .popup button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Header Styles */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      background-color: var(--bs-primary);
+      color: var(--bs-white);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .header .logo {
+      font-size: 1.8em;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: var(--bs-white);
+    }
+
+    .menu-bar {
+      display: flex;
+      gap: 30px;
+    }
+
+    .menu-bar a {
+      color: var(--bs-white);
+      text-decoration: none;
+      font-size: 1.1em;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .menu-bar a:hover {
+      background: var(--bs-secondary);
+      transform: scale(1.1);
+    }
+
+    /* Additional Utility Classes */
+    .active {
+      background-color: var(--bs-secondary);
+    }
+  </style>
+  
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="logo">Central E-Library</div>
+    <nav class="menu-bar">
+      <a href="#">Home</a>
+      <a href="#">Contact Us</a>
+      <a href="#">About Us</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>Your Search Result for "<span id="selected-domain">Mathematics</span>" Domain</h1>
+    <div class="search-panel">
+      <input type="text" id="search-input" placeholder="Search by Title, Author, or ISBN" oninput="showSuggestions()">
+      <button onclick="searchBooks()">Search</button>
+      <div class="suggestions" id="suggestions"></div>
+    </div>
+
+    <div class="filter-panel" id="filter-panel">
+      <select id="filter-author">
+        <option value="">Filter by Author</option>
+      </select>
+      <select id="filter-year">
+        <option value="">Filter by Year</option>
+      </select>
+      <button onclick="applyFilter()">Apply Filter</button>
+      <button onclick="clearFilter()">Clear Filter</button>
+    </div>
+
+    <div class="book-list" id="book-list"></div>
+  </div>
+
+  <!-- Error Message -->
+  <div id="error-message" style="text-align: center; color: red; font-size: 20px; display: none;">
+    <p>The selected domain is not in our list, or you have not given the parameter correctly. Please check the URL or contact the site owner.</p>
+  </div>
+
+  <!-- Popup Overlay -->
+  <div class="popup-overlay" id="popup-overlay">
+    <div class="popup">
+      <img id="popup-book-cover" src="" alt="Book Cover">
+      <h2 id="popup-book-title"></h2>
+      <p><strong>Author:</strong> <span id="popup-book-author"></span></p>
+      <p><strong>Year Published:</strong> <span id="popup-book-year"></span></p>
+      <p><strong>ISBN:</strong> <span id="popup-book-isbn"></span></p>
+      <p id="popup-book-description"></p>
+      <button onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const resourceData = [
+      {
+        domain: "Mathematics",
+        books: [
+          {
+            BookName: "HC Verma",
+            Author: "HC Sahab",
+            ISBN: "1234567890",
+            year: 1986,
+            bookCover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmvXSG6V4br4ueNwxOPj0d2hiQfW1_K4KLcw&s",
+            description: "A classic Physics textbook.",
+            pdfLink: "https://example.com/hc-verma.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          }
+        ]
+      },
+      {
+        domain: "Physics",
+        books: [
+          {
+            BookName: "Fundamentals of Physics",
+            Author: "Resnick, Halliday, Walker",
+            ISBN: "1112223334",
+            year: 2011,
+            bookCover: "https://example.com/fundamentals.jpg",
+            description: "Comprehensive Physics reference.",
+            pdfLink: "https://example.com/fundamentals.pdf"
+          }
+        ]
+      }
+    ];
+
+    let selectedDomain = getDomainFromURL();
+    
+    // Function to get domain from URL params
+    function getDomainFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('domain') || ''; // Return empty string if no domain
+    }
+
+    // Function to display error if domain is not valid
+    function showErrorMessage() {
+      document.getElementById("error-message").style.display = "block";
+      document.getElementById("book-list").style.display = "none";
+    }
+
+    // Load books only if domain exists
+    function loadBooks() {
+      if (!selectedDomain || !resourceData.some(r => r.domain.toLowerCase() === selectedDomain.toLowerCase())) {
+        showErrorMessage();
+        return;
+      }
+
+      const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
+      const bookList = document.getElementById("book-list");
+      const authorFilter = document.getElementById("filter-author");
+      const yearFilter = document.getElementById("filter-year");
+
+      document.getElementById("selected-domain").innerText = selectedDomain.charAt(0).toUpperCase() + selectedDomain.slice(1);
+
+      // Clear previous results
+      bookList.innerHTML = "";
+      authorFilter.innerHTML = `<option value="">Filter by Author</option>`;
+      yearFilter.innerHTML = `<option value="">Filter by Year</option>`;
+
+      // Populate book cards
+      domainData.books.forEach(book => {
+        const card = document.createElement("div");
+        card.className = "book-card";
+        card.setAttribute("data-book", JSON.stringify(book)); // Store book data in card
+        card.innerHTML = `
+          <img src="${book.bookCover}" alt="${book.BookName}">
+          <h3>${book.BookName}</h3>
+          <p>by ${book.Author}</p>
+          <p>Year: ${book.year}</p>
+        `;
+        card.onclick = () => openPopup(book); // Add click listener for pop-up
+        bookList.appendChild(card);
+
+        // Populate filters
+        if (![...authorFilter.options].some(opt => opt.value === book.Author)) {
+          authorFilter.innerHTML += `<option value="${book.Author}">${book.Author}</option>`;
+        }
+        if (![...yearFilter.options].some(opt => opt.value == book.year)) {
+          yearFilter.innerHTML += `<option value="${book.year}">${book.year}</option>`;
+        }
+      });
+    }
+
+    // Apply filter
+    function applyFilter() {
+      const authorFilter = document.getElementById("filter-author").value;
+      const yearFilter = document.getElementById("filter-year").value;
+      
+      const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
+      const filteredBooks = domainData.books.filter(book => {
+        return (
+          (authorFilter === "" || book.Author === authorFilter) &&
+          (yearFilter === "" || book.year == yearFilter)
+        );
+      });
+
+      displayBooks(filteredBooks);
+    }
+
+    // Clear all filters
+    function clearFilter() {
+      document.getElementById("filter-author").value = "";
+      document.getElementById("filter-year").value = "";
+      loadBooks(); // Load all books
+    }
+
+    // Display books in cards
+    function displayBooks(books) {
+      const bookList = document.getElementById("book-list");
+      bookList.innerHTML = "";
+
+      if (books.length === 0) {
+        bookList.innerHTML = "<p>No books found</p>";
+      }
+
+      books.forEach(book => {
+        const card = document.createElement("div");
+        card.className = "book-card";
+        card.setAttribute("data-book", JSON.stringify(book)); // Store book data in card
+        card.innerHTML = `
+          <img src="${book.bookCover}" alt="${book.BookName}">
+          <h3>${book.BookName}</h3>
+          <p>by ${book.Author}</p>
+          <p>Year: ${book.year}</p>
+        `;
+        card.onclick = () => openPopup(book); // Add click listener for pop-up
+        bookList.appendChild(card);
+      });
+    }
+
+    // Show suggestions based on input
+    function showSuggestions() {
+      const searchText = document.getElementById("search-input").value.toLowerCase();
+      const suggestions = document.getElementById("suggestions");
+      suggestions.innerHTML = "";
+
+      if (searchText.length < 2) return; // Only show suggestions if the input is at least 2 characters long
+
+      const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
+      const filteredSuggestions = domainData.books.filter(book => 
+        book.BookName.toLowerCase().includes(searchText) ||
+        book.Author.toLowerCase().includes(searchText) ||
+        book.ISBN.includes(searchText)
+      );
+
+      filteredSuggestions.forEach(book => {
+        const suggestionItem = document.createElement("div");
+        suggestionItem.textContent = `${book.BookName} by ${book.Author}`;
+        suggestionItem.onclick = () => {
+          document.getElementById("search-input").value = book.BookName;
+          suggestions.innerHTML = "";
+          searchBooks();
+        };
+        suggestions.appendChild(suggestionItem);
+      });
+    }
+
+    // Search books based on input
+    function searchBooks() {
+      const searchText = document.getElementById("search-input").value.toLowerCase();
+      const authorFilter = document.getElementById("filter-author").value;
+      const yearFilter = document.getElementById("filter-year").value;
+
+      const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
+      const filteredBooks = domainData.books.filter(book => {
+        return (
+          (searchText === "" || book.BookName.toLowerCase().includes(searchText) || book.Author.toLowerCase().includes(searchText) || book.ISBN.includes(searchText)) &&
+          (authorFilter === "" || book.Author === authorFilter) &&
+          (yearFilter === "" || book.year == yearFilter)
+        );
+      });
+
+      displayBooks(filteredBooks);
+    }
+
+    // Function to open popup for book details
+    function openPopup(book) {
+      document.getElementById("popup-book-cover").src = book.bookCover;
+      document.getElementById("popup-book-title").textContent = book.BookName;
+      document.getElementById("popup-book-author").textContent = book.Author;
+      document.getElementById("popup-book-year").textContent = book.year;
+      document.getElementById("popup-book-isbn").textContent = book.ISBN;
+      document.getElementById("popup-book-description").textContent = book.description;
+
+      document.getElementById("popup-overlay").style.display = "flex";
+    }
+
+    // Close popup
+    function closePopup() {
+      document.getElementById("popup-overlay").style.display = "none";
+    }
+
+    // Initialize
+    loadBooks();
+
+    document.addEventListener('DOMContentLoaded', () => {
+  const token = localStorage.getItem('userToken');
+  const selectedDomain = localStorage.getItem('selectedDomain');
+
+  if (!token) {
+    alert('Unauthorized access. Please log in.');
+    window.location.href = './login.html';
+    return;
+  }
+
+  
+});
+function logout() {
+  firebase.auth().signOut().then(() => {
+    // Clear token from localStorage
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('selectedDomain');
+
+    // Redirect to login page
+    alert('Logged out successfully.');
+    window.location.href = './login.html';
+  }).catch(error => {
+    console.error('Logout Error:', error.message);
+  });
+}
+
+  </script>
+</body>
+</html>
