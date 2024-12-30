@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Library</title>
+  <link rel="stylesheet" href="./headerfooter.css">
+  <script src="headerfooter.js"></script>
+  <script src="hard.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -302,16 +305,9 @@
   
 </head>
 <body>
-    <header class="header">
-        <div class="logo">Central E-Library</div>
-        <nav class="menu-bar">
-          <a href="./Home.html">Home</a>  
-          <a href="#" onclick="scrollToSection('contact-section', 'red')">Contact Us</a>
-          <a href="#" onclick="scrollToSection('about-section', 'blue')">About Us</a>
-         
-          <a href="#" onclick="logout()">Logout</a>
-        </nav>
-      </header>
+     <!-- Menu bar dynamically loaded -->
+  <div id="menu-container"></div>
+   
 
   <div class="container">
     <h1>Your Search Result for "<span id="selected-domain">Mathematics</span>" Domain</h1>
@@ -352,35 +348,9 @@
       <button onclick="closePopup()">Close</button>
     </div>
   </div>
-
-  <footer>
-    <div class="footer-container">
-      <div class="about-section" id="about-section">
-        <h2>About Us</h2>
-        <p>
-          Welcome to our library, a treasure trove of knowledge and resources. We
-          strive to foster a love for learning and reading by providing access to
-          an extensive collection of books, digital content, and community programs.
-        </p>
-      </div>
-      <div class="contact-section" id="contact-section">
-        <h2>Contact Us</h2>
-        <p><strong>Address:</strong> 123 Knowledge Lane, Booksville</p>
-        <p><strong>Phone:</strong> +1 234 567 890</p>
-        <p><strong>Email:</strong> contact@ourlibrary.com</p>
-      </div>
-      <div class="social-media-section">
-        <h2>Follow Us</h2>
-        <a href="#" class="social-link">Facebook</a>
-        <a href="#" class="social-link">Twitter</a>
-        <a href="#" class="social-link">Instagram</a>
-        <a href="#" class="social-link">LinkedIn</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2024 Our Library. All Rights Reserved.</p>
-    </div>
-  </footer>
+<!-- Footer dynamically loaded -->
+<div id="footer-container"></div>
+  
 
   <script>
     const resourceData = [
@@ -404,7 +374,197 @@
             bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
             description: "An introduction to linear algebra.",
             pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
+          },
+          {
+            BookName: "Linear Algebra",
+            Author: "Gilbert Strang",
+            ISBN: "9876543210",
+            year: 2005,
+            bookCover: "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
+            description: "An introduction to linear algebra.",
+            pdfLink: "https://example.com/linear-algebra.pdf"
           }
+
         ]
       },
       {
