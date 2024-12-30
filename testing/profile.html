@@ -6,8 +6,8 @@
   <title>Profile</title>
   <link rel="stylesheet" href="./profile.css">
   <link rel="stylesheet" href="./headerfooter.css">
-
-  <script defer src="headerfooter.js"></script>
+  <script src="headerfooter.js"></script>
+  <script src="hard.js"></script>
 </head>
 <body>
   <!-- Menu bar dynamically loaded -->
@@ -45,10 +45,16 @@
       <button type="button" id="submit-btn" disabled onclick="saveProfile()">Save Profile</button>
     </form>
 
-    <!-- Note section -->
-    <p class="note">
-      <strong>Note:</strong> Once the data is approved by the Librarian, you can access the content.
-    </p>
+    <div id="saved-profile" style="margin-top: 20px; display: none;">
+      <h2>Saved Profile</h2>
+      <p><strong>Name:</strong> <span id="display-name"></span></p>
+      <p><strong>Email Address:</strong> <span id="display-email"></span></p>
+      <p><strong>Contact No:</strong> <span id="display-contact"></span></p>
+      <p><strong>PRN No:</strong> <span id="display-prn"></span></p>
+      <p><strong>Branch:</strong> <span id="display-branch"></span></p>
+      <p><strong>Division:</strong> <span id="display-division"></span></p>
+      <p><strong>Roll No:</strong> <span id="display-roll"></span></p>
+    </div>
   </main>
 
   <!-- Footer dynamically loaded -->
@@ -91,13 +97,18 @@
 
     // Save profile function
     function saveProfile() {
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const contact = document.getElementById('contact').value;
-      const prn = document.getElementById('prn').value;
-      const branch = document.getElementById('branch').value;
-      const division = document.getElementById('division').value;
-      const roll = document.getElementById('roll').value;
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const contact = document.getElementById('contact').value.trim();
+      const prn = document.getElementById('prn').value.trim();
+      const branch = document.getElementById('branch').value.trim();
+      const division = document.getElementById('division').value.trim();
+      const roll = document.getElementById('roll').value.trim();
+
+      if (!name || !email || !contact || !prn || !branch || !division || !roll) {
+        alert('Please fill out all fields.');
+        return;
+      }
 
       const profileData = {
         name,
@@ -112,20 +123,29 @@
       localStorage.setItem('profileData', JSON.stringify(profileData));
 
       alert('Profile saved successfully!');
+      displaySavedProfile(profileData);
     }
 
-    // Load previously saved data on page load
+    // Display saved profile data
+    function displaySavedProfile(profileData) {
+      document.getElementById('saved-profile').style.display = 'block';
+      document.getElementById('display-name').textContent = profileData.name;
+      document.getElementById('display-email').textContent = profileData.email;
+      document.getElementById('display-contact').textContent = profileData.contact;
+      document.getElementById('display-prn').textContent = profileData.prn;
+      document.getElementById('display-branch').textContent = profileData.branch;
+      document.getElementById('display-division').textContent = profileData.division;
+      document.getElementById('display-roll').textContent = profileData.roll;
+    }
+
+    // Load saved profile data if exists
     document.addEventListener('DOMContentLoaded', () => {
-      const savedData = JSON.parse(localStorage.getItem('profileData'));
-      if (savedData) {
-        document.getElementById('name').value = savedData.name || '';
-        document.getElementById('email').value = savedData.email || '';
-        document.getElementById('contact').value = savedData.contact || '';
-        document.getElementById('prn').value = savedData.prn || '';
-        document.getElementById('branch').value = savedData.branch || '';
-        document.getElementById('division').value = savedData.division || '';
-        document.getElementById('roll').value = savedData.roll || '';
-        updateProgress();
+      const savedProfile = JSON.parse(localStorage.getItem('profileData'));
+
+      if (savedProfile) {
+        displaySavedProfile(savedProfile);
+        // Hide the form if profile is already saved
+        document.getElementById('profile-form').style.display = 'none';
       }
     });
   </script>
