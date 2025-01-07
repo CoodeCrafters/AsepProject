@@ -10,7 +10,36 @@
           "bookCover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmvXSG6V4br4ueNwxOPj0d2hiQfW1_K4KLcw&s",
           "description": "A classic Physics textbook.",
           "pdfLink": "https://example.com/hc-verma.pdf"
+        },
+        {
+            "BookName": "Fundamentals of Physics",
+            "Author": "Resnick, Halliday, Walker",
+            "ISBN": "1112223334",
+            "year": 2011,
+            "bookCover": "https://example.com/fundamentals.jpg",
+            "description": "Comprehensive Physics reference.",
+            "pdfLink": "https://example.com/fundamentals.pdf"
+        },
+        {
+            "BookName": "Fundamentals of Physics",
+            "Author": "Resnick, Halliday, Walker",
+            "ISBN": "1112223334",
+            "year": 2011,
+            "bookCover": "https://example.com/fundamentals.jpg",
+            "description": "Comprehensive Physics reference.",
+            "pdfLink": "https://example.com/fundamentals.pdf"
+        },
+        {
+            "BookName": "Fundamentals of Physics",
+            "Author": "Resnick, Halliday, Walker",
+            "ISBN": "1112223334",
+            "year": 2011,
+            "bookCover": "https://example.com/fundamentals.jpg",
+            "description": "Comprehensive Physics reference.",
+            "pdfLink": "https://example.com/fundamentals.pdf"
         }
+        
+       
       ]
     },
     {
