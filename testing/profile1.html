@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile Form</title>
+  <link rel="stylesheet" href="./profile.css">
+  <link rel="stylesheet" href="./headerfooter.css">
+  <script src="./headerfooter.js" defer></script>
+  <script src="./profile.js" defer></script>
+</head>
+<body>
+  <!-- Menu bar dynamically loaded -->
+  <div id="menu-container"></div>
+
+  <!-- Profile Form Section -->
+  <main>
+    <h1>User Profile Form</h1>
+    <div id="progress-bar-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div id="progress-bar"></div>
+    </div>
+
+    <form id="profile-form" class="profile-form">
+      <!-- Left Column -->
+      <div class="half-width">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name" required oninput="updateProgress()" aria-label="Name">
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" placeholder="Enter your email" required oninput="updateProgress()" aria-label="Email Address">
+
+        <label for="contact">Contact No:</label>
+        <input type="tel" id="contact" placeholder="Enter your contact no." required pattern="^[0-9]{10}$" title="Enter a valid 10-digit phone number" oninput="updateProgress()" aria-label="Contact Number">
+
+        <label for="prn">PRN No:</label>
+        <input type="text" id="prn" placeholder="Enter your PRN No" required pattern="^[0-9]{10}$" title="PRN must be a 10-digit number" oninput="updateProgress()" aria-label="PRN Number">
+      </div>
+
+      <!-- Right Column -->
+      <div class="half-width">
+        <label for="branch">Branch:</label>
+        <input type="text" id="branch" placeholder="Enter your branch" required oninput="updateProgress()" aria-label="Branch">
+
+        <label for="division">Division:</label>
+        <input type="text" id="division" placeholder="Enter your division" required oninput="updateProgress()" aria-label="Division">
+
+        <label for="roll">Roll No:</label>
+        <input type="number" id="roll" placeholder="Enter your roll no" required oninput="updateProgress()" aria-label="Roll Number">
+      </div>
+
+      <button type="button" id="submit-btn" disabled onclick="saveProfile()">Save Profile</button>
+      <button type="reset" id="reset-btn">Reset Form</button>
+    </form>
+
+    <div id="feedback-message" style="display: none; color: green; margin-top: 20px;">
+      Profile saved successfully!
+    </div>
+
+    <div class="note">
+      <p><strong>Note:</strong> Once the data is approved by the Librarian, you can access the content.</p>
+    </div>
+  </main>
+
+  <!-- Footer dynamically loaded -->
+  <div id="footer-container"></div>
+</body>
+<script>
+// Load the menu and footer dynamically
+async function loadDynamicContent() {
+  try {
+    const menuResponse = await fetch('menu.html');
+    if (!menuResponse.ok) throw new Error('Menu not loaded');
+    const menuContent = await menuResponse.text();
+    document.getElementById('menu-container').innerHTML = menuContent;
+
+    const footerResponse = await fetch('footer.html');
+    if (!footerResponse.ok) throw new Error('Footer not loaded');
+    const footerContent = await footerResponse.text();
+    document.getElementById('footer-container').innerHTML = footerContent;
+  } catch (error) {
+    console.error('Error loading dynamic content:', error);
+  }
+}
+
+// Update progress bar function
+function updateProgress() {
+  const form = document.getElementById('profile-form');
+  const inputs = form.querySelectorAll('input');
+  const filledFields = Array.from(inputs).filter(input => input.value.trim() !== '').length;
+  const totalFields = inputs.length;
+
+  const progress = (filledFields / totalFields) * 100;
+  document.getElementById('progress-bar').style.width = `${progress}%`;
+
+  // Enable or disable submit button based on form completion
+  document.getElementById('submit-btn').disabled = filledFields < totalFields;
+}
+
+// Save profile function
+async function saveProfile() {
+  const profileData = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    contact: document.getElementById('contact').value,
+    prn: document.getElementById('prn').value,
+    branch: document.getElementById('branch').value,
+    division: document.getElementById('division').value,
+    roll: document.getElementById('roll').value,
+  };
+
+  try {
+    const response = await fetch('http://localhost:3000/saveProfile', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(profileData),
+    });
+
+    if (response.ok) {
+      document.getElementById('feedback-message').style.display = 'block';
+    } else {
+      throw new Error('Failed to save profile');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Error saving profile.');
+  }
+}
+
+// Populate saved profile data if available
+document.addEventListener('DOMContentLoaded', () => {
+  loadDynamicContent();
+
+  const savedProfileData = JSON.parse(localStorage.getItem('profileData'));
+  if (savedProfileData) {
+    document.getElementById('name').value = savedProfileData.name || '';
+    document.getElementById('email').value = savedProfileData.email || '';
+    document.getElementById('contact').value = savedProfileData.contact || '';
+    document.getElementById('prn').value = savedProfileData.prn || '';
+    document.getElementById('branch').value = savedProfileData.branch || '';
+    document.getElementById('division').value = savedProfileData.division || '';
+    document.getElementById('roll').value = savedProfileData.roll || '';
+    updateProgress();
+  }
+});
+</script>
+</html>
