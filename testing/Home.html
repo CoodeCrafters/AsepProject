@@ -501,6 +501,9 @@ footer {
     <option value="Physics">Physics</option>
   </select>
   <button onclick="searchBook()">Search</button>
+  <!-- Add this container to display suggestions -->
+  <div id="suggestions-container"></div>
+
 </section>
 
 
@@ -646,7 +649,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function searchBook() {
   const searchInput = document.getElementById('search-input').value.trim().toLowerCase();
   const suggestionsContainer = document.getElementById('suggestions-container');
-  
+
   // Clear previous suggestions
   suggestionsContainer.innerHTML = '';
 
@@ -693,8 +696,6 @@ function searchBook() {
   suggestionsContainer.appendChild(dropdown);
 }
 
-// Event Listener for Search Input
-document.getElementById('search-input').addEventListener('input', searchBook);
 
 
     // Move left or right in the carousel
