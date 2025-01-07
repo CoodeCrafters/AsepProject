@@ -20,7 +20,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // MongoDB Atlas connection string
-const mongoUri = "mongodb+srv://codecrafters:n2R7uwl86Dhz5Y8@centrallibraryprofile.zw3fw.mongodb.net/CentralLibraryProfile?retryWrites=true&w=majority";
+const mongoUri = "mongodb+srv://codecrafters:nn2R7uwl86Dhz5Y8@centrallibraryprofile.zw3fw.mongodb.net/CentralLibraryProfile?retryWrites=true&w=majority";
 
 // Replace <db_password> with the actual password from MongoDB Atlas
 mongoose
