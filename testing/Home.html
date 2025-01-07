@@ -74,75 +74,51 @@
       transform: scale(1.1);
     }
 
-   /* Search Panel */
-.search-panel {
-  position: relative;
-  background: url('/AsepProject/1200x400.webp') no-repeat center center/cover;
-  padding: 80px 20px;
-  text-align: center;
-  color: var(--bs-white);
-}
+    /* Search Panel */
+    .search-panel {
+      position: relative;
+      background: url('/AsepProject/1200x400.webp') no-repeat center center/cover;
+      padding: 80px 20px;
+      text-align: center;
+      color: var(--bs-white);
+    }
 
-.search-panel h2 {
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-}
+    .search-panel h2 {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    }
 
-/* Flex container for search elements */
-.search-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px; /* Space between elements */
-  margin-bottom: 20px; /* Space below the row */
-}
+    .search-panel input,
+    .search-panel select,
+    .search-panel button {
+      padding: 10px 20px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 5px;
+      margin: 10px 0;
+      outline: none;
+      transition: all 0.3s ease;
+    }
 
-/* Input, Select, and Button Styling */
-.search-panel input,
-.search-panel select,
-.search-panel button {
-  padding: 10px 20px;
-  font-size: 1.1em;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  transition: all 0.3s ease;
-}
+    .search-panel input:focus,
+    .search-panel select:focus {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
 
-.search-panel input {
-  flex: 2; /* Slightly wider than other elements */
-}
+    .search-panel button {
+      cursor: pointer;
+      background-color: var(--bs-primary);
+      color: var(--bs-white);
+      border: none;
+    }
 
-.search-panel select {
-  flex: 1; /* Medium width */
-}
-
-.search-panel button {
-  flex: 1; /* Same width as select */
-  cursor: pointer;
-  background-color: var(--bs-primary);
-  color: var(--bs-white);
-}
-
-.search-panel input:focus,
-.search-panel select:focus {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.05);
-}
-
-.search-panel button:hover {
-  background-color: var(--bs-secondary);
-  transform: scale(1.1);
-}
-
-/* Suggestions container */
-.suggestions {
-  margin-top: 10px;
-  text-align: left;
-  color: var(--bs-dark);
-}
+    .search-panel button:hover {
+      background-color: var(--bs-secondary);
+      transform: scale(1.1);
+    }
 
     /* Domain Carousel Section */
     .domain-carousel {
@@ -485,28 +461,16 @@ footer {
   </header>
 
   <!-- Search Panel -->
+<!-- Search Panel -->
 <section class="search-panel">
   <h2>Find Your Next Book</h2>
-  <!-- Search Input -->
-  <div class="search-container">
-    <input
-      type="text"
-      id="search-input"
-      placeholder="Search for books by name, author, ISBN, or domain..."
-    />
-    <!-- Suggestions -->
-    <div id="suggestions-container" class="suggestions"></div>
-  </div>
-  
-  <!-- Category Dropdown -->
-  <select id="category-select">
+  <input type="text" placeholder="Search by Title, Author, ISBN">
+  <select>
     <option value="all">All Categories</option>
     <option value="Mathematics">Mathematics</option>
     <option value="Python">Python</option>
     <option value="Physics">Physics</option>
   </select>
-  
-  <!-- Search Button -->
   <button onclick="searchBook()">Search</button>
 </section>
 
@@ -743,7 +707,10 @@ document.getElementById('search-input').addEventListener('input', searchBook);
       }
     }, 5000); // Change domain every 5 seconds
 
-    
+    // Search Book Functionality (for demonstration)
+    function searchBook() {
+      alert('Search functionality is not yet implemented.');
+    }
 
 window.addEventListener("scroll", () => {
   const footer = document.querySelector("footer");
