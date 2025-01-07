@@ -454,9 +454,12 @@ footer {
   max-height: 200px;
   overflow-y: auto;
   position: absolute;
-  width: calc(100% - 80px); /* Matches the width of the input */
+  width: 510px; /* Set the width to 500px */
+  left: 50%; /* Center the dropdown horizontally */
+  transform: translateX(-50%); /* Adjust the left positioning to truly center */
   z-index: 1000;
 }
+
 
 .suggestions-dropdown li {
   padding: 10px;
