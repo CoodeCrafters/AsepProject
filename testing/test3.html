@@ -435,23 +435,25 @@ function showSuggestions() {
   });
 }
 
-// Search books based on input
-function searchBooks() {
-  const searchText = document.getElementById("search-input").value.toLowerCase();
-  const authorFilter = document.getElementById("filter-author").value;
-  const yearFilter = document.getElementById("filter-year").value;
 
-  const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
-  const filteredBooks = domainData.books.filter(book => {
-    return (
-      (searchText === "" || book.BookName.toLowerCase().includes(searchText) || book.Author.toLowerCase().includes(searchText) || book.ISBN.includes(searchText)) &&
-      (authorFilter === "" || book.Author === authorFilter) &&
-      (yearFilter === "" || book.year == yearFilter)
-    );
-  });
+    // Search books based on input
+    function searchBooks() {
+      const searchText = document.getElementById("search-input").value.toLowerCase();
+      const authorFilter = document.getElementById("filter-author").value;
+      const yearFilter = document.getElementById("filter-year").value;
 
-  displayBooks(filteredBooks);
-}
+      const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
+      const filteredBooks = domainData.books.filter(book => {
+        return (
+          (searchText === "" || book.BookName.toLowerCase().includes(searchText) || book.Author.toLowerCase().includes(searchText) || book.ISBN.includes(searchText)) &&
+          (authorFilter === "" || book.Author === authorFilter) &&
+          (yearFilter === "" || book.year == yearFilter)
+        );
+      });
+
+      displayBooks(filteredBooks);
+    }
+
 
 // Function to open popup for book details
 function openPopup(book) {
