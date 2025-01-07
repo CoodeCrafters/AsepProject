@@ -67,7 +67,8 @@
   </main>
 </body>
 <script>
-// Load the menu and footer dynamically
+document.addEventListener('DOMContentLoaded', loadDynamicContent);
+
 async function loadDynamicContent() {
   try {
     const menuResponse = await fetch('menu.html');
@@ -83,6 +84,7 @@ async function loadDynamicContent() {
     console.error('Error loading dynamic content:', error);
   }
 }
+
 
 // Update progress bar function
 function updateProgress() {
