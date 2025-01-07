@@ -20,15 +20,16 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // MongoDB Atlas connection string
-const mongoUri = process.env.MONGO_URI;
+const mongoUri = "mongodb+srv://codecrafters:n2R7uwl86Dhz5Y8@centrallibraryprofile.zw3fw.mongodb.net/CentralLibraryProfile?retryWrites=true&w=majority";
 
+// Replace <db_password> with the actual password from MongoDB Atlas
 mongoose
   .connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log('Connected to MongoDB Atlas'))
-  .catch(err => console.error('Error connecting to MongoDB Atlas:', err));
+  .then(() => console.log("Connected to MongoDB Atlas"))
+  .catch((err) => console.error("Error connecting to MongoDB Atlas:", err));
 
 // Define Mongoose Schema
 const profileSchema = new mongoose.Schema({
