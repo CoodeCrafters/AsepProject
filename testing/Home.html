@@ -444,6 +444,35 @@ footer {
   }
 }
 
+/* Suggestions Dropdown */
+.suggestions-dropdown {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  width: calc(100% - 20px); /* Matches the width of the input */
+  z-index: 1000;
+}
+
+.suggestions-dropdown li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.suggestions-dropdown li:last-child {
+  border-bottom: none;
+}
+
+.suggestions-dropdown li:hover {
+  background: #f5f5f5;
+}
+
+
 </style>
 </head>
 <body>
@@ -610,7 +639,7 @@ function searchBook() {
   
   // Clear previous suggestions
   suggestionsContainer.innerHTML = '';
-  
+
   if (searchInput === '') {
     return; // No search input, no suggestions
   }
@@ -633,32 +662,30 @@ function searchBook() {
     }
   });
 
-  // Display suggestions
+  // Display suggestions in a dropdown format
   if (matchingBooks.length === 0) {
     suggestionsContainer.innerHTML = '<p>No books found.</p>';
     return;
   }
 
+  const dropdown = document.createElement('ul');
+  dropdown.classList.add('suggestions-dropdown');
+
   matchingBooks.forEach(book => {
-    const suggestion = document.createElement('div');
-    suggestion.classList.add('suggestion');
-    suggestion.innerHTML = `
-      <img src="${book.bookCover}" alt="${book.BookName}" class="book-cover">
-      <div class="book-info">
-        <h3>${book.BookName}</h3>
-        <p>Author: ${book.Author}</p>
-        <p>Year: ${book.year}</p>
-      </div>
-    `;
-    suggestion.addEventListener('click', () => {
+    const listItem = document.createElement('li');
+    listItem.textContent = `${book.BookName} by ${book.Author}`;
+    listItem.addEventListener('click', () => {
       window.location.href = `./description?ISBN=${book.ISBN}`;
     });
-    suggestionsContainer.appendChild(suggestion);
+    dropdown.appendChild(listItem);
   });
+
+  suggestionsContainer.appendChild(dropdown);
 }
 
 // Event Listener for Search Input
 document.getElementById('search-input').addEventListener('input', searchBook);
+
 
     // Move left or right in the carousel
     let currentIndex = 0; // Start at the first domain
