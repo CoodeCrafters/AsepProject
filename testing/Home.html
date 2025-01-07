@@ -648,42 +648,23 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Search Book Functionality
-// Search Book Functionality
 function searchBook() {
   const searchInput = document.getElementById('search-input').value.trim().toLowerCase();
-  const categorySelect = document.getElementById('category-select');
-  const selectedDomain = categorySelect.value;
   const suggestionsContainer = document.getElementById('suggestions-container');
 
   // Clear previous suggestions
   suggestionsContainer.innerHTML = '';
 
-  if (searchInput === '' && selectedDomain === 'all') {
-    return; // If no search input and no category selected, do nothing
-  }
-
-  // If a domain is selected and the search button is clicked, redirect to the respective page
-  if (searchInput === '' && selectedDomain !== 'all') {
-    window.location.href = `./test3.html?domain=${selectedDomain}`;
-    return;
+  if (searchInput === '') {
+    return; // No search input, no suggestions
   }
 
   // Find matching books
   const matchingBooks = [];
   resourceData.forEach(resource => {
-    // If a category is selected, filter only the selected domain
-    if (selectedDomain !== 'all' && resource.domain === selectedDomain) {
-      resource.books.forEach(book => {
-        if (
-          book.BookName.toLowerCase().includes(searchInput) ||
-          book.Author.toLowerCase().includes(searchInput) ||
-          book.ISBN.includes(searchInput)
-        ) {
-          matchingBooks.push(book);
-        }
-      });
-    } else if (selectedDomain === 'all') {
-      // If 'all' category is selected, check across all domains
+    if (resource.domain.toLowerCase().includes(searchInput)) {
+      matchingBooks.push(...resource.books); // Add all books from the domain
+    } else {
       resource.books.forEach(book => {
         if (
           book.BookName.toLowerCase().includes(searchInput) ||
@@ -716,10 +697,6 @@ function searchBook() {
 
   suggestionsContainer.appendChild(dropdown);
 }
-
-// Event Listener for Search Input
-document.getElementById('search-input').addEventListener('input', searchBook);
-
 
 
 
