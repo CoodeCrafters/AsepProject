@@ -1,0 +1,16 @@
+{
+    "name": "e-library",
+    "version": "1.0.0",
+    "description": "The asepProject content for the backend",
+    "main": "index.js",
+    "scripts": {
+      "start": "node index.js"
+    },
+    "keywords": [
+      "backend",
+      "server"
+    ],
+    "author": "",
+    "license": "ISC"
+  }
+  
