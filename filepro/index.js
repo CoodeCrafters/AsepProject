@@ -7,23 +7,28 @@ require('dotenv').config();
 
 // Initialize Express app
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.json()); // Parse JSON data
-app.use(cors()); // Enable Cross-Origin Resource Sharing
+
+// CORS Configuration
+const corsOptions = {
+  origin: 'https://coodecrafters.github.io', // Replace with your GitHub Pages URL
+  methods: ['GET', 'POST'], // Allow only necessary methods
+};
+app.use(cors(corsOptions));
 
 // MongoDB Atlas connection string
-const mongoUri = "mongodb+srv://codecrafters:nn2R7uwl86Dhz5Y8@centrallibraryprofile.zw3fw.mongodb.net/CentralLibraryProfile?retryWrites=true&w=majority";
+const mongoUri = process.env.MONGO_URI;
 
-// Replace <db_password> with the actual password from MongoDB Atlas
 mongoose
   .connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("Connected to MongoDB Atlas"))
-  .catch((err) => console.error("Error connecting to MongoDB Atlas:", err));
+  .then(() => console.log('Connected to MongoDB Atlas'))
+  .catch(err => console.error('Error connecting to MongoDB Atlas:', err));
 
 // Define Mongoose Schema
 const profileSchema = new mongoose.Schema({
@@ -37,7 +42,7 @@ const profileSchema = new mongoose.Schema({
 });
 
 // Create Mongoose Model
-const Profile = mongoose.model("Profile", profileSchema);
+const Profile = mongoose.model('Profile', profileSchema);
 
 // API Endpoint to save profile data
 app.post('/saveProfile', async (req, res) => {
@@ -58,9 +63,9 @@ app.post('/saveProfile', async (req, res) => {
     // Save the profile to MongoDB
     await newProfile.save();
 
-    res.status(201).send({ message: "Profile saved successfully!" });
+    res.status(201).send({ message: 'Profile saved successfully!' });
   } catch (error) {
-    res.status(500).send({ error: "Failed to save profile" });
+    res.status(500).send({ error: 'Failed to save profile' });
   }
 });
 

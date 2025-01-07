@@ -97,52 +97,37 @@ function updateProgress() {
 }
 
 // Save profile function
-async function saveProfile() {
+function saveProfile() {
   const profileData = {
     name: document.getElementById('name').value,
-    email: document.getElementById('email').value,
-    contact: document.getElementById('contact').value,
-    prn: document.getElementById('prn').value,
     branch: document.getElementById('branch').value,
-    division: document.getElementById('division').value,
-    roll: document.getElementById('roll').value,
+    email_id: document.getElementById('email').value,
+    prn_no: document.getElementById('prn').value,
+    roll_no: document.getElementById('roll').value,
+    div: document.getElementById('division').value,
+    contact_no: document.getElementById('contact').value,
   };
 
-  try {
-    const response = await fetch('http://localhost:3000/saveProfile', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(profileData),
+  fetch('https://central-library.onrender.com/saveProfile', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(profileData),
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.message) {
+        alert('Profile saved successfully!');
+      } else {
+        alert('Failed to save profile: ' + (data.error || 'Unknown error'));
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred while saving the profile.');
     });
-
-    if (response.ok) {
-      document.getElementById('feedback-message').style.display = 'block';
-    } else {
-      throw new Error('Failed to save profile');
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    alert('Error saving profile.');
-  }
 }
 
-// Populate saved profile data if available
-document.addEventListener('DOMContentLoaded', () => {
-  loadDynamicContent();
-
-  const savedProfileData = JSON.parse(localStorage.getItem('profileData'));
-  if (savedProfileData) {
-    document.getElementById('name').value = savedProfileData.name || '';
-    document.getElementById('email').value = savedProfileData.email || '';
-    document.getElementById('contact').value = savedProfileData.contact || '';
-    document.getElementById('prn').value = savedProfileData.prn || '';
-    document.getElementById('branch').value = savedProfileData.branch || '';
-    document.getElementById('division').value = savedProfileData.division || '';
-    document.getElementById('roll').value = savedProfileData.roll || '';
-    updateProgress();
-  }
-});
 </script>
 </html>
