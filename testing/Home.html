@@ -461,17 +461,31 @@ footer {
   </header>
 
   <!-- Search Panel -->
-  <section class="search-panel">
-    <h2>Find Your Next Book</h2>
-    <input type="text" placeholder="Search by Title, Author, ISBN">
-    <select>
-      <option value="all">All Categories</option>
-      <option value="Mathematics">Mathematics</option>
-      <option value="Python">Python</option>
-      <option value="Physics">Physics</option>
-    </select>
-    <button onclick="searchBook()">Search</button>
-  </section>
+<section class="search-panel">
+  <h2>Find Your Next Book</h2>
+  <!-- Search Input -->
+  <div class="search-container">
+    <input
+      type="text"
+      id="search-input"
+      placeholder="Search for books by name, author, ISBN, or domain..."
+    />
+    <!-- Suggestions -->
+    <div id="suggestions-container" class="suggestions"></div>
+  </div>
+  
+  <!-- Category Dropdown -->
+  <select id="category-select">
+    <option value="all">All Categories</option>
+    <option value="Mathematics">Mathematics</option>
+    <option value="Python">Python</option>
+    <option value="Physics">Physics</option>
+  </select>
+  
+  <!-- Search Button -->
+  <button onclick="searchBook()">Search</button>
+</section>
+
 
   <!-- Domain Carousel Section -->
   <section class="domain-carousel">
@@ -586,6 +600,78 @@ footer {
   </div>
 </div>
   <script>
+    let resourceData = [];
+
+// Fetch resource data from JSON
+async function fetchResourceData() {
+  try {
+    const response = await fetch('resources.json');
+    if (!response.ok) throw new Error('Failed to load resources');
+    resourceData = await response.json();
+    console.log('Resources loaded:', resourceData); // Debugging purpose
+  } catch (error) {
+    console.error('Error loading resource data:', error);
+  }
+}
+fetchResourceData();
+
+// Search Book Functionality
+function searchBook() {
+  const searchInput = document.getElementById('search-input').value.trim().toLowerCase();
+  const suggestionsContainer = document.getElementById('suggestions-container');
+  
+  // Clear previous suggestions
+  suggestionsContainer.innerHTML = '';
+  
+  if (searchInput === '') {
+    return; // No search input, no suggestions
+  }
+
+  // Find matching books
+  const matchingBooks = [];
+  resourceData.forEach(resource => {
+    if (resource.domain.toLowerCase().includes(searchInput)) {
+      matchingBooks.push(...resource.books); // Add all books from the domain
+    } else {
+      resource.books.forEach(book => {
+        if (
+          book.BookName.toLowerCase().includes(searchInput) ||
+          book.Author.toLowerCase().includes(searchInput) ||
+          book.ISBN.includes(searchInput)
+        ) {
+          matchingBooks.push(book);
+        }
+      });
+    }
+  });
+
+  // Display suggestions
+  if (matchingBooks.length === 0) {
+    suggestionsContainer.innerHTML = '<p>No books found.</p>';
+    return;
+  }
+
+  matchingBooks.forEach(book => {
+    const suggestion = document.createElement('div');
+    suggestion.classList.add('suggestion');
+    suggestion.innerHTML = `
+      <img src="${book.bookCover}" alt="${book.BookName}" class="book-cover">
+      <div class="book-info">
+        <h3>${book.BookName}</h3>
+        <p>Author: ${book.Author}</p>
+        <p>Year: ${book.year}</p>
+      </div>
+    `;
+    suggestion.addEventListener('click', () => {
+      window.location.href = `./description?ISBN=${book.ISBN}`;
+    });
+    suggestionsContainer.appendChild(suggestion);
+  });
+}
+
+// Event Listener for Search Input
+document.getElementById('search-input').addEventListener('input', searchBook);
+
     // Move left or right in the carousel
     let currentIndex = 0; // Start at the first domain
     const domainContainer = document.getElementById('domainContainer');
