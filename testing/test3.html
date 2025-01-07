@@ -259,170 +259,148 @@ h1 {
   
 
   <script>
-      // Load the menu and footer dynamically
-    async function loadDynamicContent() {
-      try {
-        const menuResponse = await fetch('menu.html');
-        if (!menuResponse.ok) throw new Error('Menu not loaded');
-        const menuContent = await menuResponse.text();
-        document.getElementById('menu-container').innerHTML = menuContent;
-
-        const footerResponse = await fetch('footer.html');
-        if (!footerResponse.ok) throw new Error('Footer not loaded');
-        const footerContent = await footerResponse.text();
-        document.getElementById('footer-container').innerHTML = footerContent;
-      } catch (error) {
-        console.error('Error loading dynamic content:', error);
-      }
-    }
-
-    loadDynamicContent();
-
-
-    let resourceData = [];
+      // Declare variables for selected domain and resource data
 let selectedDomain = getDomainFromURL();
+let resourceData = [];
 
+// Load the menu and footer dynamically
+async function loadDynamicContent() {
+  try {
+    const menuResponse = await fetch('menu.html');
+    if (!menuResponse.ok) throw new Error('Menu not loaded');
+    const menuContent = await menuResponse.text();
+    document.getElementById('menu-container').innerHTML = menuContent;
+
+    const footerResponse = await fetch('footer.html');
+    if (!footerResponse.ok) throw new Error('Footer not loaded');
+    const footerContent = await footerResponse.text();
+    document.getElementById('footer-container').innerHTML = footerContent;
+  } catch (error) {
+    console.error('Error loading dynamic content:', error);
+  }
+}
+
+// Fetch resource data from JSON
 async function fetchResourceData() {
   try {
     const response = await fetch('resources.json');
     if (!response.ok) throw new Error('Failed to load resources');
     resourceData = await response.json();
-    loadBooks();
+    loadBooks();  // Load books after data is fetched
   } catch (error) {
     console.error('Error loading resource data:', error);
   }
 }
 
-async function initialize() {
-  await fetchResourceData();
-  loadBooks();
+// Get domain from URL params
+function getDomainFromURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('domain') || ''; // Return empty string if no domain
 }
 
-initialize();
+// Show error message when no domain is found
+function showErrorMessage() {
+  document.getElementById("error-message").style.display = "block";
+  document.getElementById("book-list").style.display = "none";
+}
 
-const resourceData =   let selectedDomain = getDomainFromURL();
-    let resourceData = [];
+// Load books based on selected domain and fetched resource data
+function loadBooks() {
+  if (!selectedDomain || !resourceData.length) {
+    showErrorMessage();
+    return;
+  }
 
-    // Fetch resource data
-    async function fetchResourceData() {
-      try {
-        const response = await fetch('resources.json');
-        if (!response.ok) throw new Error('Failed to load resources');
-        resourceData = await response.json();
-        loadBooks();
-      } catch (error) {
-        console.error('Error loading resource data:', error);
-      }
+  const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
+  if (!domainData) {
+    showErrorMessage();
+    return;
+  }
+
+  const bookList = document.getElementById("book-list");
+  const authorFilter = document.getElementById("filter-author");
+  const yearFilter = document.getElementById("filter-year");
+
+  document.getElementById("selected-domain").innerText = selectedDomain.charAt(0).toUpperCase() + selectedDomain.slice(1);
+
+  // Clear previous results
+  bookList.innerHTML = "";
+  authorFilter.innerHTML = `<option value="">Filter by Author</option>`;
+  yearFilter.innerHTML = `<option value="">Filter by Year</option>`;
+
+  // Populate book cards and filters
+  domainData.books.forEach(book => {
+    const card = document.createElement("div");
+    card.className = "book-card";
+    card.setAttribute("data-book", JSON.stringify(book)); // Store book data in card
+    card.innerHTML = `
+      <img src="${book.bookCover}" alt="${book.BookName}">
+      <h3>${book.BookName}</h3>
+      <p>by ${book.Author}</p>
+      <p>Year: ${book.year}</p>
+    `;
+    card.onclick = () => openPopup(book);
+    bookList.appendChild(card);
+
+    // Populate filters
+    if (![...authorFilter.options].some(opt => opt.value === book.Author)) {
+      authorFilter.innerHTML += `<option value="${book.Author}">${book.Author}</option>`;
     }
-
-    fetchResourceData();
-
-
-   
-    
-    // Function to get domain from URL params
-    function getDomainFromURL() {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get('domain') || ''; // Return empty string if no domain
+    if (![...yearFilter.options].some(opt => opt.value == book.year)) {
+      yearFilter.innerHTML += `<option value="${book.year}">${book.year}</option>`;
     }
+  });
+}
 
-    // Function to display error if domain is not valid
-    function showErrorMessage() {
-      document.getElementById("error-message").style.display = "block";
-      document.getElementById("book-list").style.display = "none";
-    }
+// Apply filter based on author and year
+function applyFilter() {
+  const authorFilter = document.getElementById("filter-author").value;
+  const yearFilter = document.getElementById("filter-year").value;
+  
+  const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
+  const filteredBooks = domainData.books.filter(book => {
+    return (
+      (authorFilter === "" || book.Author === authorFilter) &&
+      (yearFilter === "" || book.year == yearFilter)
+    );
+  });
 
-    // Load books only if domain exists
-    function loadBooks() {
-      if (!selectedDomain || !resourceData.some(r => r.domain.toLowerCase() === selectedDomain.toLowerCase())) {
-        showErrorMessage();
-        return;
-      }
+  displayBooks(filteredBooks);
+}
 
-      const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
-      const bookList = document.getElementById("book-list");
-      const authorFilter = document.getElementById("filter-author");
-      const yearFilter = document.getElementById("filter-year");
+// Clear all filters and reload books
+function clearFilter() {
+  document.getElementById("filter-author").value = "";
+  document.getElementById("filter-year").value = "";
+  loadBooks(); // Load all books
+}
 
-      document.getElementById("selected-domain").innerText = selectedDomain.charAt(0).toUpperCase() + selectedDomain.slice(1);
+// Display filtered books in cards
+function displayBooks(books) {
+  const bookList = document.getElementById("book-list");
+  bookList.innerHTML = "";
 
-      // Clear previous results
-      bookList.innerHTML = "";
-      authorFilter.innerHTML = `<option value="">Filter by Author</option>`;
-      yearFilter.innerHTML = `<option value="">Filter by Year</option>`;
+  if (books.length === 0) {
+    bookList.innerHTML = "<p>No books found</p>";
+  }
 
-      // Populate book cards
-      domainData.books.forEach(book => {
-        const card = document.createElement("div");
-        card.className = "book-card";
-        card.setAttribute("data-book", JSON.stringify(book)); // Store book data in card
-        card.innerHTML = `
-          <img src="${book.bookCover}" alt="${book.BookName}">
-          <h3>${book.BookName}</h3>
-          <p>by ${book.Author}</p>
-          <p>Year: ${book.year}</p>
-        `;
-        card.onclick = () => openPopup(book); // Add click listener for pop-up
-        bookList.appendChild(card);
+  books.forEach(book => {
+    const card = document.createElement("div");
+    card.className = "book-card";
+    card.setAttribute("data-book", JSON.stringify(book)); // Store book data in card
+    card.innerHTML = `
+      <img src="${book.bookCover}" alt="${book.BookName}">
+      <h3>${book.BookName}</h3>
+      <p>by ${book.Author}</p>
+      <p>Year: ${book.year}</p>
+    `;
+    card.onclick = () => openPopup(book);
+    bookList.appendChild(card);
+  });
+}
 
-        // Populate filters
-        if (![...authorFilter.options].some(opt => opt.value === book.Author)) {
-          authorFilter.innerHTML += `<option value="${book.Author}">${book.Author}</option>`;
-        }
-        if (![...yearFilter.options].some(opt => opt.value == book.year)) {
-          yearFilter.innerHTML += `<option value="${book.year}">${book.year}</option>`;
-        }
-      });
-    }
-
-    // Apply filter
-    function applyFilter() {
-      const authorFilter = document.getElementById("filter-author").value;
-      const yearFilter = document.getElementById("filter-year").value;
-      
-      const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
-      const filteredBooks = domainData.books.filter(book => {
-        return (
-          (authorFilter === "" || book.Author === authorFilter) &&
-          (yearFilter === "" || book.year == yearFilter)
-        );
-      });
-
-      displayBooks(filteredBooks);
-    }
-
-    // Clear all filters
-    function clearFilter() {
-      document.getElementById("filter-author").value = "";
-      document.getElementById("filter-year").value = "";
-      loadBooks(); // Load all books
-    }
-
-    // Display books in cards
-    function displayBooks(books) {
-      const bookList = document.getElementById("book-list");
-      bookList.innerHTML = "";
-
-      if (books.length === 0) {
-        bookList.innerHTML = "<p>No books found</p>";
-      }
-
-      books.forEach(book => {
-        const card = document.createElement("div");
-        card.className = "book-card";
-        card.setAttribute("data-book", JSON.stringify(book)); // Store book data in card
-        card.innerHTML = `
-          <img src="${book.bookCover}" alt="${book.BookName}">
-          <h3>${book.BookName}</h3>
-          <p>by ${book.Author}</p>
-          <p>Year: ${book.year}</p>
-        `;
-        card.onclick = () => openPopup(book); // Add click listener for pop-up
-        bookList.appendChild(card);
-      });
-    }
-
-   function showSuggestions() {
+// Show book suggestions based on search input
+function showSuggestions() {
   const searchText = document.getElementById("search-input").value.toLowerCase();
   const suggestions = document.getElementById("suggestions");
   suggestions.innerHTML = "";
@@ -457,34 +435,32 @@ const resourceData =   let selectedDomain = getDomainFromURL();
   });
 }
 
+// Search books based on input
+function searchBooks() {
+  const searchText = document.getElementById("search-input").value.toLowerCase();
+  const authorFilter = document.getElementById("filter-author").value;
+  const yearFilter = document.getElementById("filter-year").value;
 
-    // Search books based on input
-    function searchBooks() {
-      const searchText = document.getElementById("search-input").value.toLowerCase();
-      const authorFilter = document.getElementById("filter-author").value;
-      const yearFilter = document.getElementById("filter-year").value;
+  const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
+  const filteredBooks = domainData.books.filter(book => {
+    return (
+      (searchText === "" || book.BookName.toLowerCase().includes(searchText) || book.Author.toLowerCase().includes(searchText) || book.ISBN.includes(searchText)) &&
+      (authorFilter === "" || book.Author === authorFilter) &&
+      (yearFilter === "" || book.year == yearFilter)
+    );
+  });
 
-      const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
-      const filteredBooks = domainData.books.filter(book => {
-        return (
-          (searchText === "" || book.BookName.toLowerCase().includes(searchText) || book.Author.toLowerCase().includes(searchText) || book.ISBN.includes(searchText)) &&
-          (authorFilter === "" || book.Author === authorFilter) &&
-          (yearFilter === "" || book.year == yearFilter)
-        );
-      });
-
-      displayBooks(filteredBooks);
-    }
-
-    // Function to open popup for book details
-    // Function to open the description page with the ISBN as a query parameter
-function openPopup(book) {
-  window.location.href = "./description?ISBN=${book.ISBN}";
+  displayBooks(filteredBooks);
 }
 
+// Function to open popup for book details
+function openPopup(book) {
+  window.location.href = `./description?ISBN=${book.ISBN}`;
+}
 
-    // Initialize
-    loadBooks();
+// Initialize dynamic content and fetch resources
+loadDynamicContent();
+fetchResourceData();  // Start fetching resource data
 
   </script>
   
