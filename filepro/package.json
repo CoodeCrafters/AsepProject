@@ -4,13 +4,27 @@
     "description": "The asepProject content for the backend",
     "main": "index.js",
     "scripts": {
-      "start": "node index.js"
+        "start": "node index.js"
     },
     "keywords": [
-      "backend",
-      "server"
+        "backend",
+        "server"
     ],
-    "author": "",
-    "license": "ISC"
-  }
-  
+    "author": "CodeCrafters",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/CoodeCrafters/AsepProject.git"
+    },
+    "bugs": {
+        "url": "https://github.com/CoodeCrafters/AsepProject/issues"
+    },
+    "homepage": "https://github.com/CoodeCrafters/AsepProject#readme",
+    "dependencies": {
+        "body-parser": "^1.20.3",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "mongoose": "^8.9.3"
+    }
+}
