@@ -493,7 +493,7 @@ footer {
 <!-- Search Panel -->
 <section class="search-panel">
   <h2>Find Your Next Book</h2>
-  <input type="text" placeholder="Search by Title, Author, ISBN">
+  <input type="text" id="search-input" placeholder="Search by Title, Author, ISBN">
   <select>
     <option value="all">All Categories</option>
     <option value="Mathematics">Mathematics</option>
@@ -631,6 +631,16 @@ async function fetchResourceData() {
   }
 }
 fetchResourceData();
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Event Listener for Search Input
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', searchBook);
+  } else {
+    console.error('Search input not found');
+  }
+});
 
 // Search Book Functionality
 function searchBook() {
