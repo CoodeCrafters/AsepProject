@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library</title>
+  <link rel="stylesheet" href="./headerfooter.css">
+  <script src="headerfooter.js"></script>
+  <script src="hard.js"></script>
+  <style>
+  /* General Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f4f9fc, #e8f0ff);
+  overflow-x: hidden;
+  position: relative;
+  color: #333;
+}
+
+/* Background Shapes */
+body::before,
+body::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  width: 300px;
+  height: 300px;
+  background: rgba(0, 123, 255, 0.1);
+  border-radius: 50%;
+}
+
+body::before {
+  top: -100px;
+  left: -150px;
+  filter: blur(100px);
+}
+
+body::after {
+  bottom: -100px;
+  right: -150px;
+  filter: blur(100px);
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #222;
+  font-weight: 700;
+  font-size: 36px;
+  text-transform: capitalize;
+}
+
+/* Search Panel */
+.search-panel {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.search-panel select {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.search-panel select:focus {
+  border-color: #007bff;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.search-panel input {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  flex: 1;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-panel button {
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-panel button:hover {
+  background: #f4f4f4;
+  color: #007bff;
+}
+
+/* Filter Panel */
+.filter-panel {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.filter-panel select {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.3s;
+  cursor: pointer;
+}
+
+.filter-panel button {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.filter-panel button:hover {
+  background: #f4f4f4;
+  color: #007bff;
+}
+
+/* Book List */
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.book-card {
+  position: relative;
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+.book-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 15px 15px 0 0;
+}
+
+.book-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #444;
+  padding: 10px;
+  margin: 0;
+}
+
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup {
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.popup button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #007bff, #0056b3);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.popup button:hover {
+  background: linear-gradient(145deg, #0056b3, #007bff);
+}
+
+
+
+    /* Header Styles */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      background-color: var(--bs-primary);
+      color: var(--bs-white);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .header .logo {
+      font-size: 1.8em;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: var(--bs-white);
+    }
+
+    .menu-bar {
+      display: flex;
+      gap: 30px;
+    }
+
+    .menu-bar a {
+      color: var(--bs-white);
+      text-decoration: none;
+      font-size: 1.1em;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .menu-bar a:hover {
+      background: var(--bs-secondary);
+      transform: scale(1.1);
+    }
+
+    /* Additional Utility Classes */
+    .active {
+      background-color: var(--bs-secondary);
+    }
+
+    /* General Footer Styling */
+    footer {
+  background: #cfe7ed;
+  color: #000000;
+  padding: 40px 20px;
+  font-family: 'Arial', sans-serif;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-container div {
+  flex: 1;
+  margin: 10px;
+  min-width: 250px;
+  padding: 20px;
+  border: 2px solid transparent; /* Default transparent border */
+  border-radius: 10px; /* Rounded corners for a polished look */
+  transition: border 0.4s ease-in-out, transform 0.3s ease-in-out, background 0.3s;
+}
+
+.footer-container h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.footer-container h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 2px;
+  background: #ff6347;
+  margin-top: 5px;
+  transition: width 0.4s ease-in-out;
+}
+
+.footer-container h2:hover::after {
+  width: 100px;
+}
+
+.footer-container p,
+.footer-container a {
+  font-size: 14px;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.footer-container a {
+  color: #ff6347;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-container a:hover {
+  color: #fff;
+}
+
+/* Social Media Links */
+.social-media-section a {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border: 1px solid #ff6347;
+  border-radius: 4px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.social-media-section a:hover {
+  background: #ff6347;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+/* Highlight Animation for Contact Us and About Us */
+.highlighted {
+  background: #f5f5f5; /* Light background to emphasize */
+  border: 2px solid #007bff; /* Blue border */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+  </style>
+</head>
+<body>
+  <!-- Menu bar dynamically loaded -->
+  <div id="menu-container"></div>
+
+  <div class="container">
+    <h1>Your Search Result for "<span id="selected-domain">Mathematics</span>" Domain</h1>
+    <div class="search-panel">
+      <input type="text" id="search-input" placeholder="Search by Title, Author, or ISBN" oninput="showSuggestions()">
+      <button onclick="searchBooks()">Search</button>
+      <div class="suggestions" id="suggestions"></div>
+    </div>
+
+    <div class="filter-panel" id="filter-panel">
+      <select id="filter-author">
+        <option value="">Filter by Author</option>
+      </select>
+      <select id="filter-year">
+        <option value="">Filter by Year</option>
+      </select>
+      <button onclick="applyFilter()">Apply Filter</button>
+      <button onclick="clearFilter()">Clear Filter</button>
+    </div>
+
+    <div class="book-list" id="book-list"></div>
+  </div>
+
+  <!-- Error Message -->
+  <div id="error-message" style="text-align: center; color: red; font-size: 20px; display: none;">
+    <p>The selected domain is not in our list, or you have not given the parameter correctly. Please check the URL or contact the site owner.</p>
+  </div>
+
+  <!-- Footer dynamically loaded -->
+  <div id="footer-container"></div>
+
+  <script>
+    // Load the menu and footer dynamically
+    async function loadDynamicContent() {
+      try {
+        const menuResponse = await fetch('menu.html');
+        if (!menuResponse.ok) throw new Error('Menu not loaded');
+        const menuContent = await menuResponse.text();
+        document.getElementById('menu-container').innerHTML = menuContent;
+
+        const footerResponse = await fetch('footer.html');
+        if (!footerResponse.ok) throw new Error('Footer not loaded');
+        const footerContent = await footerResponse.text();
+        document.getElementById('footer-container').innerHTML = footerContent;
+      } catch (error) {
+        console.error('Error loading dynamic content:', error);
+      }
+    }
+
+    loadDynamicContent();
+
+    let selectedDomain = getDomainFromURL();
+    let resourceData = [];
+
+    // Fetch resource data
+    async function fetchResourceData() {
+      try {
+        const response = await fetch('resources.json');
+        if (!response.ok) throw new Error('Failed to load resources');
+        resourceData = await response.json();
+        loadBooks();
+      } catch (error) {
+        console.error('Error loading resource data:', error);
+      }
+    }
+
+    fetchResourceData();
+
+    // Function to get domain from URL params
+    function getDomainFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('domain') || ''; // Return empty string if no domain
+    }
+
+    // Function to display error if domain is not valid
+    function showErrorMessage() {
+      document.getElementById("error-message").style.display = "block";
+      document.getElementById("book-list").style.display = "none";
+    }
+
+    // Load books only if domain exists
+    function loadBooks() {
+      if (!selectedDomain || !resourceData.some(r => r.domain.toLowerCase() === selectedDomain.toLowerCase())) {
+        showErrorMessage();
+        return;
+      }
+
+      const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
+      const bookList = document.getElementById("book-list");
+      const authorFilter = document.getElementById("filter-author");
+      const yearFilter = document.getElementById("filter-year");
+
+      document.getElementById("selected-domain").innerText = selectedDomain.charAt(0).toUpperCase() + selectedDomain.slice(1);
+
+      // Clear previous results
+      bookList.innerHTML = "";
+      authorFilter.innerHTML = `<option value="">Filter by Author</option>`;
+      yearFilter.innerHTML = `<option value="">Filter by Year</option>`;
+
+      // Populate book cards
+      domainData.books.forEach(book => {
+        const card = document.createElement("div");
+        card.className = "book-card";
+        card.setAttribute("data-book", JSON.stringify(book)); // Store book data in card
+        card.innerHTML = `
+          <a href="description.html?isbn=${book.ISBN}">
+            <img src="${book.bookCover}" alt="${book.BookName}" style="width: 100%; height: 260px; object-fit: cover; border-radius: 15px 15px 0 0;">
+            <h3>${book.BookName}</h3>
+            <p>by ${book.Author}</p>
+            <p>Year: ${book.year}</p>
+          </a>
+        `;
+        bookList.appendChild(card);
+
+        // Populate filters
+        if (![...authorFilter.options].some(opt => opt.value === book.Author)) {
+          authorFilter.innerHTML += `<option value="${book.Author}">${book.Author}</option>`;
+        }
+        if (![...yearFilter.options].some(opt => opt.value == book.year)) {
+          yearFilter.innerHTML += `<option value="${book.year}">${book.year}</option>`;
+        }
+      });
+    }
+
+    // Apply filter
+    function applyFilter() {
+      const authorFilter = document.getElementById("filter-author").value;
+      const yearFilter = document.getElementById("filter-year").value;
+
+      const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
+      const filteredBooks = domainData.books.filter(book => {
+        return (
+          (authorFilter === "" || book.Author === authorFilter) &&
+          (yearFilter === "" || book.year == yearFilter)
+        );
+      });
+
+      displayBooks(filteredBooks);
+    }
+
+    // Clear all filters
+    function clearFilter() {
+      document.getElementById("filter-author").value = "";
+      document.getElementById("filter-year").value = "";
+      loadBooks(); // Load all books
+    }
+
+    // Display books in cards
+    function displayBooks(books) {
+      const bookList = document.getElementById("book-list");
+      bookList.innerHTML = "";
+
+      if (books.length === 0) {
+        bookList.innerHTML = "<p>No books found</p>";
+      }
+
+      books.forEach(book => {
+        const card = document.createElement("div");
+        card.className = "book-card";
+        card.setAttribute("data-book", JSON.stringify(book)); // Store book data in card
+        card.innerHTML = `
+          <a href="description.html?isbn=${book.ISBN}">
+            <img src="${book.bookCover}" alt="${book.BookName}" style="width: 100%; height: 260px; object-fit: cover; border-radius: 15px 15px 0 0;">
+            <h3>${book.BookName}</h3>
+            <p>by ${book.Author}</p>
+            <p>Year: ${book.year}</p>
+          </a>
+        `;
+        bookList.appendChild(card);
+      });
+    }
+
+    // Show suggestions based on input
+    function showSuggestions() {
+      const searchText = document.getElementById("search-input").value.toLowerCase();
+      const suggestions = document.getElementById("suggestions");
+      suggestions.innerHTML = "";
+
+      if (searchText.length < 2) return; // Only show suggestions if the input is at least 2 characters long
+
+      const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
+      const filteredSuggestions = domainData.books.filter(book => 
+        book.BookName.toLowerCase().includes(searchText) ||
+        book.Author.toLowerCase().includes(searchText) ||
+        book.ISBN.includes(searchText)
+      );
+
+      filteredSuggestions.forEach(book => {
+        const suggestion = document.createElement("div");
+        suggestion.className = "suggestion-item";
+        suggestion.innerHTML = `${book.BookName} by ${book.Author}`;
+        suggestion.addEventListener("click", () => {
+          document.getElementById("search-input").value = book.BookName;
+          suggestions.innerHTML = "";
+        });
+        suggestions.appendChild(suggestion);
+      });
+    }
+
+    // Search books based on input
+    function searchBooks() {
+      const searchText = document.getElementById("search-input").value.toLowerCase();
+      const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
+      const searchResults = domainData.books.filter(book => 
+        book.BookName.toLowerCase().includes(searchText) ||
+        book.Author.toLowerCase().includes(searchText) ||
+        book.ISBN.includes(searchText)
+      );
+
+      displayBooks(searchResults);
+    }
+  </script>
+</body>
+</html>
