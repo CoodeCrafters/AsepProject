@@ -259,8 +259,8 @@ h1 {
   
 
   <script>
-     // Load the menu and footer dynamically
-     async function loadDynamicContent() {
+      // Load the menu and footer dynamically
+    async function loadDynamicContent() {
       try {
         const menuResponse = await fetch('menu.html');
         if (!menuResponse.ok) throw new Error('Menu not loaded');
@@ -276,8 +276,8 @@ h1 {
       }
     }
 
-    // Call the function to load the dynamic content
     loadDynamicContent();
+
 
     let resourceData = [];
 let selectedDomain = getDomainFromURL();
