@@ -87,9 +87,15 @@ app.post('/saveProfile', async (req, res) => {
 });
 
 // API Endpoint to get profile data
+// API Endpoint to get profile data
 app.get('/getProfile', async (req, res) => {
   try {
     const { email_id } = req.query;
+
+    // Check if email_id is provided
+    if (!email_id) {
+      return res.status(400).send({ error: 'Email ID is required' });
+    }
 
     // Find the profile by email_id
     const profile = await Profile.findOne({ email_id });
@@ -98,6 +104,7 @@ app.get('/getProfile', async (req, res) => {
       return res.status(404).send({ error: 'Profile not found' });
     }
 
+    // Send the profile data in the response
     res.status(200).send({
       name: profile.name,
       branch: profile.branch,
@@ -114,6 +121,7 @@ app.get('/getProfile', async (req, res) => {
     res.status(500).send({ error: 'Failed to fetch profile' });
   }
 });
+
 
 // Start the server
 app.listen(PORT, () => {
