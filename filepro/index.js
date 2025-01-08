@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { v4: uuidv4 } = require('uuid'); // For generating unique user IDs
 require('dotenv').config();
 
 // Initialize Express app
@@ -40,6 +41,8 @@ const profileSchema = new mongoose.Schema({
   roll_no: String,
   div: String,
   contact_no: String,
+  userId: { type: String, unique: true, default: uuidv4 }, // Auto-generate unique user ID
+  createdTime: { type: Date, default: Date.now }, // Auto-set created date
 });
 
 // Create Mongoose Model
@@ -70,7 +73,11 @@ app.post('/saveProfile', async (req, res) => {
     });
 
     await newProfile.save();
-    res.status(201).send({ message: 'Profile saved successfully!' });
+    res.status(201).send({
+      message: 'Profile saved successfully!',
+      userId: newProfile.userId,
+      createdTime: newProfile.createdTime,
+    });
   } catch (error) {
     console.error('Error saving profile:', error);
     res.status(500).send({ error: 'Failed to save profile' });
@@ -89,7 +96,17 @@ app.get('/getProfile', async (req, res) => {
       return res.status(404).send({ error: 'Profile not found' });
     }
 
-    res.status(200).send(profile);
+    res.status(200).send({
+      name: profile.name,
+      branch: profile.branch,
+      email_id: profile.email_id,
+      prn_no: profile.prn_no,
+      roll_no: profile.roll_no,
+      div: profile.div,
+      contact_no: profile.contact_no,
+      userId: profile.userId,
+      createdTime: profile.createdTime,
+    });
   } catch (error) {
     console.error('Error fetching profile:', error);
     res.status(500).send({ error: 'Failed to fetch profile' });
