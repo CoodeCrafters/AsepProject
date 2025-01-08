@@ -49,7 +49,6 @@
       </div>
 
       <button type="button" id="submit-btn" disabled onclick="saveProfile()">Save Profile</button>
-      <button type="reset" id="reset-btn">Reset Form</button>
     </form>
 
     <div id="feedback-message" style="display: none; color: green; margin-top: 20px;">
@@ -93,7 +92,7 @@
     // Fetch user profile from the backend
     async function fetchProfile(email) {
       try {
-        const response = await fetch(`https://central-library.onrender.com/getProfile?email_id=${email}`);
+        const response = await fetch(`https://central-library.onrender.com/saveProfile?email_id=${email}`);
         const data = await response.json();
         if (data.error) {
           console.log('Profile not found or error fetching.');
