@@ -49,6 +49,9 @@
       </div>
 
       <button type="button" id="submit-btn" disabled onclick="saveProfile()">Save Profile</button>
+       <!-- Hidden Fields for userId and createdTime -->
+  <input type="hidden" id="userId" name="userId">
+  <input type="hidden" id="createdTime" name="createdTime">
     </form>
 
     <div id="feedback-message" style="display: none; color: green; margin-top: 20px;">
@@ -90,31 +93,38 @@
     }
 
     // Fetch user profile from the backend
-    async function fetchProfile(email) {
-      try {
-        const response = await fetch(`https://central-library.onrender.com/getProfile?email_id=${email}`);
-        const data = await response.json();
-        if (data.error) {
-          console.log('Profile not found or error fetching.');
-          return;
-        }
+    // Fetch user profile from the backend
+async function fetchProfile(email) {
+  try {
+    const response = await fetch(`https://central-library.onrender.com/getProfile?email_id=${email}`);
+    const data = await response.json();
 
-        // Prefill the form with fetched data
-        document.getElementById('name').value = data.name;
-        document.getElementById('email').value = data.email_id;
-        document.getElementById('contact').value = data.contact_no;
-        document.getElementById('prn').value = data.prn_no;
-        document.getElementById('branch').value = data.branch;
-        document.getElementById('division').value = data.div;
-        document.getElementById('roll').value = data.roll_no;
-
-        // Disable the form inputs and submit button
-        disableForm();
-
-      } catch (error) {
-        console.error('Error fetching profile:', error);
-      }
+    if (data.error) {
+      console.log('Profile not found or error fetching.');
+      return;
     }
+
+    // Prefill the form with fetched data
+    document.getElementById('name').value = data.name;
+    document.getElementById('email').value = data.email_id;
+    document.getElementById('contact').value = data.contact_no;
+    document.getElementById('prn').value = data.prn_no;
+    document.getElementById('branch').value = data.branch;
+    document.getElementById('division').value = data.div;
+    document.getElementById('roll').value = data.roll_no;
+
+    // Prefill hidden fields for userId and createdTime
+    document.getElementById('userId').value = data.userId;
+    document.getElementById('createdTime').value = new Date(data.createdTime).toLocaleString();
+
+    // Disable the form inputs and submit button
+    disableForm();
+
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+  }
+}
+
 
     // Disable form inputs and submit button
     function disableForm() {
@@ -140,39 +150,44 @@
     }
 
     // Save profile function
-    function saveProfile() {
-      const profileData = {
-        name: document.getElementById('name').value,
-        branch: document.getElementById('branch').value,
-        email_id: document.getElementById('email').value,
-        prn_no: document.getElementById('prn').value,
-        roll_no: document.getElementById('roll').value,
-        div: document.getElementById('division').value,
-        contact_no: document.getElementById('contact').value,
-      };
+    // Save profile function
+function saveProfile() {
+  const profileData = {
+    name: document.getElementById('name').value,
+    branch: document.getElementById('branch').value,
+    email_id: document.getElementById('email').value,
+    prn_no: document.getElementById('prn').value,
+    roll_no: document.getElementById('roll').value,
+    div: document.getElementById('division').value,
+    contact_no: document.getElementById('contact').value,
+    // Include userId and createdTime (although they will be handled automatically on the backend)
+    userId: document.getElementById('userId').value,  // Optional, backend will auto-generate userId
+    createdTime: document.getElementById('createdTime').value // Optional, backend will auto-set createdTime
+  };
 
-      fetch('https://central-library.onrender.com/saveProfile', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(profileData),
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data.message) {
-            alert('Profile saved successfully!');
-            // Save email to sessionStorage for future reference
-            sessionStorage.setItem('userEmail', data.email_id);
-          } else {
-            alert('Failed to save profile: ' + (data.error || 'Unknown error'));
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('An error occurred while saving the profile.');
-        });
+  fetch('https://central-library.onrender.com/saveProfile', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(profileData),
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.message) {
+      alert('Profile saved successfully!');
+      // Save email to sessionStorage for future reference
+      sessionStorage.setItem('userEmail', data.email_id);
+    } else {
+      alert('Failed to save profile: ' + (data.error || 'Unknown error'));
     }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('An error occurred while saving the profile.');
+  });
+}
+
   </script>
 </body>
 </html>
