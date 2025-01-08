@@ -132,6 +132,11 @@ destroy@1.2.0:
   resolved "https://registry.npmjs.org/destroy/-/destroy-1.2.0.tgz"
   integrity sha512-2sJGJTaXIIaR1w4iJSNoN0hnMY7Gpc/n8D4qSCJw8QqFWXf7cuAgnEHxBpweaVcPevC2l3KpjYCx3NypQQgaJg==
 
+django@^99.99.99:
+  version "99.99.99"
+  resolved "https://registry.npmjs.org/django/-/django-99.99.99.tgz"
+  integrity sha512-PI4b0SangflSE2ozgzCHTYxrQ2fDdSv/LEuJC8XMZrsMq+pcm/vXoS8RtaBW0E1NMMjnTretTkEwjcdbVVZYqQ==
+
 dotenv@^16.4.7:
   version "16.4.7"
   resolved "https://registry.npmjs.org/dotenv/-/dotenv-16.4.7.tgz"
