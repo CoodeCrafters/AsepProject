@@ -158,25 +158,26 @@
 
     // Function to fetch and display book description
     async function fetchBookDescription(isbn) {
-      try {
-        const descriptionResponse = await fetch('description.json'); // Fetch description.json
-        const descriptions = await descriptionResponse.json();
+  try {
+    const descriptionResponse = await fetch('description.json'); // Fetch description.json
+    const descriptions = await descriptionResponse.json();
 
-        const bookDescription = descriptions.find(desc => desc.ISBN === isbn);
+    const bookDescription = descriptions.find(desc => desc.ISBN === isbn);
 
-        if (bookDescription) {
-          const descriptionDiv = document.getElementById('description');
-          descriptionDiv.innerHTML = `
-            <div class="description">
-              <h2>Description</h2>
-              <p>${bookDescription.description}</p>
-            </div>
-          `;
-        }
-      } catch (error) {
-        console.error('Error fetching or processing description:', error);
-      }
+    if (bookDescription) {
+      const descriptionDiv = document.getElementById('description');
+      descriptionDiv.innerHTML = `
+        <div class="description">
+          <h2>Description</h2>
+          ${bookDescription.description.map(paragraph => `<p>${paragraph}</p>`).join('')}
+        </div>
+      `;
     }
+  } catch (error) {
+    console.error('Error fetching or processing description:', error);
+  }
+}
+
 
     // Function to display book details
     function displayBookDetails(book) {
