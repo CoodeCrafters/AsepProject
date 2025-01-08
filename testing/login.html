@@ -29,29 +29,38 @@
 
       // Google Sign-In
       function handleGoogleLogin() {
-        auth.signInWithPopup(provider)
-          .then((result) => {
-            const user = result.user;
-            const email = user.email;
+  auth.signInWithPopup(provider)
+    .then((result) => {
+      const user = result.user;
+      const email = user.email;
 
-            // Restrict login to the domain @vit.edu
-            const allowedDomain = "vit.edu";
-            if (email.split("@")[1] === allowedDomain) {
-              user.getIdToken().then(token => {
-                localStorage.setItem("userToken", token); // Store token
-               
-                window.location.href = "./Home.html"; // Redirect to Home
-              });
-            } else {
-              alert("Only users with the '@vit.edu' domain are allowed to log in.");
-              auth.signOut();
-            }
-          })
-          .catch((error) => {
-            alert("Login failed. Please try again.");
-            console.error("Login failed:", error.message);
-          });
+      // Log the email to the console
+      console.log("Logged in email:", email);
+
+      // Store email in sessionStorage
+      sessionStorage.setItem("userEmail", email);
+
+      // Restrict login to the domain @vit.edu
+      const allowedDomain = "vit.edu";
+      if (email.split("@")[1] === allowedDomain) {
+        user.getIdToken().then((token) => {
+          // Store token in localStorage
+          localStorage.setItem("userToken", token);
+
+          // Redirect to Home
+          window.location.href = "./Home.html";
+        });
+      } else {
+        alert("Only users with the '@vit.edu' domain are allowed to log in.");
+        auth.signOut();
       }
+    })
+    .catch((error) => {
+      alert("Login failed. Please try again.");
+      console.error("Login failed:", error.message);
+    });
+}
+
 
       // Handle regular login button click
       function handleLoginClick(event) {
