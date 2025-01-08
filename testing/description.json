@@ -6,7 +6,13 @@
 "One of the most highly regarded books on linear algebra is Linear Algebra Done Right by Sheldon Axler. This book is known for its clear and concise explanations and its unique approach to teaching linear algebra. It emphasizes the importance of understanding the concepts behind linear algebra, rather than just focusing on computational skills.",
 "Axler's approach is rigorous and theoretical, with a strong emphasis on the beauty of the subject. The book covers topics such as vector spaces, linear maps, eigenvalues and eigenvectors, and inner product spaces. It also includes a variety of exercises and examples to help reinforce the material.",
 "Whether you are a student learning linear algebra for the first time, or an instructor looking for a comprehensive and well-organized textbook, Linear Algebra Done Right is an excellent choice."
-      ]
+      ],
+      "images": [
+      "https://example.com/sample-image1.jpeg",
+      "https://example.com/sample-image2.jpeg",
+      "https://example.com/sample-image3.jpeg"
+    ]
+  
     },
     {
       "ISBN": "0987654321",
