@@ -23,7 +23,18 @@ body {
   padding: 0;
   color: var(--bs-body-color);
   overflow-x: hidden;
+  
+  /* Make body a flex container */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure body takes full viewport height */
 }
+
+/* Ensure main content area takes up all available space */
+.content {
+  flex-grow: 1; /* Takes up the remaining space */
+}
+
 
 /* Header Section */
 .header {
@@ -70,12 +81,15 @@ body {
 
     
     /* General Footer Styling */
-footer {
-  background: #cfe7ed;
-  color: #000000;
-  padding: 40px 20px;
-  font-family: 'Arial', sans-serif;
-}
+    footer {
+      background: #cfe7ed;
+      color: #000000;
+      padding: 40px 20px;
+      font-family: 'Arial', sans-serif;
+      position: relative;
+      /* Ensure footer stays at the bottom */
+      margin-top: auto; /* Pushes footer to the bottom */
+    }
 
 .footer-container {
   display: flex;
