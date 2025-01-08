@@ -51,7 +51,7 @@ const Profile = mongoose.model('Profile', profileSchema);
 // API Endpoint to save profile data
 app.post('/saveProfile', async (req, res) => {
   try {
-    const { name, branch, email_id, prn_no, roll_no, div, contact_no } = req.body;
+    const { name, branch, email_id, prn_no, roll_no, div, contact_no, userId, createdTime } = req.body;
 
     // Check if profile already exists
     const existingProfile = await Profile.findOne({ email_id });
@@ -70,6 +70,8 @@ app.post('/saveProfile', async (req, res) => {
       roll_no,
       div,
       contact_no,
+      userId,
+      createdTime,
     });
 
     await newProfile.save();
