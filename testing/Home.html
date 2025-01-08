@@ -455,11 +455,12 @@ footer {
   max-height: 200px;
   overflow-y: auto;
   position: absolute;
-  width: 500px; /* Fixed width */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Shift left by 50% of the width to center it */
+  width: 500px; /* Fixed width for dropdown */
+  left: 50%; /* Center horizontally within the search panel */
+  transform: translateX(-50%); /* Adjust centering */
   z-index: 1000;
-  top: 100%; /* Align it just below the search input */
+  top: calc(100% + 10px); /* Place it just below the input, with a small gap */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for visibility */
 }
 
 
