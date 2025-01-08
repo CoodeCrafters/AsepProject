@@ -220,31 +220,32 @@
     }
 
     async function fetchBookDescription(isbn, coverPhoto) {
-      try {
-        const descriptionResponse = await fetch('description.json');
-        const descriptions = await descriptionResponse.json();
+  try {
+    const descriptionResponse = await fetch('description.json');
+    const descriptions = await descriptionResponse.json();
 
-        const bookDescription = descriptions.find(desc => desc.ISBN === isbn);
+    const bookDescription = descriptions.find(desc => desc.ISBN === isbn);
 
-        if (bookDescription) {
-          const descriptionDiv = document.getElementById('description');
-          descriptionDiv.innerHTML = `
-            <div class="description">
-              <h2>Description</h2>
-              ${bookDescription.description.map(paragraph => `<p>${paragraph}</p>`).join('')}
-            </div>
-          `;
+    if (bookDescription) {
+      const descriptionDiv = document.getElementById('description');
+      descriptionDiv.innerHTML = `
+        <div class="description">
+          <h2>Description</h2>
+          ${bookDescription.description.map(paragraph => `<p>${paragraph}</p>`).join('')}
+        </div>
+      `;
 
-          const imageViewer = document.getElementById('image-viewer');
-          const images = [coverPhoto, ...(bookDescription.images || [])];
-          imageViewer.innerHTML = images
-            .map(img => `<img src="${img}" alt="Book Image">`)
-            .join('');
-        }
-      } catch (error) {
-        console.error('Error fetching or processing description:', error);
-      }
+      const imageViewer = document.getElementById('image-viewer');
+      const images = [coverPhoto, ...(bookDescription.images || [])]; // Load cover + sample images
+      imageViewer.innerHTML = images
+        .map(img => `<img src="${img}" alt="Book Image">`)
+        .join('');
     }
+  } catch (error) {
+    console.error('Error fetching or processing description:', error);
+  }
+}
+
 
     function displayBookDetails(book) {
       const bookInfo = document.getElementById('book-info');
