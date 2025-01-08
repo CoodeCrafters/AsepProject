@@ -80,16 +80,18 @@ body {
 }
 
     
-    /* General Footer Styling */
-    footer {
-      background: #cfe7ed;
-      color: #000000;
-      padding: 40px 20px;
-      font-family: 'Arial', sans-serif;
-      position: relative;
-      /* Ensure footer stays at the bottom */
-      margin-top: auto; /* Pushes footer to the bottom */
-    }
+footer {
+  background: #cfe7ed;
+  color: #000000;
+  padding: 40px 20px;
+  font-family: 'Arial', sans-serif;
+  position: fixed; /* Fix the footer to the bottom */
+  left: 0;
+  bottom: 0; /* Set footer to 0% from the bottom of the page */
+  width: 100%; /* Ensure footer spans the full width */
+  z-index: 10; /* Ensure it's above other content */
+}
+
 
 .footer-container {
   display: flex;
