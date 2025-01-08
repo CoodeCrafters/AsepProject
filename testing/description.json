@@ -1,11 +1,19 @@
 [
     {
-      "ISBN": "1234567890",
-      "description": "This is a classic physics textbook that delves into the fundamentals of mechanics and thermodynamics."
+      "ISBN": "9876543210",
+      "description": [
+    
+"One of the most highly regarded books on linear algebra is Linear Algebra Done Right by Sheldon Axler. This book is known for its clear and concise explanations and its unique approach to teaching linear algebra. It emphasizes the importance of understanding the concepts behind linear algebra, rather than just focusing on computational skills.",
+"Axler's approach is rigorous and theoretical, with a strong emphasis on the beauty of the subject. The book covers topics such as vector spaces, linear maps, eigenvalues and eigenvectors, and inner product spaces. It also includes a variety of exercises and examples to help reinforce the material.",
+"Whether you are a student learning linear algebra for the first time, or an instructor looking for a comprehensive and well-organized textbook, Linear Algebra Done Right is an excellent choice."
+      ]
     },
     {
       "ISBN": "0987654321",
-      "description": "An insightful mathematics book covering calculus and linear algebra concepts."
+      "description": [
+        "An insightful mathematics book covering calculus and linear algebra concepts.",
+        "It provides in-depth examples to clarify complex theories and ideas."
+      ]
     }
   ]
   
