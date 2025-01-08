@@ -444,6 +444,22 @@ footer {
   }
 }
 
+/* Suggestions Dropdown */
+.suggestions-dropdown {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  width: 500px; /* Fixed width */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Shift by half the width to fully center it */
+  top: calc(100% + 10px); /* Position it just below the input field */
+  z-index: 1000; /* Ensure it is above other content */
+}
 
 
 .suggestions-dropdown li {
