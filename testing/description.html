@@ -82,6 +82,13 @@
       background-color: #0057b8;
     }
 
+    .error-message {
+      color: red;
+      font-size: 18px;
+      margin: 20px;
+      text-align: center;
+    }
+
     #menu-container, #footer-container {
       margin-bottom: 20px;
     }
@@ -107,7 +114,8 @@
       <div class="book-info" id="book-info">
         <!-- Book information will be displayed here -->
       </div>
-      <button id="access-btn" class="access-button">Access this Book PDF</button>
+      <button id="access-btn" class="access-button" style="display:none;">Access this Book PDF</button>
+      <div id="error-message" class="error-message" style="display:none;"></div>
     </div>
   </div>
 
@@ -152,11 +160,12 @@
           displayBookInfo(book);
           fetchDescription(isbn); // Fetch description from description.json
         } else {
-          console.error('Book not found!');
+          displayErrorMessage();
         }
 
       } catch (error) {
         console.error('Error fetching book data:', error);
+        displayErrorMessage();
       }
     }
 
@@ -176,6 +185,10 @@
         img.src = imageUrl;
         bookImagesDiv.appendChild(img);
       });
+
+      // Show the access button
+      const accessBtn = document.getElementById('access-btn');
+      accessBtn.style.display = 'inline-block';
     }
 
     // Fetch description from description.json and display it
@@ -210,10 +223,17 @@
         img.style.maxWidth = '100%';
         bookInfoDiv.appendChild(img);
       });
+    }
 
-      // Add button for accessing the book
+    // Display error message if book not found
+    function displayErrorMessage() {
+      const errorMessageDiv = document.getElementById('error-message');
+      errorMessageDiv.style.display = 'block';
+      errorMessageDiv.innerHTML = 'The book you are searching is not found, check URL or contact the admin.';
+      
+      // Hide the access button if no book is found
       const accessBtn = document.getElementById('access-btn');
-      accessBtn.onclick = () => accessBook(description.ISBN);
+      accessBtn.style.display = 'none';
     }
 
     // Handle access button click
