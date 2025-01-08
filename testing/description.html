@@ -39,6 +39,16 @@
       font-size: 16px;
       margin: 5px 0;
     }
+    .description {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-size: 18px;
+      margin-top: 20px;
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
     .error-message {
       color: red;
       font-size: 20px;
@@ -60,6 +70,16 @@
     .pdf-button button:hover {
       background-color: #0056b3;
     }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
@@ -68,6 +88,7 @@
   
   <div class="container">
     <div id="book-info"></div>
+    <div id="description"></div>
     <div class="error-message" id="error-message"></div>
   </div>
 
@@ -125,12 +146,35 @@
 
         if (bookFound) {
           displayBookDetails(bookFound);
+          fetchBookDescription(isbn);
         } else {
           displayError('The book you are searching is not found. Check the URL or contact the admin.');
         }
       } catch (error) {
         console.error('Error fetching or processing resources:', error);
         displayError('An error occurred while fetching the book details. Please try again later.');
+      }
+    }
+
+    // Function to fetch and display book description
+    async function fetchBookDescription(isbn) {
+      try {
+        const descriptionResponse = await fetch('description.json'); // Fetch description.json
+        const descriptions = await descriptionResponse.json();
+
+        const bookDescription = descriptions.find(desc => desc.ISBN === isbn);
+
+        if (bookDescription) {
+          const descriptionDiv = document.getElementById('description');
+          descriptionDiv.innerHTML = `
+            <div class="description">
+              <h2>Description</h2>
+              <p>${bookDescription.description}</p>
+            </div>
+          `;
+        }
+      } catch (error) {
+        console.error('Error fetching or processing description:', error);
       }
     }
 
@@ -144,7 +188,6 @@
             <h1>${book.BookName}</h1>
             <p><strong>Author:</strong> ${book.Author}</p>
             <p><strong>Year:</strong> ${book.year}</p>
-            <p><strong>Description:</strong> ${book.decsription}</p>
           </div>
         </div>
         <div class="pdf-button">
@@ -175,6 +218,7 @@
     function displayError(message) {
       document.getElementById('error-message').textContent = message;
       document.getElementById('book-info').innerHTML = ''; // Clear book details if any
+      document.getElementById('description').innerHTML = ''; // Clear description if any
     }
   </script>
 </body>
