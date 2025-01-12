@@ -150,6 +150,7 @@ function decodeUrl(encodedUrl) {
 
 
 // API Endpoint to get PDF link by ISBN
+// API Endpoint to get PDF link by ISBN
 app.get('/getLibraryView', async (req, res) => {
   const origin = req.get('Origin');
 
@@ -170,8 +171,9 @@ app.get('/getLibraryView', async (req, res) => {
       return res.status(404).send({ error: 'PDF link not found for this ISBN' });
     }
 
-    const encodedPdfLink = encodeURIComponent(libraryView.pdf_link);
-    res.status(200).send({ pdf_link: encodedPdfLink });
+    // Encode the PDF link to Base64
+    const encodedPdfLink = encodeUrl(libraryView.pdf_link); // Encode to Base64
+    res.status(200).send({ pdf_link: encodedPdfLink }); // Send the Base64 encoded link
   } catch (error) {
     console.error('Error fetching PDF link:', error);
     res.status(500).send({ error: 'Failed to fetch PDF link' });
