@@ -300,25 +300,40 @@
       }
     }
 
-    async function fetchProfileAndRedirect(isbn) {
-      const userEmail = sessionStorage.getItem('userEmail');
-      if (userEmail) {
-        await fetchProfile(userEmail); // Fetch and save profile details
-      }
-
-      const prnNo = sessionStorage.getItem('prn_no');
-      const rollNo = sessionStorage.getItem('roll_no');
-      const branch = sessionStorage.getItem('branch');
-
-      // Check if profile information is available in sessionStorage
-      if (!userEmail || !prnNo || !rollNo || !branch) {
-        alert('Your profile is incomplete. First complete it, then you can access the content.');
-        window.location.href = './Profile1.html';
-      } else {
-        // Redirect to book viewer page with ISBN as URL param
-        window.location.href = `./bookviewer.html?ISBN=${isbn}`;
-      }
+    document.addEventListener('DOMContentLoaded', async () => {
+  const userEmail = sessionStorage.getItem('userEmail');
+  
+  if (userEmail) {
+    // Fetch profile details only if they are not already available
+    const isProfileIncomplete = !sessionStorage.getItem('prn_no') ||
+                                !sessionStorage.getItem('roll_no') ||
+                                !sessionStorage.getItem('branch');
+    if (isProfileIncomplete) {
+      await fetchProfile(userEmail);
     }
+  }
+});
+
+// Triggered on button click or other actions
+async function fetchProfileAndRedirect(isbn) {
+  const userEmail = sessionStorage.getItem('userEmail');
+  
+  if (userEmail) {
+    await fetchProfile(userEmail); // Fetch and save profile details
+  }
+
+  const prnNo = sessionStorage.getItem('prn_no');
+  const rollNo = sessionStorage.getItem('roll_no');
+  const branch = sessionStorage.getItem('branch');
+
+  if (!userEmail || !prnNo || !rollNo || !branch) {
+    alert('Your profile is incomplete. First complete it, then you can access the content.');
+    window.location.href = './profile1.html';
+  } else {
+    window.location.href = `./bookviewer.html?ISBN=${isbn}`;
+  }
+}
+
   </script>
 </body>
 
