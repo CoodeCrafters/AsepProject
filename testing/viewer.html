@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple PDF Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    #viewerContainer {
+      width: 100%;
+      height: 80vh;
+      margin-top: 20px;
+      overflow: hidden;
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+    }
+
+    #pdfViewer {
+      width: 100%;
+      height: 100%;
+    }
+
+    #pdfLinkContainer {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #pdfLinkInput {
+      padding: 10px;
+      width: 300px;
+      margin-bottom: 20px;
+    }
+
+    #loadPdfButton {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #loadPdfButton:hover {
+      background-color: #45a049;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+</head>
+<body>
+
+  <div id="pdfLinkContainer">
+    <input type="text" id="pdfLinkInput" placeholder="Enter PDF URL">
+    <button id="loadPdfButton" onclick="loadPdf()">Load PDF</button>
+  </div>
+
+  <div id="viewerContainer">
+    <canvas id="pdfViewer"></canvas>
+  </div>
+
+  <script>
+    const pdfViewer = document.getElementById('pdfViewer');
+    const pdfLinkInput = document.getElementById('pdfLinkInput');
+
+    let pdfDoc = null;
+    let pageNum = 1;
+
+    // Function to load the PDF from the input URL
+    async function loadPdf() {
+      const pdfUrl = pdfLinkInput.value.trim();
+      
+      if (!pdfUrl) {
+        alert("Please enter a PDF URL.");
+        return;
+      }
+
+      try {
+        // Load the PDF using pdf.js
+        pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
+        renderPage(pageNum);
+      } catch (error) {
+        console.error('Error loading PDF:', error);
+        alert('Failed to load PDF. Please check the URL.');
+      }
+    }
+
+    // Function to render a specific page
+    function renderPage(num) {
+      pdfDoc.getPage(num).then(page => {
+        const viewport = page.getViewport({ scale: 1.5 });
+        const canvas = pdfViewer;
+        const context = canvas.getContext('2d');
+
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        const renderContext = {
+          canvasContext: context,
+          viewport: viewport
+        };
+
+        page.render(renderContext).promise.then(() => {
+          console.log(`Page ${num} rendered.`);
+        }).catch((error) => {
+          console.error('Error rendering page:', error);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
