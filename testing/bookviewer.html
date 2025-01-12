@@ -38,26 +38,26 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', loadDynamicContent);
-
+  
     async function loadDynamicContent() {
       try {
         const menuResponse = await fetch('menu.html');
         if (!menuResponse.ok) throw new Error('Menu not loaded');
         const menuContent = await menuResponse.text();
         document.getElementById('menu-container').innerHTML = menuContent;
-
+  
         const footerResponse = await fetch('footer.html');
         if (!footerResponse.ok) throw new Error('Footer not loaded');
         const footerContent = await footerResponse.text();
         document.getElementById('footer-container').innerHTML = footerContent;
-
+  
         // Load the PDF after the menu and footer are loaded
         loadPdf();
       } catch (error) {
         console.error('Error loading dynamic content:', error);
       }
     }
-
+  
     // Fetch the PDF path dynamically from the backend
     async function getPdfPath(isbn) {
       try {
@@ -67,19 +67,27 @@
           alert('PDF not found for this ISBN');
           return null;
         }
-        return data.pdfPath;
+        // Decode the Base64 encoded PDF link and return the decoded URL
+        const decodedPdfLink = decodeBase64(data.encodedPdfLink);
+        return decodedPdfLink;
       } catch (error) {
         console.error('Error fetching PDF path:', error);
         return null;
       }
     }
-
+  
+    // Function to decode the Base64 PDF link
+    function decodeBase64(base64String) {
+      const decodedString = atob(base64String); // Decodes the Base64 encoded string
+      return decodedString;
+    }
+  
     // Initialize the pdf.js library
     const pdfViewer = document.getElementById('pdfViewer');
     const viewerContainer = document.getElementById('viewerContainer');
     let pdfDoc = null;
     let pageNum = 1;
-
+  
     async function loadPdf() {
       const urlParams = new URLSearchParams(window.location.search);
       const isbn = urlParams.get('ISBN');
@@ -87,12 +95,12 @@
         alert('ISBN is missing in the URL');
         return;
       }
-
+  
       const pdfPath = await getPdfPath(isbn);
       if (!pdfPath) return;
-
+  
       pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.js'; // Adjust the path if necessary
-
+  
       try {
         pdfDoc = await pdfjsLib.getDocument(pdfPath).promise;
         renderPage(pageNum);
@@ -100,27 +108,27 @@
         console.error('Error loading PDF:', error);
       }
     }
-
+  
     function renderPage(num) {
       pdfDoc.getPage(num).then(page => {
         const viewport = page.getViewport({ scale: 1.5 }); // Adjust scale as needed
         const canvas = pdfViewer;
         const context = canvas.getContext('2d');
-
+  
         canvas.width = viewport.width;
         canvas.height = viewport.height;
-
+  
         const renderContext = {
           canvasContext: context,
           viewport: viewport
         };
-
+  
         page.render(renderContext).promise.then(() => {
           console.log(`Page ${num} rendered.`);
         });
       });
     }
-
+  
     // Disable print functionality using CSS
     const disablePrintStyles = document.createElement('style');
     disablePrintStyles.innerHTML = `
@@ -132,5 +140,6 @@
     `;
     document.head.appendChild(disablePrintStyles);
   </script>
+  
 </body>
 </html>
