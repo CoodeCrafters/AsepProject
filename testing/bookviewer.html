@@ -61,7 +61,7 @@
     // Fetch the PDF path dynamically from the backend
     async function getPdfPath(isbn) {
       try {
-        const response = await fetch(`https://central-library.onrender.com/getLibraryView?ISBN${isbn}`);
+        const response = await fetch(`https://central-library.onrender.com/getLibraryView?ISBN=${isbn}`);
         const data = await response.json();
         if (data.error) {
           alert('PDF not found for this ISBN');
