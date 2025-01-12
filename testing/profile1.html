@@ -117,6 +117,11 @@ async function fetchProfile(email) {
     document.getElementById('userId').value = data.userId;
     document.getElementById('createdTime').value = new Date(data.createdTime).toLocaleString();
 
+    // Save additional profile data (prn_no, roll_no, branch) to sessionStorage
+    sessionStorage.setItem('prn_no', data.prn_no);
+    sessionStorage.setItem('roll_no', data.roll_no);
+    sessionStorage.setItem('branch', data.branch);
+
     // Disable the form inputs and submit button
     disableForm();
 
