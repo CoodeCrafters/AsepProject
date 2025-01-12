@@ -32,28 +32,7 @@
     border: none;
   }
   
-  /* Menu and Footer containers styling */
-  #menu-container, #footer-container {
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-  }
-  
-  #menu-container {
-    top: 0;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  #footer-container {
-    bottom: 0;
-    padding: 10px;
-    border-top: 1px solid #ccc;
-  }
+ 
   
   .disable-print {
     display: none !important;
