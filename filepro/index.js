@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid'); // For generating unique user IDs
 require('dotenv').config();
+const crypto = require('crypto');
+
 
 // Initialize Express app
 const app = express();
