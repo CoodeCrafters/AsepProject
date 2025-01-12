@@ -15,7 +15,7 @@ app.use(bodyParser.json()); // Parse JSON data
 
 // CORS Configuration
 const corsOptions = {
-  origin: 'https://coodecrafters.github.io', // Replace with your GitHub Pages URL
+  origin: 'https://coodecrafters.github.io', // Allow only this origin
   methods: ['GET', 'POST'], // Allow only necessary methods
 };
 app.use(cors(corsOptions));
@@ -87,8 +87,14 @@ app.post('/saveProfile', async (req, res) => {
 });
 
 // API Endpoint to get profile data
-// API Endpoint to get profile data
 app.get('/getProfile', async (req, res) => {
+  const origin = req.get('Origin'); // Get the Origin header from the request
+
+  // Check if the request is from the allowed origin
+  if (origin !== 'https://coodecrafters.github.io') {
+    return res.status(403).send({ error: "What are u trying to access, go to hell" });
+  }
+
   try {
     const { email_id } = req.query;
 
@@ -121,7 +127,6 @@ app.get('/getProfile', async (req, res) => {
     res.status(500).send({ error: 'Failed to fetch profile' });
   }
 });
-
 
 // Start the server
 app.listen(PORT, () => {
