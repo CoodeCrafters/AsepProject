@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Viewer</title>
+  <link rel="stylesheet" href="viewer.css">
+  <link rel="stylesheet" href="./headerfooter.css">
+  <script src="./headerfooter.js" defer></script>
+  <script src="./hard.js" defer></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #viewerContainer {
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #f5f5f5;
+      border: 1px solid #ddd;
+    }
+
+    .disable-print {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+    <div id="menu-container"></div>
+  <div id="viewerContainer">
+    <canvas id="pdfViewer"></canvas>
+  </div>
+  <div id="footer-container"></div>
+  <script src="pdf.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', loadDynamicContent);
+
+async function loadDynamicContent() {
+  try {
+    const menuResponse = await fetch('menu.html');
+    if (!menuResponse.ok) throw new Error('Menu not loaded');
+    const menuContent = await menuResponse.text();
+    document.getElementById('menu-container').innerHTML = menuContent;
+
+    const footerResponse = await fetch('footer.html');
+    if (!footerResponse.ok) throw new Error('Footer not loaded');
+    const footerContent = await footerResponse.text();
+    document.getElementById('footer-container').innerHTML = footerContent;
+
+  } catch (error) {
+    console.error('Error loading dynamic content:', error);
+  }
+}
+    const pdfPath = './path-to-your-pdf-file.pdf'; // Replace with the actual path to your PDF
+    const pdfViewer = document.getElementById('pdfViewer');
+    const viewerContainer = document.getElementById('viewerContainer');
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdf.worker.js'; // Adjust path if necessary
+
+    let pdfDoc = null;
+    let pageNum = 1;
+
+    async function loadPdf() {
+      try {
+        pdfDoc = await pdfjsLib.getDocument(pdfPath).promise;
+        renderPage(pageNum);
+      } catch (error) {
+        console.error('Error loading PDF:', error);
+      }
+    }
+
+    function renderPage(num) {
+      pdfDoc.getPage(num).then(page => {
+        const viewport = page.getViewport({ scale: 1.5 }); // Adjust scale as needed
+        const canvas = pdfViewer;
+        const context = canvas.getContext('2d');
+
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        const renderContext = {
+          canvasContext: context,
+          viewport: viewport
+        };
+
+        page.render(renderContext).promise.then(() => {
+          console.log(`Page ${num} rendered.`);
+        });
+      });
+    }
+
+    // Load the PDF when the page loads
+    document.addEventListener('DOMContentLoaded', loadPdf);
+
+    // Disable print functionality
+    const disablePrintStyles = document.createElement('style');
+    disablePrintStyles.innerHTML = `
+      @media print {
+        * {
+          display: none !important;
+        }
+      }
+    `;
+    document.head.appendChild(disablePrintStyles);
+  </script>
+</body>
+</html>
