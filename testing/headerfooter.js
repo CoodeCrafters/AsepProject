@@ -1,105 +1,99 @@
 function loadDynamicContent() {
-  try {
-    // Load menu dynamically
-    fetch('menu.html')
-      .then(response => {
-        if (!response.ok) throw new Error('Menu not loaded');
-        return response.text();
-      })
-      .then(menuContent => {
-        document.getElementById('menu-container').innerHTML = menuContent;
-      });
-
-    // Load footer dynamically
-    fetch('footer.html')
-      .then(response => {
-        if (!response.ok) throw new Error('Footer not loaded');
-        return response.text();
-      })
-      .then(footerContent => {
-        document.getElementById('footer-container').innerHTML = footerContent;
-      });
-
-  } catch (error) {
-    console.error('Error loading dynamic content:', error);
-  }
+    try {
+      // Load menu dynamically
+      fetch('menu.html')
+        .then(response => {
+          if (!response.ok) throw new Error('Menu not loaded');
+          return response.text();
+        })
+        .then(menuContent => {
+          document.getElementById('menu-container').innerHTML = menuContent;
+        });
+  
+      // Load footer dynamically
+      fetch('footer.html')
+        .then(response => {
+          if (!response.ok) throw new Error('Footer not loaded');
+          return response.text();
+        })
+        .then(footerContent => {
+          document.getElementById('footer-container').innerHTML = footerContent;
+        });
+  
+    } catch (error) {
+      console.error('Error loading dynamic content:', error);
+    }
 }
 
 function logout() {
-  // Clear token from localStorage
-  localStorage.removeItem('userToken');
-  localStorage.removeItem('selectedDomain');
-
-  // Clear all content
-  document.body.innerHTML = '';
-
-  // Display logout message
-  const logoutMessage = `
-    <div style="text-align: center; margin-top: 100px;">
-      <h1>😊</h1>
-      <h2>Dear User,</h2>
-      <p>You are successfully signed out!!</p>
-      <p>Thank you for choosing and using us!!</p>
-      <p>We hope you visit us again!!</p>
-      <p>Best Regards,</p>
-      <p>Central Library</p><br><br>
-      <p><a href="./login.html" style="color: #007bff; text-decoration: none;">Click here to login again</a></p>
-    </div>
-  `;
-  document.body.innerHTML = logoutMessage; // Display the logout message
-
-  // Redirect after a few seconds
-  setTimeout(() => {
-    window.location.href = './login.html';
-  }, 30000); // Redirect after 30 seconds
-}
-
-// Inactivity logout function
-let inactivityTimeout;
-function resetInactivityTimer() {
-  clearTimeout(inactivityTimeout); // Clear any existing timeout
-  inactivityTimeout = setTimeout(() => {
-    logout(); // Call logout function after 3 minutes of inactivity
-  }, 3 * 60 * 1000); // 3 minutes = 3 * 60 * 1000 milliseconds
-}
-
-// Attach the inactivity reset function to user activity events
-['mousemove', 'keypress', 'click'].forEach(event => {
-  document.addEventListener(event, resetInactivityTimer);
-});
-
-// Reset the inactivity timer when the user interacts
-resetInactivityTimer(); // Initial timer reset
-
-function scrollToSection(sectionId, color) {
-  const section = document.getElementById(sectionId);
-  console.log(`Scrolling to section with ID: ${sectionId}`); // Log the sectionId being passed
+      // Clear token from localStorage
+      localStorage.removeItem('userToken');
+      localStorage.removeItem('selectedDomain');
   
-  if (!section) {
-    console.error(`No element found with id: ${sectionId}`);
-    return; // Prevent further execution if section is not found
-  }
-
-  // Remove highlighting from all sections
-  document.querySelectorAll('.about-section, .contact-section').forEach((sec) => {
-    sec.style.border = '2px solid transparent'; // Reset border
-    sec.classList.remove('highlighted'); // Remove animation class
-  });
-
-  // Scroll to the section smoothly
-  section.scrollIntoView({ behavior: 'smooth' });
-
-  // Apply the highlight effect
-  section.classList.add('highlighted');
-  section.style.border = `2px solid ${color}`; // Apply border color
-
-  // Remove highlight effect after 5 seconds
-  setTimeout(() => {
-    section.classList.remove('highlighted');
-  }, 5000);
-
-  // Remove border after 20 seconds
-  setTimeout(() => {
-    section.style.border = '2px solid transparent';
-  }, 20000);
-}
+      // Clear all content
+      document.body.innerHTML = '';
+  
+      // Display logout message
+      const logoutMessage = `
+        <div style="text-align: center; margin-top: 100px;">
+          <h1>😊</h1>
+          <h2>Dear User,</h2>
+          <p>You are successfully signed out!!</p>
+          <p>Thank you for choosing and using us!!</p>
+          <p>We hope you visit us again!!</p>
+          <p>Best Regards,</p>
+          <p>Central Library</p><br><br>
+          <p><a href="./login.html" style="color: #007bff; text-decoration: none;">Click here to login again</a></p>
+        </div>
+      `;
+      document.body.innerHTML = logoutMessage; // Display the logout message
+  
+      // Redirect after a few seconds
+      setTimeout(() => {
+        window.location.href = './login.html';
+      }, 30000); // Redirect after 30 seconds
+    }
+  
+    // Inactivity logout function
+    let inactivityTimeout;
+    function resetInactivityTimer() {
+      clearTimeout(inactivityTimeout); // Clear any existing timeout
+      inactivityTimeout = setTimeout(() => {
+        logout(); // Call logout function after 3 minutes of inactivity
+      }, 3 * 60 * 1000); // 3 minutes = 3 * 60 * 1000 milliseconds
+    }
+  
+    // Attach the inactivity reset function to user activity events
+    ['mousemove', 'keypress', 'click'].forEach(event => {
+      document.addEventListener(event, resetInactivityTimer);
+    });
+  
+    // Reset the inactivity timer when the user interacts
+    resetInactivityTimer(); // Initial timer reset
+  
+    function scrollToSection(sectionId, color) {
+      const section = document.getElementById(sectionId);
+  
+      // Remove highlighting from all sections
+      document.querySelectorAll('.about-section, .contact-section').forEach((sec) => {
+        sec.style.border = '2px solid transparent'; // Reset border
+        sec.classList.remove('highlighted'); // Remove animation class
+      });
+  
+      // Scroll to the section smoothly
+      section.scrollIntoView({ behavior: 'smooth' });
+  
+      // Apply the highlight effect
+      section.classList.add('highlighted');
+      section.style.border = `2px solid ${color}`; // Apply border color
+  
+      // Remove highlight effect after 5 seconds
+      setTimeout(() => {
+        section.classList.remove('highlighted');
+      }, 5000);
+  
+      // Remove border after 20 seconds
+      setTimeout(() => {
+        section.style.border = '2px solid transparent';
+      }, 20000);
+    }
