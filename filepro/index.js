@@ -128,6 +128,79 @@ app.get('/getProfile', async (req, res) => {
   }
 });
 
+// Define Mongoose Schema for LibraryView (to store PDF links)
+const libraryViewSchema = new mongoose.Schema({
+  isbn: { type: String, unique: true },
+  pdf_link: String, // Store the link to the PDF
+});
+
+// Create Mongoose Model for LibraryView
+const LibraryView = mongoose.model('LibraryView', libraryViewSchema);
+// Function to encode URL to Base64
+function encodeUrl(url) {
+  return Buffer.from(url).toString('base64');
+}
+
+// Function to decode Base64 URL
+function decodeUrl(encodedUrl) {
+  return Buffer.from(encodedUrl, 'base64').toString('utf-8');
+}
+
+
+// API Endpoint to get PDF link by ISBN
+app.get('/getLibraryView', async (req, res) => {
+  const origin = req.get('Origin');
+
+  if (origin !== 'https://coodecrafters.github.io') {
+    return res.status(403).send({ error: "What are u trying to access, go to hell" });
+  }
+
+  try {
+    const { isbn } = req.query;
+
+    if (!isbn) {
+      return res.status(400).send({ error: 'ISBN is required' });
+    }
+
+    const libraryView = await LibraryView.findOne({ isbn });
+
+    if (!libraryView) {
+      return res.status(404).send({ error: 'PDF link not found for this ISBN' });
+    }
+
+    const encodedPdfLink = encodeURIComponent(libraryView.pdf_link);
+    res.status(200).send({ pdf_link: encodedPdfLink });
+  } catch (error) {
+    console.error('Error fetching PDF link:', error);
+    res.status(500).send({ error: 'Failed to fetch PDF link' });
+  }
+});
+
+// API Endpoint to save PDF URL with ISBN
+app.post('/saveLibraryView', async (req, res) => {
+  const { isbn, pdfLink } = req.body;
+
+  // Check if ISBN and PDF link are provided
+  if (!isbn || !pdfLink) {
+    return res.status(400).send({ error: 'ISBN and PDF link are required' });
+  }
+
+  try {
+    // Save PDF link as provided in the input (no encoding)
+    const libraryView = new LibraryView({
+      isbn,
+      pdf_link: pdfLink, // Directly save the PDF link without encoding
+    });
+
+    await libraryView.save();
+    res.status(201).send({ message: 'Library view saved successfully' });
+  } catch (error) {
+    console.error('Error saving library view:', error);
+    res.status(500).send({ error: 'Failed to save library view' });
+  }
+});
+
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
