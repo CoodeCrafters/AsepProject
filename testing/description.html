@@ -317,11 +317,8 @@
 // Triggered on button click or other actions
 async function fetchProfileAndRedirect(isbn) {
   const userEmail = sessionStorage.getItem('userEmail');
-  
-  if (userEmail) {
-    await fetchProfile(userEmail); // Fetch and save profile details
-  }
 
+  // Check if all required profile details exist in sessionStorage
   const prnNo = sessionStorage.getItem('prn_no');
   const rollNo = sessionStorage.getItem('roll_no');
   const branch = sessionStorage.getItem('branch');
@@ -333,6 +330,7 @@ async function fetchProfileAndRedirect(isbn) {
     window.location.href = `./bookviewer.html?ISBN=${isbn}`;
   }
 }
+
 
   </script>
 </body>
