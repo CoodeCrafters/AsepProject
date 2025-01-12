@@ -27,43 +27,72 @@
       display: none !important;
     }
   </style>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/+esm"></script>
 </head>
 <body>
-    <div id="menu-container"></div>
+  <div id="menu-container"></div>
   <div id="viewerContainer">
     <canvas id="pdfViewer"></canvas>
   </div>
   <div id="footer-container"></div>
-  <script src="pdf.js"></script>
+
   <script>
     document.addEventListener('DOMContentLoaded', loadDynamicContent);
 
-async function loadDynamicContent() {
-  try {
-    const menuResponse = await fetch('menu.html');
-    if (!menuResponse.ok) throw new Error('Menu not loaded');
-    const menuContent = await menuResponse.text();
-    document.getElementById('menu-container').innerHTML = menuContent;
+    async function loadDynamicContent() {
+      try {
+        const menuResponse = await fetch('menu.html');
+        if (!menuResponse.ok) throw new Error('Menu not loaded');
+        const menuContent = await menuResponse.text();
+        document.getElementById('menu-container').innerHTML = menuContent;
 
-    const footerResponse = await fetch('footer.html');
-    if (!footerResponse.ok) throw new Error('Footer not loaded');
-    const footerContent = await footerResponse.text();
-    document.getElementById('footer-container').innerHTML = footerContent;
+        const footerResponse = await fetch('footer.html');
+        if (!footerResponse.ok) throw new Error('Footer not loaded');
+        const footerContent = await footerResponse.text();
+        document.getElementById('footer-container').innerHTML = footerContent;
 
-  } catch (error) {
-    console.error('Error loading dynamic content:', error);
-  }
-}
-    const pdfPath = './path-to-your-pdf-file.pdf'; // Replace with the actual path to your PDF
+        // Load the PDF after the menu and footer are loaded
+        loadPdf();
+      } catch (error) {
+        console.error('Error loading dynamic content:', error);
+      }
+    }
+
+    // Fetch the PDF path dynamically from the backend
+    async function getPdfPath(isbn) {
+      try {
+        const response = await fetch(`http://localhost:5000/getPdfPath/${isbn}`);
+        const data = await response.json();
+        if (data.error) {
+          alert('PDF not found for this ISBN');
+          return null;
+        }
+        return data.pdfPath;
+      } catch (error) {
+        console.error('Error fetching PDF path:', error);
+        return null;
+      }
+    }
+
+    // Initialize the pdf.js library
     const pdfViewer = document.getElementById('pdfViewer');
     const viewerContainer = document.getElementById('viewerContainer');
-
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdf.worker.js'; // Adjust path if necessary
-
     let pdfDoc = null;
     let pageNum = 1;
 
     async function loadPdf() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const isbn = urlParams.get('ISBN');
+      if (!isbn) {
+        alert('ISBN is missing in the URL');
+        return;
+      }
+
+      const pdfPath = await getPdfPath(isbn);
+      if (!pdfPath) return;
+
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.js'; // Adjust the path if necessary
+
       try {
         pdfDoc = await pdfjsLib.getDocument(pdfPath).promise;
         renderPage(pageNum);
@@ -92,10 +121,7 @@ async function loadDynamicContent() {
       });
     }
 
-    // Load the PDF when the page loads
-    document.addEventListener('DOMContentLoaded', loadPdf);
-
-    // Disable print functionality
+    // Disable print functionality using CSS
     const disablePrintStyles = document.createElement('style');
     disablePrintStyles.innerHTML = `
       @media print {
