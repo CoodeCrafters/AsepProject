@@ -56,27 +56,15 @@
         // Initialize the PDF viewer
         initializePdfViewer();
 
-        // Fetch and decode the PDF URL dynamically
-        fetchAndDecodePdf();
+        // Fetch the PDF URL dynamically from the server
+        fetchPdfUrl();
       } catch (error) {
         console.error('Error loading dynamic content:', error);
       }
     }
 
-    // Alternative method for decoding Base64
-    function decodeBase64UsingBuffer(base64String) {
-      try {
-        const binaryString = Uint8Array.from(atob(base64String), c => c.charCodeAt(0));
-        const decoder = new TextDecoder('utf-8');
-        return decoder.decode(binaryString);
-      } catch (error) {
-        console.error("Error decoding Base64 string:", error);
-        return null;
-      }
-    }
-
     // Fetch the PDF path dynamically from the backend
-    async function fetchAndDecodePdf() {
+    async function fetchPdfUrl() {
       const urlParams = new URLSearchParams(window.location.search);
       const isbn = urlParams.get('ISBN');
       if (!isbn) {
@@ -92,17 +80,10 @@
           return;
         }
 
-        // Decode the Base64 PDF path
-        const decodedPath = decodeBase64UsingBuffer(data.pdfPath);
-        if (!decodedPath) {
-          alert('Failed to decode PDF path');
-          return;
-        }
-
-        // Update the viewer with the decoded URL
-        updatePdfViewer(decodedPath);
+        // Update the viewer with the PDF URL from the server
+        updatePdfViewer(data.pdfPath);
       } catch (error) {
-        console.error('Error fetching or decoding PDF path:', error);
+        console.error('Error fetching PDF URL:', error);
       }
     }
 
@@ -130,7 +111,7 @@
       });
     }
 
-    // Update the Adobe PDF Viewer with the decoded PDF URL
+    // Update the Adobe PDF Viewer with the actual PDF URL
     function updatePdfViewer(pdfUrl) {
       adobeDCView.previewFile({
         content: {
