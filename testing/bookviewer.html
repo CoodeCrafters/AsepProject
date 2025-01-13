@@ -27,12 +27,12 @@
       display: none !important;
     }
   </style>
-  <script type="module" src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/+esm"></script>
+  <script src="https://acrobatservices.adobe.com/view-sdk/viewer.js"></script>
 </head>
 <body>
   <div id="menu-container"></div>
   <div id="viewerContainer">
-    <canvas id="pdfViewer"></canvas>
+    <div id="adobe-dc-view" style="height: 100%; width: 100%;"></div>
   </div>
   <div id="footer-container"></div>
 
@@ -74,12 +74,7 @@
       }
     }
 
-    // Initialize the pdf.js library
-    const pdfViewer = document.getElementById('pdfViewer');
-    const viewerContainer = document.getElementById('viewerContainer');
-    let pdfDoc = null;
-    let pageNum = 1;
-
+    // Initialize Adobe PDF Viewer
     async function loadPdf() {
       const urlParams = new URLSearchParams(window.location.search);
       const isbn = urlParams.get('ISBN');
@@ -91,46 +86,26 @@
       const pdfPath = await getPdfPath(isbn);
       if (!pdfPath) return;
 
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.js'; // Adjust the path if necessary
+      document.addEventListener("adobe_dc_view_sdk.ready", function () {
+        const adobeDCView = new AdobeDC.View({
+          clientId: "ac9f216e0fa243a3a80907a7924ff08a", // Replace with your own Adobe API client ID
+          divId: "adobe-dc-view"
+        });
 
-      try {
-        pdfDoc = await pdfjsLib.getDocument(pdfPath).promise;
-        renderPage(pageNum);
-      } catch (error) {
-        console.error('Error loading PDF:', error);
-      }
-    }
-
-    function renderPage(num) {
-      pdfDoc.getPage(num).then(page => {
-        const viewport = page.getViewport({ scale: 1.5 }); // Adjust scale as needed
-        const canvas = pdfViewer;
-        const context = canvas.getContext('2d');
-
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-
-        const renderContext = {
-          canvasContext: context,
-          viewport: viewport
-        };
-
-        page.render(renderContext).promise.then(() => {
-          console.log(`Page ${num} rendered.`);
+        adobeDCView.previewFile({
+          content: {
+            location: { url: pdfPath }
+          },
+          metaData: {
+            fileName: "Book Preview.pdf"
+          }
+        }, {
+          embedMode: "SIZED_CONTAINER",
+          showDownloadPDF: false,
+          showPrintPDF: false
         });
       });
     }
-
-    // Disable print functionality using CSS
-    const disablePrintStyles = document.createElement('style');
-    disablePrintStyles.innerHTML = `
-      @media print {
-        * {
-          display: none !important;
-        }
-      }
-    `;
-    document.head.appendChild(disablePrintStyles);
   </script>
 </body>
 </html>
