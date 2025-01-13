@@ -58,37 +58,13 @@
       }
     }
 
-    // Fetch the PDF path dynamically from the backend
-    async function getPdfPath(isbn) {
-      try {
-        const response = await fetch(`https://central-library.onrender.com/getLibraryView?isbn=${isbn}`);
-        const data = await response.json();
-        if (data.error) {
-          alert('PDF not found for this ISBN');
-          return null;
-        }
-        return data.pdfPath;
-      } catch (error) {
-        console.error('Error fetching PDF path:', error);
-        return null;
-      }
-    }
-
     // Initialize Adobe PDF Viewer
     async function loadPdf() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const isbn = urlParams.get('ISBN');
-      if (!isbn) {
-        alert('ISBN is missing in the URL');
-        return;
-      }
-
-      const pdfPath = await getPdfPath(isbn);
-      if (!pdfPath) return;
+      const pdfPath = "https://faculty.ksu.edu.sa/sites/default/files/stat_-book_introduction_to_statistics.pdf";
 
       document.addEventListener("adobe_dc_view_sdk.ready", function () {
         const adobeDCView = new AdobeDC.View({
-          clientId: "ac9f216e0fa243a3a80907a7924ff08a", // Replace with your own Adobe API client ID
+          clientId: "ac9f216e0fa243a3a80907a7924ff08a", // Replace with your Adobe API client ID
           divId: "adobe-dc-view"
         });
 
@@ -97,7 +73,7 @@
             location: { url: pdfPath }
           },
           metaData: {
-            fileName: "Book Preview.pdf"
+            fileName: "Introduction to Statistics.pdf"
           }
         }, {
           embedMode: "SIZED_CONTAINER",
