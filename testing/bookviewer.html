@@ -58,7 +58,17 @@
       }
     }
 
-    // Fetch the PDF path dynamically from the backend
+    // Function to decode Base64 strings
+    function decodeBase64(base64String) {
+      try {
+        return atob(base64String);
+      } catch (error) {
+        console.error("Error decoding Base64 string:", error);
+        return null;
+      }
+    }
+
+    // Fetch the PDF path dynamically from the backend and decode it
     async function getPdfPath(isbn) {
       try {
         const response = await fetch(`https://central-library.onrender.com/getLibraryView?isbn=${isbn}`);
@@ -67,9 +77,17 @@
           alert('PDF not found for this ISBN');
           return null;
         }
-        return data.pdfPath;
+
+        // Decode the Base64 PDF path
+        const decodedPath = decodeBase64(data.pdfPath);
+        if (!decodedPath) {
+          alert('Failed to decode PDF path');
+          return null;
+        }
+
+        return decodedPath;
       } catch (error) {
-        console.error('Error fetching PDF path:', error);
+        console.error('Error fetching or decoding PDF path:', error);
         return null;
       }
     }
