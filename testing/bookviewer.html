@@ -39,6 +39,8 @@
   <script>
     document.addEventListener('DOMContentLoaded', loadDynamicContent);
 
+    let adobeDCView; // To hold the AdobeDC.View instance
+
     async function loadDynamicContent() {
       try {
         const menuResponse = await fetch('menu.html');
@@ -51,49 +53,30 @@
         const footerContent = await footerResponse.text();
         document.getElementById('footer-container').innerHTML = footerContent;
 
-        // Load the PDF after the menu and footer are loaded
-        loadPdf();
+        // Initialize the PDF viewer
+        initializePdfViewer();
+
+        // Fetch and decode the PDF URL dynamically
+        fetchAndDecodePdf();
       } catch (error) {
         console.error('Error loading dynamic content:', error);
       }
     }
 
-    // Function to decode Base64 strings
-    function decodeBase64(base64String) {
+    // Alternative method for decoding Base64
+    function decodeBase64UsingBuffer(base64String) {
       try {
-        return atob(base64String);
+        const binaryString = Uint8Array.from(atob(base64String), c => c.charCodeAt(0));
+        const decoder = new TextDecoder('utf-8');
+        return decoder.decode(binaryString);
       } catch (error) {
         console.error("Error decoding Base64 string:", error);
         return null;
       }
     }
 
-    // Fetch the PDF path dynamically from the backend and decode it
-    async function getPdfPath(isbn) {
-      try {
-        const response = await fetch(`https://central-library.onrender.com/getLibraryView?isbn=${isbn}`);
-        const data = await response.json();
-        if (data.error) {
-          alert('PDF not found for this ISBN');
-          return null;
-        }
-
-        // Decode the Base64 PDF path
-        const decodedPath = decodeBase64(data.pdfPath);
-        if (!decodedPath) {
-          alert('Failed to decode PDF path');
-          return null;
-        }
-
-        return decodedPath;
-      } catch (error) {
-        console.error('Error fetching or decoding PDF path:', error);
-        return null;
-      }
-    }
-
-    // Initialize Adobe PDF Viewer
-    async function loadPdf() {
+    // Fetch the PDF path dynamically from the backend
+    async function fetchAndDecodePdf() {
       const urlParams = new URLSearchParams(window.location.search);
       const isbn = urlParams.get('ISBN');
       if (!isbn) {
@@ -101,27 +84,65 @@
         return;
       }
 
-      const pdfPath = await getPdfPath(isbn);
-      if (!pdfPath) return;
+      try {
+        const response = await fetch(`https://central-library.onrender.com/getLibraryView?isbn=${isbn}`);
+        const data = await response.json();
+        if (data.error) {
+          alert('PDF not found for this ISBN');
+          return;
+        }
 
+        // Decode the Base64 PDF path
+        const decodedPath = decodeBase64UsingBuffer(data.pdfPath);
+        if (!decodedPath) {
+          alert('Failed to decode PDF path');
+          return;
+        }
+
+        // Update the viewer with the decoded URL
+        updatePdfViewer(decodedPath);
+      } catch (error) {
+        console.error('Error fetching or decoding PDF path:', error);
+      }
+    }
+
+    // Initialize Adobe PDF Viewer with a placeholder
+    function initializePdfViewer() {
       document.addEventListener("adobe_dc_view_sdk.ready", function () {
-        const adobeDCView = new AdobeDC.View({
+        adobeDCView = new AdobeDC.View({
           clientId: "ac9f216e0fa243a3a80907a7924ff08a", // Replace with your own Adobe API client ID
           divId: "adobe-dc-view"
         });
 
+        // Load a placeholder PDF until the actual URL is fetched
         adobeDCView.previewFile({
           content: {
-            location: { url: pdfPath }
+            location: { url: "https://example.com/placeholder.pdf" } // Temporary placeholder URL
           },
           metaData: {
-            fileName: "Book Preview.pdf"
+            fileName: "Loading Preview..."
           }
         }, {
           embedMode: "SIZED_CONTAINER",
           showDownloadPDF: false,
           showPrintPDF: false
         });
+      });
+    }
+
+    // Update the Adobe PDF Viewer with the decoded PDF URL
+    function updatePdfViewer(pdfUrl) {
+      adobeDCView.previewFile({
+        content: {
+          location: { url: pdfUrl }
+        },
+        metaData: {
+          fileName: "Book Preview.pdf"
+        }
+      }, {
+        embedMode: "SIZED_CONTAINER",
+        showDownloadPDF: false,
+        showPrintPDF: false
       });
     }
   </script>
