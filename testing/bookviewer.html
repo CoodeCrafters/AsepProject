@@ -87,16 +87,21 @@
       }
 
       try {
-        // Fetch the secured PDF link with PRN_NO for watermarking
+        // Fetch the secured PDF data (as a blob) from the backend
         const response = await fetch(`https://central-library.onrender.com/getfetchdata?isbn=${isbn}&prn_no=${prnNo}`);
-        const data = await response.json();
-        if (data.error) {
+        
+        if (!response.ok) {
           alert('Error loading the PDF. Please try again later.');
           return;
         }
 
+        const pdfBlob = await response.blob(); // Get the PDF as a Blob
+
+        // Create an Object URL for the Blob
+        const pdfUrl = URL.createObjectURL(pdfBlob);
+
         // Set the PDF URL in the iframe
-        updatePdfViewer(data.securePdfUrl);
+        updatePdfViewer(pdfUrl);
       } catch (error) {
         console.error('Error fetching secure PDF URL:', error);
       }
@@ -104,7 +109,7 @@
 
     function updatePdfViewer(pdfUrl) {
       const iframe = document.getElementById('pdfViewerIframe');
-      iframe.src = pdfUrl;
+      iframe.src = pdfUrl; // Set the Object URL as the iframe source
     }
 
     // Block right-click on the iframe
