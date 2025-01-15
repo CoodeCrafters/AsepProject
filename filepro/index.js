@@ -3,10 +3,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { v4: uuidv4 } = require('uuid'); // For generating unique user IDs
+const { v4: uuidv4 } = require('uuid');
+const { PDFDocument, rgb } = require('pdf-lib'); // Import PDF-Lib for PDF manipulation
+const fetch = require('node-fetch'); // For fetching the PDF
 require('dotenv').config();
 const crypto = require('crypto');
-
 
 // Initialize Express app
 const app = express();
@@ -201,6 +202,58 @@ app.post('/saveLibraryView', async (req, res) => {
   } catch (error) {
     console.error('Error saving library view:', error);
     res.status(500).send({ error: 'Failed to save library view' });
+  }
+});
+
+// Endpoint: /getfetchdata
+app.get('/getfetchdata', async (req, res) => {
+  try {
+    const { isbn, prn_no } = req.query;
+
+    // Validate input
+    if (!isbn || !prn_no) {
+      return res.status(400).send({ error: 'Both ISBN and PRN number are required' });
+    }
+
+    // Fetch profile and library data
+    const profile = await Profile.findOne({ prn_no });
+    if (!profile) {
+      return res.status(404).send({ error: 'Profile not found' });
+    }
+
+    const libraryView = await LibraryView.findOne({ isbn });
+    if (!libraryView) {
+      return res.status(404).send({ error: 'Library view not found for the given ISBN' });
+    }
+
+    const pdfUrl = decodeUrl(libraryView.pdf_link); // Decode the Base64 URL
+
+    // Fetch the PDF file
+    const response = await fetch(pdfUrl);
+    if (!response.ok) {
+      return res.status(500).send({ error: 'Failed to fetch the PDF file' });
+    }
+    const pdfBytes = await response.arrayBuffer();
+
+    // Add watermark to the PDF
+    const pdfDoc = await PDFDocument.load(pdfBytes);
+    const pages = pdfDoc.getPages();
+    const watermarkText = `Watermark: ${prn_no}`;
+    const watermarkOptions = { x: 200, y: 400, color: rgb(0.8, 0.8, 0.8), size: 50, rotate: 45 };
+
+    for (const page of pages) {
+      page.drawText(watermarkText, watermarkOptions);
+    }
+
+    const watermarkedPdfBytes = await pdfDoc.save();
+
+    // Send the watermarked PDF
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'inline; filename=watermarked.pdf');
+    res.send(Buffer.from(watermarkedPdfBytes));
+  } catch (error) {
+    console.error('Error in /getfetchdata:', error);
+    res.status(500).send({ error: 'Internal server error' });
   }
 });
 
