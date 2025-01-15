@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
-const { PDFDocument, rgb } = require('pdf-lib'); // Import PDF-Lib for PDF manipulation
+const { PDFDocument, rgb, degrees } = require('pdf-lib'); // Import PDF-Lib for PDF manipulation
 const fetch = require('node-fetch'); // For fetching the PDF
 require('dotenv').config();
 const crypto = require('crypto');
