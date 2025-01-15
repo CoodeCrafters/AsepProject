@@ -208,7 +208,6 @@ app.post('/saveLibraryView', async (req, res) => {
 
 // Endpoint: /getfetchdata
 app.get('/getfetchdata', async (req, res) => {
-
   const origin = req.get('Origin'); // Get the Origin header from the request
 
   // Check if the request is from the allowed origin
@@ -224,18 +223,20 @@ app.get('/getfetchdata', async (req, res) => {
       return res.status(400).send({ error: 'Both ISBN and PRN number are required' });
     }
 
-    // Fetch profile and library data
+    // Fetch profile data based on prn_no
     const profile = await Profile.findOne({ prn_no });
     if (!profile) {
       return res.status(404).send({ error: 'Profile not found' });
     }
 
+    // Fetch library view (PDF link) based on the given ISBN
     const libraryView = await LibraryView.findOne({ isbn });
     if (!libraryView) {
       return res.status(404).send({ error: 'Library view not found for the given ISBN' });
     }
 
-    const pdfUrl = decodeUrl(libraryView.pdf_link); // Decode the Base64 URL
+    // Directly use the pdf_link stored in the database (no decoding needed)
+    const pdfUrl = libraryView.pdf_link; // Just use it directly
 
     // Fetch the PDF file
     const response = await fetch(pdfUrl);
