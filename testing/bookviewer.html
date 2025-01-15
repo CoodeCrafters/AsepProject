@@ -23,23 +23,26 @@
       border: 1px solid #ddd;
     }
 
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
     .disable-print {
       display: none !important;
     }
   </style>
-  <script src="https://acrobatservices.adobe.com/view-sdk/viewer.js"></script>
 </head>
 <body>
   <div id="menu-container"></div>
   <div id="viewerContainer">
-    <div id="adobe-dc-view" style="height: 100%; width: 100%;"></div>
+    <iframe id="pdfViewerIframe" title="PDF Viewer"></iframe>
   </div>
   <div id="footer-container"></div>
 
   <script>
     document.addEventListener('DOMContentLoaded', loadDynamicContent);
-
-    let adobeDCView = null; // To hold the AdobeDC.View instance
 
     async function loadDynamicContent() {
       try {
@@ -53,89 +56,44 @@
         const footerContent = await footerResponse.text();
         document.getElementById('footer-container').innerHTML = footerContent;
 
-        // Initialize the PDF viewer and fetch the PDF URL
-        await initializePdfViewer();
+        // Fetch the PDF URL dynamically
         fetchPdfUrl();
       } catch (error) {
         console.error('Error loading dynamic content:', error);
       }
     }
 
-    // Initialize Adobe PDF Viewer with a placeholder
-    function initializePdfViewer() {
-      return new Promise((resolve) => {
-        document.addEventListener("adobe_dc_view_sdk.ready", function () {
-          adobeDCView = new AdobeDC.View({
-            clientId: "ac9f216e0fa243a3a80907a7924ff08a", // Replace with your own Adobe API client ID
-            divId: "adobe-dc-view"
-          });
-
-          // Load a placeholder PDF until the actual URL is fetched
-          adobeDCView.previewFile({
-            content: {
-              location: { url: "https://example.com/placeholder.pdf" } // Temporary placeholder URL
-            },
-            metaData: {
-              fileName: "Loading Preview..."
-            }
-          }, {
-            embedMode: "SIZED_CONTAINER",
-            showDownloadPDF: false,
-            showPrintPDF: false
-          });
-
-          resolve(); // Resolve the promise once initialization is complete
-        });
-      });
-    }
-
-   // Fetch the PDF path dynamically from the backend
-async function fetchPdfUrl() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const isbn = urlParams.get('ISBN');
-  if (!isbn) {
-    alert('ISBN is missing in the URL');
-    return;
-  }
-
-  try {
-    const response = await fetch(`https://central-library.onrender.com/getLibraryView?isbn=${isbn}`);
-    const data = await response.json();
-    if (data.error) {
-      alert('PDF not found for this ISBN');
-      return;
-    }
-
-    // Decode the Base64-encoded PDF link
-    const decodedPdfUrl = atob(data.pdf_link);
-
-    // Update the viewer with the decoded PDF URL from the server
-    updatePdfViewer(decodedPdfUrl);
-  } catch (error) {
-    console.error('Error fetching PDF URL:', error);
-  }
-}
-
-
-    // Update the Adobe PDF Viewer with the actual PDF URL
-    function updatePdfViewer(pdfUrl) {
-      if (!adobeDCView) {
-        console.error('Adobe DC View is not initialized');
+    // Fetch the PDF path dynamically from the backend
+    async function fetchPdfUrl() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const isbn = urlParams.get('ISBN');
+      if (!isbn) {
+        alert('ISBN is missing in the URL');
         return;
       }
 
-      adobeDCView.previewFile({
-        content: {
-          location: { url: pdfUrl }
-        },
-        metaData: {
-          fileName: "Book Preview.pdf"
+      try {
+        const response = await fetch(`https://central-library.onrender.com/getLibraryView?isbn=${isbn}`);
+        const data = await response.json();
+        if (data.error) {
+          alert('PDF not found for this ISBN');
+          return;
         }
-      }, {
-        embedMode: "SIZED_CONTAINER",
-        showDownloadPDF: false,
-        showPrintPDF: false
-      });
+
+        // Decode the Base64-encoded PDF link
+        const decodedPdfUrl = atob(data.pdf_link);
+
+        // Set the decoded URL in the iframe
+        updatePdfViewer(decodedPdfUrl);
+      } catch (error) {
+        console.error('Error fetching PDF URL:', error);
+      }
+    }
+
+    // Update the iframe with the actual PDF URL
+    function updatePdfViewer(pdfUrl) {
+      const iframe = document.getElementById('pdfViewerIframe');
+      iframe.src = pdfUrl;
     }
   </script>
 </body>
