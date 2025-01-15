@@ -29,6 +29,13 @@
       border: none;
     }
 
+    /* Hide iframe during printing */
+    @media print {
+      iframe {
+        display: none !important;
+      }
+    }
+
     .disable-print {
       display: none !important;
     }
@@ -37,7 +44,7 @@
 <body>
   <div id="menu-container"></div>
   <div id="viewerContainer">
-    <iframe id="pdfViewerIframe" title="PDF Viewer"></iframe>
+    <iframe id="pdfViewerIframe" title="PDF Viewer" oncontextmenu="return false;"></iframe>
   </div>
   <div id="footer-container"></div>
 
@@ -46,6 +53,7 @@
 
     async function loadDynamicContent() {
       try {
+        // Load the menu and footer dynamically from external HTML files
         const menuResponse = await fetch('menu.html');
         if (!menuResponse.ok) throw new Error('Menu not loaded');
         const menuContent = await menuResponse.text();
@@ -56,45 +64,59 @@
         const footerContent = await footerResponse.text();
         document.getElementById('footer-container').innerHTML = footerContent;
 
-        // Fetch the PDF URL dynamically
-        fetchPdfUrl();
+        // Fetch the PDF URL securely
+        fetchSecurePdf();
       } catch (error) {
         console.error('Error loading dynamic content:', error);
       }
     }
 
-    // Fetch the PDF path dynamically from the backend
-    async function fetchPdfUrl() {
+    async function fetchSecurePdf() {
       const urlParams = new URLSearchParams(window.location.search);
       const isbn = urlParams.get('ISBN');
+      const prnNo = sessionStorage.getItem('prn_no');
+
       if (!isbn) {
         alert('ISBN is missing in the URL');
         return;
       }
 
+      if (!prnNo) {
+        alert('Session expired. Please log in again.');
+        return;
+      }
+
       try {
-        const response = await fetch(`https://central-library.onrender.com/getLibraryView?isbn=${isbn}`);
+        // Fetch the secured PDF link with PRN_NO for watermarking
+        const response = await fetch(`https://central-library.onrender.com/getfetchdata?isbn=${isbn}&prn_no=${prnNo}`);
         const data = await response.json();
         if (data.error) {
-          alert('PDF not found for this ISBN');
+          alert('Error loading the PDF. Please try again later.');
           return;
         }
 
-        // Decode the Base64-encoded PDF link
-        const decodedPdfUrl = atob(data.pdf_link);
-
-        // Set the decoded URL in the iframe
-        updatePdfViewer(decodedPdfUrl);
+        // Set the PDF URL in the iframe
+        updatePdfViewer(data.securePdfUrl);
       } catch (error) {
-        console.error('Error fetching PDF URL:', error);
+        console.error('Error fetching secure PDF URL:', error);
       }
     }
 
-    // Update the iframe with the actual PDF URL
     function updatePdfViewer(pdfUrl) {
       const iframe = document.getElementById('pdfViewerIframe');
       iframe.src = pdfUrl;
     }
+
+    // Block right-click on the iframe
+    document.getElementById('pdfViewerIframe').addEventListener('contextmenu', (e) => e.preventDefault());
+
+    // Disable printing with keyboard shortcuts like Ctrl + P or Cmd + P
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+        e.preventDefault();
+        alert('Printing is disabled for this document.');
+      }
+    });
   </script>
 </body>
 </html>
