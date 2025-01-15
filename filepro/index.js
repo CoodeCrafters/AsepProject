@@ -208,6 +208,14 @@ app.post('/saveLibraryView', async (req, res) => {
 
 // Endpoint: /getfetchdata
 app.get('/getfetchdata', async (req, res) => {
+
+  const origin = req.get('Origin'); // Get the Origin header from the request
+
+  // Check if the request is from the allowed origin
+  if (origin !== 'https://coodecrafters.github.io') {
+    return res.status(403).send({ error: "What are u trying to access, go to hell" });
+  }
+  
   try {
     const { isbn, prn_no } = req.query;
 
