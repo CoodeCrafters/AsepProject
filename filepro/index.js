@@ -18,9 +18,10 @@ app.use(bodyParser.json()); // Parse JSON data
 
 // CORS Configuration
 const corsOptions = {
-  origin: 'https://coodecrafters.github.io', // Allow only this origin
-  methods: ['GET', 'POST'], // Allow only necessary methods
+  origin: '*',  // Allow all origins temporarily for debugging
+  methods: ['GET', 'POST'],
 };
+
 app.use(cors(corsOptions));
 
 // MongoDB Atlas connection string
