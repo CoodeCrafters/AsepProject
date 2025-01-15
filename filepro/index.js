@@ -207,6 +207,8 @@ app.post('/saveLibraryView', async (req, res) => {
 });
 
 // Endpoint: /getfetchdata
+const { PDFDocument, rgb, degrees } = require('pdf-lib'); // Import degrees function
+
 app.get('/getfetchdata', async (req, res) => {
   const origin = req.get('Origin'); // Get the Origin header from the request
 
@@ -214,7 +216,7 @@ app.get('/getfetchdata', async (req, res) => {
   if (origin !== 'https://coodecrafters.github.io') {
     return res.status(403).send({ error: "What are u trying to access, go to hell" });
   }
-  
+
   try {
     const { isbn, prn_no } = req.query;
 
@@ -249,7 +251,13 @@ app.get('/getfetchdata', async (req, res) => {
     const pdfDoc = await PDFDocument.load(pdfBytes);
     const pages = pdfDoc.getPages();
     const watermarkText = `Watermark: ${prn_no}`;
-    const watermarkOptions = { x: 200, y: 400, color: rgb(0.8, 0.8, 0.8), size: 50, rotate: 45 };
+    const watermarkOptions = {
+      x: 200,
+      y: 400,
+      color: rgb(0.8, 0.8, 0.8),
+      size: 50,
+      rotate: degrees(45), // Use degrees() to set the rotation angle
+    };
 
     for (const page of pages) {
       page.drawText(watermarkText, watermarkOptions);
