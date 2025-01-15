@@ -207,7 +207,6 @@ app.post('/saveLibraryView', async (req, res) => {
 });
 
 // Endpoint: /getfetchdata
-const { PDFDocument, rgb, degrees } = require('pdf-lib'); // Import degrees function
 
 app.get('/getfetchdata', async (req, res) => {
   const origin = req.get('Origin'); // Get the Origin header from the request
