@@ -1,1 +1,24 @@
-
+[
+    {
+      "domain": "Mathematics",
+      "books": [
+        {
+          "BookName": "HC Verma",
+          "Author": "HC Sahab",
+          "ISBN": "0987654321",
+          "year": 1986,
+          "bookCover": "https://someimageurl.com",
+          "description": "A classic Physics textbook."
+        },
+        {
+          "BookName": "Linear Algebra",
+          "Author": "Gilbert Strang",
+          "ISBN": "9876543210",
+          "year": 2005,
+          "bookCover": "https://someimageurl.com",
+          "description": "An introduction to linear algebra."
+        }
+      ]
+    }
+  ]
+  
