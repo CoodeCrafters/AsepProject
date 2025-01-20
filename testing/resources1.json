@@ -17,6 +17,14 @@
         "year": 2005,
         "bookCover": "https://someimageurl.com",
         "description": "An introduction to linear algebra."
+      },
+      {
+        "BookName": "Handbook of IoT and Big Data",
+        "Author": "Vijender Kumar Solanki, Vicente García Díaz, and J. Paulo Davim",
+        "ISBN": "9780429013461",
+        "year": 2019,
+        "bookCover": "https://images.tandf.co.uk/common/jackets/crclarge/978113858/9781138584204.jpg",
+        "pdfLink": {}
       }
     ]
   },
