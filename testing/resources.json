@@ -186,6 +186,14 @@
             "year": 2005,
             "bookCover": "https://play-lh.googleusercontent.com/0Jmxrc7CF6WRpCY8vdbWf1q7g6IELyUjUxNXrOJNS-ocFttTY4MOdk-6TKuB-QfWWiKC",
             "decsription": "An introduction to linear algebra."
+          },
+          {
+            "BookName": "Example",
+            "Author": "Authors name",
+            "ISBN": "Number Provided",
+            "year": 2005,
+            "bookCover": "Link of the Image cover",
+            "decsription": "An introduction to linear algebra."
           }
 
         ]
