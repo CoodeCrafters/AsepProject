@@ -142,6 +142,14 @@
         "year": 1989,
         "bookCover": "https://openlibrary.org/images/icons/avatar_book-sm.png",
         "pdfLink": "https://web.eecs.umich.edu/~qstout/pap/PIEEE91.pdf"
+      },
+      {
+        "BookName": "Mark as downloadedDownloaded Python Data Science Handbook",
+        "Author": "Jake VanderPlas",
+        "ISBN": "9781491912058",
+        "year": 2016,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/867efb196b9f175193be7a29f5d23e6762b0bb72442f84b1fcbe65d7111e15cd.jpg",
+        "pdfLink": "https://avys.omu.edu.tr/storage/app/public/mustafa.kaya/135286/Python_Datascience.pdf"
       }
     ]
   }
