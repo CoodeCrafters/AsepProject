@@ -145,6 +145,14 @@
         "year": 2021,
         "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MzMxMiwicHVyIjoiYmxvYl9pZCJ9fQ==--e8b8d3c077894fc156b3827bead6cabe65a5a3e1/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJKUEciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--427a9ad23b67f6db86d2706f85458e5f46b6e0ef/Capture121.JPG",
         "pdfLink": "https://zenodo.org/records/5523349/files/gasDynamics.pdf?download=1"
+      },
+      {
+        "BookName": "Aerodynamics and Aircraft Performance - 3rd edition",
+        "Author": "James F. Marchman III",
+        "ISBN": "9781949373639",
+        "year": 2004,
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MjczMSwicHVyIjoiYmxvYl9pZCJ9fQ==--c177a9fced79960cdc552be87dd5ebc83f46c010/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/A-AP-cover-PB-version-685x1024.png",
+        "pdfLink": "https://vtechworks.lib.vt.edu/bitstreams/9096a84e-cdb4-4b82-88ac-9713a4992e8a/download"
       }
     ]
   },
