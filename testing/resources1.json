@@ -129,6 +129,14 @@
         "year": 2013,
         "bookCover": "https://m.media-amazon.com/images/I/81wDO0PXQVL._AC_UF1000,1000_QL80_.jpg",
         "pdfLink": "https://gessknust.wordpress.com/wp-content/uploads/2015/09/engineering-mechanics-statics-r-c-hibbeler-12th-edition.pdf"
+      },
+      {
+        "BookName": "Basics of Fluid Mechanics",
+        "Author": "Genick Bar-Meir",
+        "ISBN": "9781616100940",
+        "year": 2021,
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MzMxMywicHVyIjoiYmxvYl9pZCJ9fQ==--c569c071f53d3eb47e5524aab83ae2134ed7647b/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJKUEciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--427a9ad23b67f6db86d2706f85458e5f46b6e0ef/Capture23231.JPG",
+        "pdfLink": "https://zenodo.org/records/7990868/files/fluidMechanics.pdf?download=1"
       }
     ]
   },
