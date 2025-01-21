@@ -240,5 +240,18 @@
         "pdfLink": "https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf"
       }
     ]
+  },
+  {
+    "domain": "Medicine",
+    "books": [
+      {
+        "BookName": "Safety, Health, and Nutrition in Early Childhood Education",
+        "Author": "Jennifer Paris",
+        "ISBN": "Not Available",
+        "year": 2018,
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTQzNiwicHVyIjoiYmxvYl9pZCJ9fQ==--63d8f4163201626c77d5d2eff529cd879d4bd8a3/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJQTkciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--89343f782352aa835ac38157b276868b90549fdb/Title.PNG",
+        "pdfLink": "https://drive.google.com/file/d/1yguKUImxne8B_aQmmJD6uvhiDdMq4rMf/view?usp=drive_link"
+      }
+    ]
   }
 ]
