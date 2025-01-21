@@ -73,6 +73,14 @@
         "year": 2016,
         "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTc3LCJwdXIiOiJibG9iX2lkIn19--b17c33718c99e58389eb09bf61f578850bc1132d/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--92321c91481b14cf986468483667757f1e9e4957/9781944325022.png",
         "pdfLink": "http://abstract.ups.edu/download/aata-20220728.pdf"
+      },
+      {
+        "BookName": "Explorations: An Open Invitation To Biological Anthropology - 2nd Edition",
+        "Author": "Beth Shook, Katie Nelson and  Mary Nelson",
+        "ISBN": "9781931303637",
+        "year": 2023,
+        "bookCover": "https://explorations.americananthro.org/wp-content/uploads/2023/03/Final-Cover3-scaled.jpg",
+        "pdfLink": "https://drive.google.com/file/d/1Pfu3AncIvah1jdWBTIrCWuvRsKEmt2ij/view?usp=drive_link"
       }
     ]
   },
