@@ -166,6 +166,14 @@
         "year": 2018,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/a65db6acd17ad650c373da5853a77ec7c2ea7303befed6c675a1ae423a944815.jpg",
         "pdfLink": "http://projanco.com/Library/Practical%20SQL%20A%20Beginner%E2%80%99s%20Guide%20to%20Storytelling%20with%20Data.pdf"
+      },
+      {
+        "BookName": "Data Analysis from Scratch with Python",
+        "Author": "Peters Morgan",
+        "ISBN": "9781721942817",
+        "year": 2016,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/52f375b13029a198139b8101a6977c9aec5c4ad3e18ff8beaf4ea3c15615db9a.jpg",
+        "pdfLink": "https://unidel.edu.ng/focelibrary/books/Data%20Analysis%20From%20Scratch%20With%20Python%20Beginner%20Guide%20using%20Python,%20Pandas,%20NumPy,%20Scikit-Learn,%20IPython,%20TensorFlow%20and%20Matplotlib%20by%20Peters%20Morgan%20(z-lib.org).pdf"
       }
     ]
   }
