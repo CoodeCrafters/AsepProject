@@ -65,6 +65,14 @@
         "year": 2015,
         "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTI0ODUsInB1ciI6ImJsb2JfaWQifX0=--a9e73d721a2de09a42897124aa02de1ee4eec9d4/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/cover-350x700.png",
         "pdfLink": "https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=2d126254474e43b7d300ef5e60752d5e19f287c3"
+      },
+      {
+        "BookName": "Abstract Algebra: Theory and Applications",
+        "Author": "Thomas W. Judson",
+        "ISBN": "9781944325022",
+        "year": 2016,
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTc3LCJwdXIiOiJibG9iX2lkIn19--b17c33718c99e58389eb09bf61f578850bc1132d/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--92321c91481b14cf986468483667757f1e9e4957/9781944325022.png",
+        "pdfLink": "http://abstract.ups.edu/download/aata-20220728.pdf"
       }
     ]
   },
