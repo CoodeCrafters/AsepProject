@@ -121,6 +121,14 @@
         "year": 2015,
         "bookCover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0zgqQVFVPVcfvgrnt__UeneJPQkwRpLNgfw&s",
         "pdfLink": "https://teachmint.storage.googleapis.com/public/288796041/StudyMaterial/06157a3b-d687-490e-827f-a48697dfb6b6.pdf"
+      },
+      {
+        "BookName": "Engineering mechanics Statics",
+        "Author": "R. C. Hibbeler, R.C. Hibbeler, and S.C. Fan",
+        "ISBN": "125665017X",
+        "year": 2013,
+        "bookCover": "https://m.media-amazon.com/images/I/81wDO0PXQVL._AC_UF1000,1000_QL80_.jpg",
+        "pdfLink": "https://gessknust.wordpress.com/wp-content/uploads/2015/09/engineering-mechanics-statics-r-c-hibbeler-12th-edition.pdf"
       }
     ]
   }
