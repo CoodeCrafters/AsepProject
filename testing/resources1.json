@@ -174,6 +174,14 @@
         "year": 2016,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/52f375b13029a198139b8101a6977c9aec5c4ad3e18ff8beaf4ea3c15615db9a.jpg",
         "pdfLink": "https://unidel.edu.ng/focelibrary/books/Data%20Analysis%20From%20Scratch%20With%20Python%20Beginner%20Guide%20using%20Python,%20Pandas,%20NumPy,%20Scikit-Learn,%20IPython,%20TensorFlow%20and%20Matplotlib%20by%20Peters%20Morgan%20(z-lib.org).pdf"
+      },
+      {
+        "BookName": "The Elements of Statistical Learning: Data Mining, Inference, and Prediction (2nd edition) (12print 2017)",
+        "Author": "Trevor Hastie, Robert Tibshirani, Jerome Friedman",
+        "ISBN": "978-0387848570",
+        "year": 2009,
+        "bookCover": "https://m.media-amazon.com/images/I/61Sxfhpv7ML._UF1000,1000_QL80_.jpg",
+        "pdfLink": "https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf"
       }
     ]
   }
