@@ -153,6 +153,14 @@
         "year": 2004,
         "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MjczMSwicHVyIjoiYmxvYl9pZCJ9fQ==--c177a9fced79960cdc552be87dd5ebc83f46c010/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/A-AP-cover-PB-version-685x1024.png",
         "pdfLink": "https://vtechworks.lib.vt.edu/bitstreams/9096a84e-cdb4-4b82-88ac-9713a4992e8a/download"
+      },
+      {
+        "BookName": "Introduction to Communication Systems: An Interactive Approach Using the Wolfram Language",
+        "Author": "Victor S. Frost",
+        "ISBN": "9781936153251",
+        "year": 2021,
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6Mjc3OCwicHVyIjoiYmxvYl9pZCJ9fQ==--53db68a29184e3512646b6d06dc69eb0e42877e0/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/Book-Cover-picture-min.png",
+        "pdfLink": "https://kuscholarworks.ku.edu/bitstreams/c48f61c6-b2a1-40bc-b528-650156058e8f/download"
       }
     ]
   },
