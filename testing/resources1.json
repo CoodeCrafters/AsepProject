@@ -137,6 +137,14 @@
         "year": 2021,
         "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MzMxMywicHVyIjoiYmxvYl9pZCJ9fQ==--c569c071f53d3eb47e5524aab83ae2134ed7647b/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJKUEciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--427a9ad23b67f6db86d2706f85458e5f46b6e0ef/Capture23231.JPG",
         "pdfLink": "https://zenodo.org/records/7990868/files/fluidMechanics.pdf?download=1"
+      },
+      {
+        "BookName": "Fundamentals of Compressible Flow Mechanics",
+        "Author": "Genick Bar-Meir",
+        "ISBN": "Not Available",
+        "year": 2021,
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MzMxMiwicHVyIjoiYmxvYl9pZCJ9fQ==--e8b8d3c077894fc156b3827bead6cabe65a5a3e1/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJKUEciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--427a9ad23b67f6db86d2706f85458e5f46b6e0ef/Capture121.JPG",
+        "pdfLink": "https://zenodo.org/records/5523349/files/gasDynamics.pdf?download=1"
       }
     ]
   },
