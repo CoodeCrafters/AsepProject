@@ -49,6 +49,14 @@
         "year": 2010,
         "bookCover": "https://images.tandf.co.uk/common/jackets/crclarge/978042907/9780429074233.jpg",
         "pdfLink": "https://api.pageplace.de/preview/DT0400.9781466585447_A37871590/preview-9781466585447_A37871590.pdf"
+      },
+      {
+        "BookName": "Fundamentals of engineering thermodynamics",
+        "Author": "Michael J. Moran and Howard N. Shapiro",
+        "ISBN": "0471076813",
+        "year": 1995,
+        "bookCover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzSUFyHDan35F_aFh370uz6FrL3D3hasG9rA&s",
+        "pdfLink": "https://www.arma.org.au/wp-content/uploads/2017/03/Fundamentals-of-Engineering-Thermodynamics-by-Michael-J.Moran-Howard-N.-Shapiro.pdf"
       }
     ]
   },
