@@ -131,5 +131,18 @@
         "pdfLink": "https://gessknust.wordpress.com/wp-content/uploads/2015/09/engineering-mechanics-statics-r-c-hibbeler-12th-edition.pdf"
       }
     ]
+  },
+  {
+    "domain": "Computer science",
+    "books": [
+      {
+        "BookName": "Reconfigurable Processor Array A Bit Sliced Parallel Computer (USA)",
+        "Author": "A. Rushton",
+        "ISBN": "9780256066685",
+        "year": 1989,
+        "bookCover": "https://openlibrary.org/images/icons/avatar_book-sm.png",
+        "pdfLink": "https://web.eecs.umich.edu/~qstout/pap/PIEEE91.pdf"
+      }
+    ]
   }
 ]
