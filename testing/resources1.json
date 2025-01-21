@@ -161,6 +161,14 @@
         "year": 2021,
         "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6Mjc3OCwicHVyIjoiYmxvYl9pZCJ9fQ==--53db68a29184e3512646b6d06dc69eb0e42877e0/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/Book-Cover-picture-min.png",
         "pdfLink": "https://kuscholarworks.ku.edu/bitstreams/c48f61c6-b2a1-40bc-b528-650156058e8f/download"
+      },
+      {
+        "BookName": "Essential Mechanics - Statics and Strength of Materials with MATLAB and Octave",
+        "Author": "P. Venkataraman",
+        "ISBN": "9780988881129",
+        "year": 2023,
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6OTU4MiwicHVyIjoiYmxvYl9pZCJ9fQ==--833ea9432d97f11034674f9dd0b9051c62598fdd/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--92321c91481b14cf986468483667757f1e9e4957/EmbeddedImage.jpg",
+        "pdfLink": "https://repository.rit.edu/cgi/viewcontent.cgi?article=1002&context=ritbooks"
       }
     ]
   },
