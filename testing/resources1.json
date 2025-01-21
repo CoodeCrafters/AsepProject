@@ -57,6 +57,14 @@
         "year": 1995,
         "bookCover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzSUFyHDan35F_aFh370uz6FrL3D3hasG9rA&s",
         "pdfLink": "https://www.arma.org.au/wp-content/uploads/2017/03/Fundamentals-of-Engineering-Thermodynamics-by-Michael-J.Moran-Howard-N.-Shapiro.pdf"
+      },
+      {
+        "BookName": "A First Course in Linear Algebra",
+        "Author": "Robert A. Beezer",
+        "ISBN": "9780984417551",
+        "year": 2015,
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTI0ODUsInB1ciI6ImJsb2JfaWQifX0=--a9e73d721a2de09a42897124aa02de1ee4eec9d4/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/cover-350x700.png",
+        "pdfLink": "https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=2d126254474e43b7d300ef5e60752d5e19f287c3"
       }
     ]
   },
