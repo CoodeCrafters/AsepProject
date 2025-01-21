@@ -97,6 +97,14 @@
         "year": 2017,
         "bookCover": "https://covers.openlibrary.org/b/id/13217752-M.jpg",
         "pdfLink": "https://archive.org/download/hc-verma-concepts-of-physics-volume-2.-volume-2-bharati-bhawan-publishers-2020/HC%20Verma%20-%20Concepts%20of%20Physics%20Volume%201.%20Volume%201-Bharati%20Bhawan%20Publishers%20%282019%29.pdf"
+      },
+      {
+        "BookName": "Mechatronics",
+        "Author": "W. Bolton",
+        "ISBN": "978-1-292-08159-5",
+        "year": 2015,
+        "bookCover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0zgqQVFVPVcfvgrnt__UeneJPQkwRpLNgfw&s",
+        "pdfLink": "https://teachmint.storage.googleapis.com/public/288796041/StudyMaterial/06157a3b-d687-490e-827f-a48697dfb6b6.pdf"
       }
     ]
   }
