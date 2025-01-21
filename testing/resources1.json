@@ -150,6 +150,14 @@
         "year": 2016,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/867efb196b9f175193be7a29f5d23e6762b0bb72442f84b1fcbe65d7111e15cd.jpg",
         "pdfLink": "https://avys.omu.edu.tr/storage/app/public/mustafa.kaya/135286/Python_Datascience.pdf"
+      },
+      {
+        "BookName": "Mark as downloadedDownloaded Data Structures and Algorithms Made Easy: Data Structures and Algorithmic Puzzles",
+        "Author": "Narasimha Karumanchi",
+        "ISBN": "9788193245279",
+        "year": 2017,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/922a952955ac7c235d5bea952238c9ebecddf2e9e2622ee88a7dd446c2e41547.jpg",
+        "pdfLink": "https://eprints.triatmamulya.ac.id/1694/1/Data%20Structures%20and%20Algorithms%20Made%20Easy_%20Data%20Structures%20and%20Algorithmic%20Puzzles.pdf"
       }
     ]
   }
