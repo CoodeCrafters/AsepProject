@@ -158,6 +158,14 @@
         "year": 2017,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/922a952955ac7c235d5bea952238c9ebecddf2e9e2622ee88a7dd446c2e41547.jpg",
         "pdfLink": "https://eprints.triatmamulya.ac.id/1694/1/Data%20Structures%20and%20Algorithms%20Made%20Easy_%20Data%20Structures%20and%20Algorithmic%20Puzzles.pdf"
+      },
+      {
+        "BookName": "Practical SQL: A Beginner’s Guide to Storytelling with Data",
+        "Author": "Anthony DeBarros",
+        "ISBN": "9781593278274",
+        "year": 2018,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/a65db6acd17ad650c373da5853a77ec7c2ea7303befed6c675a1ae423a944815.jpg",
+        "pdfLink": "http://projanco.com/Library/Practical%20SQL%20A%20Beginner%E2%80%99s%20Guide%20to%20Storytelling%20with%20Data.pdf"
       }
     ]
   }
