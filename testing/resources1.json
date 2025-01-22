@@ -424,6 +424,14 @@
         "year": 2012,
         "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+891751293_140.jpg?allowDefault=false&client=WorldcatOrgUI",
         "pdfLink": "file:///C:/Users/Sonal/Downloads/Steel%20Designers%20Handbook%20(%20PDFDrive%20).pdf"
+      },
+      {
+        "BookName": "Structural steelwork design to limit state theory",
+        "Author": "T. J. MacGinley",
+        "ISBN": "0750604409",
+        "year": 1992,
+        "bookCover": "https://covers.openlibrary.org/b/id/3973625-M.jpg",
+        "pdfLink": "file:///C:/Users/Sonal/Downloads/structural%20steelwork-design%20to%20limit%20state%20theory%20(%20PDFDrive%20).pdf"
       }
     ]
   }
