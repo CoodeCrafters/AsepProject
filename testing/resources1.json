@@ -496,6 +496,14 @@
         "year": 1999,
         "bookCover": "https://covers.openlibrary.org/b/id/4532160-M.jpg",
         "pdfLink": "file:///C:/Users/Sonal/Downloads/Vibration%20of%20Solids%20and%20Structures%20Under%20Moving%20Loads%20(%20PDFDrive%20).pdf"
+      },
+      {
+        "BookName": "Earthquake engineering for structural design",
+        "Author": "Wai-Fah Chen",
+        "ISBN": "0849372348",
+        "year": 2005,
+        "bookCover": "https://covers.openlibrary.org/b/id/1598168-M.jpg",
+        "pdfLink": "file:///C:/Users/Sonal/Downloads/Earthquake%20engineering%20for%20structural%20design%20(%20PDFDrive%20).pdf"
       }
     ]
   }
