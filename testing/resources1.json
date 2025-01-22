@@ -488,6 +488,14 @@
         "year": 2014,
         "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+928546623_140.jpg?allowDefault=false&client=WorldcatOrgUI",
         "pdfLink": "file:///C:/Users/Sonal/Downloads/Underground%20pipeline%20corrosion%20(%20PDFDrive%20).pdf"
+      },
+      {
+        "BookName": "Vibration of solids and structures under moving loads",
+        "Author": "Ladislav Frýba",
+        "ISBN": "0727727419",
+        "year": 1999,
+        "bookCover": "https://covers.openlibrary.org/b/id/4532160-M.jpg",
+        "pdfLink": "file:///C:/Users/Sonal/Downloads/Vibration%20of%20Solids%20and%20Structures%20Under%20Moving%20Loads%20(%20PDFDrive%20).pdf"
       }
     ]
   }
