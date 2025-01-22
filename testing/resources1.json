@@ -368,6 +368,14 @@
         "year": 2018,
         "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+3305578956_140.jpg?allowDefault=false&client=WorldcatOrgUI",
         "pdfLink": "file:///C:/Users/Sonal/Downloads/Modern%20Earthquake%20Engineering%20Offshore%20and%20Land-based%20Structures%20(%20PDFDrive%20).pdf"
+      },
+      {
+        "BookName": "Structural Timber Design",
+        "Author": "Abdy Kermani",
+        "ISBN": "0632050918",
+        "year": 1998,
+        "bookCover": "https://covers.openlibrary.org/b/id/1328783-M.jpg",
+        "pdfLink": "file:///C:/Users/Sonal/Downloads/Structural%20Timber%20Design%20(%20PDFDrive%20).pdf"
       }
     ]
   }
