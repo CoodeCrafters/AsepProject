@@ -464,6 +464,14 @@
         "year": 2016,
         "bookCover": "https://covers.openlibrary.org/b/id/9361675-M.jpg",
         "pdfLink": "file:///C:/Users/Sonal/Downloads/Seismic%20Design%20of%20RC%20Buildings%20Theory%20and%20Practice%20(%20PDFDrive%20).pdf"
+      },
+      {
+        "BookName": "Dynamics of Structure",
+        "Author": "Jagmohan L. Humar",
+        "ISBN": "9058092461",
+        "year": 2002,
+        "bookCover": "https://covers.openlibrary.org/b/id/2287082-M.jpg",
+        "pdfLink": "file:///C:/Users/Sonal/Downloads/Dynamics%20of%20Structures%20(%20PDFDrive%20).pdf"
       }
     ]
   }
