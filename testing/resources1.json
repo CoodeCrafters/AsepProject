@@ -304,6 +304,14 @@
         "year": 2008,
         "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+825663889_140.jpg?allowDefault=false&client=WorldcatOrgUI",
         "pdfLink": "file:///C:/Users/Sonal/Downloads/Strengthening%20and%20Rehabilitation%20of%20Civil%20Infrastructures%20Using%20Fibre-Reinforced%20Polymer%20(FRP)%20Composites%20(Woodhead%20Publishing%20in%20Materials)%20%20%20(%20PDFDrive%20).pdf"
+      },
+      {
+        "BookName": "Design of concrete structures",
+        "Author": "Arthur H. Nilson",
+        "ISBN": "007046586X",
+        "year": 1997,
+        "bookCover": "https://covers.openlibrary.org/b/id/3856125-M.jpg",
+        "pdfLink": "file:///C:/Users/Sonal/Downloads/Design_of_Concrete_Structures_15Ed.pdf"
       }
     ]
   }
