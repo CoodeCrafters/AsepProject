@@ -352,6 +352,14 @@
         "year": 2016,
         "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+027986694_140.jpg?allowDefault=false&client=WorldcatOrgUI",
         "pdfLink": "file:///C:/Users/Sonal/Downloads/Pile%20Design%20for%20Structural%20and%20Geotechnical%20Engineers%20(%20PDFDrive%20).pdf"
+      },
+      {
+        "BookName": "Building construction handbook",
+        "Author": "R. Chudley",
+        "ISBN": "0750637536",
+        "year": 2001,
+        "bookCover": "https://covers.openlibrary.org/b/id/1400163-M.jpg",
+        "pdfLink": "file:///C:/Users/Sonal/Downloads/Building%20Construction%20Handbook%20(1).pdf"
       }
     ]
   }
