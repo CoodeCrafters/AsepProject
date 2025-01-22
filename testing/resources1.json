@@ -360,6 +360,14 @@
         "year": 2001,
         "bookCover": "https://covers.openlibrary.org/b/id/1400163-M.jpg",
         "pdfLink": "file:///C:/Users/Sonal/Downloads/Building%20Construction%20Handbook%20(1).pdf"
+      },
+      {
+        "BookName": "Modern Earthquake Engineering",
+        "Author": "Junbo Jia",
+        "ISBN": "9783662568576",
+        "year": 2018,
+        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+3305578956_140.jpg?allowDefault=false&client=WorldcatOrgUI",
+        "pdfLink": "file:///C:/Users/Sonal/Downloads/Modern%20Earthquake%20Engineering%20Offshore%20and%20Land-based%20Structures%20(%20PDFDrive%20).pdf"
       }
     ]
   }
