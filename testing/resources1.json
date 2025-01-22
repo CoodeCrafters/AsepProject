@@ -328,6 +328,14 @@
         "year": 2016,
         "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+129591494_140.jpg?allowDefault=false&client=WorldcatOrgUI",
         "pdfLink": "file:///C:/Users/Sonal/Downloads/Handbook%20of%20Structural%20Steel%20Connection%20Design%20and%20Details%20(%20PDFDrive%20).pdf"
+      },
+      {
+        "BookName": "Design and Analysis of Connections in Steel Structures",
+        "Author": "Wiley and Alfredo Boracchini",
+        "ISBN": "9783433032268",
+        "year": 2018,
+        "bookCover": "https://covers.openlibrary.org/b/id/14790429-M.jpg",
+        "pdfLink": "file:///C:/Users/Sonal/Downloads/Design%20and%20analysis%20of%20connections%20in%20steel%20structures_%20fundamentals%20and%20examples%20(%20PDFDrive%20).pdf"
       }
     ]
   }
