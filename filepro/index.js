@@ -248,21 +248,57 @@ app.get('/getfetchdata', async (req, res) => {
     }
     const pdfBytes = await response.arrayBuffer();
 
-    // Add watermark to the PDF
+    // Load the PDF document
     const pdfDoc = await PDFDocument.load(pdfBytes);
     const pages = pdfDoc.getPages();
-    const watermarkText = `Watermark: ${prn_no}`;
+    const watermarkText = prn_no; // Use PRN number as watermark text
+
+    // Load the Comic Sans font
+    const fontPath = path.join(__dirname, 'testing', 'COMIC.TTF'); // Path to the Comic Sans font file
+    const fontBytes = fs.readFileSync(fontPath); // Read font file
+    const font = await pdfDoc.embedFont(fontBytes);
+
+    // Calculate watermark position and size based on page size and max PRN count
     const watermarkOptions = {
-      x: 200,
-      y: 400,
       color: rgb(0.8, 0.8, 0.8),
-      size: 50,
-      rotate: degrees(45), // Use degrees() to set the rotation angle
+      size: 7, // Font size 7
+      rotate: degrees(45), // Rotation angle
     };
 
-    for (const page of pages) {
-      page.drawText(watermarkText, watermarkOptions);
-    }
+    const maxWatermarks = 15; // Limit to a maximum of 15 PRN numbers
+    let xPos = 0;
+    let yPos = 0;
+
+    // Loop through each page and add the watermark
+    pages.forEach(page => {
+      const { width, height } = page.getSize();
+      const rows = Math.ceil(Math.sqrt(maxWatermarks)); // Create a grid-like pattern
+      const cols = Math.ceil(maxWatermarks / rows);
+      
+      // Calculate the spacing between the watermark texts
+      const xSpacing = width / cols;
+      const ySpacing = height / rows;
+
+      // Add watermark text for each position on the page
+      let count = 0;
+      for (let row = 0; row < rows && count < maxWatermarks; row++) {
+        for (let col = 0; col < cols && count < maxWatermarks; col++) {
+          xPos = xSpacing * col + 50; // Adjust horizontal position with padding
+          yPos = ySpacing * row + 50; // Adjust vertical position with padding
+          
+          page.drawText(watermarkText, {
+            x: xPos,
+            y: yPos,
+            font: font,
+            size: watermarkOptions.size,
+            color: watermarkOptions.color,
+            rotate: watermarkOptions.rotate,
+          });
+
+          count++;
+        }
+      }
+    });
 
     const watermarkedPdfBytes = await pdfDoc.save();
 
@@ -275,7 +311,6 @@ app.get('/getfetchdata', async (req, res) => {
     res.status(500).send({ error: 'Internal server error' });
   }
 });
-
 
 // Start the server
 app.listen(PORT, () => {
