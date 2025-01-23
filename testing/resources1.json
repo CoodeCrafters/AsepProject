@@ -7,24 +7,21 @@
         "Author": "Robert A. Beezer",
         "ISBN": "9780984417551",
         "year": 2015,
-        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTI0ODUsInB1ciI6ImJsb2JfaWQifX0=--a9e73d721a2de09a42897124aa02de1ee4eec9d4/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/cover-350x700.png",
-        "pdfLink": "https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=2d126254474e43b7d300ef5e60752d5e19f287c3"
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTI0ODUsInB1ciI6ImJsb2JfaWQifX0=--a9e73d721a2de09a42897124aa02de1ee4eec9d4/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/cover-350x700.png"
       },
       {
         "BookName": "Abstract Algebra: Theory and Applications",
         "Author": "Thomas W. Judson",
         "ISBN": "9781944325022",
         "year": 2016,
-        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTc3LCJwdXIiOiJibG9iX2lkIn19--b17c33718c99e58389eb09bf61f578850bc1132d/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--92321c91481b14cf986468483667757f1e9e4957/9781944325022.png",
-        "pdfLink": "http://abstract.ups.edu/download/aata-20220728.pdf"
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTc3LCJwdXIiOiJibG9iX2lkIn19--b17c33718c99e58389eb09bf61f578850bc1132d/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--92321c91481b14cf986468483667757f1e9e4957/9781944325022.png"
       },
       {
         "BookName": "Explorations: An Open Invitation To Biological Anthropology - 2nd Edition",
         "Author": "Beth Shook, Katie Nelson and  Mary Nelson",
         "ISBN": "9781931303637",
         "year": 2023,
-        "bookCover": "https://explorations.americananthro.org/wp-content/uploads/2023/03/Final-Cover3-scaled.jpg",
-        "pdfLink": "https://drive.google.com/file/d/1Pfu3AncIvah1jdWBTIrCWuvRsKEmt2ij/view?usp=drive_link"
+        "bookCover": "https://explorations.americananthro.org/wp-content/uploads/2023/03/Final-Cover3-scaled.jpg"
       }
     ]
   },
@@ -36,16 +33,14 @@
         "Author": "Christoph Schiller",
         "ISBN": "9781447545545",
         "year": 1990,
-        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTIwLCJwdXIiOiJibG9iX2lkIn19--d31d89e88c8881c957e22daf29bdb84a7c1d651b/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/9781447545545.png",
-        "pdfLink": "https://www.motionmountain.net/motionmountain-volume1.pdf"
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTIwLCJwdXIiOiJibG9iX2lkIn19--d31d89e88c8881c957e22daf29bdb84a7c1d651b/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/9781447545545.png"
       },
       {
         "BookName": "The Adventure of Physics - Vol. II: Relativity",
         "Author": "Christoph Schiller",
         "ISBN": "Not Avail",
         "year": 1990,
-        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTMwLCJwdXIiOiJibG9iX2lkIn19--3b13215342a7058b1de151d113b0743c8385946f/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/0000AdPhysTwo.png",
-        "pdfLink": "https://www.motionmountain.net/motionmountain-volume2.pdf"
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTMwLCJwdXIiOiJibG9iX2lkIn19--3b13215342a7058b1de151d113b0743c8385946f/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/0000AdPhysTwo.png"
       }
     ]
   },
@@ -57,72 +52,63 @@
         "Author": "W. Bolton",
         "ISBN": "978-1-292-08159-5",
         "year": 2015,
-        "bookCover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0zgqQVFVPVcfvgrnt__UeneJPQkwRpLNgfw&s",
-        "pdfLink": "https://teachmint.storage.googleapis.com/public/288796041/StudyMaterial/06157a3b-d687-490e-827f-a48697dfb6b6.pdf"
+        "bookCover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0zgqQVFVPVcfvgrnt__UeneJPQkwRpLNgfw&s"
       },
       {
         "BookName": "Introduction to Mechanical Engineering",
         "Author": "Michael Clifford, Richard Brooks, Kwing-So Choi, Donald Giddings, and Alan Howe",
         "ISBN": "9780340939963",
         "year": 2010,
-        "bookCover": "https://images.tandf.co.uk/common/jackets/crclarge/978042907/9780429074233.jpg",
-        "pdfLink": "https://api.pageplace.de/preview/DT0400.9781466585447_A37871590/preview-9781466585447_A37871590.pdf"
+        "bookCover": "https://images.tandf.co.uk/common/jackets/crclarge/978042907/9780429074233.jpg"
       },
       {
         "BookName": "Fundamentals of engineering thermodynamics",
         "Author": "Michael J. Moran and Howard N. Shapiro",
         "ISBN": "0471076813",
         "year": 1995,
-        "bookCover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzSUFyHDan35F_aFh370uz6FrL3D3hasG9rA&s",
-        "pdfLink": "https://www.arma.org.au/wp-content/uploads/2017/03/Fundamentals-of-Engineering-Thermodynamics-by-Michael-J.Moran-Howard-N.-Shapiro.pdf"
+        "bookCover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzSUFyHDan35F_aFh370uz6FrL3D3hasG9rA&s"
       },
       {
         "BookName": "Engineering mechanics Statics",
         "Author": "R. C. Hibbeler, R.C. Hibbeler, and S.C. Fan",
         "ISBN": "125665017X",
         "year": 2013,
-        "bookCover": "https://m.media-amazon.com/images/I/81wDO0PXQVL._AC_UF1000,1000_QL80_.jpg",
-        "pdfLink": "https://gessknust.wordpress.com/wp-content/uploads/2015/09/engineering-mechanics-statics-r-c-hibbeler-12th-edition.pdf"
+        "bookCover": "https://m.media-amazon.com/images/I/81wDO0PXQVL._AC_UF1000,1000_QL80_.jpg"
       },
       {
         "BookName": "Basics of Fluid Mechanics",
         "Author": "Genick Bar-Meir",
         "ISBN": "9781616100940",
         "year": 2021,
-        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MzMxMywicHVyIjoiYmxvYl9pZCJ9fQ==--c569c071f53d3eb47e5524aab83ae2134ed7647b/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJKUEciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--427a9ad23b67f6db86d2706f85458e5f46b6e0ef/Capture23231.JPG",
-        "pdfLink": "https://zenodo.org/records/7990868/files/fluidMechanics.pdf?download=1"
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MzMxMywicHVyIjoiYmxvYl9pZCJ9fQ==--c569c071f53d3eb47e5524aab83ae2134ed7647b/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJKUEciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--427a9ad23b67f6db86d2706f85458e5f46b6e0ef/Capture23231.JPG"
       },
       {
         "BookName": "Fundamentals of Compressible Flow Mechanics",
         "Author": "Genick Bar-Meir",
         "ISBN": "Not Available",
         "year": 2021,
-        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MzMxMiwicHVyIjoiYmxvYl9pZCJ9fQ==--e8b8d3c077894fc156b3827bead6cabe65a5a3e1/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJKUEciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--427a9ad23b67f6db86d2706f85458e5f46b6e0ef/Capture121.JPG",
-        "pdfLink": "https://zenodo.org/records/5523349/files/gasDynamics.pdf?download=1"
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MzMxMiwicHVyIjoiYmxvYl9pZCJ9fQ==--e8b8d3c077894fc156b3827bead6cabe65a5a3e1/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJKUEciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--427a9ad23b67f6db86d2706f85458e5f46b6e0ef/Capture121.JPG"
       },
       {
         "BookName": "Aerodynamics and Aircraft Performance - 3rd edition",
         "Author": "James F. Marchman III",
         "ISBN": "9781949373639",
         "year": 2004,
-        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MjczMSwicHVyIjoiYmxvYl9pZCJ9fQ==--c177a9fced79960cdc552be87dd5ebc83f46c010/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/A-AP-cover-PB-version-685x1024.png",
-        "pdfLink": "https://vtechworks.lib.vt.edu/bitstreams/9096a84e-cdb4-4b82-88ac-9713a4992e8a/download"
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MjczMSwicHVyIjoiYmxvYl9pZCJ9fQ==--c177a9fced79960cdc552be87dd5ebc83f46c010/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/A-AP-cover-PB-version-685x1024.png"
       },
       {
         "BookName": "Introduction to Communication Systems: An Interactive Approach Using the Wolfram Language",
         "Author": "Victor S. Frost",
         "ISBN": "9781936153251",
         "year": 2021,
-        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6Mjc3OCwicHVyIjoiYmxvYl9pZCJ9fQ==--53db68a29184e3512646b6d06dc69eb0e42877e0/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/Book-Cover-picture-min.png",
-        "pdfLink": "https://kuscholarworks.ku.edu/bitstreams/c48f61c6-b2a1-40bc-b528-650156058e8f/download"
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6Mjc3OCwicHVyIjoiYmxvYl9pZCJ9fQ==--53db68a29184e3512646b6d06dc69eb0e42877e0/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJwbmciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--1d221d0e87311391d13a7728d03226e2fff3667a/Book-Cover-picture-min.png"
       },
       {
         "BookName": "Essential Mechanics - Statics and Strength of Materials with MATLAB and Octave",
         "Author": "P. Venkataraman",
         "ISBN": "9780988881129",
         "year": 2023,
-        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6OTU4MiwicHVyIjoiYmxvYl9pZCJ9fQ==--833ea9432d97f11034674f9dd0b9051c62598fdd/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--92321c91481b14cf986468483667757f1e9e4957/EmbeddedImage.jpg",
-        "pdfLink": "https://repository.rit.edu/cgi/viewcontent.cgi?article=1002&context=ritbooks"
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6OTU4MiwicHVyIjoiYmxvYl9pZCJ9fQ==--833ea9432d97f11034674f9dd0b9051c62598fdd/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--92321c91481b14cf986468483667757f1e9e4957/EmbeddedImage.jpg"
       }
     ]
   },
@@ -134,48 +120,42 @@
         "Author": "A. Rushton",
         "ISBN": "9780256066685",
         "year": 1989,
-        "bookCover": "https://openlibrary.org/images/icons/avatar_book-sm.png",
-        "pdfLink": "https://web.eecs.umich.edu/~qstout/pap/PIEEE91.pdf"
+        "bookCover": "https://openlibrary.org/images/icons/avatar_book-sm.png"
       },
       {
         "BookName": "Mark as downloadedDownloaded Python Data Science Handbook",
         "Author": "Jake VanderPlas",
         "ISBN": "9781491912058",
         "year": 2016,
-        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/867efb196b9f175193be7a29f5d23e6762b0bb72442f84b1fcbe65d7111e15cd.jpg",
-        "pdfLink": "https://avys.omu.edu.tr/storage/app/public/mustafa.kaya/135286/Python_Datascience.pdf"
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/867efb196b9f175193be7a29f5d23e6762b0bb72442f84b1fcbe65d7111e15cd.jpg"
       },
       {
         "BookName": "Mark as downloadedDownloaded Data Structures and Algorithms Made Easy: Data Structures and Algorithmic Puzzles",
         "Author": "Narasimha Karumanchi",
         "ISBN": "9788193245279",
         "year": 2017,
-        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/922a952955ac7c235d5bea952238c9ebecddf2e9e2622ee88a7dd446c2e41547.jpg",
-        "pdfLink": "https://eprints.triatmamulya.ac.id/1694/1/Data%20Structures%20and%20Algorithms%20Made%20Easy_%20Data%20Structures%20and%20Algorithmic%20Puzzles.pdf"
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/922a952955ac7c235d5bea952238c9ebecddf2e9e2622ee88a7dd446c2e41547.jpg"
       },
       {
         "BookName": "Practical SQL: A Beginner’s Guide to Storytelling with Data",
         "Author": "Anthony DeBarros",
         "ISBN": "9781593278274",
         "year": 2018,
-        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/a65db6acd17ad650c373da5853a77ec7c2ea7303befed6c675a1ae423a944815.jpg",
-        "pdfLink": "http://projanco.com/Library/Practical%20SQL%20A%20Beginner%E2%80%99s%20Guide%20to%20Storytelling%20with%20Data.pdf"
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/a65db6acd17ad650c373da5853a77ec7c2ea7303befed6c675a1ae423a944815.jpg"
       },
       {
         "BookName": "Data Analysis from Scratch with Python",
         "Author": "Peters Morgan",
         "ISBN": "9781721942817",
         "year": 2016,
-        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/52f375b13029a198139b8101a6977c9aec5c4ad3e18ff8beaf4ea3c15615db9a.jpg",
-        "pdfLink": "https://unidel.edu.ng/focelibrary/books/Data%20Analysis%20From%20Scratch%20With%20Python%20Beginner%20Guide%20using%20Python,%20Pandas,%20NumPy,%20Scikit-Learn,%20IPython,%20TensorFlow%20and%20Matplotlib%20by%20Peters%20Morgan%20(z-lib.org).pdf"
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/52f375b13029a198139b8101a6977c9aec5c4ad3e18ff8beaf4ea3c15615db9a.jpg"
       },
       {
         "BookName": "The Elements of Statistical Learning: Data Mining, Inference, and Prediction (2nd edition) (12print 2017)",
         "Author": "Trevor Hastie, Robert Tibshirani, Jerome Friedman",
         "ISBN": "978-0387848570",
         "year": 2009,
-        "bookCover": "https://m.media-amazon.com/images/I/61Sxfhpv7ML._UF1000,1000_QL80_.jpg",
-        "pdfLink": "https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf"
+        "bookCover": "https://m.media-amazon.com/images/I/61Sxfhpv7ML._UF1000,1000_QL80_.jpg"
       }
     ]
   },
@@ -187,16 +167,14 @@
         "Author": "Jennifer Paris",
         "ISBN": "Not Available",
         "year": 2018,
-        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTQzNiwicHVyIjoiYmxvYl9pZCJ9fQ==--63d8f4163201626c77d5d2eff529cd879d4bd8a3/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJQTkciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--89343f782352aa835ac38157b276868b90549fdb/Title.PNG",
-        "pdfLink": "https://drive.google.com/file/d/1yguKUImxne8B_aQmmJD6uvhiDdMq4rMf/view?usp=drive_link"
+        "bookCover": "https://open.umn.edu/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MTQzNiwicHVyIjoiYmxvYl9pZCJ9fQ==--63d8f4163201626c77d5d2eff529cd879d4bd8a3/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJQTkciLCJyZXNpemUiOiI0OTB4MTAwMCJ9LCJwdXIiOiJ2YXJpYXRpb24ifX0=--89343f782352aa835ac38157b276868b90549fdb/Title.PNG"
       },
       {
         "BookName": "Sports Nutrition Laboratory Manual - 1st Ed.",
         "Author": "Mary P Miles, Stephanie M.G. Wilson and Morgan L Chamberlin",
         "ISBN": "Non Availability",
         "year": 2022,
-        "bookCover": "https://scholarworks.montana.edu/server/api/core/bitstreams/a7874463-c2b0-4120-8587-843ac6f1cf62/content",
-        "pdfLink": "https://scholarworks.montana.edu/bitstreams/2fdda327-c9ef-45f5-868d-795d8e386a0e/download"
+        "bookCover": "https://scholarworks.montana.edu/server/api/core/bitstreams/a7874463-c2b0-4120-8587-843ac6f1cf62/content"
       }
     ]
   },
@@ -208,216 +186,189 @@
         "Author": "S. S. Bhavikatti",
         "ISBN": "8122428533",
         "year": 2010,
-        "bookCover": "https://covers.openlibrary.org/b/id/10020291-M.jpg",
-        "pdfLink": "https://civiltechnocrats.wordpress.com/wp-content/uploads/2013/11/101986842-basic-civil-engineering-s-s-bhavikatti.pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/10020291-M.jpg"
       },
       {
         "BookName": "Strengthening and Rehabilitation of Civil Infrastructures Using Fibre-Reinforced Polymer (FRP) Composites",
         "Author": "Len Hollaway and J. G. Teng",
         "ISBN": "9781420087741",
         "year": 2008,
-        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+825663889_140.jpg?allowDefault=false&client=WorldcatOrgUI",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Strengthening%20and%20Rehabilitation%20of%20Civil%20Infrastructures%20Using%20Fibre-Reinforced%20Polymer%20(FRP)%20Composites%20(Woodhead%20Publishing%20in%20Materials)%20%20%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+825663889_140.jpg?allowDefault=false&client=WorldcatOrgUI"
       },
       {
         "BookName": "Design of concrete structures",
         "Author": "Arthur H. Nilson",
         "ISBN": "007046586X",
         "year": 1997,
-        "bookCover": "https://covers.openlibrary.org/b/id/3856125-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Design_of_Concrete_Structures_15Ed.pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/3856125-M.jpg"
       },
       {
         "BookName": "Steel Structures",
         "Author": "Hassan A Nageim",
         "ISBN": "0415301564",
         "year": 2005,
-        "bookCover": "https://covers.openlibrary.org/b/id/1214863-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Steel%20structures_%20practical%20design%20studies%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/1214863-M.jpg"
       },
       {
         "BookName": "Handbook of Structural Steel Connection Design and Details, Third Edition",
         "Author": "Akbar R. Tamboli",
         "ISBN": "9781259585517",
         "year": 2016,
-        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+129591494_140.jpg?allowDefault=false&client=WorldcatOrgUI",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Handbook%20of%20Structural%20Steel%20Connection%20Design%20and%20Details%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+129591494_140.jpg?allowDefault=false&client=WorldcatOrgUI"
       },
       {
         "BookName": "Design and Analysis of Connections in Steel Structures",
         "Author": "Wiley and Alfredo Boracchini",
         "ISBN": "9783433032268",
         "year": 2018,
-        "bookCover": "https://covers.openlibrary.org/b/id/14790429-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Design%20and%20analysis%20of%20connections%20in%20steel%20structures_%20fundamentals%20and%20examples%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/14790429-M.jpg"
       },
       {
         "BookName": "Steel detailers' manual",
         "Author": "Alan Hayward, A. Hayward, and F. Weare",
         "ISBN": "0632055723",
         "year": 2001,
-        "bookCover": "https://covers.openlibrary.org/b/id/7074400-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Steel%20Detailers'%20Manual%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/7074400-M.jpg"
       },
       {
         "BookName": "Pile Design and Construction Rules of Thumb",
         "Author": "Ruwan Abey Rajapakse",
         "ISBN": "9780128042021",
         "year": 2016,
-        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+027986694_140.jpg?allowDefault=false&client=WorldcatOrgUI",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Pile%20Design%20for%20Structural%20and%20Geotechnical%20Engineers%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+027986694_140.jpg?allowDefault=false&client=WorldcatOrgUI"
       },
       {
         "BookName": "Building construction handbook",
         "Author": "R. Chudley",
         "ISBN": "0750637536",
         "year": 2001,
-        "bookCover": "https://covers.openlibrary.org/b/id/1400163-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Building%20Construction%20Handbook%20(1).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/1400163-M.jpg"
       },
       {
         "BookName": "Modern Earthquake Engineering",
         "Author": "Junbo Jia",
         "ISBN": "9783662568576",
         "year": 2018,
-        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+3305578956_140.jpg?allowDefault=false&client=WorldcatOrgUI",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Modern%20Earthquake%20Engineering%20Offshore%20and%20Land-based%20Structures%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+3305578956_140.jpg?allowDefault=false&client=WorldcatOrgUI"
       },
       {
         "BookName": "Structural Timber Design",
         "Author": "Abdy Kermani",
         "ISBN": "0632050918",
         "year": 1998,
-        "bookCover": "https://covers.openlibrary.org/b/id/1328783-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Structural%20Timber%20Design%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/1328783-M.jpg"
       },
       {
         "BookName": "Earthquake Resistant Design of Structures",
         "Author": "Pankaj Agarwal and Manish Shrikhande",
         "ISBN": "8120328922",
         "year": 2006,
-        "bookCover": "https://covers.openlibrary.org/b/id/13518163-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Earthquake%20Resistant%20Design%20of%20Structures%20By%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/13518163-M.jpg"
       },
       {
         "BookName": "Steel structures design and practice",
         "Author": "N. Subramanian",
         "ISBN": "1613441088",
         "year": 2010,
-        "bookCover": "https://www.datocms-assets.com/29926/1612816836-coverart-book.svg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Steel%20Structures%20-%20Design%20and%20Practice%20(%20PDFDrive%20)-1.pdf"
+        "bookCover": "https://www.datocms-assets.com/29926/1612816836-coverart-book.svg"
       },
       {
         "BookName": "Advanced Analysis and Design for Fire Safety of Steel Structures",
         "Author": "Guoqiang Li",
         "ISBN": "9783642343933",
         "year": 2013,
-        "bookCover": "https://covers.openlibrary.org/b/id/8613892-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Advanced%20Analysis%20and%20Design%20for%20Fire%20Safety%20of%20Steel%20Structures%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/8613892-M.jpg"
       },
       {
         "BookName": "Structural Health in Civil Engineering",
         "Author": "Sreenivas Alampalli",
         "ISBN": "0849320402",
         "year": 2008,
-        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+709651022_140.jpg?allowDefault=false&client=WorldcatOrgUI",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Infrastructure%20Health%20in%20Civil%20Engineering%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+709651022_140.jpg?allowDefault=false&client=WorldcatOrgUI"
       },
       {
         "BookName": "Design Procedures for the Use of Composites in Strengthening of Reinforced Concrete Structures",
         "Author": "Carlo Pellegrino and José Sena-Cruz",
         "ISBN": "9789402404135",
         "year": 2016,
-        "bookCover": "https://covers.openlibrary.org/b/id/9694771-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Design%20procedures%20for%20the%20use%20of%20composites%20in%20strengthening%20of%20reinforced%20concrete%20structures%20state-of-the-art%20report%20of%20the%20RILEM%20Technical%20Committee%20234-DUC%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/9694771-M.jpg"
       },
       {
         "BookName": "Steel designers' handbook",
         "Author": "B. Gorenc",
         "ISBN": "1628708433, 1742245943, 1742233414",
         "year": 2012,
-        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+891751293_140.jpg?allowDefault=false&client=WorldcatOrgUI",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Steel%20Designers%20Handbook%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+891751293_140.jpg?allowDefault=false&client=WorldcatOrgUI"
       },
       {
         "BookName": "Structural steelwork design to limit state theory",
         "Author": "T. J. MacGinley",
         "ISBN": "0750604409",
         "year": 1992,
-        "bookCover": "https://covers.openlibrary.org/b/id/3973625-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/structural%20steelwork-design%20to%20limit%20state%20theory%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/3973625-M.jpg"
       },
       {
         "BookName": "Sustainability guidelines for the structural engineer",
         "Author": "Dirk M. Kestner, Jennifer Goupil, and Emily Lorenz",
         "ISBN": "9780784411193",
         "year": 2010,
-        "bookCover": "https://covers.openlibrary.org/b/id/14387159-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Sustainability%20Guidelines%20for%20the%20Structural%20Engineer%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/14387159-M.jpg"
       },
       {
         "BookName": "Tall Buildings: Structural Design of Concrete Buildings up to 300m Tall",
         "Author": "International Federation for Structural Concrete (fib)",
         "ISBN": "9782883941137",
         "year": 2014,
-        "bookCover": "https://www.theengineeringcommunity.org/wp-content/uploads/2021/01/Tall-Buildings-Structural-Design-Of-Concrete-Buildings-Up-to-300m-tall.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Tall%20Buildings%20-%20Structural%20Design%20of%20Concrete%20Buildings%20Up%20to%20300%20M%20Tall%20A%20Working%20Group%20of%20The%20Concrete%20Centre%20and%20Fib%20Task%20Group%201.6%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://www.theengineeringcommunity.org/wp-content/uploads/2021/01/Tall-Buildings-Structural-Design-Of-Concrete-Buildings-Up-to-300m-tall.jpg"
       },
       {
         "BookName": "Wind effects on structures fundamentals and applications to design",
         "Author": "Emil Simiu",
         "ISBN": "0471121576",
         "year": 1996,
-        "bookCover": "https://covers.openlibrary.org/b/id/1241984-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Wind%20Effects%20on%20Structures%20Modern%20Structural%20Design%20for%20Wind%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/1241984-M.jpg"
       },
       {
         "BookName": "Seismic Design of RC Buildings",
         "Author": "Sharad Manohar and Suhasini Madhekar",
         "ISBN": "8132234154",
         "year": 2016,
-        "bookCover": "https://covers.openlibrary.org/b/id/9361675-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Seismic%20Design%20of%20RC%20Buildings%20Theory%20and%20Practice%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/9361675-M.jpg"
       },
       {
         "BookName": "Dynamics of Structure",
         "Author": "Jagmohan L. Humar",
         "ISBN": "9058092461",
         "year": 2002,
-        "bookCover": "https://covers.openlibrary.org/b/id/2287082-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Dynamics%20of%20Structures%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/2287082-M.jpg"
       },
       {
         "BookName": "Engineering Drawing And Design",
         "Author": "David A. Madsen",
         "ISBN": "9781305887923",
         "year": 2016,
-        "bookCover": "https://i.pinimg.com/736x/b6/4a/df/b64adf01b55127d50d644c40dca1086b.jpg",
-        "pdfLink": "https://www.benardmakaa.com/wp-content/uploads/2023/01/3062.-Madsen-D.A.-Madsen-D.P.-Engineering-Drawing-Design.pdf"
+        "bookCover": "https://i.pinimg.com/736x/b6/4a/df/b64adf01b55127d50d644c40dca1086b.jpg"
       },
       {
         "BookName": "Underground Pipeline Corrosion",
         "Author": "Mark E. Orazem",
         "ISBN": "9780857095091",
         "year": 2014,
-        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+928546623_140.jpg?allowDefault=false&client=WorldcatOrgUI",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Underground%20pipeline%20corrosion%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://coverart.oclc.org/ImageWebSvc/oclc/+-+928546623_140.jpg?allowDefault=false&client=WorldcatOrgUI"
       },
       {
         "BookName": "Vibration of solids and structures under moving loads",
         "Author": "Ladislav Frýba",
         "ISBN": "0727727419",
         "year": 1999,
-        "bookCover": "https://covers.openlibrary.org/b/id/4532160-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Vibration%20of%20Solids%20and%20Structures%20Under%20Moving%20Loads%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/4532160-M.jpg"
       },
       {
         "BookName": "Earthquake engineering for structural design",
         "Author": "Wai-Fah Chen",
         "ISBN": "0849372348",
         "year": 2005,
-        "bookCover": "https://covers.openlibrary.org/b/id/1598168-M.jpg",
-        "pdfLink": "file:///C:/Users/Sonal/Downloads/Earthquake%20engineering%20for%20structural%20design%20(%20PDFDrive%20).pdf"
+        "bookCover": "https://covers.openlibrary.org/b/id/1598168-M.jpg"
       }
     ]
   },
