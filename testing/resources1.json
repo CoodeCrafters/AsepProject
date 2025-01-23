@@ -3,54 +3,6 @@
     "domain": "Mathematics",
     "books": [
       {
-        "BookName": "HC Verma",
-        "Author": "HC Sahab",
-        "ISBN": "0987654321",
-        "year": 1986,
-        "bookCover": "https://someimageurl.com",
-        "description": "A classic Physics textbook."
-      },
-      {
-        "BookName": "Linear Algebra",
-        "Author": "Gilbert Strang",
-        "ISBN": "9876543210",
-        "year": 2005,
-        "bookCover": "https://someimageurl.com",
-        "description": "An introduction to linear algebra."
-      },
-      {
-        "BookName": "Handbook of IoT and Big Data",
-        "Author": "Vijender Kumar Solanki, Vicente García Díaz, and J. Paulo Davim",
-        "ISBN": "9780429013461",
-        "year": 2019,
-        "bookCover": "https://images.tandf.co.uk/common/jackets/crclarge/978113858/9781138584204.jpg",
-        "pdfLink": {}
-      },
-      {
-        "BookName": "Handbook of IoT and Big Data IIII",
-        "Author": "Vijender Kumar Solanki, Vicente García Díaz, and J. Paulo Davim",
-        "ISBN": "9780429013462456",
-        "year": 2005,
-        "bookCover": "https://images.tandf.co.uk/common/jackets/crclarge/978113858/9781138584204.jpg",
-        "pdfLink": {}
-      },
-      {
-        "BookName": "Introduction to Mechanical Engineering",
-        "Author": "Michael Clifford, Richard Brooks, Kwing-So Choi, Donald Giddings, and Alan Howe",
-        "ISBN": "9780340939963",
-        "year": 2010,
-        "bookCover": "https://images.tandf.co.uk/common/jackets/crclarge/978042907/9780429074233.jpg",
-        "pdfLink": "https://api.pageplace.de/preview/DT0400.9781466585447_A37871590/preview-9781466585447_A37871590.pdf"
-      },
-      {
-        "BookName": "Fundamentals of engineering thermodynamics",
-        "Author": "Michael J. Moran and Howard N. Shapiro",
-        "ISBN": "0471076813",
-        "year": 1995,
-        "bookCover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzSUFyHDan35F_aFh370uz6FrL3D3hasG9rA&s",
-        "pdfLink": "https://www.arma.org.au/wp-content/uploads/2017/03/Fundamentals-of-Engineering-Thermodynamics-by-Michael-J.Moran-Howard-N.-Shapiro.pdf"
-      },
-      {
         "BookName": "A First Course in Linear Algebra",
         "Author": "Robert A. Beezer",
         "ISBN": "9780984417551",
@@ -107,6 +59,22 @@
         "year": 2015,
         "bookCover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0zgqQVFVPVcfvgrnt__UeneJPQkwRpLNgfw&s",
         "pdfLink": "https://teachmint.storage.googleapis.com/public/288796041/StudyMaterial/06157a3b-d687-490e-827f-a48697dfb6b6.pdf"
+      },
+      {
+        "BookName": "Introduction to Mechanical Engineering",
+        "Author": "Michael Clifford, Richard Brooks, Kwing-So Choi, Donald Giddings, and Alan Howe",
+        "ISBN": "9780340939963",
+        "year": 2010,
+        "bookCover": "https://images.tandf.co.uk/common/jackets/crclarge/978042907/9780429074233.jpg",
+        "pdfLink": "https://api.pageplace.de/preview/DT0400.9781466585447_A37871590/preview-9781466585447_A37871590.pdf"
+      },
+      {
+        "BookName": "Fundamentals of engineering thermodynamics",
+        "Author": "Michael J. Moran and Howard N. Shapiro",
+        "ISBN": "0471076813",
+        "year": 1995,
+        "bookCover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzSUFyHDan35F_aFh370uz6FrL3D3hasG9rA&s",
+        "pdfLink": "https://www.arma.org.au/wp-content/uploads/2017/03/Fundamentals-of-Engineering-Thermodynamics-by-Michael-J.Moran-Howard-N.-Shapiro.pdf"
       },
       {
         "BookName": "Engineering mechanics Statics",
