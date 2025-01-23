@@ -170,23 +170,28 @@
     document.addEventListener('DOMContentLoaded', loadDynamicContent);
 
     async function loadDynamicContent() {
-      try {
-        const menuResponse = await fetch('menu.html');
-        if (!menuResponse.ok) throw new Error('Menu not loaded');
-        const menuContent = await menuResponse.text();
-        document.getElementById('menu-container').innerHTML = menuContent;
+  try {
+    const [menuResponse, footerResponse] = await Promise.all([
+      fetch('menu.html'),
+      fetch('footer.html'),
+      fetchProfile() // This runs in parallel with the menu and footer fetches
+    ]);
 
-        const footerResponse = await fetch('footer.html');
-        if (!footerResponse.ok) throw new Error('Footer not loaded');
-        const footerContent = await footerResponse.text();
-        document.getElementById('footer-container').innerHTML = footerContent;
+    if (!menuResponse.ok) throw new Error('Menu not loaded');
+    const menuContent = await menuResponse.text();
+    document.getElementById('menu-container').innerHTML = menuContent;
 
-        // Fetch and display the book details
-        fetchBookDetails();
-      } catch (error) {
-        console.error('Error loading dynamic content:', error);
-      }
-    }
+    if (!footerResponse.ok) throw new Error('Footer not loaded');
+    const footerContent = await footerResponse.text();
+    document.getElementById('footer-container').innerHTML = footerContent;
+
+    // Fetch and display the book details
+    fetchBookDetails();
+  } catch (error) {
+    console.error('Error loading dynamic content:', error);
+  }
+}
+
 
     async function fetchBookDetails() {
   const urlParams = new URLSearchParams(window.location.search);
