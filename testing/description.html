@@ -167,28 +167,29 @@
   <div id="footer-container"></div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', loadDynamicContent);
+   document.addEventListener('DOMContentLoaded', loadDynamicContent);
 
-    async function loadDynamicContent() {
-      try {
-        const menuResponse = await fetch('menu.html');
-        if (!menuResponse.ok) throw new Error('Menu not loaded');
-        const menuContent = await menuResponse.text();
-        document.getElementById('menu-container').innerHTML = menuContent;
+async function loadDynamicContent() {
+  try {
+    const menuResponse = await fetch('menu.html');
+    if (!menuResponse.ok) throw new Error('Menu not loaded');
+    const menuContent = await menuResponse.text();
+    document.getElementById('menu-container').innerHTML = menuContent;
 
-        const footerResponse = await fetch('footer.html');
-        if (!footerResponse.ok) throw new Error('Footer not loaded');
-        const footerContent = await footerResponse.text();
-        document.getElementById('footer-container').innerHTML = footerContent;
+    const footerResponse = await fetch('footer.html');
+    if (!footerResponse.ok) throw new Error('Footer not loaded');
+    const footerContent = await footerResponse.text();
+    document.getElementById('footer-container').innerHTML = footerContent;
 
-        // Fetch and display the book details
-        fetchBookDetails();
-      } catch (error) {
-        console.error('Error loading dynamic content:', error);
-      }
-    }
+    // Fetch and display the book details
+    fetchBookDetails();
+  } catch (error) {
+    console.error('Error loading dynamic content:', error);
+  }
+}
 
-    async function fetchBookDetails() {
+// Modified fetchBookDetails function (unchanged from previous)
+async function fetchBookDetails() {
   const urlParams = new URLSearchParams(window.location.search);
   const isbn = urlParams.get('ISBN');
 
@@ -241,66 +242,18 @@
   }
 }
 
-
-    async function fetchBookDescription(isbn, coverPhoto) {
+// Modified fetchProfile function: Now waits for DOMContentLoaded and only triggers on button click
+async function fetchProfile() {
+  const userEmail = sessionStorage.getItem('userEmail');
+  
+  if (userEmail) {
+    // Fetch profile details only if they are not already available
+    const isProfileIncomplete = !sessionStorage.getItem('prn_no') ||
+                                !sessionStorage.getItem('roll_no') ||
+                                !sessionStorage.getItem('branch');
+    if (isProfileIncomplete) {
       try {
-        const descriptionResponse = await fetch('description.json');
-        const descriptions = await descriptionResponse.json();
-
-        const bookDescription = descriptions.find(desc => desc.ISBN === isbn);
-
-        if (bookDescription) {
-          const descriptionDiv = document.getElementById('description');
-          descriptionDiv.innerHTML = `
-            <div class="description">
-              <h2>Description</h2>
-              ${bookDescription.description.map(paragraph => `<p>${paragraph}</p>`).join('')}
-            </div>
-          `;
-
-          const imageViewer = document.getElementById('image-viewer');
-          const images = [coverPhoto, ...(bookDescription.images || [])]; // Load cover + sample images
-          imageViewer.innerHTML = images
-            .map(img => `<img src="${img}" alt="Book Image">`)
-            .join('');
-        }
-      } catch (error) {
-        console.error('Error fetching or processing description:', error);
-      }
-    }
-
-    function displayBookDetails(book) {
-      const bookInfo = document.getElementById('book-info');
-      bookInfo.innerHTML = `
-        <div class="book-details">
-          <div class="details">
-            <h1>${book.BookName}</h1>
-            <p><strong>Author:</strong> ${book.Author}</p>
-            <p><strong>Year:</strong> ${book.year}</p>
-          </div>
-        </div>
-      `;
-
-      // Add event listener for "Access this Book" button
-      document.getElementById('access-pdf').addEventListener('click', async () => {
-        await fetchProfileAndRedirect(book.ISBN);
-      });
-    }
-
-    function displayError(message) {
-      const errorMessage = document.getElementById('error-message');
-      errorMessage.textContent = message;
-      errorMessage.style.color = 'red';
-
-      // Hide left and right sections
-      document.getElementById('left-section').style.display = 'none';
-      document.getElementById('right-section').style.display = 'none';
-    }
-
-    // Fetch user profile and save additional fields to sessionStorage
-    async function fetchProfile(email) {
-      try {
-        const response = await fetch(`https://central-library.onrender.com/getProfile?email_id=${email}`);
+        const response = await fetch(`https://central-library.onrender.com/getProfile?email_id=${userEmail}`);
         const data = await response.json();
 
         if (data.error) {
@@ -316,22 +269,10 @@
         console.error('Error fetching profile:', error);
       }
     }
-
-    document.addEventListener('DOMContentLoaded', async () => {
-  const userEmail = sessionStorage.getItem('userEmail');
-  
-  if (userEmail) {
-    // Fetch profile details only if they are not already available
-    const isProfileIncomplete = !sessionStorage.getItem('prn_no') ||
-                                !sessionStorage.getItem('roll_no') ||
-                                !sessionStorage.getItem('branch');
-    if (isProfileIncomplete) {
-      await fetchProfile(userEmail);
-    }
   }
-});
+}
 
-// Triggered on button click or other actions
+// Triggered when the "Access this Book" button is clicked
 async function fetchProfileAndRedirect(isbn) {
   const userEmail = sessionStorage.getItem('userEmail');
 
@@ -348,6 +289,14 @@ async function fetchProfileAndRedirect(isbn) {
   }
 }
 
+// Button event listener
+document.getElementById('access-pdf').addEventListener('click', async () => {
+  await fetchProfile(); // Ensure the profile is fetched first if it's incomplete
+  const isbn = new URLSearchParams(window.location.search).get('ISBN');
+  if (isbn) {
+    await fetchProfileAndRedirect(isbn); // Redirect after profile is checked
+  }
+});
 
   </script>
 </body>
