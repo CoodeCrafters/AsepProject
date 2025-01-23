@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Library Login</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyD2UawbUSvZgheQ89kQT9FvL-UZfu1UxZo",
+        authDomain: "asep-project-f4b23.firebaseapp.com",
+        projectId: "asep-project-f4b23",
+        storageBucket: "asep-project-f4b23.appspot.com",
+        messagingSenderId: "404098472129",
+        appId: "1:404098472129:web:2eaa5d9240f8d732d59c40",
+        measurementId: "G-580RFQEW5V",
+      };
+
+      const app = firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const provider = new firebase.auth.GoogleAuthProvider();
+
+      function handleGoogleLogin() {
+        auth
+          .signInWithPopup(provider)
+          .then((result) => {
+            const user = result.user;
+            const email = user.email;
+
+            sessionStorage.setItem("userEmail", email);
+
+            const allowedDomain = "vit.edu";
+            if (email.split("@")[1] === allowedDomain) {
+              user.getIdToken().then((token) => {
+                localStorage.setItem("userToken", token);
+                window.location.href = "./Home.html";
+              });
+            } else {
+              alert("Only users with the '@vit.edu' domain are allowed to log in.");
+              auth.signOut();
+            }
+          })
+          .catch((error) => {
+            alert("Login failed. Please try again.");
+            console.error("Login failed:", error.message);
+          });
+      }
+    </script>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: url('vit.webp') no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        color: #333;
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: -1;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        max-width: 600px;
+        text-align: center;
+      }
+
+      .login {
+        margin-bottom: 30px;
+      }
+
+      .login h1 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        color: var(--blue);
+      }
+
+      .login p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+        color: var(--gray);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #fff;
+        background: #db4437;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.3s, background 0.3s;
+      }
+
+      .btn:hover {
+        transform: scale(1.05);
+        background: #b53229;
+      }
+
+      .btn i {
+        margin-right: 10px;
+        font-size: 1.2rem;
+      }
+
+      .testimonials {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .testimonials h2 {
+        font-size: 1.8rem;
+        color: var(--primary);
+        margin-bottom: 20px;
+      }
+
+      .testimonial {
+        font-size: 1rem;
+        color: #555;
+        font-style: italic;
+        display: none;
+        animation: fadeIn 1s forwards;
+      }
+
+      .testimonial.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .reviewer {
+        margin-top: 10px;
+        font-weight: bold;
+        color: var(--gray-dark);
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+
+        .login h1 {
+          font-size: 1.5rem;
+        }
+
+        .btn {
+          font-size: 0.9rem;
+        }
+
+        .testimonials h2 {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="login">
+        <h1>Welcome Back!</h1>
+        <p>Sign in with your Google account to access your library dashboard.</p>
+        <button class="btn" onclick="handleGoogleLogin()">
+          <i class='bx bxl-google'></i> Login with Google
+        </button>
+      </div>
+      <div class="testimonials">
+        <h2>What Our Learners Say</h2>
+        <div class="testimonial active">
+          "The library resources are amazing and easily accessible. Highly recommended!"<br />
+          <span class="reviewer">- John Doe</span>
+        </div>
+        <div class="testimonial">
+          "A great place for knowledge seekers. The e-library is top-notch."<br />
+          <span class="reviewer">- Jane Smith</span>
+        </div>
+        <div class="testimonial">
+          "The best part of our college experience is this incredible e-library!"<br />
+          <span class="reviewer">- Emily Clark</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const testimonials = document.querySelectorAll('.testimonial');
+      let index = 0;
+      setInterval(() => {
+        testimonials[index].classList.remove('active');
+        index = (index + 1) % testimonials.length;
+        testimonials[index].classList.add('active');
+      }, 5000);
+    </script>
+  </body>
+</html>
