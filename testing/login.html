@@ -75,188 +75,202 @@
 
       // Add logout logic if necessary (optional)
     </script>
-    <style>
-      /* Styling: Same as before, no changes. */
-      body {
-        font-family: 'Poppins', sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background: linear-gradient(135deg, #89f7fe, #66a6ff);
+   <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: url('./vit.webp') no-repeat center center/cover;
+      position: relative;
+    }
+  
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+  
+    .container {
+      display: flex;
+      width: 90%;
+      max-width: 1200px;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      animation: fadeIn 1s ease-in-out;
+      position: relative;
+      z-index: 2;
+    }
+  
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
       }
-
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+    .left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: rgba(240, 248, 255, 0.9);
+      padding: 30px;
+      text-align: center;
+    }
+  
+    .left img {
+      width: 80%;
+      max-width: 400px;
+      animation: bounce 2s infinite;
+    }
+  
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-10px);
+      }
+      60% {
+        transform: translateY(-5px);
+      }
+    }
+  
+    .left h2 {
+      font-size: 30px;
+      margin-top: 20px;
+      color: #333;
+      font-weight: 700;
+    }
+  
+    .left p {
+      font-size: 16px;
+      color: #555;
+      margin-top: 10px;
+      font-style: italic;
+    }
+  
+    .right {
+      flex: 1;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+  
+    .right h1 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 32px;
+      font-weight: 600;
+    }
+  
+    .input-box {
+      margin: 15px 0;
+    }
+  
+    .input-box input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      background: #f9f9f9;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+      transition: border 0.3s;
+    }
+  
+    .input-box input:focus {
+      border-color: #66a6ff;
+      outline: none;
+    }
+  
+    .btn {
+      width: 100%;
+      padding: 14px;
+      margin: 15px 0;
+      font-size: 18px;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s ease;
+    }
+  
+    .btn:hover {
+      transform: scale(1.05);
+    }
+  
+    .btn.google-login {
+      background-color: #db4437;
+    }
+  
+    .btn.google-login:hover {
+      background-color: #b53229;
+    }
+  
+    .btn.default {
+      background-color: #007bff;
+    }
+  
+    .btn.default:hover {
+      background-color: #0056b3;
+    }
+  
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+    }
+  
+    .register-link p {
+      font-size: 14px;
+    }
+  
+    .register-link a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+  
+    @media (max-width: 768px) {
       .container {
-        display: flex;
-        width: 90%;
-        max-width: 1200px;
-        background: #ffffff;
-        border-radius: 20px;
-        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
-        overflow: hidden;
-        animation: fadeIn 1s ease-in-out;
+        flex-direction: column;
+        height: auto;
       }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
+  
       .left {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background: #f0f8ff;
-        padding: 30px;
-        text-align: center;
+        padding: 20px;
       }
-
-      .left img {
-        width: 80%;
-        max-width: 400px;
-        animation: bounce 2s infinite;
-      }
-
-      @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% {
-          transform: translateY(0);
-        }
-        40% {
-          transform: translateY(-10px);
-        }
-        60% {
-          transform: translateY(-5px);
-        }
-      }
-
-      .left h2 {
-        font-size: 30px;
-        margin-top: 20px;
-        color: #333;
-        font-weight: 700;
-      }
-
-      .left p {
-        font-size: 16px;
-        color: #555;
-        margin-top: 10px;
-        font-style: italic;
-      }
-
+  
       .right {
-        flex: 1;
-        padding: 50px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
+        padding: 20px;
       }
-
-      .right h1 {
-        margin-bottom: 20px;
-        color: #333;
-        font-size: 32px;
-        font-weight: 600;
-      }
-
-      .input-box {
-        margin: 15px 0;
-      }
-
-      .input-box input {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        font-size: 16px;
-        background: #f9f9f9;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-        transition: border 0.3s;
-      }
-
-      .input-box input:focus {
-        border-color: #66a6ff;
-        outline: none;
-      }
-
-      .btn {
-        width: 100%;
-        padding: 14px;
-        margin: 15px 0;
-        font-size: 18px;
-        color: #fff;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: transform 0.3s, background 0.3s ease;
-      }
-
-      .btn:hover {
-        transform: scale(1.05);
-      }
-
-      .btn.google-login {
-        background-color: #db4437;
-      }
-
-      .btn.google-login:hover {
-        background-color: #b53229;
-      }
-
-      .btn.default {
-        background-color: #007bff;
-      }
-
-      .btn.default:hover {
-        background-color: #0056b3;
-      }
-
-      .remember-forgot {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 14px;
-      }
-
-      .register-link p {
-        font-size: 14px;
-      }
-
-      .register-link a {
-        color: #007bff;
-        text-decoration: none;
-        font-weight: bold;
-      }
-
-      .register-link a:hover {
-        text-decoration: underline;
-      }
-
-      @media (max-width: 768px) {
-        .container {
-          flex-direction: column;
-          height: auto;
-        }
-
-        .left {
-          padding: 20px;
-        }
-
-        .right {
-          padding: 20px;
-        }
-      }
-    </style>
+    }
+  </style>
+  
   </head>
   <body>
     <div class="container">
