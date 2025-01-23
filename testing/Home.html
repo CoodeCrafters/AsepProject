@@ -630,18 +630,31 @@ footer {
   <script>
     let resourceData = [];
 
-// Fetch resource data from JSON
+// Fetch resource data from both JSON files
 async function fetchResourceData() {
   try {
-    const response = await fetch('resources.json');
-    if (!response.ok) throw new Error('Failed to load resources');
-    resourceData = await response.json();
+    const [response1, response2] = await Promise.all([
+      fetch('resources.json'),
+      fetch('resources1.json')
+    ]);
+
+    if (!response1.ok) throw new Error('Failed to load resources.json');
+    if (!response2.ok) throw new Error('Failed to load resources1.json');
+    
+    const data1 = await response1.json();
+    const data2 = await response2.json();
+
+    // Combine data from both JSON files
+    resourceData = [...data1, ...data2];
+    
     console.log('Resources loaded:', resourceData); // Debugging purpose
   } catch (error) {
     console.error('Error loading resource data:', error);
   }
 }
+
 fetchResourceData();
+
 
 document.addEventListener('DOMContentLoaded', () => {
   // Event Listener for Search Input
