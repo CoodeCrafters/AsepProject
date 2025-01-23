@@ -278,17 +278,35 @@ async function loadDynamicContent() {
   }
 }
 
-// Fetch resource data from JSON
 async function fetchResourceData() {
   try {
-    const response = await fetch('resources.json');
-    if (!response.ok) throw new Error('Failed to load resources');
-    resourceData = await response.json();
+    // Fetch resources from both JSON files
+    const [response1, response2] = await Promise.all([
+      fetch('resources.json'),
+      fetch('resources1.json')
+    ]);
+
+    // Check if both responses are OK
+    if (!response1.ok) throw new Error('Failed to load resources from resources.json');
+    if (!response2.ok) throw new Error('Failed to load resources from resources1.json');
+    
+    // Parse both JSON responses
+    const data1 = await response1.json();
+    const data2 = await response2.json();
+    
+    // Combine data from both sources
+    resourceData = [...data1, ...data2];
+    
+    // After fetching data, load books
     loadBooks();  // Load books after data is fetched
+    console.log('Resources loaded:', resourceData); // Debugging purpose
   } catch (error) {
     console.error('Error loading resource data:', error);
   }
 }
+
+// Call the function to fetch resource data
+fetchResourceData();
 
 // Get domain from URL params
 function getDomainFromURL() {
