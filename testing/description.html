@@ -189,41 +189,58 @@
     }
 
     async function fetchBookDetails() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const isbn = urlParams.get('ISBN');
+  const urlParams = new URLSearchParams(window.location.search);
+  const isbn = urlParams.get('ISBN');
 
-      if (!isbn) {
-        displayError('No ISBN number provided in the URL.');
-        return;
-      }
+  if (!isbn) {
+    displayError('No ISBN number provided in the URL.');
+    return;
+  }
 
-      try {
-        const resourcesResponse = await fetch('resources.json');
-        const resources = await resourcesResponse.json();
+  try {
+    // Fetch data from both resources.json and resources1.json
+    const [resourcesResponse1, resourcesResponse2] = await Promise.all([
+      fetch('resources.json'),
+      fetch('resources1.json')
+    ]);
 
-        let bookFound = null;
+    // Check if both responses are OK
+    if (!resourcesResponse1.ok) throw new Error('Failed to load resources from resources.json');
+    if (!resourcesResponse2.ok) throw new Error('Failed to load resources from resources1.json');
+    
+    // Parse both JSON responses
+    const resources1 = await resourcesResponse1.json();
+    const resources2 = await resourcesResponse2.json();
 
-        for (const domain of resources) {
-          for (const book of domain.books) {
-            if (book.ISBN === isbn) {
-              bookFound = book;
-              break;
-            }
-          }
-          if (bookFound) break;
+    // Combine data from both resources
+    const allResources = [...resources1, ...resources2];
+
+    let bookFound = null;
+
+    // Search through both resources
+    for (const domain of allResources) {
+      for (const book of domain.books) {
+        if (book.ISBN === isbn) {
+          bookFound = book;
+          break;
         }
-
-        if (bookFound) {
-          displayBookDetails(bookFound);
-          fetchBookDescription(isbn, bookFound.bookCover);
-        } else {
-          displayError('The book which you are searching is unavailable, Please make sure the ISBN no in the URL is correctly mentioned. Otherwise, contact with the administration department.');
-        }
-      } catch (error) {
-        console.error('Error fetching or processing resources:', error);
-        displayError('An error occurred while fetching the book details. Please try again later.');
       }
+      if (bookFound) break;
     }
+
+    // Display the book details if found, otherwise show an error
+    if (bookFound) {
+      displayBookDetails(bookFound);
+      fetchBookDescription(isbn, bookFound.bookCover);
+    } else {
+      displayError('The book which you are searching is unavailable, Please make sure the ISBN no in the URL is correctly mentioned. Otherwise, contact with the administration department.');
+    }
+  } catch (error) {
+    console.error('Error fetching or processing resources:', error);
+    displayError('An error occurred while fetching the book details. Please try again later.');
+  }
+}
+
 
     async function fetchBookDescription(isbn, coverPhoto) {
       try {
