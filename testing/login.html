@@ -271,11 +271,64 @@
         padding: 20px;
       }
     }
+
+    /* Header Container */
+.header {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #ffffff; /* Background for header */
+  margin-bottom: 20px;
+  border: 3px solid transparent; /* Initially transparent border */
+  border-radius: 10px; /* Optional: gives rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 255, 0.3); /* Blue shadow effect */
+}
+
+/* Logo Image */
+.header img {
+  width: 100%;
+  max-width: 543px;
+  height: auto;
+}
+
+/* Heading with Comic Sans MS font, glowing effect, and shadow */
+.header h1 {
+  font-size: 36px;
+  color: #333;
+  margin-top: 10px;
+  font-weight: 700;
+  font-family: 'Comic Sans MS', cursive, sans-serif; /* Comic Sans font */
+  text-shadow: 0 0 10px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue; /* Glowing blue text */
+  transition: text-shadow 0.3s ease-in-out;
+}
+
+/* Glowing effect on hover for header text */
+.header h1:hover {
+  text-shadow: 0 0 20px blue, 0 0 40px blue, 0 0 60px blue, 0 0 80px blue;
+}
+
   </style>
   
   </head>
   <body>
     <div class="container">
+
+      <div class="header">
+        <!-- Image logo -->
+        <img 
+          width="543" 
+          height="137" 
+          src="https://www.vit.edu/wp-content/uploads/2024/09/Group-148284.webp" 
+          class="neve-site-logo skip-lazy" 
+          alt="VIT Logo" 
+          data-variant="logo" 
+          decoding="async" 
+          fetchpriority="high" 
+          srcset="https://www.vit.edu/wp-content/uploads/2024/09/Group-148284.webp 543w, https://www.vit.edu/wp-content/uploads/2024/09/Group-148284-300x76.webp 300w" 
+          sizes="(max-width: 543px) 100vw, 543px">
+        
+        <!-- Heading for Central E Library -->
+        <h1>Central E Library</h1>
+      </div>
       <div class="left">
       
         <h2>Welcome VITiaans !</h2>
