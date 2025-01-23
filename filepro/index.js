@@ -8,6 +8,8 @@ const { PDFDocument, rgb, degrees } = require('pdf-lib'); // Import PDF-Lib for 
 const fetch = require('node-fetch'); // For fetching the PDF
 require('dotenv').config();
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
 
 // Initialize Express app
 const app = express();
