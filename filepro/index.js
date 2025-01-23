@@ -226,24 +226,34 @@ app.get('/getfetchdata', async (req, res) => {
       return res.status(400).send({ error: 'Both ISBN and PRN number are required' });
     }
 
+    console.log("ISBN:", isbn);
+    console.log("PRN No:", prn_no);
+
     // Fetch profile data based on prn_no
     const profile = await Profile.findOne({ prn_no });
     if (!profile) {
+      console.log('Profile not found');
       return res.status(404).send({ error: 'Profile not found' });
     }
+
+    console.log('Profile found:', profile);
 
     // Fetch library view (PDF link) based on the given ISBN
     const libraryView = await LibraryView.findOne({ isbn });
     if (!libraryView) {
+      console.log('Library view not found for ISBN:', isbn);
       return res.status(404).send({ error: 'Library view not found for the given ISBN' });
     }
 
+    console.log('Library view found:', libraryView);
+
     // Directly use the pdf_link stored in the database (no decoding needed)
-    const pdfUrl = libraryView.pdf_link; // Just use it directly
+    const pdfUrl = libraryView.pdf_link;
 
     // Fetch the PDF file
     const response = await fetch(pdfUrl);
     if (!response.ok) {
+      console.log('Failed to fetch the PDF file');
       return res.status(500).send({ error: 'Failed to fetch the PDF file' });
     }
     const pdfBytes = await response.arrayBuffer();
@@ -253,10 +263,10 @@ app.get('/getfetchdata', async (req, res) => {
     const pages = pdfDoc.getPages();
     const watermarkText = prn_no; // Use PRN number as watermark text
 
-    // Load the Comic Sans font
-    const fontPath = path.join(__dirname, 'testing', 'COMIC.TTF'); // Path to the Comic Sans font file
-    const fontBytes = fs.readFileSync(fontPath); // Read font file
-    const font = await pdfDoc.embedFont(fontBytes);
+    // Use the default font from pdf-lib (no specific font file)
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+    console.log('Default font loaded successfully');
 
     // Calculate watermark position and size based on page size and max PRN count
     const watermarkOptions = {
@@ -311,6 +321,8 @@ app.get('/getfetchdata', async (req, res) => {
     res.status(500).send({ error: 'Internal server error' });
   }
 });
+
+
 
 // Start the server
 app.listen(PORT, () => {
