@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
-const { PDFDocument, rgb, degrees } = require('pdf-lib'); // Import PDF-Lib for PDF manipulation
+const { PDFDocument, rgb, degrees, StandardFonts } = require('pdf-lib'); // Import PDF-Lib for PDF manipulation
 const fetch = require('node-fetch'); // For fetching the PDF
 require('dotenv').config();
 const crypto = require('crypto');
@@ -226,26 +226,19 @@ app.get('/getfetchdata', async (req, res) => {
       return res.status(400).send({ error: 'Both ISBN and PRN number are required' });
     }
 
-    console.log("ISBN:", isbn);
-    console.log("PRN No:", prn_no);
-
     // Fetch profile data based on prn_no
     const profile = await Profile.findOne({ prn_no });
     if (!profile) {
-      console.log('Profile not found');
       return res.status(404).send({ error: 'Profile not found' });
     }
 
-    console.log('Profile found:', profile);
 
     // Fetch library view (PDF link) based on the given ISBN
     const libraryView = await LibraryView.findOne({ isbn });
     if (!libraryView) {
-      console.log('Library view not found for ISBN:', isbn);
       return res.status(404).send({ error: 'Library view not found for the given ISBN' });
     }
 
-    console.log('Library view found:', libraryView);
 
     // Directly use the pdf_link stored in the database (no decoding needed)
     const pdfUrl = libraryView.pdf_link;
@@ -265,8 +258,6 @@ app.get('/getfetchdata', async (req, res) => {
 
     // Use the default font from pdf-lib (no specific font file)
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-
-    console.log('Default font loaded successfully');
 
     // Calculate watermark position and size based on page size and max PRN count
     const watermarkOptions = {
