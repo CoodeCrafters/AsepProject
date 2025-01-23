@@ -87,8 +87,9 @@
       height: 100vh;
       background: url('./image.webp') no-repeat center center/cover;
       position: relative;
+      flex-direction: column; /* Align content vertically */
     }
-  
+
     body::before {
       content: '';
       position: absolute;
@@ -100,34 +101,33 @@
       z-index: 1;
     }
 
-    /* Header Container */
+    /* Header Container - Align Image and Text */
     .header {
-      text-align: center;
-      padding: 40px 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; /* Align content horizontally */
+      padding: 20px;
       background-color: #ffffff; /* Background for header */
-      margin-bottom: 20px;
-      border: 3px solid transparent; /* Initially transparent border */
-      border-radius: 10px; /* Optional: gives rounded corners */
-      box-shadow: 0 4px 10px rgba(0, 0, 255, 0.3); /* Blue shadow effect */
+      width: 100%;
       z-index: 2;
       position: relative;
+      box-shadow: 0 4px 10px rgba(0, 0, 255, 0.3); /* Blue shadow effect */
     }
 
-    /* Logo Image */
     .header img {
       width: 100%;
-      max-width: 543px;
+      max-width: 200px; /* Fixed size for logo */
       height: auto;
     }
 
-    /* Heading with Comic Sans MS font, glowing effect, and shadow */
+    /* Heading for "Central E Library" */
     .header h1 {
+      margin-left: 20px;
       font-size: 36px;
       color: #333;
-      margin-top: 10px;
       font-weight: 700;
-      font-family: 'Comic Sans MS', cursive, sans-serif; /* Comic Sans font */
-      text-shadow: 0 0 10px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue; /* Glowing blue text */
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-shadow: 0 0 10px blue, 0 0 20px blue, 0 0 30px blue, 0 0 40px blue;
       transition: text-shadow 0.3s ease-in-out;
     }
 
@@ -306,47 +306,44 @@
       .right {
         padding: 20px;
       }
+
+      .header h1 {
+        font-size: 28px; /* Adjust font size for smaller screens */
+      }
     }
   </style>
   
   </head>
   <body>
 
-    <!-- Header Section Outside of the Container -->
-    <div class="header">
-      <img 
-        width="543" 
-        height="137" 
-        src="https://www.vit.edu/wp-content/uploads/2024/09/Group-148284.webp" 
-        class="neve-site-logo skip-lazy" 
-        alt="VIT Logo" 
-        data-variant="logo" 
-        decoding="async" 
-        fetchpriority="high" 
-        srcset="https://www.vit.edu/wp-content/uploads/2024/09/Group-148284.webp 543w, https://www.vit.edu/wp-content/uploads/2024/09/Group-148284-300x76.webp 300w" 
-        sizes="(max-width: 543px) 100vw, 543px">
-      <h1>Central E Library</h1>
+   <!-- Header Section -->
+   <div class="header">
+    <img 
+      width="200" 
+      height="auto" 
+      src="https://www.vit.edu/wp-content/uploads/2024/09/Group-148284.webp" 
+      alt="VIT Logo">
+    <h1>Central E Library</h1>
+  </div>
+
+  <!-- Main Content Section (The container with left and right sections) -->
+  <div class="container">
+    <div class="left">
+      <h2>Welcome VITiaans !</h2>
+      <p>
+        Unlock your potential with the vast resources available at our library. Whether you're diving into research, preparing for exams, or exploring new interests, the library is your gateway to knowledge and innovation. 
+      </p>
+      <p>
+        Make the most of this treasure trove of books, journals, and digital tools designed to help you succeed. Visit today and discover a world of opportunities waiting for you!
+      </p>
     </div>
-  
-    <!-- Main Content Section (The container with left and right sections) -->
-    <div class="container">
-      <div class="left">
-        <h2>Welcome VITiaans !</h2>
-        <p>
-          Unlock your potential with the vast resources available at our library. Whether you're diving into research, preparing for exams, or exploring new interests, the library is your gateway to knowledge and innovation. 
-        </p>
-        <p>
-          Make the most of this treasure trove of books, journals, and digital tools designed to help you succeed. Visit today and discover a world of opportunities waiting for you!
-        </p>
-      </div>
-  
-      <div class="right">
-        <h1>Login to Our Library 💕</h1>
-        <button type="button" class="btn google-login" onclick="handleGoogleLogin()">
-          <i class='bx bxl-google'></i> Login with Google
-        </button>
-      </div>
+
+    <div class="right">
+      <h1>Login to Our Library 💕</h1>
+      <button type="button" class="btn google-login" onclick="handleGoogleLogin()">
+        <i class='bx bxl-google'></i> Login with Google
+      </button>
     </div>
-  
+  </div>
   </body>
 </html>
