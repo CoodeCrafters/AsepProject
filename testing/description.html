@@ -173,8 +173,8 @@
   try {
     const [menuResponse, footerResponse] = await Promise.all([
       fetch('menu.html'),
-      fetch('footer.html'),
-      fetchProfile() // This runs in parallel with the menu and footer fetches
+      fetch('footer.html')
+     
     ]);
 
     if (!menuResponse.ok) throw new Error('Menu not loaded');
@@ -301,36 +301,6 @@
       document.getElementById('left-section').style.display = 'none';
       document.getElementById('right-section').style.display = 'none';
     }
-
-    // Fetch user profile and save additional fields to sessionStorage
-    async function fetchProfile() {
-  const userEmail = sessionStorage.getItem('userEmail');
-  
-  if (userEmail) {
-    // Fetch profile details only if they are not already available
-    const isProfileIncomplete = !sessionStorage.getItem('prn_no') ||
-                                !sessionStorage.getItem('roll_no') ||
-                                !sessionStorage.getItem('branch');
-    if (isProfileIncomplete) {
-      try {
-        const response = await fetch(`https://central-library.onrender.com/getProfile?email_id=${userEmail}`);
-        const data = await response.json();
-
-        if (data.error) {
-          console.log('Profile not found or error fetching.');
-          return;
-        }
-
-        // Save additional profile data (prn_no, roll_no, branch) to sessionStorage
-        sessionStorage.setItem('prn_no', data.prn_no);
-        sessionStorage.setItem('roll_no', data.roll_no);
-        sessionStorage.setItem('branch', data.branch);
-      } catch (error) {
-        console.error('Error fetching profile:', error);
-      }
-    }
-  }
-}
 
 // Triggered on button click or other actions
 async function fetchProfileAndRedirect(isbn) {
