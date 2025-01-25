@@ -59,13 +59,36 @@
       0% { transform: translate(-50%, -50%) rotate(0deg); }
       100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
+
+    /* Styling for the loading container */
+.loading-container {
+  position: relative;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #333;
+  margin-top: 100px; /* Adjust as needed */
+}
+
+/* Styling for the loading text */
+.loading-text {
+  margin-top: 70px; /* Adjust to avoid overlapping with spinner */
+  font-size: 16px;
+  line-height: 1.5;
+  color: #555;
+}
   </style>
 </head>
 <body>
   <div id="menu-container"></div>
   <div id="viewerContainer">
     <!-- Loading spinner -->
-    <div id="loadingSpinner" class="loading-spinner"></div>
+    <div class="loading-container">
+  <div class="loading-spinner"></div>
+  <p class="loading-text">
+    Please, wait for a while. It usually takes time to load depending on the PDF file size or the number of pages it contains.
+  </p>
+</div>
+
 
     <iframe id="pdfViewerIframe" title="PDF Viewer" oncontextmenu="return false;" style="display: none;"></iframe>
   </div>
