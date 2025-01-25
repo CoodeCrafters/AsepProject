@@ -79,7 +79,7 @@ body {
 .content {
   flex: 1; /* Ensures it expands to push the footer down */
 }
-    
+
     /* General Footer Styling */
 /* Footer styles */
 footer {
@@ -88,7 +88,7 @@ footer {
   padding: 40px 20px;
   font-family: 'Arial', sans-serif;
   animation: fadeIn 1.5s ease-in-out;
-  text-align: center;
+ 
 }
 
 .footer-container {
