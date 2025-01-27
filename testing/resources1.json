@@ -170,6 +170,13 @@
         "ISBN": "9781617295980",
         "year": 2019,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers400/collections/genesis/ed7651235f6751ae83cebef5d7295df5bc1e9246f67aa233f18fb07e0631db19.jpg"
+      },
+      {
+        "BookName": "Think Python: How to Think Like a Computer Scientist",
+        "Author": "Allen B. Downey",
+        "ISBN": "9781491939369",
+        "year": 2015,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers400/collections/genesis/b4a1a2c3e4b860626faaa1648090fbd44404d5c893e81797ed129c72bc3f183f.jpg"
       }
     ]
   },
