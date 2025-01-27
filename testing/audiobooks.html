@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Book</title>
+  <link rel="stylesheet" href="./headerfooter.css">
+  <script src="headerfooter.js" defer></script>
+  <script src="hard.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+
+    .carousel-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 50px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 20px;
+      padding: 20px 10px;
+    }
+
+    .carousel-item {
+      flex: 0 0 auto;
+      width: 250px;
+      height: 300px;
+      scroll-snap-align: center;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #e6e6e6, #ffffff);
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .carousel-item:hover {
+      transform: scale(1.05);
+      box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .carousel-item h3 {
+      font-size: 1.5rem;
+      color: #333;
+      margin: 10px 0;
+    }
+
+    .carousel-item p {
+      font-size: 1rem;
+      color: #777;
+    }
+
+    .carousel-item[data-domain="Fiction"] {
+      background: linear-gradient(145deg, #ffecd2, #fcb69f);
+    }
+
+    .carousel-item[data-domain="Poetry"] {
+      background: linear-gradient(145deg, #d4fc79, #96e6a1);
+    }
+
+    .carousel-item[data-domain="Non-Fiction"] {
+      background: linear-gradient(145deg, #a18cd1, #fbc2eb);
+    }
+
+    .carousel-title {
+      font-size: 2rem;
+      color: #444;
+      margin-bottom: 20px;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+
+  <!-- Carousel Section -->
+  <div class="carousel-container">
+    <h2 class="carousel-title">Select Your Audio Book Domain</h2>
+    <div class="carousel">
+      <div class="carousel-item" data-domain="Fiction" onclick="redirectToDetails('Fiction')">
+        <h3>Fiction</h3>
+        <p>Explore imaginative stories</p>
+      </div>
+      <div class="carousel-item" data-domain="Poetry" onclick="redirectToDetails('Poetry')">
+        <h3>Poetry</h3>
+        <p>Delve into lyrical expressions</p>
+      </div>
+      <div class="carousel-item" data-domain="Non-Fiction" onclick="redirectToDetails('Non-Fiction')">
+        <h3>Non-Fiction</h3>
+        <p>Discover factual narratives</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer dynamically loaded -->
+  <div id="footer-container"></div>
+
+  <script>
+    async function loadDynamicContent() {
+      try {
+        const menuResponse = await fetch('menu.html');
+        if (!menuResponse.ok) throw new Error('Menu not loaded');
+        const menuContent = await menuResponse.text();
+        document.getElementById('menu-container').innerHTML = menuContent;
+
+        const footerResponse = await fetch('footer.html');
+        if (!footerResponse.ok) throw new Error('Footer not loaded');
+        const footerContent = await footerResponse.text();
+        document.getElementById('footer-container').innerHTML = footerContent;
+      } catch (error) {
+        console.error('Error loading dynamic content:', error);
+      }
+    }
+
+    function redirectToDetails(domain) {
+      window.location.href = `./audio-bookdetails.html?domain=${domain}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', loadDynamicContent);
+  </script>
+</body>
+</html>
