@@ -214,6 +214,9 @@ window.addEventListener('DOMContentLoaded', populateDomainDropdown);
           <option value="" disabled selected>Select a domain</option>
         </select>
         
+        <label for="id">ID:</label>
+        <input type="text" id="id" oninput="fetchSuggestions()" placeholder="Enter ID for suggestions">
+
 
         <label for="audioBookTitle">Title of Audio Book:</label>
         <input type="text" id="audioBookTitle" required>
