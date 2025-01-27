@@ -1,4 +1,6 @@
-{
+[
+    {
+    
     "domain": "Poetry",
     "entries": [
         {
@@ -522,4 +524,1076 @@
             "id": "89652597-7128-4275-9cea-72e7a6ef5a40"
           }
     ]
-}
+   },
+    {
+    "domain": "Fiction",
+    "entries": [
+        {
+            "author": "Aristo­phanes",
+            "title": "Lysis­tra­ta (per­formed by Lucy Law­less)",
+            "id": "a64eb6d8-757b-48c7-94ae-c3724fc9ba0d"
+          },
+          {
+            "author": "Asi­mov, Isaac",
+            "title": "“Night­fall”",
+            "id": "aa9ebc74-6507-4b14-a042-3801041d7b1d"
+          },
+          {
+            "author": "Asi­mov, Isaac",
+            "title": "Free Stream",
+            "id": "ced97c7d-7784-4d29-baa2-8abfe540cae1"
+          },
+          {
+            "author": "Atwood, Mar­garet",
+            "title": "“Stone Mat­tress”",
+            "id": "117bc881-0b2d-40ee-b4a4-23d58759ab0e"
+          },
+          {
+            "author": "Auster, Paul",
+            "title": "Free Stream",
+            "id": "bfed8392-5086-42f1-ba58-36cae133d9fb"
+          },
+          {
+            "author": "Auster, Pau",
+            "title": "Free MP3",
+            "id": "639ddca7-973c-495d-8151-ff02d2e494da"
+          },
+          {
+            "author": "Babel, Isaac",
+            "title": "Free MP3",
+            "id": "a7a08fc3-d527-45f8-8624-baa6c7fb2753"
+          },
+          {
+            "author": "Babel, Isaac",
+            "title": "“You Must Know Every­thing”",
+            "id": "ad099b84-8fc7-47f1-9333-437704e231be"
+          },
+          {
+            "author": "Bal­lard, JG",
+            "title": "“Track 12” and “Venus Smiles”",
+            "id": "270f72a1-e068-4ece-9a39-da5d32a7d3be"
+          },
+          {
+            "author": "Bal­lard, JG",
+            "title": "Cocaine Nights",
+            "id": "38aca59d-cf61-44a0-96b9-3d250aabc8e0"
+          },
+          {
+            "author": "Bal­lard, JG",
+            "title": "Free MP3",
+            "id": "85a0a36e-9128-4903-b02f-75ec09d6cf73"
+          },
+          {
+            "author": "Bal­lard, JG",
+            "title": "The Drowned World",
+            "id": "c3bc5c13-68b3-49ac-8e48-a75945ea61e6"
+          },
+          {
+            "author": "Bal­lard, JG",
+            "title": "“The Sto­ries of JG Bal­lard” (dra­ma­tized for radio)",
+            "id": "55fb2c35-4b97-4141-8da4-3dcc60ccdddc"
+          },
+          {
+            "author": "Balzac, Hon­oré de",
+            "title": "The Peas­ant Sto­ry of Napoleon",
+            "id": "b8aee907-9cee-44cf-832c-c2aef89029d0"
+          },
+          {
+            "author": "Bar­rie, JM",
+            "title": "Peter Pan",
+            "id": "04ceac04-1353-44e7-8e23-997a210eabdb"
+          },
+          {
+            "author": "Bar­ro­dale, Amie",
+            "title": "Free MP3",
+            "id": "e986780a-3d84-46e7-ae16-bb2196b0e931"
+          },
+          {
+            "author": "Barthelme, Don­ald",
+            "title": "“Chablis” (read by Etgar Keret)",
+            "id": "fe7aa485-ef70-4c1f-87ac-8ba05e659dce"
+          },
+          {
+            "author": "Barthelme, Don­ald -",
+            "title": "Free MP3",
+            "id": "aeb64eb1-b3d6-4b0b-bd80-62e1fe2f7415"
+          },
+          {
+            "author": "Barthelme, Don­ald",
+            "title": "Free MP3",
+            "id": "33ecd987-cdfb-462f-9b45-0b68d63a660f"
+          },
+          {
+            "author": "Barthelme, Don­ald",
+            "title": "Free Stream",
+            "id": "16abf0e4-c25a-4c94-b8f1-a2894ffa905b"
+          },
+          {
+            "author": "Barthelme, Don­ald",
+            "title": "Free Stream",
+            "id": "178d228e-d8f5-4da0-90cb-07b2102674fc"
+          },
+          {
+            "author": "Baum, Frank L.",
+            "title": "The Wiz­ard of Oz (Vol 1)",
+            "id": "21fcdbb3-98ac-4886-8443-c6da3312c230"
+          },
+          {
+            "author": "Baum, Frank L.",
+            "title": "Tik Tok of Oz (Vol 8)",
+            "id": "d4e1d2e9-d8a1-44d1-828f-6eaa053f01e3"
+          },
+          {
+            "author": "Baum, L. Frank",
+            "title": "Rinkitink in Oz (Vol 10)",
+            "id": "8ba6b7f0-89fd-4d23-bb1f-a896563fca92"
+          },
+          {
+            "author": "Baum, Frank L.",
+            "title": "The Tin Wood­man of Oz (Vol 12)",
+            "id": "4083ac2f-900f-4ae2-b782-f89490bb153f"
+          },
+          {
+            "author": "Baum, Frank L.",
+            "title": "The Mag­ic of Oz (Vol 13)",
+            "id": "0be92845-80b3-4f55-accd-b8300a78723c"
+          },
+          {
+            "author": "Baum, Frank L.",
+            "title": "Glin­da of Oz (Vol 14)",
+            "id": "2f21a8f1-7e3c-44cd-aa1a-2c04300e42be"
+          },
+          {
+            "author": "Borges, Jorge Luis",
+            "title": "Ibn Hakkan Al-Bokhari, Dead in his Labyrinth (Read by Orhan Pamuk)",
+            "id": "37ce3353-0634-493d-81f7-b2eea4a4b63a"
+          },
+          {
+            "author": "Borges, Jorge Luis",
+            "title": "Shake­speare’s Mem­o­ry",
+            "id": "8371d43e-b2aa-4459-b7da-6f55ba8d3e07"
+          },
+          {
+            "author": "Borges, Jorge Luis",
+            "title": "“The Book of Sand”",
+            "id": "bd92c96b-3bea-4593-818e-7e3a174b7b73"
+          },
+          {
+            "author": "Borges, Jorge Luis",
+            "title": "The Gospel Accord­ing to Mark (read by Paul Ther­oux)",
+            "id": "eddefe61-d499-4deb-b620-db56511ce722"
+          },
+          {
+            "author": "Brad­bury, Ray",
+            "title": "Futuria Fan­ta­sia (a sci fi short sto­ry col­lect­ed edit­ed by Ray Brad­bury)",
+            "id": "6b52ba32-c6cc-461a-bd03-c97ea22063d7"
+          },
+          {
+            "author": "Brad­bury, Ray",
+            "title": "Radio Dra­mas of Brad­bury Sto­ries",
+            "id": "2c45bd15-b149-4251-82e3-0f9943d3c9e4"
+          },
+          {
+            "author": "Brod­key, Harold",
+            "title": "“Dumb­ness is Every­thing” (read by Michael Cun­ning­ham)",
+            "id": "2cedf7da-5367-4384-a882-36b430b1476c"
+          },
+          {
+            "author": "Brod­key, Harold",
+            "title": "“Spring Fugue” (read by Jef­frey Eugenides)",
+            "id": "06c19f00-57ea-4e34-b4a6-6413209b2ae3"
+          },
+          {
+            "author": "Brod­key, Harold",
+            "title": "“The State of Grace” (read by Richard Ford )",
+            "id": "f7793d07-31f0-4352-80ba-00846d9fdfe4"
+          },
+          {
+            "author": "Bronte, Char­lotte",
+            "title": "Jane Eyre",
+            "id": "40c023b7-fbac-42bb-bb5e-3da310c0ed6a"
+          },
+          {
+            "author": "Bronte, Char­lotte",
+            "title": "The Pro­fes­sor",
+            "id": "1416f474-1ddd-45b6-875f-130c7f212199"
+          },
+          {
+            "author": "Bronte, Emi­ly",
+            "title": "Free MP3",
+            "id": "04a760b0-c19e-417c-b2da-4ee5f32aa973"
+          },
+          {
+            "author": "Calvi­no, Ita­lo",
+            "title": "Invis­i­ble Cities (excerpts read by Calvi­no)",
+            "id": "3c5af2d6-b596-495d-a03a-43f1568a3c9e"
+          },
+          {
+            "author": "Calvi­no, Ita­lo",
+            "title": "“Love Far from Home” (read by Salman Rushdie)",
+            "id": "25a0d637-44ff-4c5d-8978-15a08f79890e"
+          },
+          {
+            "author": "Calvi­no, Ita­lo",
+            "title": "The Night Dri­ver (read by Jeanette Win­ter­son)",
+            "id": "5092563e-76ce-4ad9-8c0d-2db20d9b23ca"
+          },
+          {
+            "author": "Calvi­no, Ita­lo",
+            "title": "“The Daugh­ters of the Moon” (read by Robert Coover)",
+            "id": "09b78205-e092-4d53-892b-c2efc5cd5c39"
+          },
+          {
+            "author": "Car­roll, Lewis",
+            "title": "Sylvie and Bruno",
+            "id": "9697c88f-84e3-4389-b3f3-6defe00bc63e"
+          },
+          {
+            "author": "Car­roll, Lewis",
+            "title": "Sylvie and Bruno Con­clud­ed",
+            "id": "9738e22e-b893-4bd3-8625-7b6001e09aa6"
+          },
+          {
+            "author": "Carv­er, Ray­mond",
+            "title": "“Chef’s House” (read by David Means)",
+            "id": "1fa16fa6-931a-4efa-afb0-8fc318960a3f"
+          },
+          {
+            "author": "Carv­er, Ray­mond",
+            "title": "Free MP3",
+            "id": "7547808a-9367-4487-81ce-dbbfb129e10f"
+          },
+          {
+            "author": "Carv­er, Ray­mond",
+            "title": "“The Stu­dents’ Wife (read by Richard Ford)",
+            "id": "79f4a3ca-03d8-4437-833a-2ed96eb819b3"
+          },
+          {
+            "author": "Carv­er, Ray­mond",
+            "title": "“What We Talk About When We Talk About Love” (Read by Carv­er)",
+            "id": "989cbbb1-32c1-442e-a88b-7d9bc7f8ab2c"
+          },
+          {
+            "author": "Chabon, Michael",
+            "title": "“S. Angel”",
+            "id": "98521716-71a4-44bb-8870-ba317e9c44e0"
+          },
+          {
+            "author": "Cheev­er, John",
+            "title": "Free Stream",
+            "id": "6d5e61b3-0ebc-4551-987a-7b876415ddb5"
+          },
+          {
+            "author": "Cheev­er, John",
+            "title": "Free MP3",
+            "id": "90d2a87c-d3de-4997-97de-43da937c0804"
+          },
+          {
+            "author": "Cheev­er, John",
+            "title": "“The Swim­mer” (read by Anne Enright)",
+            "id": "4948d0e4-e326-4050-ab44-4269b101ec95"
+          },
+          {
+            "author": "Cheev­er, John",
+            "title": "“The Swim­mer” (read by Cheev­er him­self)",
+            "id": "8860dc48-c66e-4736-a2f7-14b55b047b5e"
+          },
+          {
+            "author": "Chekhov, Anton",
+            "title": "“The Beau­ties” (read by Philip Pull­man)",
+            "id": "d49c909a-7903-4d98-aea9-f3faf31abe88"
+          },
+          {
+            "author": "Chris­t­ian Ander­sen, Hans",
+            "title": "Ander­sen’s Fairy Tales",
+            "id": "af2181f2-0837-4b58-ad0e-f52039108319"
+          },
+          {
+            "author": "Chris­t­ian Ander­sen, Hans",
+            "title": "The Emper­or’s New Clothes",
+            "id": "d8c8d527-3485-4a92-9eb4-42a2524dc5a2"
+          },
+          {
+            "author": "Clarke, Arthur C.",
+            "title": "“Ham­mer of God”",
+            "id": "0c2d59ca-8a35-4373-8166-743020a847c6"
+          },
+          {
+            "author": "Clarke, Arthur C.",
+            "title": "“The Star” (Radio Dra­ma)",
+            "id": "266d65b8-706c-43ea-9b6c-072e9dd8bf11"
+          },
+          {
+            "author": "Conan Doyle, Arthur",
+            "title": "Beyond the City",
+            "id": "dda9e296-4cfc-4d57-abcf-f774ec5c3631"
+          },
+          {
+            "author": "Conan Doyle, Arthur",
+            "title": "Free Stream",
+            "id": "5c3130e4-e3ea-4303-af27-222e58da9527"
+          },
+          {
+            "author": "Conan Doyle, Arthur",
+            "title": "The Mys­tery of Cloomber",
+            "id": "ff91af29-16fd-4184-b8c2-eabd154647e7"
+          },
+          {
+            "author": "Con­rad, Joseph",
+            "title": "Heart of Dark­ness",
+            "id": "4e39b079-c369-4c06-b01f-89d382952449"
+          },
+          {
+            "author": "Con­rad, Joseph",
+            "title": "Free MP3",
+            "id": "175fa784-d9cf-4d8e-aa79-3fb8d487cd52"
+          },
+          {
+            "author": "Coop­er, James Fen­i­more",
+            "title": "Jack Tier, or the Flori­da Reef",
+            "id": "5517bffc-3765-4e5c-aac9-31187e4e017f"
+          },
+          {
+            "author": "Coop­er, James Fen­i­more",
+            "title": "The Last of the Mohi­cans",
+            "id": "4046129e-b2f7-4953-928f-7a8cd9c857af"
+          },
+          {
+            "author": "Crane, Stephen",
+            "title": "Free MP3",
+            "id": "9f0da4e9-9a72-4c5c-b7db-658e2767d2e2"
+          },
+          {
+            "author": "Dan­ti­cat, Edwidge",
+            "title": "Free MP3",
+            "id": "f4d303c8-8e05-4c62-bc94-adaadb44570a"
+          },
+          {
+            "author": "Dan­ti­cat, Edwidge",
+            "title": "Free Stream",
+            "id": "be67123c-bec2-46e9-8b88-8d22ed7351a2"
+          },
+          {
+            "author": "DeLil­lo, Don",
+            "title": "“The Itch”",
+            "id": "c5955c06-65b7-4dce-8091-73f692996e62"
+          },
+          {
+            "author": "Diaz, Junot",
+            "title": "“How to Date a Brown Girl (Black Girl, White Girl, or Hal­fie)”",
+            "id": "6ec6f086-9780-44fb-998d-d19e974100bc"
+          },
+          {
+            "author": "Diaz, Junot",
+            "title": "“The Ghosts of Glo­ria Lara” (read by the author)",
+            "id": "d4930611-ab1e-44dd-a8c2-009703ae8d7a"
+          },
+          {
+            "author": "Dick, Philip K.",
+            "title": "“Beyond Lies the Wub”",
+            "id": "3166d7f4-b468-4fbd-b201-c5f3d7eb51d0"
+          },
+          {
+            "author": "Dick, Philip K.",
+            "title": "“The Defend­ers”",
+            "id": "dcc443c2-af9f-43f9-b3ce-4408e8aebe63"
+          },
+          {
+            "author": "Dick, Philip K.",
+            "title": "“The Eyes Have It”",
+            "id": "bb5d6a7a-8d26-47d4-b81b-618adfc5b87f"
+          },
+          {
+            "author": "Dick, Philip K",
+            "title": "Free Stream",
+            "id": "32c1daad-f043-4bf5-9713-cb71f3c8408a"
+          },
+          {
+            "author": "Dick­ens, Charles",
+            "title": "A Christ­mas Car­ol (Read by Neil Gaiman)",
+            "id": "ea263b2d-837d-4ea4-bbc6-3f6d531a361e"
+          },
+          {
+            "author": "Dick­ens, Charles",
+            "title": "“The Christ­mas Tree” (Read by Simon Cal­low)",
+            "id": "b5e96dfc-1bf6-43bc-b222-31228f71022a"
+          },
+          {
+            "author": "Dos­toyevsky, Fyo­dor",
+            "title": "Free MP3\n\nFree eBook avail­able here.",
+            "id": "36a375aa-74bc-4c66-8a90-12191bbf677d"
+          },
+          {
+            "author": "Dos­toyevsky, Fyo­dor",
+            "title": "Free MP3",
+            "id": "bc207a24-344f-421a-91f8-2f95b010101e"
+          },
+          {
+            "author": "Dos­toyevsky, Fyo­dor —",
+            "title": "The Broth­ers Kara­ma­zov",
+            "id": "57228758-d9d3-4147-8aa6-69f85c3adbbb"
+          },
+          {
+            "author": "Dos­toyevsky",
+            "title": "The Grand Inquisi­tor (dra­mat­ic read­ing)",
+            "id": "8a5e1144-aa5c-4507-9795-6fe58a3b30dd"
+          },
+          {
+            "author": "Dos­toyevsky, Fyo­dor",
+            "title": "The Pos­sessed",
+            "id": "99cbf574-6d0d-495f-b8e0-4f2b5db888de"
+          },
+          {
+            "author": "Doyle, Rod­dy",
+            "title": "“Bull­fight­ing” (Read by Dave Eggers)",
+            "id": "033a42e8-5b46-4ab0-8286-611d847c6a59"
+          },
+          {
+            "author": "Dreis­er, Theodore",
+            "title": "Sis­ter Car­rie",
+            "id": "f79e93b3-a3cb-478c-887b-c63e2b6578d9"
+          },
+          {
+            "author": "Dumas, Alexan­dre",
+            "title": "The Three Mus­ke­teers",
+            "id": "758e4d6e-6be6-43bd-8f78-c4a6e90ef034"
+          },
+          {
+            "author": "Eliot, George",
+            "title": "Free MP3\n\nFree eBook avail­able here.",
+            "id": "0b70440e-5465-4d7e-abac-f395c1f64cca"
+          },
+          {
+            "author": "Erdrich, Louise",
+            "title": "“The Stone” (read by the author)",
+            "id": "10f9630b-5c02-4990-a86d-a7894aa5af4c"
+          },
+          {
+            "author": "Faulkn­er, William",
+            "title": "“Shin­gles for the Lord”",
+            "id": "6202f46c-3265-4599-91fe-8b31ad17206c"
+          },
+          {
+            "author": "Faulkn­er, William",
+            "title": "Faulkn­er Reads Faulkn­er",
+            "id": "1fe807f6-abd0-480f-a907-a07210505256"
+          },
+          {
+            "author": "Fitzger­ald, F. Scott",
+            "title": "The Great Gats­by",
+            "id": "ae163dab-81d0-4297-86ef-bb1910f4c79c"
+          },
+          {
+            "author": "Ford, Richard",
+            "title": "“Dis­placed” (Read by Richard Ford)\n\nFree Stream",
+            "id": "4c8bbb1a-1ddd-4c9b-95f9-52894ce23616"
+          },
+          {
+            "author": "Unknown Author",
+            "title": "Unknown Title",
+            "id": "39f57a35-ff68-4c58-b7f8-d87fa4abd9ce"
+          },
+          {
+            "author": "Gaiman, Neil",
+            "title": "“How to Talk to Oth­er Girls at Par­ties”",
+            "id": "4262c03f-054f-4b8b-848b-4cc066b89876"
+          },
+          {
+            "author": "Gaiman, Neil",
+            "title": "Free Stream",
+            "id": "4b1d1fa6-4fa2-4b6e-b693-06e80e95a02b"
+          },
+          {
+            "author": "Unknown Author",
+            "title": "Unknown Title",
+            "id": "d14e5a43-18da-461e-b58b-083817f485a6"
+          },
+          {
+            "author": "Gaiman, Neil",
+            "title": "“The Truth Is a Cave in the Black Moun­tains”",
+            "id": "c14c9e56-4de7-4bca-8506-9f310006e4af"
+          },
+          {
+            "author": "Gait­skill, Mary",
+            "title": "“The Oth­er Place” (read by Jen­nifer Egan)",
+            "id": "8eed7313-51d6-4386-a477-da4597dc6437"
+          },
+          {
+            "author": "Geng, Veron­i­ca",
+            "title": "“Love Trou­ble Is My Busi­ness” (read by Jonathan Franzen)",
+            "id": "6a9cc5ff-d901-41f2-9876-58f03a8655fe"
+          },
+          {
+            "author": "Gogol, Niko­lai",
+            "title": "“The Nose”",
+            "id": "51337bf2-b0b1-42ab-9bc5-6bb061d9a836"
+          },
+          {
+            "author": "Gordimer, Nadine",
+            "title": "“City Lovers” (read by Tes­sa Hadley)",
+            "id": "483c945c-9fbb-4bc4-9d4a-d1e845ccb8f4"
+          },
+          {
+            "author": "Gordimer, Nadine",
+            "title": "“The Pet” (read by Joseph O’Neill)",
+            "id": "6d368b9a-3f85-4f74-a919-936f2ef6d498"
+          },
+          {
+            "author": "Hawthorne, Nathaniel",
+            "title": "Rap­pac­cini’s Daugh­ter",
+            "id": "e0eaa702-460e-491d-b018-f4874de4464b"
+          },
+          {
+            "author": "Hay­den, Julie",
+            "title": "Unknown Title",
+            "id": "08871c6e-b765-4d0d-9452-6a13190da408"
+          },
+          {
+            "author": "Hem­ing­way, Ernest",
+            "title": "Ernest Hem­ing­way Reads Ernest Hem­ing­way",
+            "id": "70dadc94-188e-465d-a9c6-a121e6d1dea5"
+          },
+          {
+            "author": "Hem­ing­way, Ernest",
+            "title": "Free MP3",
+            "id": "bce6956b-0fe7-4234-a5e7-3b6397e02d9e"
+          },
+          {
+            "author": "Hesse, Her­mann",
+            "title": "Sid­dhartha",
+            "id": "5c4bef40-1d45-45b2-8297-16aa37ec2521"
+          },
+          {
+            "author": "Hugh­es, Langston —",
+            "title": "“Sim­ple on Indi­an Blood”(read by Ossie Davis)",
+            "id": "e66c0f45-92fd-4c11-a7ea-42ce050778a1"
+          },
+          {
+            "author": "Hugh­es, Langston",
+            "title": "Free Stream",
+            "id": "c98f537d-735b-4c4f-be16-a0acc57ae82d"
+          },
+          {
+            "author": "Hugh­es, Langston",
+            "title": "“Last Whip­ping” (read by Ossie Davis)",
+            "id": "c73615ff-e5be-4853-b140-1e490a8ce2c1"
+          },
+          {
+            "author": "Hugh­es, Langston",
+            "title": "“Feet Live Their Own Life” (read by Ossie Davis)",
+            "id": "c214875a-8078-42cf-870e-f89f48e0bcbe"
+          },
+          {
+            "author": "Hugo, Vic­tor",
+            "title": "The Hunch­back of Notre Dame",
+            "id": "9d23e203-da72-464b-9aa4-6fe61c1b229a"
+          },
+          {
+            "author": "Hux­ley, Aldous",
+            "title": "Brave New World (Dra­ma­tized ver­sion read by Hux­ley)",
+            "id": "de38e5b8-ada6-4d0f-a41e-e1698f3a517e"
+          },
+          {
+            "author": "Irv­ing, Wash­ing­ton —",
+            "title": "Rip Van Win­kle",
+            "id": "2564e3d4-c03f-4e2a-ab23-fb84e050a070"
+          },
+          {
+            "author": "Joyce, James",
+            "title": "“Eve­line” (read by Sebas­t­ian Bar­ry)",
+            "id": "af5a851a-2930-4ede-b3b7-ffa9c2e12bb5"
+          },
+          {
+            "author": "Joyce, James",
+            "title": "Finnegans Wake",
+            "id": "13b5ec78-4d64-461b-b30a-63e881a9907a"
+          },
+          {
+            "author": "Joyce, James",
+            "title": "“The Dead” (Read by Cyn­thia Nixon & Colum McCann)",
+            "id": "477058b5-41f6-4eef-81a3-37b2277047e0"
+          },
+          {
+            "author": "July, Miran­da",
+            "title": "Free MP3",
+            "id": "3e0b457c-189c-42d2-894a-eb682396d31c"
+          },
+          {
+            "author": "Kaf­ka, Franz",
+            "title": "“A Lit­tle Fable” (Read by David Fos­ter Wal­lace)",
+            "id": "3e5ae372-0301-426a-8c5e-2116a09b7895"
+          },
+          {
+            "author": "Kaf­ka, Franz",
+            "title": "“A Hunger Artist” (read by Hanif Kureishi)",
+            "id": "ac2ba309-fad8-41aa-8b47-38cd23a225e5"
+          },
+          {
+            "author": "Kaf­ka, Franz",
+            "title": "“Before the Law”",
+            "id": "d142f442-8aa6-4738-baf3-d051b561fcb3"
+          },
+          {
+            "author": "Kaf­ka, Franz",
+            "title": "“In the Penal Colony",
+            "id": "8a7231c6-85d2-495f-90a4-4deca18d283e"
+          },
+          {
+            "author": "Kin­caid, Jamaica",
+            "title": "“Fig­ures in the Dis­tance” (read by Chi­ma­man­da Ngozi Adichie)",
+            "id": "1b506cba-ccdf-4f44-839e-a39d5dae0920"
+          },
+          {
+            "author": "Kin­caid, Jamaica —",
+            "title": "“Girl” and “Wing­less” (read by Edwidge Dan­ti­cat)",
+            "id": "87ceab50-30d9-41a0-aaf0-2fb2f0b5eed4"
+          },
+          {
+            "author": "Kipling, Rud­yard",
+            "title": "Rik­­ki-Tik­­ki-Tavi",
+            "id": "2c400481-439b-4904-8e44-44c7f22cdd5d"
+          },
+          {
+            "author": "Kipling,",
+            "title": "“The Ele­phan­t’s Child”",
+            "id": "76b4bc9c-8557-47ce-831c-5e210e90f849"
+          },
+          {
+            "author": "Lahiri, Jhumpa",
+            "title": "“Cast­ing Shad­ows‪”‬ (read by the author)",
+            "id": "cf694c7e-39f2-4c6d-9425-26abfa153e67"
+          },
+          {
+            "author": "Lawrence, D.H.",
+            "title": "Free MP3",
+            "id": "bb4473a8-d1a7-4c9d-9e2c-ad95ccfbcccf"
+          },
+          {
+            "author": "Lethem, Jonathan",
+            "title": "“The After­life‪”‬ (read by the author)",
+            "id": "335c9b9a-48fd-4a0b-b0f6-a65fb5188dcc"
+          },
+          {
+            "author": "Lon­don, Jack",
+            "title": "The Hea­then",
+            "id": "8faba672-4987-47fa-99b3-96d72c5fb1a2"
+          },
+          {
+            "author": "Lon­don, Jack",
+            "title": "Free MP3",
+            "id": "16eadca1-00ca-4aff-9b89-4b3d35411f8f"
+          },
+          {
+            "author": "Longfel­low, Hen­ry Wadsworth",
+            "title": "Select­ed Works",
+            "id": "a0071b37-9075-4c73-a57c-16df4ee5a257"
+          },
+          {
+            "author": "McCabe, Eugene",
+            "title": "Free MP3",
+            "id": "fe9c15d5-7326-4e3c-aab9-eab708a344e1"
+          },
+          {
+            "author": "McCann, Colum",
+            "title": "“Transat­lantic” (read by author)",
+            "id": "82f64ef6-150b-4315-abe6-e993f2462c87"
+          },
+          {
+            "author": "McE­wan, Ian",
+            "title": "“My Pur­ple Scent­ed Nov­el” (read by the author)",
+            "id": "9f3fe8cc-6ba9-419e-904a-48c6161840d3"
+          },
+          {
+            "author": "Melville, Her­man",
+            "title": "Moby-Dick",
+            "id": "b8aa4f05-d4ac-4a04-8b33-eb38a48bacd0"
+          },
+          {
+            "author": "Miller Jr, Wal­ter M.",
+            "title": "A Can­ti­cle for Lei­bowitz (Dra­ma­tized Ver­sion)",
+            "id": "bf2ebc11-7398-4f18-9f6d-42086a0b19c3"
+          },
+          {
+            "author": "Moore, Lor­rie",
+            "title": "“Paper Loss­es” (read by Gary Shteyn­gart)",
+            "id": "dd4108ea-6c63-439d-a9e3-d04e450f1723"
+          },
+          {
+            "author": "Munro, Alice",
+            "title": "“Axis”",
+            "id": "35e44586-ddcf-4b5e-97c3-d56ad0e9d562"
+          },
+          {
+            "author": "Muraka­mi, Haru­ki",
+            "title": "“Barn Burn­ing”",
+            "id": "019f0ff8-7459-48c8-94bb-a50d747a2c1c"
+          },
+          {
+            "author": "Muraka­mi, Haru­ki",
+            "title": "“On See­ing the 100% Per­fect Girl One Beau­ti­ful April Morn­ing”",
+            "id": "3d8a8dbf-5469-4991-9d2f-d3942cf7d14b"
+          },
+          {
+            "author": "Muraka­mi, Haru­ki",
+            "title": "“U.F.O. in Kushi­ro”",
+            "id": "548a6fec-f489-470e-ab3d-082a146c3a77"
+          },
+          {
+            "author": "Nabokov, Vladimir",
+            "title": "Free MP3",
+            "id": "c2c6778a-1599-4eba-aa58-e799684a0eb7"
+          },
+          {
+            "author": "Nabokov, Vladimir",
+            "title": "“Pnin”",
+            "id": "db9ad281-831f-4639-a4c4-7815cf38b94b"
+          },
+          {
+            "author": "Nabokov, Vladimir",
+            "title": "Signs and Sym­bols",
+            "id": "825883fe-6a95-43fa-be32-e1331820bd66"
+          },
+          {
+            "author": "Oates, Joyce Car­ol",
+            "title": "“Late Love”",
+            "id": "207562a4-7b37-49ba-9227-197ba431d7ba"
+          },
+          {
+            "author": "Oates, Joyce Car­ol",
+            "title": "Free Stream",
+            "id": "8fef440e-f7a1-4b90-b414-695fc0e1834f"
+          },
+          {
+            "author": "Oates, Joyce Car­ol",
+            "title": "Free Stream",
+            "id": "578e5c51-2dab-4711-b9bc-68d9c11dfed6"
+          },
+          {
+            "author": "Orwell, George",
+            "title": "1984 (Radio Dra­ma from 1949 start­ing David Niv­en)",
+            "id": "b543a620-4ca2-4956-a432-e8404531f11a"
+          },
+          {
+            "author": "Oz, Amos",
+            "title": "“The King of Nor­way” (read by Jonathan Safran Foer)",
+            "id": "6dd7a347-0cb7-4460-95be-2879f99a78a9"
+          },
+          {
+            "author": "Ozick, Cyn­thia",
+            "title": "“The Shawl” (read by Joyce Car­ol Oates)",
+            "id": "dd1f4bba-fdf8-46f2-bbcf-6dab3e395554"
+          },
+          {
+            "author": "Paley, Grace",
+            "title": "“Love” (read by George Saun­ders)",
+            "id": "347418ff-0a31-4c45-bb09-2dac2a4f9f17"
+          },
+          {
+            "author": "Plath, Sylvia",
+            "title": "Three Women (a radio play)",
+            "id": "8371db25-879f-4602-9617-7dc7dd4efe5f"
+          },
+          {
+            "author": "Poe, Edgar Allan",
+            "title": "Free MP3",
+            "id": "c0686323-2383-4dd7-8b2f-bbf858eb44a2"
+          },
+          {
+            "author": "Poe, Edgar Allan",
+            "title": "The Raven",
+            "id": "8a7eb651-1c17-4157-89e0-48090aff58bf"
+          },
+          {
+            "author": "Poe, Edgar Allan",
+            "title": "The Tell Tale Heart",
+            "id": "b408b736-8f00-4c7e-8453-efea553793db"
+          },
+          {
+            "author": "Poe, Edgar Allan",
+            "title": "The Tell Tale Heart, Silence, Annabel Lee (read by James Mason)",
+            "id": "1f0a7343-ecc7-4db5-b20f-c204dc99dfee"
+          },
+          {
+            "author": "Pritch­ett, V.S.",
+            "title": "The Res­cue (Read by Jonathan Lethem)",
+            "id": "6ae7c420-2413-4e0a-9120-385ccc35ee74"
+          },
+          {
+            "author": "Proust, Mar­cel",
+            "title": "À La Recherche Du Temps Per­du (Œuvre Inté­grale) (in French)",
+            "id": "d55e362f-05c4-4b53-bced-7d2f72e34371"
+          },
+          {
+            "author": "Rushdie, Salman",
+            "title": "“The Lit­tle King‪”‬ (read by the author)",
+            "id": "b762c538-8c27-44f0-b3bc-6f693bbedffe"
+          },
+          {
+            "author": "Rushdie, Salman",
+            "title": "“The Old Man in the Piaz­za‪”‬ (read by the author)",
+            "id": "38c82872-e3db-4987-a755-bda84d36a79e"
+          },
+          {
+            "author": "Ruskin, John",
+            "title": "Free MP3",
+            "id": "322d47ca-fb3f-4011-a4b7-0ad61c06a8aa"
+          },
+          {
+            "author": "Sara­m­a­go, José",
+            "title": "Free MP3",
+            "id": "8c521ec3-b421-4c77-89df-682c542484ec"
+          },
+          {
+            "author": "Sartre, Jean-Paul",
+            "title": "Free Stream",
+            "id": "cfce9645-5525-4791-a9aa-2dfc10d2fa12"
+          },
+          {
+            "author": "Saun­ders, George",
+            "title": "“Elliott Spencer” (read by the author)",
+            "id": "9e356db0-88b3-45c1-b0c0-8bdba18ed13f"
+          },
+          {
+            "author": "Saun­ders, George",
+            "title": "“Ghoul” (read by the author)",
+            "id": "ad534c5c-0490-4938-9f55-57d1c8ce75f7"
+          },
+          {
+            "author": "Saun­ders, George",
+            "title": "“Love Let­ter” (read by the author)",
+            "id": "7aa7e1a1-0497-4fd1-8a87-a512343466f7"
+          },
+          {
+            "author": "Saun­ders, George",
+            "title": "“Thurs­day” (read by the author)",
+            "id": "981a549a-690d-4a90-9539-5d501327defb"
+          },
+          {
+            "author": "Sedaris, David",
+            "title": "“The Mouse and the Snake” from Squir­rel Seeks Chip­munk: A Mod­est Bes­tiary - Free MP3",
+            "id": "84f4228b-848c-4c87-a0b9-afc324f30bb6"
+          },
+          {
+            "author": "Sedaris, David",
+            "title": "Unknown Title",
+            "id": "6197db30-8522-4799-ab4a-611ed88850d2"
+          },
+          {
+            "author": "Schwartz, Del­more",
+            "title": "“In Dreams Begin Respon­si­bil­i­ties” (Read by Lou Reed)",
+            "id": "f3c53f68-e8df-45d5-9ae7-93b40af4470a"
+          },
+          {
+            "author": "Shake­speare, William",
+            "title": "10 Plays Per­formed by Orson Welles on the Radio",
+            "id": "c5b0e594-63f5-47d8-bc90-9a849c3a896b"
+          },
+          {
+            "author": "Shake­speare, William",
+            "title": "All’s Well Ends Well",
+            "id": "fe57b253-47d3-4c96-86c0-93734ee3e344"
+          },
+          {
+            "author": "Shake­speare, William",
+            "title": "Free MP3\n\nFree eBook avail­able here.",
+            "id": "e9502167-de1f-4189-a983-7f18ba8e63c3"
+          },
+          {
+            "author": "Shake­speare, William",
+            "title": "Julius Cae­sar",
+            "id": "d79653de-5199-445d-afc5-55eaca81df36"
+          },
+          {
+            "author": "Shake­speare, William",
+            "title": "Romeo and Juli­et",
+            "id": "aaead77f-a792-4d08-bc77-bc50904200ae"
+          },
+          {
+            "author": "Shake­speare, William",
+            "title": "Free MP3\n\nFree eBook avail­able here.",
+            "id": "f5f4b325-ba2c-497d-90d8-b620ac2c1ddc"
+          },
+          {
+            "author": "Shake­speare, William",
+            "title": "The Son­nets",
+            "id": "ec20f236-3bee-4047-963f-3a4fc865ac45"
+          },
+          {
+            "author": "Shaw, George Bernard",
+            "title": "Pyg­malion",
+            "id": "bedf4e2e-f296-443d-82f6-e92d9c6637aa"
+          },
+          {
+            "author": "Shel­ley, Mary",
+            "title": "Franken­stein",
+            "id": "b92ff58c-a5a9-478d-9590-adda17886f5c"
+          },
+          {
+            "author": "Shep­ard, Sam",
+            "title": "“Indi­anapo­lis (High­way 74)” read by Dave Eggers",
+            "id": "18c0db75-98bd-448e-b985-635e46dfd134"
+          },
+          {
+            "author": "Sin­clair, Upton",
+            "title": "The Jun­gle",
+            "id": "04d6b9e0-13d2-4d43-8377-c15f0bc68f06"
+          },
+          {
+            "author": "Singer, Isaac Bashe­vis",
+            "title": "Dis­guised (read by Nathan Eng­lan­der)",
+            "id": "8445fc4f-f0a6-4dde-af77-6a49360f3fb9"
+          },
+          {
+            "author": "Stein, Gertrude",
+            "title": "If I Told Him: a Com­plet­ed Por­trait of Picas­so",
+            "id": "859f8dcb-e8d8-4ac7-a4ea-78ec1acf6751"
+          },
+          {
+            "author": "Stein, Gertrude",
+            "title": "Free MP3",
+            "id": "30fd74fb-ad8f-4b89-bfec-213bb1c1e0e0"
+          },
+          {
+            "author": "Stein, Gertrude",
+            "title": "The Fif­teenth Of Novem­ber … T. S. Eliot",
+            "id": "b606b7d7-1a49-42d1-a29a-55ea5cb15ee8"
+          },
+          {
+            "author": "Stein, Gertrude",
+            "title": "The Mak­ing of Amer­i­cans",
+            "id": "ca4768ce-a5bc-4015-845a-ea3109320888"
+          },
+          {
+            "author": "Stein­beck, John",
+            "title": "“The Snake” and “John­ny Bear”",
+            "id": "5aa4cf9a-dd65-4e8c-ae93-a61f81e3adde"
+          },
+          {
+            "author": "Steven­son, Robert Louis",
+            "title": "The Strange Case of Dr Jekyll & Mr Hyde",
+            "id": "01bfe788-bdab-407b-88d0-614efaa27cde"
+          },
+          {
+            "author": "Steven­son, Robert Louis",
+            "title": "Trea­sure Island",
+            "id": "a521f66b-8781-4cd6-84ef-c2a66d867ca8"
+          },
+          {
+            "author": "Thay­er, Ernest Lawrence",
+            "title": "Casey at the Bat",
+            "id": "eee6d886-4ede-4560-9441-e4dee1c99fa0"
+          },
+          {
+            "author": "Tol­stoy, Leo",
+            "title": "Anna Karen­i­na",
+            "id": "62afddbe-b995-4516-a2a5-0060917a8cbb"
+          },
+          {
+            "author": "Twain, Mark",
+            "title": "The Adven­tures of Tom Sawyer",
+            "id": "9e453112-7b14-4125-b271-155486307719"
+          },
+          {
+            "author": "Updike, John",
+            "title": "Free MP3",
+            "id": "3cc5f8d3-fa62-49c8-be04-584d6b2c74e3"
+          },
+          {
+            "author": "Updike, John",
+            "title": "“A & P.” (read by Alle­gra Good­man)",
+            "id": "d86a4277-445e-4ff1-9b3d-12b7b0019a58"
+          },
+          {
+            "author": "Updike, John",
+            "title": "“Twin Beds in Rome”",
+            "id": "43d996d9-91f2-43c4-a206-dd4ba0080183"
+          },
+          {
+            "author": "Verne, Jules",
+            "title": "The Mas­ter of the World",
+            "id": "d2b395a7-79ab-480c-b9ff-6eb47aa832ae"
+          },
+          {
+            "author": "Voltaire",
+            "title": "Can­dide",
+            "id": "1b37550b-b1ca-48a0-af4b-d694cd25f11c"
+          },
+          {
+            "author": "Von­negut, Kurt",
+            "title": "Free MP3",
+            "id": "538a4820-b751-4596-a672-14485b7c9d33"
+          },
+          {
+            "author": "Von­negut, Kurt",
+            "title": "“Har­ri­son Berg­eron”",
+            "id": "f6dec24e-f9ef-4b1b-80bf-73fea067eaf7"
+          },
+          {
+            "author": "Von­negut, Kurt",
+            "title": "The Big Trip Up Yon­der",
+            "id": "d556f838-5c85-4a5d-882f-ee36cad96651"
+          },
+          {
+            "author": "Von­negut, Kurt",
+            "title": "“The Drone”",
+            "id": "8304c09c-d44a-4aab-8bdc-d6e19c73ef8c"
+          },
+          {
+            "author": "Von­negut, Kurt",
+            "title": "The Sol­dier’s Sto­ry (as a radio opera)",
+            "id": "0ffb2df0-ef97-4dab-a899-ed92c865f65f"
+          },
+          {
+            "author": "Wal­lace, David Fos­ter",
+            "title": "Free Stream",
+            "id": "44e0581c-f420-4c2c-ae9f-385e36fe8b84"
+          },
+          {
+            "author": "Wal­lace, David Fos­ter",
+            "title": "Free MP3",
+            "id": "8423088c-1bc3-410f-8a03-d8ce43e55fd1"
+          },
+          {
+            "author": "Welles, Orson",
+            "title": "“The Shad­ow” radio dra­ma (Per­formed by Welles)",
+            "id": "344e5334-9821-461a-9864-a10a399f3b13"
+          },
+          {
+            "author": "Wells, HG",
+            "title": "The Invis­i­ble Man",
+            "id": "d8920732-0587-4c15-8255-f399a9b25266"
+          },
+          {
+            "author": "Wells, HG",
+            "title": "Mag­ic Shop",
+            "id": "558adf98-d7c8-4f88-a9a4-0c772b4323dc"
+          },
+          {
+            "author": "Whar­ton, Edith",
+            "title": "The Ful­ness of Life",
+            "id": "8c8ac331-b571-4cd4-b388-22e8c826f59e"
+          },
+          {
+            "author": "Wilde, Oscar",
+            "title": "The Hap­py Prince",
+            "id": "70ee9c01-9f9f-4321-8b21-64089c0ef588"
+          },
+          {
+            "author": "Wilde, Oscar",
+            "title": "The Impor­tance of Being Earnest",
+            "id": "5e539752-3926-4877-928a-cbaf3aeab8d9"
+          },
+          {
+            "author": "Woolf, Vir­ginia",
+            "title": "“A Haunt­ed House”",
+            "id": "5b776a12-d094-4061-b1d3-61262208db85"
+          },
+          {
+            "author": "Woolf, Vir­ginia",
+            "title": "The Voy­age Out",
+            "id": "396ee348-5f1b-4b6f-be72-bd4477619148"
+          }
+
+    ]
+   }
+]
