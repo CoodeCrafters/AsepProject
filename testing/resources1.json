@@ -381,6 +381,13 @@
         "ISBN": "758890025154",
         "year": 2015,
         "bookCover": "https://images.tandf.co.uk/common/jackets/crclarge/978113858/9781138584204.jpg"
+      },
+      {
+        "BookName": "Xyz",
+        "Author": "Gilbert Strang",
+        "ISBN": "75889002512",
+        "year": 2025,
+        "bookCover": "https://www.instagram.com/reel/DFLPpd3MXw7/?igsh=MWMyNDRnZmVrcGlseg=="
       }
     ]
   }
