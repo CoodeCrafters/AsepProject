@@ -191,6 +191,13 @@
         "ISBN": "9780997316025",
         "year": 2017,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers400/collections/genesis/3bf67f72cff051f95545d83431b39d06caab1546f2fe824e712512856992322f.jpg"
+      },
+      {
+        "BookName": "Quantum Computing Explained",
+        "Author": "Wiley-Interscience :, IEEE Computer Society",
+        "ISBN": "9780470181362",
+        "year": 2008,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/38134b7c74aaea0bdc77fa5d72756ae2b147af8a3c9526a5a071cf50277c564f.jpg"
       }
     ]
   },
