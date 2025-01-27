@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Book Insertion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            text-align: center;
+            background: #007bff;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        form {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .mp3-group {
+            display: flex;
+            gap: 10px;
+        }
+        .mp3-group input {
+            flex: 1;
+        }
+        .mp3-container {
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        const BASE_URL = "https://datainsertion.onrender.com";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchDomains();
+        });
+
+        async function fetchDomains() {
+            try {
+                const response = await fetch(`${BASE_URL}/get-domains`);
+                const domains = await response.json();
+                const dropdown = document.getElementById('domainDropdown');
+                dropdown.innerHTML = '';
+
+                domains.forEach(domain => {
+                    const option = document.createElement('option');
+                    option.value = domain;
+                    option.textContent = domain;
+                    dropdown.appendChild(option);
+                });
+
+                const othersOption = document.createElement('option');
+                othersOption.value = 'Others';
+                othersOption.textContent = 'Others';
+                dropdown.appendChild(othersOption);
+            } catch (error) {
+                console.error('Error fetching domains:', error);
+                alert('Failed to load domains.');
+            }
+        }
+
+        function toggleOtherDomain() {
+            const dropdown = document.getElementById('domainDropdown');
+            const otherDomainField = document.getElementById('otherDomainField');
+            otherDomainField.style.display = dropdown.value === 'Others' ? 'block' : 'none';
+        }
+
+        function addMp3Fields() {
+            const mp3Container = document.getElementById('mp3Container');
+            const newMp3Group = document.createElement('div');
+            newMp3Group.classList.add('mp3-group');
+
+            newMp3Group.innerHTML = `
+                <input type="text" name="mp3Title[]" placeholder="MP3 Title" required>
+                <input type="text" name="mp3Duration[]" placeholder="MP3 Duration" required>
+                <input type="url" name="mp3Link[]" placeholder="MP3 Link" required>
+            `;
+            mp3Container.appendChild(newMp3Group);
+        }
+
+        async function insertAudioBook() {
+            const domain = document.getElementById('domainDropdown').value;
+            const otherDomain = document.getElementById('otherDomain').value.trim();
+            const title = document.getElementById('audioBookTitle').value.trim();
+            const year = document.getElementById('year').value.trim();
+            const coverPhoto = document.getElementById('coverPhoto').value.trim();
+            const authors = document.getElementById('authors').value.trim();
+            const totalDuration = document.getElementById('totalDuration').value.trim();
+            const genre = document.getElementById('genre').value.trim();
+            const mp3Titles = [...document.querySelectorAll('input[name="mp3Title[]"]')].map(el => el.value.trim());
+            const mp3Durations = [...document.querySelectorAll('input[name="mp3Duration[]"]')].map(el => el.value.trim());
+            const mp3Links = [...document.querySelectorAll('input[name="mp3Link[]"]')].map(el => el.value.trim());
+
+            const selectedDomain = domain === 'Others' ? otherDomain : domain;
+
+            if (!selectedDomain || !title || !year || !coverPhoto || !authors || !totalDuration || !genre || mp3Titles.some(t => !t) || mp3Links.some(l => !l) || mp3Durations.some(d => !d)) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            const mp3Details = mp3Titles.map((title, index) => ({
+                title,
+                duration: mp3Durations[index],
+                link: mp3Links[index],
+            }));
+
+            const payload = {
+                domain: selectedDomain,
+                audioBook: {
+                    title,
+                    year: parseInt(year, 10),
+                    coverPhoto,
+                    authors,
+                    totalDuration,
+                    genre,
+                    mp3Details,
+                },
+            };
+
+            try {
+                const response = await fetch(`${BASE_URL}/insert-audio-book`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert('Audio book inserted successfully.');
+                    fetchDomains();
+                    document.querySelector('form').reset();
+                    document.getElementById('mp3Container').innerHTML = ''; // Clear MP3 fields
+                } else {
+                    alert(`Error: ${result.message}`);
+                }
+            } catch (error) {
+                console.error('Error inserting audio book:', error);
+                alert('An error occurred.');
+            }
+        }
+
+ function fetchSuggestions() {
+    const id = document.getElementById('id').value;
+    if (id) {
+      fetch(`/suggest-audiobook?id=${id}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.author && data.title) {
+            document.getElementById('author').value = data.author;
+            document.getElementById('title').value = data.title;
+          }
+        })
+        .catch(err => console.error('Error fetching suggestions:', err));
+    }
+  }
+
+  // Fetch domains and populate the domain dropdown
+async function populateDomainDropdown() {
+  try {
+    const response = await fetch('/get-domains');
+    const domains = await response.json();
+
+    const domainDropdown = document.getElementById('domain');
+    domains.forEach((domain) => {
+      const option = document.createElement('option');
+      option.value = domain;
+      option.textContent = domain;
+      domainDropdown.appendChild(option);
+    });
+  } catch (error) {
+    console.error('Error fetching domains:', error);
+  }
+}
+
+// Call the function when the page loads
+window.addEventListener('DOMContentLoaded', populateDomainDropdown);
+
+    </script>
+</head>
+<body>
+    <h1>Audio Book Insertion</h1>
+    <form onsubmit="event.preventDefault(); insertAudioBook();">
+        <label for="domain">Domain:</label>
+        <select id="domain" name="domain">
+          <option value="" disabled selected>Select a domain</option>
+        </select>
+        
+
+        <label for="audioBookTitle">Title of Audio Book:</label>
+        <input type="text" id="audioBookTitle" required>
+
+        <label for="year">Year of Published:</label>
+        <input type="number" id="year" required>
+
+        <label for="coverPhoto">Book Cover Photo URL:</label>
+        <input type="url" id="coverPhoto" required>
+
+        <label for="authors">Authors:</label>
+        <input type="text" id="authors" required>
+
+        <label for="totalDuration">Total Duration:</label>
+        <input type="text" id="totalDuration" required>
+
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" required>
+
+        <div id="mp3Container" class="mp3-container">
+            <div class="mp3-group">
+                <input type="text" name="mp3Title[]" placeholder="MP3 Title" required>
+                <input type="text" name="mp3Duration[]" placeholder="MP3 Duration" required>
+                <input type="url" name="mp3Link[]" placeholder="MP3 Link" required>
+            </div>
+        </div>
+        <button type="button" onclick="addMp3Fields()">Add More MP3 Details</button><br>
+
+        <button type="submit">Insert Audio Book</button>
+    </form>
+</body>
+</html>
