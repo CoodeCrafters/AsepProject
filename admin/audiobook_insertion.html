@@ -186,7 +186,7 @@
   // Fetch domains and populate the domain dropdown
 async function populateDomainDropdown() {
   try {
-    const response = await fetch('/get-domains1');
+    const response = await fetch(`${BASE_URL}/get-domains`);
     const domains = await response.json();
 
     const domainDropdown = document.getElementById('domain');
