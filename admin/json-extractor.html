@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON to Textarea</title>
+  <style>
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Convert JSON to Textareas</h1>
+  <textarea id="json-input" placeholder="Paste your JSON here"></textarea>
+  <button onclick="convertJSON()">Convert</button>
+  
+  <h2>Extracted Information</h2>
+  
+  <label>Authors:</label>
+  <textarea id="author-output" readonly></textarea>
+
+  <label>Titles:</label>
+  <textarea id="title-output" readonly></textarea>
+
+  <label>IDs:</label>
+  <textarea id="id-output" readonly></textarea>
+
+  <script>
+    function convertJSON() {
+      // Get the JSON input
+      const jsonInput = document.getElementById('json-input').value.trim();
+
+      // Try parsing the JSON
+      try {
+        const jsonData = JSON.parse(jsonInput);
+
+        // Prepare strings to store the extracted values
+        let authors = "";
+        let titles = "";
+        let ids = "";
+
+        // Loop through each entry in the JSON array
+        if (jsonData && Array.isArray(jsonData)) {
+          jsonData.forEach(item => {
+            authors += item.author ? item.author + "\n" : "N/A\n";
+            titles += item.title ? item.title + "\n" : "N/A\n";
+            ids += item.id ? item.id + "\n" : "N/A\n";
+          });
+        }
+
+        // Display all extracted information in the respective textareas
+        document.getElementById('author-output').value = authors.trim();
+        document.getElementById('title-output').value = titles.trim();
+        document.getElementById('id-output').value = ids.trim();
+
+      } catch (error) {
+        alert("Invalid JSON format. Please check your input.");
+        console.error("Invalid JSON:", error);
+      }
+    }
+  </script>
+</body>
+</html>
