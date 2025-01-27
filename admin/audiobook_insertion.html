@@ -113,62 +113,54 @@
 
     // Insert the audiobook details into the backend
     async function insertAudioBook() {
-        const domain = document.getElementById('domainTextarea').value.trim();
-        const title = document.getElementById('audioBookTitle').value.trim();
-        const year = document.getElementById('year').value.trim();
-        const coverPhoto = document.getElementById('coverPhoto').value.trim();
-        const authors = document.getElementById('authors').value.trim();
-        const totalDuration = document.getElementById('totalDuration').value.trim();
-        const genre = document.getElementById('genre').value.trim();
-        const mp3Titles = [...document.querySelectorAll('input[name="mp3Title[]"]')].map(el => el.value.trim());
-        const mp3Durations = [...document.querySelectorAll('input[name="mp3Duration[]"]')].map(el => el.value.trim());
-        const mp3Links = [...document.querySelectorAll('input[name="mp3Link[]"]')].map(el => el.value.trim());
+    const title = document.getElementById('audioBookTitle').value.trim();
+    const year = document.getElementById('year').value.trim();
+    const coverPhoto = document.getElementById('coverPhoto').value.trim();
+    const totalDuration = document.getElementById('totalDuration').value.trim();
+    const genre = document.getElementById('genre').value.trim();
+    const mp3Titles = [...document.querySelectorAll('input[name="mp3Title[]"]')].map(el => el.value.trim());
+    const mp3Links = [...document.querySelectorAll('input[name="mp3Link[]"]')].map(el => el.value.trim());
 
-        if (!domain || !title || !year || !coverPhoto || !authors || !totalDuration || !genre || 
-            mp3Titles.some(t => !t) || mp3Links.some(l => !l) || mp3Durations.some(d => !d)) {
-            alert('Please fill in all required fields.');
-            return;
-        }
-
-        const mp3Details = mp3Titles.map((title, index) => ({
-            title,
-            duration: mp3Durations[index],
-            link: mp3Links[index],
-        }));
-
-        const payload = {
-            domain,
-            audioBook: {
-                title,
-                year: parseInt(year, 10),
-                coverPhoto,
-                authors,
-                totalDuration,
-                genre,
-                mp3Details,
-            },
-        };
-
-        try {
-            const response = await fetch(`${BASE_URL}/update-audiobook-details`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-            });
-
-            const result = await response.json();
-            if (response.ok) {
-                alert('Audio book inserted successfully.');
-                document.querySelector('form').reset();
-                document.getElementById('mp3Container').innerHTML = ''; // Clear MP3 fields
-            } else {
-                alert(`Error: ${result.message}`);
-            }
-        } catch (error) {
-            console.error('Error inserting audio book:', error);
-            alert('An error occurred.');
-        }
+    if (!title || !year || !coverPhoto || !totalDuration || !genre || mp3Titles.some(t => !t) || mp3Links.some(l => !l)) {
+        alert('Please fill in all required fields.');
+        return;
     }
+
+    const mp3Details = mp3Titles.map((title, index) => ({
+        title,
+        link: mp3Links[index],
+    }));
+
+    const payload = {
+        id: document.getElementById('id').value.trim(),
+        totalDuration,
+        genre,
+        coverPhoto,
+        year: parseInt(year, 10),
+        mp3Details,
+    };
+
+    try {
+        const response = await fetch(`${BASE_URL}/update-audiobook-details`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert('Audio book inserted successfully.');
+            document.querySelector('form').reset();
+            document.getElementById('mp3Container').innerHTML = ''; // Clear MP3 fields
+        } else {
+            alert(`Error: ${result.message}`);
+        }
+    } catch (error) {
+        console.error('Error inserting audio book:', error);
+        alert('An error occurred.');
+    }
+}
+
 
     // Add more MP3 fields dynamically
     function addMp3Fields() {
