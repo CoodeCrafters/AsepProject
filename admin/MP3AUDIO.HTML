@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Player</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f7f7f7;
+    }
+
+    textarea {
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>MP3 Audio Player</h1>
+
+  <label for="audio-link">Insert MP3 Link:</label>
+  <textarea id="audio-link" placeholder="Paste your MP3 link here..."></textarea>
+
+  <button id="play-btn">Play Audio</button>
+
+  <audio id="audio-player" controls style="display:none;">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    document.getElementById('play-btn').addEventListener('click', function() {
+      const audioLink = document.getElementById('audio-link').value.trim();
+
+      if (audioLink) {
+        const audioPlayer = document.getElementById('audio-player');
+        audioPlayer.src = audioLink;
+        audioPlayer.style.display = 'block'; // Show the audio player
+        audioPlayer.play(); // Play the audio
+      } else {
+        alert('Please enter a valid MP3 link.');
+      }
+    });
+  </script>
+
+</body>
+</html>
