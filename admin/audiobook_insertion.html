@@ -171,7 +171,7 @@
  function fetchSuggestions() {
     const id = document.getElementById('id').value;
     if (id) {
-      fetch(`${BASE_URL}/suggest-audiobook?id=${id}`)
+      fetch(`${BASE_URL}/get-suggestions?id=${id}`)
         .then(response => response.json())
         .then(data => {
           if (data.author && data.title) {
