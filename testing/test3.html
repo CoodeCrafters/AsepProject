@@ -153,23 +153,25 @@ h1 {
 
 /* Book List */
 .book-list {
-  display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to the next line */
-  justify-content: center; /* Center the cards in the container */
-  margin-top: 30px; /* Space above the book list */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  justify-content: center;
+  margin-top: 30px;
+  grid-column-gap: 30px; /* Horizontal gap between books */ 
+
 }
 
-/* Book Card */
 .book-card {
+  position: relative;
+  width: 210px;               /* Fixed width of the card */
+  height: 370px;              /* Fixed height of the card */
   background: #fff;
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
-  padding: 20px; /* Internal padding for card content */
-  margin: 15px; /* Margin to create a 30px gap (15px on each side) */
-  flex: 0 1 calc(33.33% - 30px); /* Adjust width to fit 3 cards per row with 30px gap */
 }
 
 .book-card:hover {
