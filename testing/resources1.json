@@ -261,6 +261,13 @@
         "ISBN": "9781098102364",
         "year": 2021,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/ad511010e894e8294b0d7d0abf9855f7adc29389cfaab9c082b73688e1daeab8.jpg"
+      },
+      {
+        "BookName": "Hacking Secret Ciphers with Python: A beginner's guide to cryptography and computer programming with Python",
+        "Author": "Al Sweigart",
+        "ISBN": "9781482614374",
+        "year": 2013,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/6cfe6c443208de90a139c765cb0746aa106243edb0b7b7f124072013ed0a4d5e.jpg"
       }
     ]
   },
