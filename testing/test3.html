@@ -155,7 +155,7 @@ h1 {
 .book-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 30px;
+  gap: 10px; /* Set gap between cards to 10px */
   justify-content: center;
   margin-top: 30px;
 }
@@ -170,6 +170,7 @@ h1 {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
+  margin: 0; /* Remove margin to avoid extra space */
 }
 
 .book-card:hover {
