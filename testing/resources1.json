@@ -163,6 +163,13 @@
         "ISBN": "9798514866571",
         "year": 2021,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers400/collections/genesis/087e4c5ab387e9b56475171de21fef9cc32edb3dde9017cc19ba1a5ac0abc3aa.jpg"
+      },
+      {
+        "BookName": "Classic Computer Science Problems in Python",
+        "Author": "David Kopec",
+        "ISBN": "9781617295980",
+        "year": 2019,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers400/collections/genesis/ed7651235f6751ae83cebef5d7295df5bc1e9246f67aa233f18fb07e0631db19.jpg"
       }
     ]
   },
