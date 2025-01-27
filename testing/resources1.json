@@ -402,5 +402,17 @@
         "bookCover": "https://th.bing.com/th/id/OIP.-_QdGUZOtnFH8GMZra6lCwAAAA?w=204&h=306&c=7&r=0&o=5&dpr=1.3&pid=1.7"
       }
     ]
+  },
+  {
+    "domain": "ELECTRICAL",
+    "books": [
+      {
+        "BookName": "Principles of electronic materials and devices",
+        "Author": "S. O. Kasap",
+        "ISBN": "0072957913",
+        "year": 2006,
+        "bookCover": "https://covers.openlibrary.org/b/id/4258526-M.jpg"
+      }
+    ]
   }
 ]
