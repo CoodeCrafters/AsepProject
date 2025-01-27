@@ -58,7 +58,9 @@
         }
     </style>
   <script>
-   let domainsLoaded = false; // Flag to check if domains are already loaded
+    const BASE_URL = "https://datainsertion.onrender.com";
+
+    let domainsLoaded = false; // Flag to check if domains are already loaded
 
 document.addEventListener("DOMContentLoaded", () => {
     if (!domainsLoaded) { // Only fetch domains if not already done
