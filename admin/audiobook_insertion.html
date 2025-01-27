@@ -58,8 +58,6 @@
         }
     </style>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-
     const BASE_URL = "https://datainsertion.onrender.com";
 
     // Function to fetch suggestions based on ID input and pre-fill the fields
@@ -106,11 +104,14 @@
         const authors = document.getElementById('authors').value.trim();
         const totalDuration = document.getElementById('totalDuration').value.trim();
         const genre = document.getElementById('genre').value.trim();
+        const id = document.getElementById('id').value.trim();
+
+        // MP3 data
         const mp3Titles = [...document.querySelectorAll('input[name="mp3Title[]"]')].map(el => el.value.trim());
         const mp3Durations = [...document.querySelectorAll('input[name="mp3Duration[]"]')].map(el => el.value.trim());
         const mp3Links = [...document.querySelectorAll('input[name="mp3Link[]"]')].map(el => el.value.trim());
 
-        if (!domain || !title || !year || !coverPhoto || !authors || !totalDuration || !genre || 
+        if (!id || !domain || !title || !year || !coverPhoto || !authors || !totalDuration || !genre || 
             mp3Titles.some(t => !t) || mp3Links.some(l => !l) || mp3Durations.some(d => !d)) {
             alert('Please fill in all required fields.');
             return;
@@ -123,6 +124,7 @@
         }));
 
         const payload = {
+            id,  // Added to the payload to match the backend expectations
             domain,
             audioBook: {
                 title,
