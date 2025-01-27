@@ -177,6 +177,13 @@
         "ISBN": "9781491939369",
         "year": 2015,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers400/collections/genesis/b4a1a2c3e4b860626faaa1648090fbd44404d5c893e81797ed129c72bc3f183f.jpg"
+      },
+      {
+        "BookName": "Numerical Algorithms: Methods for Computer Vision, Machine Learning, and Graphics",
+        "Author": "Justin Solomon",
+        "ISBN": "9781482251883",
+        "year": 2015,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers400/collections/genesis/549ecccbd2674e79cbaf367a2f4cf8bd3c953a33b2889b8f269ecb572bec1c1d.jpg"
       }
     ]
   },
