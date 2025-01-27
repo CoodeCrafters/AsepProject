@@ -407,6 +407,13 @@
         "ISBN": "0132471310",
         "year": 1986,
         "bookCover": "https://covers.openlibrary.org/b/id/14316170-M.jpg"
+      },
+      {
+        "BookName": "Fundamentals of Engineering Electromagnetics, Pearson New International Edition",
+        "Author": "David K. Cheng",
+        "ISBN": "978-1-292-02658-9",
+        "year": 2014,
+        "bookCover": "https://www.pearson.com/store//pmccommercewebservices/v2/medias/size-W370-bigcovers-1292026588.jpg?context=bWFzdGVyfGltYWdlc3w0NDY2MHxpbWFnZS9qcGVnfHN5cy1tYXN0ZXIvaW1hZ2VzL2g0MC9oNmUvMTM1ODIxNjMwMTc3NTgvc2l6ZV9XMzcwXy9iaWdjb3ZlcnMvMTI5MjAyNjU4OC5qcGd8YWI0NmMzNjQyMWUxZmEyZGNhYzg5MjE0ZDBiNWYwNDI5MmMxYTE0YzQ2YzVkNDg5OWE0MWNiOGEyMjhkY2U4Zg"
       }
     ]
   },
