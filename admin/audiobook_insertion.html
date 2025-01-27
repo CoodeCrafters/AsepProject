@@ -63,23 +63,35 @@
     // Function to fetch suggestions based on ID input and pre-fill the fields
     function fetchSuggestions() {
         const id = document.getElementById('id').value.trim();
-        if (id) {
+        
+        if (id.length >= 2) { // Only fetch suggestions if the ID is at least 2 characters long
             fetch(`${BASE_URL}/get-suggestions?id=${id}`)
                 .then(response => response.json())
                 .then(data => {
+                    const suggestionList = document.getElementById('suggestionList');
+                    suggestionList.innerHTML = ''; // Clear previous suggestions
+                    
                     if (data && data.length > 0) {
-                        // Pre-fill the author, title, domain, and id fields
-                        const suggestion = data[0]; // Take the first matching suggestion (if any)
-
-                        document.getElementById('author').value = suggestion.author || '';
-                        document.getElementById('audioBookTitle').value = suggestion.title || '';
-                        document.getElementById('domainDropdown').value = suggestion.domain || ''; // Pre-fill the domain dropdown
-                        document.getElementById('id').value = suggestion.id || ''; // Pre-fill the id field
+                        data.forEach(suggestion => {
+                            const suggestionItem = document.createElement('li');
+                            suggestionItem.textContent = suggestion.id;
+                            suggestionItem.onclick = function() {
+                                // Prefill fields when a suggestion is clicked
+                                document.getElementById('audioBookTitle').value = suggestion.title || '';
+                                document.getElementById('author').value = suggestion.author || '';
+                                document.getElementById('domainDropdown').value = suggestion.domain || '';
+                                document.getElementById('id').value = suggestion.id || ''; // Prefill the ID field
+                                suggestionList.innerHTML = ''; // Clear suggestions after selection
+                            };
+                            suggestionList.appendChild(suggestionItem);
+                        });
                     } else {
-                        alert('No suggestions found for this ID');
+                        suggestionList.innerHTML = '<li>No suggestions found</li>';
                     }
                 })
                 .catch(err => console.error('Error fetching suggestions:', err));
+        } else {
+            document.getElementById('suggestionList').innerHTML = ''; // Clear suggestions when ID is less than 2 characters
         }
     }
 
@@ -141,6 +153,19 @@
             alert('An error occurred.');
         }
     }
+
+    // Add more MP3 fields dynamically
+    function addMp3Fields() {
+        const mp3Container = document.getElementById('mp3Container');
+        const mp3Group = document.createElement('div');
+        mp3Group.classList.add('mp3-group');
+        mp3Group.innerHTML = `
+            <input type="text" name="mp3Title[]" placeholder="MP3 Title" required>
+            <input type="text" name="mp3Duration[]" placeholder="MP3 Duration" required>
+            <input type="url" name="mp3Link[]" placeholder="MP3 Link" required>
+        `;
+        mp3Container.appendChild(mp3Group);
+    }
 </script>
 
 <body>
@@ -155,6 +180,9 @@
         <!-- ID Input with oninput handler to fetch suggestions -->
         <label for="id">ID:</label>
         <input type="text" id="id" oninput="fetchSuggestions()" placeholder="Enter ID for suggestions">
+        
+        <!-- Suggestion List for IDs -->
+        <ul id="suggestionList" style="max-height: 150px; overflow-y: auto; padding-left: 0;"></ul>
 
         <!-- Fields to be pre-filled after suggestions -->
         <label for="audioBookTitle">Title of Audio Book:</label>
