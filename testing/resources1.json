@@ -226,6 +226,13 @@
         "ISBN": "9781107002173",
         "year": 2011,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/0f06c30136d2ed1a19e36fd94e856f09d87ca5d790466b7ef8edf1f7fdf8a29e.jpg"
+      },
+      {
+        "BookName": "Mathematics for Computer Science",
+        "Author": "MIT OCWare",
+        "ISBN": "14816519846",
+        "year": 2012,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/f4ab45cda410def6c968ee572e787c6ca602f9a82607991f2793478b9ee6006a.jpg"
       }
     ]
   },
