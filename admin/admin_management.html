@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Management System of E-Library</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      display: flex;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Header Styling */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to right, #46dbeb, #10c9de);
+      color: #fff;
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .menu-toggle {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-size: 28px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    /* Side Menu Styling */
+    .menu {
+      position: fixed;
+      top: 0;
+      left: -270px;
+      width: 270px;
+      height: 100%;
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      padding-top: 70px;
+      transition: left 0.4s ease;
+      box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    .menu.active {
+      left: 0;
+    }
+
+    .menu a {
+      display: block;
+      padding: 15px 20px;
+      text-decoration: none;
+      color: #ecf0f1;
+      font-size: 18px;
+      border-bottom: 1px solid #34495e;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .menu a:hover {
+      background-color: #34495e;
+      color: #1abc9c;
+    }
+
+    .menu a i {
+      margin-right: 10px;
+    }
+
+    /* Main Content Styling */
+    .main-content {
+      margin-left: 0;
+      width: 100%;
+      padding: 90px 20px 20px 20px;
+      transition: margin-left 0.4s ease;
+    }
+
+    .main-content.active {
+      margin-left: 270px;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media screen and (max-width: 768px) {
+      header {
+        font-size: 20px;
+      }
+
+      .menu a {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Side Menu -->
+  <div class="menu" id="menu">
+    <a href="ebook-redirection.html"><i class="fas fa-book"></i>E-Book Data Insertion</a>
+    <a href="audiobook-redirection.html"><i class="fas fa-headphones"></i>Audio-book Data Insertion</a>
+    <a href="json-extractor.html"><i class="fas fa-code"></i>JSON Extractor</a>
+    <a href="validate-ebooks.html"><i class="fas fa-edit"></i>Validate E-books</a>
+    <a href="validate-audiobooks.html"><i class="fas fa-check-circle"></i>Validate Audiobooks</a>
+    <a href="help.html"><i class="fas fa-question-circle"></i>Help</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content" id="main-content">
+    <header>
+      <i class="fas fa-bars menu-toggle" onclick="toggleMenu()"></i>
+      Admin Management System of E-Library
+    </header>
+    <div>
+      <p>Welcome to the Admin Management System of E-Library. Use the menu to navigate through the various sections.</p>
+    </div>
+  </div>
+
+  <script>
+    const menu = document.getElementById('menu');
+    const mainContent = document.getElementById('main-content');
+
+    // Toggle Menu Functionality
+    function toggleMenu() {
+      menu.classList.toggle('active');
+      mainContent.classList.toggle('active');
+    }
+
+    // Keyboard Shortcut for Menu Toggle
+    document.addEventListener('keydown', function (e) {
+      if (e.ctrlKey && e.key === 'b') {
+        toggleMenu();
+        e.preventDefault(); // Prevent the default browser action
+      }
+    });
+  </script>
+</body>
+</html>
