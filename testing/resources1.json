@@ -212,6 +212,13 @@
         "ISBN": "9780262542364",
         "year": 2021,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/a18db95715c574f623a922065fc5781e8425b05185afd77bed25a1038037185a.jpg"
+      },
+      {
+        "BookName": "Computer Networks",
+        "Author": "Andrew S. Tanenbaum",
+        "ISBN": "9780130661029",
+        "year": 2003,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/46743578d2a9663afae837eb629cff42153ae04705f239227faa67523a6c3f7e.jpg"
       }
     ]
   },
