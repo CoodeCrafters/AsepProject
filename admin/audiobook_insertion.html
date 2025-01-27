@@ -83,15 +83,16 @@
                             const titleField = document.getElementById('audioBookTitle');
                             const authorField = document.getElementById('authors');
                             const idField = document.getElementById('id');
-                            const domainField = document.getElementById('domainDropdown');
+                            const domainField = document.getElementById('domainTextarea');
+
 
                             // Prefill values from the selected suggestion
                             if (titleField && authorField && idField) {
                                 titleField.value = suggestion.title || ''; // Fill title
                                 authorField.value = suggestion.author || ''; // Fill author
                                 idField.value = suggestion.id || ''; // Fill ID
-                                if (domainField) domainField.value = suggestion.domain || ''; // Fill domain if exists
-                            }
+                                domainField.value = suggestion.domain || ''; // Fill domain in textarea
+                                }
 
                             // Clear suggestions after selection
                             suggestionList.innerHTML = '';
@@ -112,7 +113,7 @@
 
     // Insert the audiobook details into the backend
     async function insertAudioBook() {
-        const domain = document.getElementById('domainDropdown').value;
+        const domain = document.getElementById('domainTextarea').value.trim();
         const title = document.getElementById('audioBookTitle').value.trim();
         const year = document.getElementById('year').value.trim();
         const coverPhoto = document.getElementById('coverPhoto').value.trim();
@@ -194,11 +195,8 @@
 <body>
     <h1>Audio Book Insertion</h1>
     <form onsubmit="event.preventDefault(); insertAudioBook();">
-        <!-- Domain Dropdown -->
-        <label for="domainDropdown">Domain:</label>
-        <select id="domainDropdown" name="domain">
-          <option value="" disabled selected>Select a domain</option>
-        </select>
+        <label for="domainTextarea">Domain:</label>
+        <textarea id="domainTextarea" name="domain" rows="2" placeholder="Enter domain"></textarea>
 
         <!-- ID Input with oninput handler to fetch suggestions -->
         <label for="id">ID:</label>
