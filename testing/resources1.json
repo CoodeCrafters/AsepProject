@@ -184,6 +184,13 @@
         "ISBN": "9781482251883",
         "year": 2015,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers400/collections/genesis/549ecccbd2674e79cbaf367a2f4cf8bd3c953a33b2889b8f269ecb572bec1c1d.jpg"
+      },
+      {
+        "BookName": "Computer Science Distilled: Learn the Art of Solving Computational Problems",
+        "Author": "Wladston Ferreira Filho",
+        "ISBN": "9780997316025",
+        "year": 2017,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers400/collections/genesis/3bf67f72cff051f95545d83431b39d06caab1546f2fe824e712512856992322f.jpg"
       }
     ]
   },
