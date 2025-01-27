@@ -219,6 +219,13 @@
         "ISBN": "9780130661029",
         "year": 2003,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/46743578d2a9663afae837eb629cff42153ae04705f239227faa67523a6c3f7e.jpg"
+      },
+      {
+        "BookName": "Quantum Computation and Quantum Information: 10th Anniversary Edition",
+        "Author": "Michael A. Nielsen, Isaac L. Chuang",
+        "ISBN": "9781107002173",
+        "year": 2011,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/0f06c30136d2ed1a19e36fd94e856f09d87ca5d790466b7ef8edf1f7fdf8a29e.jpg"
       }
     ]
   },
