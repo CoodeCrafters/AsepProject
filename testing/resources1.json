@@ -205,6 +205,13 @@
         "ISBN": "9780262011532",
         "year": 1996,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/ff9f825d3582047d6bd88a48c8560c4aa49e5064f45cc9135a3c8bd7b27a0030.jpg"
+      },
+      {
+        "BookName": "Introduction to Computation and Programming Using Python",
+        "Author": "John V. Guttag",
+        "ISBN": "9780262542364",
+        "year": 2021,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/a18db95715c574f623a922065fc5781e8425b05185afd77bed25a1038037185a.jpg"
       }
     ]
   },
