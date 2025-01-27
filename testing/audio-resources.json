@@ -540,7 +540,16 @@
       {
         "author": "Aristo­phanes",
         "title": "Lysis­tra­ta (per­formed by Lucy Law­less)",
-        "id": "a64eb6d8-757b-48c7-94ae-c3724fc9ba0d"
+        "id": "a64eb6d8-757b-48c7-94ae-c3724fc9ba0d",
+        "total_duration": "1.24:54",
+        "genre": "Fiction",
+        "bookCover_url": "https://cdn8.openculture.com/2019/01/07210913/Lysistrata_Solomon_Grundy.jpg",
+        "year_of_published": 2015,
+        "mp3Details": [
+          {
+            "title": "Part One"
+          }
+        ]
       },
       {
         "author": "Asi­mov, Isaac",
