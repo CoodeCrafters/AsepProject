@@ -153,9 +153,8 @@ h1 {
 
 /* Book List */
 .book-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
-  gap: 30px; /* Set gap between consecutive book cards to 30px */
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
   justify-content: center; /* Center the cards in the container */
   margin-top: 30px; /* Space above the book list */
 }
@@ -169,6 +168,8 @@ h1 {
   text-align: center;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   padding: 20px; /* Internal padding for card content */
+  margin: 15px; /* Margin to create a 30px gap (15px on each side) */
+  flex: 0 1 calc(33.33% - 30px); /* Adjust width to fit 3 cards per row with 30px gap */
 }
 
 .book-card:hover {
