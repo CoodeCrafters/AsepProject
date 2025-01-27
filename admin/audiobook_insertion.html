@@ -58,8 +58,7 @@
         }
     </style>
  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-
+    // Define fetchSuggestions globally, so it's available outside the DOMContentLoaded listener
     const BASE_URL = "https://datainsertion.onrender.com";
 
     // Function to fetch suggestions based on ID input and pre-fill the fields
@@ -178,6 +177,12 @@
         mp3Container.appendChild(mp3Group);
     }
 
+    document.addEventListener('DOMContentLoaded', function() {
+        // All your event listeners can go here
+        const idInput = document.getElementById('id');
+        if (idInput) {
+            idInput.addEventListener('input', fetchSuggestions);
+        }
     });
 </script>
 
