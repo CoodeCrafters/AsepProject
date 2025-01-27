@@ -369,6 +369,13 @@
         "ISBN": "0849372348",
         "year": 2005,
         "bookCover": "https://covers.openlibrary.org/b/id/1598168-M.jpg"
+      },
+      {
+        "BookName": "City",
+        "Author": "David Macaulay",
+        "ISBN": "039519492X",
+        "year": 1974,
+        "bookCover": "https://covers.openlibrary.org/b/id/6726491-M.jpg"
       }
     ]
   },
