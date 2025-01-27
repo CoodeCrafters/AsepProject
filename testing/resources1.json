@@ -156,6 +156,13 @@
         "ISBN": "978-0387848570",
         "year": 2009,
         "bookCover": "https://m.media-amazon.com/images/I/61Sxfhpv7ML._UF1000,1000_QL80_.jpg"
+      },
+      {
+        "BookName": "Computer Hacking for Beginners",
+        "Author": "Kevin James",
+        "ISBN": "9798514866571",
+        "year": 2021,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers400/collections/genesis/087e4c5ab387e9b56475171de21fef9cc32edb3dde9017cc19ba1a5ac0abc3aa.jpg"
       }
     ]
   },
