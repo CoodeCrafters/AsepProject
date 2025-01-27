@@ -247,6 +247,13 @@
         "ISBN": "9789356061316",
         "year": 2022,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/0f094bcb3c2dcb76bbaeb3908ef4df26e32a2fabe72b185e310bb108dc0604ad.jpg"
+      },
+      {
+        "BookName": "Music Theory for Computer Musicians",
+        "Author": "Michael Hewitt",
+        "ISBN": "9781598635034",
+        "year": 2008,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/a758a74a2835edc05b708aa4d313f691f6515ff1d36e528abb23f9c837d56b0c.jpg"
       }
     ]
   },
