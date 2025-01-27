@@ -254,6 +254,13 @@
         "ISBN": "9781598635034",
         "year": 2008,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/a758a74a2835edc05b708aa4d313f691f6515ff1d36e528abb23f9c837d56b0c.jpg"
+      },
+      {
+        "BookName": "Practical Machine Learning for Computer Vision: End-to-End Machine Learning for Images",
+        "Author": "Valliappa Lakshmanan, Martin Görner, Ryan Gillard",
+        "ISBN": "9781098102364",
+        "year": 2021,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/ad511010e894e8294b0d7d0abf9855f7adc29389cfaab9c082b73688e1daeab8.jpg"
       }
     ]
   },
