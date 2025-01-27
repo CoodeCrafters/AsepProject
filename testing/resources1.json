@@ -198,6 +198,13 @@
         "ISBN": "9780470181362",
         "year": 2008,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/38134b7c74aaea0bdc77fa5d72756ae2b147af8a3c9526a5a071cf50277c564f.jpg"
+      },
+      {
+        "BookName": "Structure and Interpretation of Computer Programs",
+        "Author": "Harold Abelson, Gerald Jay Sussman",
+        "ISBN": "9780262011532",
+        "year": 1996,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/ff9f825d3582047d6bd88a48c8560c4aa49e5064f45cc9135a3c8bd7b27a0030.jpg"
       }
     ]
   },
