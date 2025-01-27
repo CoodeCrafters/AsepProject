@@ -57,131 +57,129 @@
             margin-bottom: 20px;
         }
     </style>
- <script>
-    // Define fetchSuggestions globally, so it's available outside the DOMContentLoaded listener
-    const BASE_URL = "https://datainsertion.onrender.com";
-
-    // Function to fetch suggestions based on ID input and pre-fill the fields
-    function fetchSuggestions() {
-        const id = document.getElementById('id').value.trim();
-        
-        if (id.length >= 2) { // Only fetch suggestions if the ID is at least 2 characters long
-            fetch(`${BASE_URL}/get-suggestions?id=${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    const suggestionList = document.getElementById('suggestionList');
-                    suggestionList.innerHTML = ''; // Clear previous suggestions
-                    
-                    if (data && data.length > 0) {
-                        data.forEach(suggestion => {
-                            const suggestionItem = document.createElement('li');
-                            suggestionItem.textContent = suggestion.id;
-                            suggestionItem.onclick = function() {
-                                // Prefill fields when a suggestion is clicked
-                                const titleField = document.getElementById('audioBookTitle');
-                                const authorField = document.getElementById('author');
-                                const domainField = document.getElementById('domainDropdown');
-                                const idField = document.getElementById('id');
-                                
-                                // Check if the elements exist before setting values
-                                if (titleField && authorField && domainField && idField) {
-                                    titleField.value = suggestion.title || '';
-                                    authorField.value = suggestion.author || '';
-                                    domainField.value = suggestion.domain || '';
-                                    idField.value = suggestion.id || ''; // Prefill the ID field
-                                }
-                                
-                                suggestionList.innerHTML = ''; // Clear suggestions after selection
-                            };
-                            suggestionList.appendChild(suggestionItem);
-                        });
-                    } else {
-                        suggestionList.innerHTML = '<li>No suggestions found</li>';
-                    }
-                })
-                .catch(err => console.error('Error fetching suggestions:', err));
-        } else {
-            document.getElementById('suggestionList').innerHTML = ''; // Clear suggestions when ID is less than 2 characters
-        }
-    }
-
-    // Insert the audiobook details into the backend
-    async function insertAudioBook() {
-        const domain = document.getElementById('domainDropdown').value;
-        const title = document.getElementById('audioBookTitle').value.trim();
-        const year = document.getElementById('year').value.trim();
-        const coverPhoto = document.getElementById('coverPhoto').value.trim();
-        const authors = document.getElementById('authors').value.trim();
-        const totalDuration = document.getElementById('totalDuration').value.trim();
-        const genre = document.getElementById('genre').value.trim();
-        const mp3Titles = [...document.querySelectorAll('input[name="mp3Title[]"]')].map(el => el.value.trim());
-        const mp3Durations = [...document.querySelectorAll('input[name="mp3Duration[]"]')].map(el => el.value.trim());
-        const mp3Links = [...document.querySelectorAll('input[name="mp3Link[]"]')].map(el => el.value.trim());
-
-        if (!domain || !title || !year || !coverPhoto || !authors || !totalDuration || !genre || 
-            mp3Titles.some(t => !t) || mp3Links.some(l => !l) || mp3Durations.some(d => !d)) {
-            alert('Please fill in all required fields.');
-            return;
-        }
-
-        const mp3Details = mp3Titles.map((title, index) => ({
-            title,
-            duration: mp3Durations[index],
-            link: mp3Links[index],
-        }));
-
-        const payload = {
-            domain,
-            audioBook: {
-                title,
-                year: parseInt(year, 10),
-                coverPhoto,
-                authors,
-                totalDuration,
-                genre,
-                mp3Details,
-            },
-        };
-
-        try {
-            const response = await fetch(`${BASE_URL}/update-audiobook-details`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-            });
-
-            const result = await response.json();
-            if (response.ok) {
-                alert('Audio book inserted successfully.');
-                document.querySelector('form').reset();
-                document.getElementById('mp3Container').innerHTML = ''; // Clear MP3 fields
-            } else {
-                alert(`Error: ${result.message}`);
-            }
-        } catch (error) {
-            console.error('Error inserting audio book:', error);
-            alert('An error occurred.');
-        }
-    }
-
-    // Add more MP3 fields dynamically
-    function addMp3Fields() {
-        const mp3Container = document.getElementById('mp3Container');
-        const mp3Group = document.createElement('div');
-        mp3Group.classList.add('mp3-group');
-        mp3Group.innerHTML = `
-            <input type="text" name="mp3Title[]" placeholder="MP3 Title" required>
-            <input type="text" name="mp3Duration[]" placeholder="MP3 Duration" required>
-            <input type="url" name="mp3Link[]" placeholder="MP3 Link" required>
-        `;
-        mp3Container.appendChild(mp3Group);
-    }
-
+   <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // All your event listeners can go here
-        const idInput = document.getElementById('id');
-        if (idInput) {
-            idInput.addEventListener('input', fetchSuggestions);
+        const BASE_URL = "https://datainsertion.onrender.com";
+
+        // Function to fetch suggestions based on ID input and pre-fill the fields
+        function fetchSuggestions() {
+            const id = document.getElementById('id').value.trim();
+            const suggestionList = document.getElementById('suggestionList');
+
+            if (id.length >= 2) { // Only fetch suggestions if the ID is at least 2 characters long
+                fetch(`${BASE_URL}/get-suggestions?id=${id}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        suggestionList.innerHTML = ''; // Clear previous suggestions
+
+                        if (data && data.length > 0) {
+                            data.forEach(suggestion => {
+                                const suggestionItem = document.createElement('li');
+                                suggestionItem.textContent = suggestion.id; // Display suggestion ID
+                                suggestionItem.onclick = function() {
+                                    // Prefill fields when a suggestion is clicked
+                                    const titleField = document.getElementById('audioBookTitle');
+                                    const authorField = document.getElementById('authors');
+                                    const domainField = document.getElementById('domainDropdown');
+                                    const idField = document.getElementById('id');
+
+                                    // Check if the elements exist before setting values
+                                    if (titleField && authorField && domainField && idField) {
+                                        console.log('Suggestion clicked:', suggestion); // Log suggestion data
+
+                                        // Prefill the fields with the values from the suggestion
+                                        titleField.value = suggestion.title || '';
+                                        authorField.value = suggestion.author || '';
+                                        domainField.value = suggestion.domain || ''; // Ensure domain is available in suggestion
+                                        idField.value = suggestion.id || ''; // Prefill the ID field
+                                    } else {
+                                        console.error('Some form fields are missing');
+                                    }
+
+                                    suggestionList.innerHTML = ''; // Clear suggestions after selection
+                                };
+                                suggestionList.appendChild(suggestionItem);
+                            });
+                        } else {
+                            suggestionList.innerHTML = '<li>No suggestions found</li>';
+                        }
+                    })
+                    .catch(err => console.error('Error fetching suggestions:', err));
+            } else {
+                suggestionList.innerHTML = ''; // Clear suggestions when ID is less than 2 characters
+            }
+        }
+
+        // Insert the audiobook details into the backend
+        async function insertAudioBook() {
+            const domain = document.getElementById('domainDropdown').value;
+            const title = document.getElementById('audioBookTitle').value.trim();
+            const year = document.getElementById('year').value.trim();
+            const coverPhoto = document.getElementById('coverPhoto').value.trim();
+            const authors = document.getElementById('authors').value.trim();
+            const totalDuration = document.getElementById('totalDuration').value.trim();
+            const genre = document.getElementById('genre').value.trim();
+            const mp3Titles = [...document.querySelectorAll('input[name="mp3Title[]"]')].map(el => el.value.trim());
+            const mp3Durations = [...document.querySelectorAll('input[name="mp3Duration[]"]')].map(el => el.value.trim());
+            const mp3Links = [...document.querySelectorAll('input[name="mp3Link[]"]')].map(el => el.value.trim());
+
+            if (!domain || !title || !year || !coverPhoto || !authors || !totalDuration || !genre || 
+                mp3Titles.some(t => !t) || mp3Links.some(l => !l) || mp3Durations.some(d => !d)) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            const mp3Details = mp3Titles.map((title, index) => ({
+                title,
+                duration: mp3Durations[index],
+                link: mp3Links[index],
+            }));
+
+            const payload = {
+                domain,
+                audioBook: {
+                    title,
+                    year: parseInt(year, 10),
+                    coverPhoto,
+                    authors,
+                    totalDuration,
+                    genre,
+                    mp3Details,
+                },
+            };
+
+            try {
+                const response = await fetch(`${BASE_URL}/update-audiobook-details`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert('Audio book inserted successfully.');
+                    document.querySelector('form').reset();
+                    document.getElementById('mp3Container').innerHTML = ''; // Clear MP3 fields
+                } else {
+                    alert(`Error: ${result.message}`);
+                }
+            } catch (error) {
+                console.error('Error inserting audio book:', error);
+                alert('An error occurred.');
+            }
+        }
+
+        // Add more MP3 fields dynamically
+        function addMp3Fields() {
+            const mp3Container = document.getElementById('mp3Container');
+            const mp3Group = document.createElement('div');
+            mp3Group.classList.add('mp3-group');
+            mp3Group.innerHTML = `
+                <input type="text" name="mp3Title[]" placeholder="MP3 Title" required>
+                <input type="text" name="mp3Duration[]" placeholder="MP3 Duration" required>
+                <input type="url" name="mp3Link[]" placeholder="MP3 Link" required>
+            `;
+            mp3Container.appendChild(mp3Group);
         }
     });
 </script>
@@ -192,34 +190,34 @@
         <!-- Domain Dropdown -->
         <label for="domainDropdown">Domain:</label>
         <select id="domainDropdown" name="domain">
-          <option value="" disabled selected>Select a domain</option>
-        </select>
+            <option value="" disabled selected>Select a domain</option>
+        </select><br>
 
         <!-- ID Input with oninput handler to fetch suggestions -->
         <label for="id">ID:</label>
-        <input type="text" id="id" oninput="fetchSuggestions()" placeholder="Enter ID for suggestions">
-        
+        <input type="text" id="id" oninput="fetchSuggestions()" placeholder="Enter ID for suggestions"><br>
+
         <!-- Suggestion List for IDs -->
-        <ul id="suggestionList" style="max-height: 150px; overflow-y: auto; padding-left: 0;"></ul>
+        <ul id="suggestionList" style="max-height: 150px; overflow-y: auto; padding-left: 0;"></ul><br>
 
         <!-- Fields to be pre-filled after suggestions -->
         <label for="audioBookTitle">Title of Audio Book:</label>
-        <input type="text" id="audioBookTitle" required>
+        <input type="text" id="audioBookTitle" required><br>
 
         <label for="year">Year of Published:</label>
-        <input type="number" id="year" required>
+        <input type="number" id="year" required><br>
 
         <label for="coverPhoto">Book Cover Photo URL:</label>
-        <input type="url" id="coverPhoto" required>
+        <input type="url" id="coverPhoto" required><br>
 
         <label for="authors">Authors:</label>
-        <input type="text" id="authors" required>
+        <input type="text" id="authors" required><br>
 
         <label for="totalDuration">Total Duration:</label>
-        <input type="text" id="totalDuration" required>
+        <input type="text" id="totalDuration" required><br>
 
         <label for="genre">Genre:</label>
-        <input type="text" id="genre" required>
+        <input type="text" id="genre" required><br>
 
         <!-- MP3 fields for multiple files -->
         <div id="mp3Container" class="mp3-container">
@@ -228,7 +226,8 @@
                 <input type="text" name="mp3Duration[]" placeholder="MP3 Duration" required>
                 <input type="url" name="mp3Link[]" placeholder="MP3 Link" required>
             </div>
-        </div>
+        </div><br>
+        
         <button type="button" onclick="addMp3Fields()">Add More MP3 Details</button><br>
 
         <button type="submit">Insert Audio Book</button>
