@@ -240,6 +240,13 @@
         "ISBN": "9780367553616",
         "year": 2020,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/30f6c9ca971ca5609d673f93e4a8bf8f972ca63479b87be6d31fad65f088c0e7.jpg"
+      },
+      {
+        "BookName": "Computer Networking: A Top-Down Approach",
+        "Author": "James F. Kurose, Keith W. Ross",
+        "ISBN": "9789356061316",
+        "year": 2022,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/0f094bcb3c2dcb76bbaeb3908ef4df26e32a2fabe72b185e310bb108dc0604ad.jpg"
       }
     ]
   },
