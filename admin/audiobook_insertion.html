@@ -58,49 +58,55 @@
         }
     </style>
   <script>
-    const BASE_URL = "https://datainsertion.onrender.com";
+   let domainsLoaded = false; // Flag to check if domains are already loaded
 
-    document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
+    if (!domainsLoaded) { // Only fetch domains if not already done
         fetchDomains();
-    });
-
-    // Fetch available domains and populate the domain dropdown
-    async function fetchDomains() {
-        try {
-            const response = await fetch(`${BASE_URL}/get-domains1`);
-            const domains = await response.json();
-            const dropdown = document.getElementById('domainDropdown');
-            dropdown.innerHTML = ''; // Clear existing options
-
-            domains.forEach(domain => {
-                const option = document.createElement('option');
-                option.value = domain;
-                option.textContent = domain;
-                dropdown.appendChild(option);
-            });
-        } catch (error) {
-            console.error('Error fetching domains:', error);
-            alert('Failed to load domains.');
-        }
     }
+});
 
-    // Fetch suggestions based on ID input and pre-fill the fields
-    function fetchSuggestions() {
-        const id = document.getElementById('id').value.trim();
-        if (id) {
-            fetch(`${BASE_URL}/get-suggestions?id=${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data) {
-                        // Pre-fill the author, title, and domain fields
-                        document.getElementById('author').value = data.author || '';
-                        document.getElementById('title').value = data.title || '';
-                        document.getElementById('domainDropdown').value = data.domain || ''; // Pre-fill the domain dropdown
-                    }
-                })
-                .catch(err => console.error('Error fetching suggestions:', err));
-        }
+// Fetch available domains and populate the domain dropdown
+async function fetchDomains() {
+    if (domainsLoaded) return; // Avoid fetching if domains are already loaded
+
+    try {
+        const response = await fetch(`${BASE_URL}/get-domains1`);
+        const domains = await response.json();
+        const dropdown = document.getElementById('domainDropdown');
+        dropdown.innerHTML = ''; // Clear existing options
+
+        domains.forEach(domain => {
+            const option = document.createElement('option');
+            option.value = domain;
+            option.textContent = domain;
+            dropdown.appendChild(option);
+        });
+
+        domainsLoaded = true; // Mark domains as loaded
+    } catch (error) {
+        console.error('Error fetching domains:', error);
+        alert('Failed to load domains.');
     }
+}
+
+// Fetch suggestions based on ID input and pre-fill the fields
+function fetchSuggestions() {
+    const id = document.getElementById('id').value.trim();
+    if (id) {
+        fetch(`${BASE_URL}/get-suggestions?id=${id}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    // Pre-fill the author, title, and domain fields
+                    document.getElementById('author').value = data.author || '';
+                    document.getElementById('title').value = data.title || '';
+                    document.getElementById('domainDropdown').value = data.domain || ''; // Pre-fill the domain dropdown
+                }
+            })
+            .catch(err => console.error('Error fetching suggestions:', err));
+    }
+}
 
     // Insert the audiobook details into the backend
     async function insertAudioBook() {
