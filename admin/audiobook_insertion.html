@@ -57,7 +57,7 @@
             margin-bottom: 20px;
         }
     </style>
- <script>
+  <script>
     document.addEventListener('DOMContentLoaded', function() {
 
     const BASE_URL = "https://datainsertion.onrender.com";
@@ -79,19 +79,10 @@
                             suggestionItem.textContent = suggestion.id;
                             suggestionItem.onclick = function() {
                                 // Prefill fields when a suggestion is clicked
-                                const titleField = document.getElementById('audioBookTitle');
-                                const authorField = document.getElementById('author');
-                                const domainField = document.getElementById('domainDropdown');
-                                const idField = document.getElementById('id');
-                                
-                                // Check if the elements exist before setting values
-                                if (titleField && authorField && domainField && idField) {
-                                    titleField.value = suggestion.title || '';
-                                    authorField.value = suggestion.author || '';
-                                    domainField.value = suggestion.domain || '';
-                                    idField.value = suggestion.id || ''; // Prefill the ID field
-                                }
-                                
+                                document.getElementById('audioBookTitle').value = suggestion.title || '';
+                                document.getElementById('author').value = suggestion.author || '';
+                                document.getElementById('domainDropdown').value = suggestion.domain || '';
+                                document.getElementById('id').value = suggestion.id || ''; // Prefill the ID field
                                 suggestionList.innerHTML = ''; // Clear suggestions after selection
                             };
                             suggestionList.appendChild(suggestionItem);
@@ -177,8 +168,6 @@
         `;
         mp3Container.appendChild(mp3Group);
     }
-
-    });
 </script>
 
 <body>
