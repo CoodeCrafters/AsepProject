@@ -233,6 +233,13 @@
         "ISBN": "14816519846",
         "year": 2012,
         "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/f4ab45cda410def6c968ee572e787c6ca602f9a82607991f2793478b9ee6006a.jpg"
+      },
+      {
+        "BookName": "The Complete Guide to Blender Graphics: Computer Modeling and Animation",
+        "Author": "John M. Blain",
+        "ISBN": "9780367553616",
+        "year": 2020,
+        "bookCover": "https://s3proxy.cdn-zlib.sk/covers300/collections/genesis/30f6c9ca971ca5609d673f93e4a8bf8f972ca63479b87be6d31fad65f088c0e7.jpg"
       }
     ]
   },
