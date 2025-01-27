@@ -59,128 +59,125 @@
     </style>
  <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const BASE_URL = "https://datainsertion.onrender.com";
 
-        // Function to fetch suggestions based on ID input and pre-fill the fields
-        function fetchSuggestions() {
-            const id = document.getElementById('id').value.trim();
-            
-            if (id.length >= 2) { // Only fetch suggestions if the ID is at least 2 characters long
-                fetch(`${BASE_URL}/get-suggestions?id=${id}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        const suggestionList = document.getElementById('suggestionList');
-                        suggestionList.innerHTML = ''; // Clear previous suggestions
-                        
-                        if (data && data.length > 0) {
-                            data.forEach(suggestion => {
-                                const suggestionItem = document.createElement('li');
-                                suggestionItem.textContent = suggestion.id;
-                                suggestionItem.onclick = function() {
-                                    // Check if the form fields exist before setting their values
-                                    const titleField = document.getElementById('audioBookTitle');
-                                    const authorField = document.getElementById('author');
-                                    const domainField = document.getElementById('domainDropdown');
-                                    const idField = document.getElementById('id');
-                                    
-                                    if (titleField && authorField && domainField && idField) {
-                                        titleField.value = suggestion.title || '';
-                                        authorField.value = suggestion.author || '';
-                                        domainField.value = suggestion.domain || '';
-                                        idField.value = suggestion.id || ''; // Prefill the ID field
-                                    }
+    const BASE_URL = "https://datainsertion.onrender.com";
 
-                                    // Clear suggestions after selection
-                                    suggestionList.innerHTML = '';
-                                };
-                                suggestionList.appendChild(suggestionItem);
-                            });
-                        } else {
-                            suggestionList.innerHTML = '<li>No suggestions found</li>';
-                        }
-                    })
-                    .catch(err => console.error('Error fetching suggestions:', err));
-            } else {
-                document.getElementById('suggestionList').innerHTML = ''; // Clear suggestions when ID is less than 2 characters
-            }
+    // Function to fetch suggestions based on ID input and pre-fill the fields
+    function fetchSuggestions() {
+        const id = document.getElementById('id').value.trim();
+        
+        if (id.length >= 2) { // Only fetch suggestions if the ID is at least 2 characters long
+            fetch(`${BASE_URL}/get-suggestions?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    const suggestionList = document.getElementById('suggestionList');
+                    suggestionList.innerHTML = ''; // Clear previous suggestions
+                    
+                    if (data && data.length > 0) {
+                        data.forEach(suggestion => {
+                            const suggestionItem = document.createElement('li');
+                            suggestionItem.textContent = suggestion.id;
+                            suggestionItem.onclick = function() {
+                                // Prefill fields when a suggestion is clicked
+                                const titleField = document.getElementById('audioBookTitle');
+                                const authorField = document.getElementById('author');
+                                const domainField = document.getElementById('domainDropdown');
+                                const idField = document.getElementById('id');
+                                
+                                // Check if the elements exist before setting values
+                                if (titleField && authorField && domainField && idField) {
+                                    titleField.value = suggestion.title || '';
+                                    authorField.value = suggestion.author || '';
+                                    domainField.value = suggestion.domain || '';
+                                    idField.value = suggestion.id || ''; // Prefill the ID field
+                                }
+                                
+                                suggestionList.innerHTML = ''; // Clear suggestions after selection
+                            };
+                            suggestionList.appendChild(suggestionItem);
+                        });
+                    } else {
+                        suggestionList.innerHTML = '<li>No suggestions found</li>';
+                    }
+                })
+                .catch(err => console.error('Error fetching suggestions:', err));
+        } else {
+            document.getElementById('suggestionList').innerHTML = ''; // Clear suggestions when ID is less than 2 characters
+        }
+    }
+
+    // Insert the audiobook details into the backend
+    async function insertAudioBook() {
+        const domain = document.getElementById('domainDropdown').value;
+        const title = document.getElementById('audioBookTitle').value.trim();
+        const year = document.getElementById('year').value.trim();
+        const coverPhoto = document.getElementById('coverPhoto').value.trim();
+        const authors = document.getElementById('authors').value.trim();
+        const totalDuration = document.getElementById('totalDuration').value.trim();
+        const genre = document.getElementById('genre').value.trim();
+        const mp3Titles = [...document.querySelectorAll('input[name="mp3Title[]"]')].map(el => el.value.trim());
+        const mp3Durations = [...document.querySelectorAll('input[name="mp3Duration[]"]')].map(el => el.value.trim());
+        const mp3Links = [...document.querySelectorAll('input[name="mp3Link[]"]')].map(el => el.value.trim());
+
+        if (!domain || !title || !year || !coverPhoto || !authors || !totalDuration || !genre || 
+            mp3Titles.some(t => !t) || mp3Links.some(l => !l) || mp3Durations.some(d => !d)) {
+            alert('Please fill in all required fields.');
+            return;
         }
 
-        // Insert the audiobook details into the backend
-        async function insertAudioBook() {
-            const domain = document.getElementById('domainDropdown').value;
-            const title = document.getElementById('audioBookTitle').value.trim();
-            const year = document.getElementById('year').value.trim();
-            const coverPhoto = document.getElementById('coverPhoto').value.trim();
-            const authors = document.getElementById('authors').value.trim();
-            const totalDuration = document.getElementById('totalDuration').value.trim();
-            const genre = document.getElementById('genre').value.trim();
-            const mp3Titles = [...document.querySelectorAll('input[name="mp3Title[]"]')].map(el => el.value.trim());
-            const mp3Durations = [...document.querySelectorAll('input[name="mp3Duration[]"]')].map(el => el.value.trim());
-            const mp3Links = [...document.querySelectorAll('input[name="mp3Link[]"]')].map(el => el.value.trim());
+        const mp3Details = mp3Titles.map((title, index) => ({
+            title,
+            duration: mp3Durations[index],
+            link: mp3Links[index],
+        }));
 
-            if (!domain || !title || !year || !coverPhoto || !authors || !totalDuration || !genre || 
-                mp3Titles.some(t => !t) || mp3Links.some(l => !l) || mp3Durations.some(d => !d)) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-
-            const mp3Details = mp3Titles.map((title, index) => ({
+        const payload = {
+            domain,
+            audioBook: {
                 title,
-                duration: mp3Durations[index],
-                link: mp3Links[index],
-            }));
+                year: parseInt(year, 10),
+                coverPhoto,
+                authors,
+                totalDuration,
+                genre,
+                mp3Details,
+            },
+        };
 
-            const payload = {
-                domain,
-                audioBook: {
-                    title,
-                    year: parseInt(year, 10),
-                    coverPhoto,
-                    authors,
-                    totalDuration,
-                    genre,
-                    mp3Details,
-                },
-            };
+        try {
+            const response = await fetch(`${BASE_URL}/update-audiobook-details`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
 
-            try {
-                const response = await fetch(`${BASE_URL}/update-audiobook-details`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                });
-
-                const result = await response.json();
-                if (response.ok) {
-                    alert('Audio book inserted successfully.');
-                    document.querySelector('form').reset();
-                    document.getElementById('mp3Container').innerHTML = ''; // Clear MP3 fields
-                } else {
-                    alert(`Error: ${result.message}`);
-                }
-            } catch (error) {
-                console.error('Error inserting audio book:', error);
-                alert('An error occurred.');
+            const result = await response.json();
+            if (response.ok) {
+                alert('Audio book inserted successfully.');
+                document.querySelector('form').reset();
+                document.getElementById('mp3Container').innerHTML = ''; // Clear MP3 fields
+            } else {
+                alert(`Error: ${result.message}`);
             }
+        } catch (error) {
+            console.error('Error inserting audio book:', error);
+            alert('An error occurred.');
         }
+    }
 
-        // Add more MP3 fields dynamically
-        function addMp3Fields() {
-            const mp3Container = document.getElementById('mp3Container');
-            const mp3Group = document.createElement('div');
-            mp3Group.classList.add('mp3-group');
-            mp3Group.innerHTML = `
-                <input type="text" name="mp3Title[]" placeholder="MP3 Title" required>
-                <input type="text" name="mp3Duration[]" placeholder="MP3 Duration" required>
-                <input type="url" name="mp3Link[]" placeholder="MP3 Link" required>
-            `;
-            mp3Container.appendChild(mp3Group);
-        }
+    // Add more MP3 fields dynamically
+    function addMp3Fields() {
+        const mp3Container = document.getElementById('mp3Container');
+        const mp3Group = document.createElement('div');
+        mp3Group.classList.add('mp3-group');
+        mp3Group.innerHTML = `
+            <input type="text" name="mp3Title[]" placeholder="MP3 Title" required>
+            <input type="text" name="mp3Duration[]" placeholder="MP3 Duration" required>
+            <input type="url" name="mp3Link[]" placeholder="MP3 Link" required>
+        `;
+        mp3Container.appendChild(mp3Group);
+    }
 
-        // Expose functions to the global window object to access them in HTML
-        window.fetchSuggestions = fetchSuggestions;
-        window.insertAudioBook = insertAudioBook;
-        window.addMp3Fields = addMp3Fields;
     });
 </script>
 
