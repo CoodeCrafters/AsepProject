@@ -313,7 +313,10 @@ app.get('/getfetchdata', async (req, res) => {
   }
 });
 
-
+// Define the /heartbeat endpoint
+app.get('/heartbeat', (req, res) => {
+  res.status(200).send('Server is alive');
+});
 
 // Start the server
 app.listen(PORT, () => {
