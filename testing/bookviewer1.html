@@ -38,10 +38,12 @@
 
     .pdf-toolbar {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      align-items: center;
       padding: 10px;
       background-color: #fff;
       border-bottom: 1px solid #ddd;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .pdf-toolbar button {
@@ -59,14 +61,31 @@
       background-color: #1a78c2;
     }
 
+    .pdf-toolbar .page-navigation {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pdf-toolbar .page-navigation input {
+      width: 50px;
+      padding: 5px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
     #pdfViewerContainer {
       flex: 1;
       overflow: auto;
       position: relative;
+      padding: 20px;
     }
 
-    #pdfViewer {
-      width: 100%;
+    .pdf-page {
+      margin-bottom: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
     }
 
     .sidebar {
@@ -182,13 +201,21 @@
   <div class="main-container">
     <div class="pdf-container">
       <div class="pdf-toolbar">
-        <button id="zoomIn">Zoom In</button>
-        <button id="zoomOut">Zoom Out</button>
-        <button id="fullScreen">Full Screen</button>
+        <div>
+          <button id="zoomIn">Zoom In</button>
+          <button id="zoomOut">Zoom Out</button>
+          <button id="fullScreen">Full Screen</button>
+        </div>
+        <div class="page-navigation">
+          <button id="prevPage">Previous</button>
+          <input type="number" id="currentPage" value="1" min="1" />
+          <span id="totalPages"></span>
+          <button id="nextPage">Next</button>
+        </div>
       </div>
       <div id="pdfViewerContainer">
         <div id="loadingSpinner" class="loading-spinner"></div>
-        <canvas id="pdfViewer"></canvas>
+        <div id="pdfViewer"></div>
       </div>
     </div>
     <div class="sidebar">
@@ -222,6 +249,7 @@
     let pdfScale = 1.0;
     let currentPage = 1;
     let pdfDoc = null;
+    let totalPages = 0;
 
     async function loadDynamicContent() {
       try {
@@ -269,8 +297,10 @@
         // Render the PDF using pdf.js
         const loadingTask = pdfjsLib.getDocument(pdfUrl);
         pdfDoc = await loadingTask.promise;
-        renderPage(currentPage);
+        totalPages = pdfDoc.numPages;
+        document.getElementById('totalPages').textContent = `of ${totalPages}`;
 
+        renderAllPages();
         document.getElementById('loadingSpinner').style.display = 'none';
       } catch (error) {
         console.error('Error loading PDF:', error);
@@ -278,28 +308,34 @@
       }
     }
 
-    async function renderPage(pageNum) {
-      const page = await pdfDoc.getPage(pageNum);
-      const canvas = document.getElementById('pdfViewer');
-      const context = canvas.getContext('2d');
-      const viewport = page.getViewport({ scale: pdfScale });
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
+    async function renderAllPages() {
+      const pdfViewer = document.getElementById('pdfViewer');
+      pdfViewer.innerHTML = '';
 
-      await page.render({ canvasContext: context, viewport }).promise;
+      for (let i = 1; i <= totalPages; i++) {
+        const page = await pdfDoc.getPage(i);
+        const canvas = document.createElement('canvas');
+        canvas.className = 'pdf-page';
+        const viewport = page.getViewport({ scale: pdfScale });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+        pdfViewer.appendChild(canvas);
+      }
     }
 
     // Zoom In
     document.getElementById('zoomIn').addEventListener('click', () => {
       pdfScale += 0.1;
-      renderPage(currentPage);
+      renderAllPages();
     });
 
     // Zoom Out
     document.getElementById('zoomOut').addEventListener('click', () => {
       if (pdfScale > 0.2) {
         pdfScale -= 0.1;
-        renderPage(currentPage);
+        renderAllPages();
       }
     });
 
@@ -308,6 +344,39 @@
       const pdfContainer = document.querySelector('.pdf-container');
       pdfContainer.classList.toggle('fullscreen');
     });
+
+    // Page Navigation
+    document.getElementById('prevPage').addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        document.getElementById('currentPage').value = currentPage;
+        scrollToPage(currentPage);
+      }
+    });
+
+    document.getElementById('nextPage').addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        document.getElementById('currentPage').value = currentPage;
+        scrollToPage(currentPage);
+      }
+    });
+
+    document.getElementById('currentPage').addEventListener('change', () => {
+      const page = parseInt(document.getElementById('currentPage').value);
+      if (page >= 1 && page <= totalPages) {
+        currentPage = page;
+        scrollToPage(currentPage);
+      }
+    });
+
+    function scrollToPage(page) {
+      const pdfViewer = document.getElementById('pdfViewer');
+      const canvas = pdfViewer.querySelectorAll('.pdf-page')[page - 1];
+      if (canvas) {
+        canvas.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
 
     async function fetchReviews() {
       const urlParams = new URLSearchParams(window.location.search);
