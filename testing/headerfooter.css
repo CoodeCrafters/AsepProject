@@ -68,27 +68,13 @@ body {
   background-color: var(--bs-secondary);
 }
 
-/* Ensure the page container fills the viewport height */
-.page-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Full viewport height */
-}
-
-/* Main content takes up remaining space */
-.content {
-  flex: 1; /* Ensures it expands to push the footer down */
-}
-
+    
     /* General Footer Styling */
-/* Footer styles */
 footer {
   background: #cfe7ed;
-  color: #000;
+  color: #000000;
   padding: 40px 20px;
   font-family: 'Arial', sans-serif;
-  animation: fadeIn 1.5s ease-in-out;
- 
 }
 
 .footer-container {
