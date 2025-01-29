@@ -28,16 +28,18 @@ body {
 .header {
   position: fixed;
   top: 0;
-  left: 0;
-  width: auto; /* Ensure it spans the full width */
+  left: 50%; /* Moves the element to the center */
+  transform: translateX(-50%); /* Adjusts position back by half of its width */
+  max-width: 1200px; /* Adjust based on your design */
+  width: auto; /* Keeps its natural width */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px; /* Adjust padding if needed */
+  padding: 15px 30px;
   background-color: var(--bs-primary);
   color: var(--bs-white);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  z-index: 1000; /* Keeps it above other elements */
+  z-index: 1000; /* Ensures it's above other elements */
 }
 
 
