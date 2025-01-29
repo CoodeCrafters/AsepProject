@@ -189,84 +189,79 @@
         width: 200px;
       }
     }
-.notification-box {
-    font-family: 'monotype', monospace;
-    color: #fff;
-    position: fixed; /* Change to fixed for positioning */
-    top: 10%; /* Adjust to your preference */
-    right: 10px; /* Move it to the right */
-    width: 300px; /* Adjust the width */
-    height: 400px; /* Set fixed height */
-    overflow: hidden;
-    border: 1px solid #4b6cb7;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background: #1e1e1e;
-    display: block;
-    z-index: 1000; /* Ensure it appears above other content */
+/* Notification Panel */
+.notification-panel {
+  background: linear-gradient(90deg, #103125, #0D7751);
+  color: var(--bs-white);
+  padding: 15px 30px;
+  text-align: center;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  overflow: hidden;
+  max-width: 600px;
+  margin: auto;
 }
 
-.neon-lights-box {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    overflow: hidden;
+.notification-header {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--bs-light-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.neon-light-box {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, rgb(202, 240, 228), rgb(124, 248, 186));
-    animation: neonGlow 2s linear infinite alternate, neonBlow 6s linear infinite;
-    z-index: -1;
+.notification-header span {
+  font-size: 1.2em;
+  margin-left: 10px;
+  transition: transform 0.3s ease;
 }
 
+/* Notification Content */
+.notification-content {
+  display: block;
+  height: 60px; /* Fixed height for 1-2 visible notifications */
+  overflow: hidden;
+  position: relative;
+}
+
+/* List Styling */
 .notification-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    width: 100%;
-    animation: scrollNotifications 20s linear infinite;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  animation: scrollNotifications 10s linear infinite;
 }
 
-.notification {
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+/* Each Notification Item */
+.notification-list li {
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 10px;
+  color: #ffeb3b;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 5px;
+  text-align: center;
+  text-transform: uppercase;
 }
 
-@keyframes neonGlow {
-    0% {
-        opacity: 0.8;
-    }
-    100% {
-        opacity: 1;
-    }
+/* Blinking Effect */
+@keyframes blinkText {
+  0% { color: #ffeb3b; }
+  100% { color: #ffffff; }
 }
 
-@keyframes neonBlow {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1.1);
-    }
-}
-
+/* Auto Scroll Animation */
 @keyframes scrollNotifications {
-    0% {
-        transform: translateY(100%); /* Start below */
-    }
-    100% {
-        transform: translateY(-100%); /* Move above */
-    }
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-100%); }
 }
+
 
 /* General Footer Styling */
 footer {
@@ -610,17 +605,23 @@ footer {
   <button class="carousel-arrow right" onclick="moveRight()">→</button>
 </section>
 
+
 <!-- Notification Panel -->
 <section class="notification-panel">
-  <div class="notification">
-    <h3>Latest News</h3>
-    <marquee behavior="scroll" direction="left" scrollamount="5">
-      🎉 Exciting News! Our library has added 500+ new eBooks this month. Check them out now! |
-      📢 Notice: The library will remain closed on public holidays. |
-      📚 Don't miss our Book Club meeting this Friday at 6 PM.
-    </marquee>
+  <div class="notification-header" onclick="toggleNotification()">
+    <h3>📢 Latest Updates <span id="toggle-icon">▼</span></h3>
+  </div>
+  <div class="notification-content">
+    <ul class="notification-list" id="notificationList">
+      <li>🎉 Exciting News! Our library has added 500+ new eBooks this month.</li>
+      <li>📢 Notice: The library will remain closed on public holidays.</li>
+      <li>📚 Don't miss our Book Club meeting this Friday at 6 PM.</li>
+      <li>🔔 New research papers available in the Science section.</li>
+      <li>📖 Register now for our upcoming "Meet the Author" event.</li>
+    </ul>
   </div>
 </section>
+
 
 
 <footer>
@@ -832,10 +833,41 @@ window.addEventListener("scroll", () => {
   }
 });
 
-function showNotifications() {
-    const notificationBox = document.getElementById('notification-box');
-    notificationBox.style.display = notificationBox.style.display === 'block' ? 'none' : 'block';
+function toggleNotification() {
+  const content = document.querySelector('.notification-content');
+  const icon = document.getElementById('toggle-icon');
+
+  if (content.style.display === "none" || content.style.display === "") {
+    content.style.display = "block";
+    icon.style.transform = "rotate(180deg)";
+  } else {
+    content.style.display = "none";
+    icon.style.transform = "rotate(0deg)";
+  }
 }
+
+// Auto-scrolling notifications
+function startNotificationScroll() {
+  const list = document.getElementById("notificationList");
+  let firstItem = list.firstElementChild.cloneNode(true);
+  
+  setInterval(() => {
+    list.appendChild(firstItem);
+    list.style.transition = "transform 1s ease-in-out";
+    list.style.transform = "translateY(-60px)";
+
+    setTimeout(() => {
+      list.removeChild(list.firstElementChild);
+      list.style.transition = "none";
+      list.style.transform = "translateY(0)";
+      firstItem = list.firstElementChild.cloneNode(true);
+    }, 1000);
+  }, 3000);
+}
+
+// Start scrolling when page loads
+window.onload = startNotificationScroll;
+
 
  // Function to handle domain click
   function openDomain(selectedDomain) {
