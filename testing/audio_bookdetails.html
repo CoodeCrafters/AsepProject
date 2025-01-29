@@ -349,25 +349,25 @@ function loadBooks() {
   yearFilter.innerHTML = `<option value="">Filter by Year</option>`;
 
   // Populate book cards and filters
-  domainData.books.forEach(book => {
+  domainData.entries.forEach(book => {
     const card = document.createElement("div");
     card.className = "book-card";
     card.setAttribute("data-book", JSON.stringify(book)); // Store book data in card
     card.innerHTML = `
-      <img src="${book.bookCover}" alt="${book.BookName}">
-      <h3>${book.BookName}</h3>
-      <p>by ${book.Author}</p>
-      <p>Year: ${book.year}</p>
+      <img src="${book.bookCover_url}" alt="${book.title}">
+      <h3>${book.title}</h3>
+      <p>by ${book.author}</p>
+      <p>Year: ${book.year_of_published}</p>
     `;
     card.onclick = () => openPopup(book);
     bookList.appendChild(card);
 
     // Populate filters
-    if (![...authorFilter.options].some(opt => opt.value === book.Author)) {
-      authorFilter.innerHTML += `<option value="${book.Author}">${book.Author}</option>`;
+    if (![...authorFilter.options].some(opt => opt.value === book.author)) {
+      authorFilter.innerHTML += `<option value="${book.author}">${book.author}</option>`;
     }
-    if (![...yearFilter.options].some(opt => opt.value == book.year)) {
-      yearFilter.innerHTML += `<option value="${book.year}">${book.year}</option>`;
+    if (![...yearFilter.options].some(opt => opt.value == book.year_of_published)) {
+      yearFilter.innerHTML += `<option value="${book.year_of_published}">${book.year_of_published}</option>`;
     }
   });
 }
@@ -378,10 +378,10 @@ function applyFilter() {
   const yearFilter = document.getElementById("filter-year").value;
   
   const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
-  const filteredBooks = domainData.books.filter(book => {
+  const filteredBooks = domainData.entries.filter(book => {
     return (
-      (authorFilter === "" || book.Author === authorFilter) &&
-      (yearFilter === "" || book.year == yearFilter)
+      (authorFilter === "" || book.author === authorFilter) &&
+      (yearFilter === "" || book.year_of_published == yearFilter)
     );
   });
 
@@ -409,10 +409,10 @@ function displayBooks(books) {
     card.className = "book-card";
     card.setAttribute("data-book", JSON.stringify(book)); // Store book data in card
     card.innerHTML = `
-      <img src="${book.bookCover}" alt="${book.BookName}">
-      <h3>${book.BookName}</h3>
-      <p>by ${book.Author}</p>
-      <p>Year: ${book.year}</p>
+      <img src="${book.bookCover_url}" alt="${book.title}">
+      <h3>${book.title}</h3>
+      <p>by ${book.author}</p>
+      <p>Year: ${book.year_of_published}</p>
     `;
     card.onclick = () => openPopup(book);
     bookList.appendChild(card);
@@ -431,10 +431,10 @@ function showSuggestions() {
   }
 
   const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
-  const filteredSuggestions = domainData.books.filter(book => 
-    book.BookName.toLowerCase().includes(searchText) ||
-    book.Author.toLowerCase().includes(searchText) ||
-    book.ISBN.includes(searchText)
+  const filteredSuggestions = domainData.entries.filter(book => 
+    book.title.toLowerCase().includes(searchText) ||
+    book.author.toLowerCase().includes(searchText) ||
+    book.id.includes(searchText) // Using `id` instead of ISBN
   );
 
   if (filteredSuggestions.length > 0) {
@@ -445,9 +445,9 @@ function showSuggestions() {
 
   filteredSuggestions.forEach(book => {
     const suggestionItem = document.createElement("div");
-    suggestionItem.textContent = `${book.BookName} by ${book.Author}`;
+    suggestionItem.textContent = `${book.title} by ${book.author}`;
     suggestionItem.onclick = () => {
-      document.getElementById("search-input").value = book.BookName;
+      document.getElementById("search-input").value = book.title;
       suggestions.innerHTML = "";
       searchBooks();
     };
@@ -455,24 +455,23 @@ function showSuggestions() {
   });
 }
 
+// Search books based on input
+function searchBooks() {
+  const searchText = document.getElementById("search-input").value.toLowerCase();
+  const authorFilter = document.getElementById("filter-author").value;
+  const yearFilter = document.getElementById("filter-year").value;
 
-    // Search books based on input
-    function searchBooks() {
-      const searchText = document.getElementById("search-input").value.toLowerCase();
-      const authorFilter = document.getElementById("filter-author").value;
-      const yearFilter = document.getElementById("filter-year").value;
+  const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
+  const filteredBooks = domainData.entries.filter(book => {
+    return (
+      (searchText === "" || book.title.toLowerCase().includes(searchText) || book.author.toLowerCase().includes(searchText) || book.id.includes(searchText)) &&
+      (authorFilter === "" || book.author === authorFilter) &&
+      (yearFilter === "" || book.year_of_published == yearFilter)
+    );
+  });
 
-      const domainData = resourceData.find(r => r.domain.toLowerCase() === selectedDomain.toLowerCase());
-      const filteredBooks = domainData.books.filter(book => {
-        return (
-          (searchText === "" || book.BookName.toLowerCase().includes(searchText) || book.Author.toLowerCase().includes(searchText) || book.ISBN.includes(searchText)) &&
-          (authorFilter === "" || book.Author === authorFilter) &&
-          (yearFilter === "" || book.year == yearFilter)
-        );
-      });
-
-      displayBooks(filteredBooks);
-    }
+  displayBooks(filteredBooks);
+}
 
 
 // Function to open popup for book details
