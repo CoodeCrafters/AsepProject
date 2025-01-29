@@ -190,22 +190,29 @@
       }
     }
 
+/* Container for both Notification Panel and Motivational Quotes */
+.notification-quote-container {
+  display: flex;
+  justify-content: space-between; /* Space between notification panel and motivational quotes */
+  align-items: flex-start; /* Align them to the top */
+  margin-top: 20px; /* Space between carousel and notification panel */
+}
+
 /* Notification Panel */
 .notification-panel {
   background: linear-gradient(90deg, #103125, #0D7751);
   color: var(--bs-white);
   padding: 15px 30px;
   text-align: center;
-  margin: 20px 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.4s ease-in-out;
   overflow: hidden;
-  width: 300px; /* Reduced width */
+  width: 300px; /* Reduced width for the notification panel */
+  height: 350px; /* Increased height */
   position: relative;
-  top: 20px;  /* Space between carousel and notification */
-  right: 15px;  /* Align to the right side */
+  right: 0; /* Align it to the right */
 }
 
 /* Notification Header */
@@ -227,10 +234,10 @@
 /* Notification Content */
 .notification-content {
   display: block;
-  height: 300px; /* Fixed height for 1-2 visible notifications */
+  height: 300px; /* Fixed height for visible notifications */
   overflow: hidden;
   position: relative;
-  width: 270px;  /* Reduced width */
+  width: 270px; /* Reduced width for better presentation */
 }
 
 /* List Styling */
@@ -269,13 +276,10 @@
 
 /* Motivational Quotes Container */
 .quote-container {
-  position: relative;  /* No longer fixed */
-  top: 20px;  /* Add some spacing from notification panel */
-  left: 15px;  /* Align it to the left side */
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Align quotes vertically */
   gap: 15px;
-  max-width: 250px;  /* Ensure a good width */
+  max-width: 250px; /* Ensure a good width for the quotes */
 }
 
 /* Motivational Quote Styling */
@@ -323,6 +327,7 @@
   transform: scale(1.05);  /* Slightly less scale effect to maintain floating feel */
   background: #f1f1f1;
 }
+
 
 /* General Footer Styling */
 footer {
