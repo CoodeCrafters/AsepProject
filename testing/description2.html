@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Description</title>
+  <link rel="stylesheet" href="./headerfooter.css">
+  <script src="./headerfooter.js" defer></script>
+  <script src="./hard.js" defer></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.11.3/dist/viewer.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.11.3/dist/viewer.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .book-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .singlebookview__card {
+      position: relative;
+      z-index: 2;
+      margin: 50px auto;
+      max-width: 800px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .booktype {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .booktype__text {
+      font-size: 1rem;
+      color: #ff9804;
+    }
+
+    .singlebookview__card-description__abstract {
+      margin-top: 20px;
+      font-size: 1rem;
+      color: #444;
+    }
+
+    .pdf-button {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #access-pdf {
+      padding: 10px 20px;
+      font-size: 1rem;
+      text-decoration: none;
+      color: #007BFF;
+      border: 2px solid #007BFF;
+      border-radius: 5px;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #access-pdf:hover {
+      background: #007BFF;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+  <div class="book-container">
+    <div class="overlay"></div>
+    <div class="singlebookview__card">
+      <div class="booktype">
+        <span class="booktype__text">Free Textbook</span>
+      </div>
+      <h1 class="singlebookview__card-details-info-title" id="book-name"></h1>
+      <h3 class="singlebookview__card-details-info-subtitle" id="book-author"></h3>
+      <p id="book-year"></p>
+      <p id="book-isbn"></p>
+      <div class="singlebookview__card-description">
+        <div class="singlebookview__card-description__abstract" id="book-description"></div>
+      </div>
+      <div class="pdf-button">
+        <button id="access-pdf" onclick="fetchProfileAndRedirect()">Access this Book</button>
+      </div>
+    </div>
+  </div>
+  <div id="footer-container"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', loadDynamicContent);
+
+    async function loadDynamicContent() {
+      try {
+        const [menuResponse, footerResponse] = await Promise.all([
+          fetch('menu.html'),
+          fetch('footer.html')
+        ]);
+
+        document.getElementById('menu-container').innerHTML = await menuResponse.text();
+        document.getElementById('footer-container').innerHTML = await footerResponse.text();
+        fetchBookDetails();
+      } catch (error) {
+        console.error('Error loading content:', error);
+      }
+    }
+
+    async function fetchBookDetails() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const isbn = urlParams.get('ISBN');
+      if (!isbn) return;
+
+      try {
+        const [resourcesResponse1, resourcesResponse2] = await Promise.all([
+          fetch('resources.json'),
+          fetch('resources1.json')
+        ]);
+
+        const resources1 = await resourcesResponse1.json();
+        const resources2 = await resourcesResponse2.json();
+        const allResources = [...resources1, ...resources2];
+        let bookFound = null;
+
+        for (const domain of allResources) {
+          for (const book of domain.books) {
+            if (book.ISBN === isbn) {
+              bookFound = book;
+              break;
+            }
+          }
+          if (bookFound) break;
+        }
+
+        if (bookFound) {
+          document.getElementById('book-name').textContent = bookFound.BookName;
+          document.getElementById('book-author').textContent = `By ${bookFound.Author}`;
+          document.getElementById('book-year').textContent = `Year: ${bookFound.year}`;
+          document.getElementById('book-isbn').textContent = `ISBN: ${bookFound.ISBN}`;
+          document.body.style.backgroundImage = `url(${bookFound.bookCover})`;
+          fetchBookDescription(isbn);
+        }
+      } catch (error) {
+        console.error('Error fetching book details:', error);
+      }
+    }
+
+    async function fetchBookDescription(isbn) {
+      try {
+        const response = await fetch('description.json');
+        const descriptions = await response.json();
+        const bookDescription = descriptions.find(desc => desc.ISBN === isbn);
+        
+        document.getElementById('book-description').innerHTML = bookDescription ? bookDescription.description.join('</p><p>') : 'No description available.';
+      } catch (error) {
+        console.error('Error fetching description:', error);
+      }
+    }
+
+    function fetchProfileAndRedirect() {
+      const isbn = new URLSearchParams(window.location.search).get('ISBN');
+      if (!sessionStorage.getItem('userEmail')) {
+        alert('Complete your profile first.');
+        window.location.href = './profile1.html';
+      } else {
+        window.location.href = `./bookviewer.html?ISBN=${isbn}`;
+      }
+    }
+  </script>
+</body>
+</html>
