@@ -196,17 +196,19 @@
   color: var(--bs-white);
   padding: 15px 30px;
   text-align: center;
+  margin: 20px 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.4s ease-in-out;
   overflow: hidden;
-  width: 300px; /* Decreased width */
+  width: 300px; /* Reduced width */
   position: relative;
-  right: 15px; /* Align it to the right side */
-  margin-top: 20px; /* Add space below the carousel */
+  top: 20px;  /* Space between carousel and notification */
+  right: 15px;  /* Align to the right side */
 }
 
+/* Notification Header */
 .notification-header {
   font-size: 1.5em;
   font-weight: bold;
@@ -228,7 +230,7 @@
   height: 300px; /* Fixed height for 1-2 visible notifications */
   overflow: hidden;
   position: relative;
-  width: 270px; /* Reduced width */
+  width: 270px;  /* Reduced width */
 }
 
 /* List Styling */
@@ -267,15 +269,16 @@
 
 /* Motivational Quotes Container */
 .quote-container {
-  position: relative;  /* No longer fixed, aligned below carousel */
-  left: 15px;  /* Align to the left side */
-  top: 20px;  /* Adjust the top position for spacing from other content */
+  position: relative;  /* No longer fixed */
+  top: 20px;  /* Add some spacing from notification panel */
+  left: 15px;  /* Align it to the left side */
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 20px;  /* Add space between the notification panel and quotes */
+  max-width: 250px;  /* Ensure a good width */
 }
 
+/* Motivational Quote Styling */
 .quote {
   font-size: 1.2em;
   font-weight: bold;
@@ -290,7 +293,7 @@
   transition: transform 0.3s ease-in-out;
 }
 
-/* Cloud-like shape */
+/* Cloud-like shape for the quote bubbles */
 .quote::before {
   content: "";
   position: absolute;
@@ -320,7 +323,6 @@
   transform: scale(1.05);  /* Slightly less scale effect to maintain floating feel */
   background: #f1f1f1;
 }
-
 
 /* General Footer Styling */
 footer {
