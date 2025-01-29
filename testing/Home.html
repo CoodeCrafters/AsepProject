@@ -190,19 +190,21 @@
       }
     }
 
-    /* Notification Panel */
+/* Notification Panel */
 .notification-panel {
   background: linear-gradient(90deg, #103125, #0D7751);
   color: var(--bs-white);
   padding: 15px 30px;
   text-align: center;
-  margin: 20px auto; /* Added auto for centering and margin for spacing */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.4s ease-in-out;
   overflow: hidden;
   width: 300px; /* Decreased width */
+  position: relative;
+  right: 15px; /* Align it to the right side */
+  margin-top: 20px; /* Add space below the carousel */
 }
 
 .notification-header {
@@ -226,7 +228,7 @@
   height: 300px; /* Fixed height for 1-2 visible notifications */
   overflow: hidden;
   position: relative;
-  width: 270px;  /* Reduced width */
+  width: 270px; /* Reduced width */
 }
 
 /* List Styling */
@@ -266,12 +268,12 @@
 /* Motivational Quotes Container */
 .quote-container {
   position: relative;  /* No longer fixed, aligned below carousel */
-  left: 15px;  /* 15px from the left */
+  left: 15px;  /* Align to the left side */
   top: 20px;  /* Adjust the top position for spacing from other content */
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 40px;  /* Add space between the notification panel and quotes */
+  margin-top: 20px;  /* Add space between the notification panel and quotes */
 }
 
 .quote {
@@ -318,6 +320,7 @@
   transform: scale(1.05);  /* Slightly less scale effect to maintain floating feel */
   background: #f1f1f1;
 }
+
 
 /* General Footer Styling */
 footer {
