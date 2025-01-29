@@ -223,9 +223,10 @@
 /* Notification Content */
 .notification-content {
   display: block;
-  height: 60px; /* Fixed height for 1-2 visible notifications */
+  height: 300px; /* Fixed height for 1-2 visible notifications */
   overflow: hidden;
   position: relative;
+  width: 270px;
 }
 
 /* List Styling */
@@ -861,7 +862,7 @@ function startNotificationScroll() {
       list.style.transition = "none";
       list.style.transform = "translateY(0)";
       firstItem = list.firstElementChild.cloneNode(true);
-    }, 1000);
+    }, 1500);
   }, 3000);
 }
 
