@@ -189,24 +189,22 @@
         width: 200px;
       }
     }
-/* Notification Panel */
+
+    /* Notification Panel */
 .notification-panel {
   background: linear-gradient(90deg, #103125, #0D7751);
   color: var(--bs-white);
   padding: 15px 30px;
   text-align: center;
-  margin: 20px 15px; /* Added right margin of 15px */
+  margin: 20px auto; /* Added auto for centering and margin for spacing */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.4s ease-in-out;
   overflow: hidden;
-  width: 300px;  /* Decreased width */
-  position: fixed;  /* Fixed position for right alignment */
-  right: 15px;  /* Right margin */
+  width: 300px; /* Decreased width */
 }
 
-/* Header */
 .notification-header {
   font-size: 1.5em;
   font-weight: bold;
@@ -267,12 +265,13 @@
 
 /* Motivational Quotes Container */
 .quote-container {
-  position: fixed;  /* Fixed position */
+  position: relative;  /* No longer fixed, aligned below carousel */
   left: 15px;  /* 15px from the left */
+  top: 20px;  /* Adjust the top position for spacing from other content */
   display: flex;
   flex-direction: column;
   gap: 15px;
-  z-index: 10; /* Ensure quotes stay on top */
+  margin-top: 40px;  /* Add space between the notification panel and quotes */
 }
 
 .quote {
@@ -319,7 +318,6 @@
   transform: scale(1.05);  /* Slightly less scale effect to maintain floating feel */
   background: #f1f1f1;
 }
-
 
 /* General Footer Styling */
 footer {
