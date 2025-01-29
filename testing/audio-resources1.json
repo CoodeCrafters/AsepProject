@@ -1,0 +1,22 @@
+[
+    {
+      "domain": "Poetry",
+      "entries": [
+        {
+          "author": "Apol­li­naire, Sufyan",
+          "title": "Free MP3",
+          "id": "892ee374-34bc-4153-8483-9587866b26c5",
+          "total_duration": "1.02",
+          "genre": "Fiction",
+          "bookCover_url": "https://m.media-amazon.com/images/I/51oppKeKWdL._SL500_.jpg",
+          "year_of_published": 1913,
+          "mp3Details": [
+            {
+              "title": "Part One",
+              "link": "https://media.sas.upenn.edu/pennsound/authors/Apollinaire/Apollinaire-Guillaume_01_Le-Pont-Mirabeau_1913.mp3"
+            }
+          ]
+        }
+    ]
+}
+]
