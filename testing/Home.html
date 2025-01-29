@@ -201,9 +201,9 @@
   transition: all 0.4s ease-in-out;
   overflow: hidden;
   max-width: 300px;
-  height: 320px;
+  height: 320px;  /* Adjusted height to fit notifications */
   position: absolute;
-  right: 15px;  /* Positioned to the right */
+  right: 15px;
   top: 20px;
 }
 
@@ -225,7 +225,7 @@
 /* Notification Content */
 .notification-content {
   display: block;
-  height: 250px; /* More space for notifications */
+  height: 250px; /* Retained for overflow handling */
   overflow: hidden;
   position: relative;
 }
@@ -237,7 +237,7 @@
   margin: 0;
   position: absolute;
   width: 100%;
-  animation: scrollNotifications 12s linear infinite;
+  /* Removed animation for scrolling to rely on JS */
 }
 
 /* Each Notification Item */
@@ -260,13 +260,7 @@
   100% { color: #ffffff; }
 }
 
-/* Auto Scroll Animation */
-@keyframes scrollNotifications {
-  0% { transform: translateY(0%); }
-  100% { transform: translateY(-100%); }
-}
-
-/* 🌥️ Motivational Quotes in Cloud Shapes */
+/* Motivational Quotes in Cloud Shapes */
 .quote-container {
   position: absolute;
   left: 30px;
@@ -317,7 +311,7 @@
 
 /* Hover Effect */
 .quote:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);  /* Slightly less scale effect to maintain floating feel */
   background: #f1f1f1;
 }
 
@@ -910,7 +904,6 @@ function toggleNotification() {
   }
 }
 
-// Auto-scrolling notifications
 function startNotificationScroll() {
   const list = document.getElementById("notificationList");
   let firstItem = list.firstElementChild.cloneNode(true);
@@ -918,7 +911,7 @@ function startNotificationScroll() {
   setInterval(() => {
     list.appendChild(firstItem);
     list.style.transition = "transform 1s ease-in-out";
-    list.style.transform = "translateY(-60px)";
+    list.style.transform = "translateY(-60px)"; // You might want to tweak this value
 
     setTimeout(() => {
       list.removeChild(list.firstElementChild);
@@ -931,6 +924,7 @@ function startNotificationScroll() {
 
 // Start scrolling when page loads
 window.onload = startNotificationScroll;
+
 
 
  // Function to handle domain click
