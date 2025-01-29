@@ -9,138 +9,113 @@
   <script src="./hard.js" defer></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/viewerjs@1.11.3/dist/viewer.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/viewerjs@1.11.3/dist/viewer.min.js"></script>
-
   <style>
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-}
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1;
-}
+    .singlebook-container {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
 
-.singlebookview__card {
-  position: relative;
-  z-index: 2;
-  margin: 50px auto;
-  max-width: 800px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1;
+    }
 
-.singlebookview__card-details-container {
-  display: flex;
-  flex-wrap: wrap;
-}
+    .book-details {
+      display: flex;
+      flex-wrap: wrap;
+    }
 
-.singlebookview__card-details-image-container {
-  flex: 1 1 40%;
-  padding: 20px;
-  text-align: left;
-}
+    .book-image {
+      flex: 1 1 40%;
+      padding: 20px;
+      text-align: left;
+    }
 
-.singlebookview__card-details-image__cover {
-  max-width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
+    .book-image img {
+      max-width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
 
-.singlebookview__card-details-info {
-  flex: 1 1 60%;
-  padding: 20px;
-}
+    .book-info {
+      flex: 1 1 60%;
+      padding: 20px;
+    }
 
-.singlebookview__card-details-info-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
-}
+    .book-info h1 {
+      font-size: 1.8rem;
+      color: #333;
+    }
 
-.singlebookview__card-details-info-subtitle {
-  font-size: 1.2rem;
-  color: #555;
-}
+    .book-info h3, .book-info p {
+      font-size: 1.2rem;
+      color: #555;
+    }
 
-.booktype {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
+    .pdf-button {
+      text-align: center;
+      margin-top: 20px;
+    }
 
-.booktype__text {
-  font-size: 1rem;
-  color: #ff9804;
-}
+    .pdf-button button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-.singlebookview__card-description__abstract {
-  margin-top: 20px;
-  font-size: 1rem;
-  color: #444;
-}
-
-.pdf-button {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.pdf-button button {
-  padding: 10px 20px;
-  font-size: 1rem;
-  background: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.pdf-button button:hover {
-  background: #218838;
-}
+    .pdf-button button:hover {
+      background: #0056b3;
+    }
   </style>
 </head>
 <body>
-    <!-- Menu bar dynamically loaded -->
-    <div id="menu-container"></div>
-  <div class="overlay"></div>
-  <div class="singlebookview__card">
-    <div class="singlebookview__card-details-container">
-      <div class="singlebookview__card-details-image-container">
-        <img class="singlebookview__card-details-image__cover" id="book-cover" src="" alt="Book Cover">
+  <div id="menu-container"></div>
+
+  <div class="singlebook-container">
+    <div class="overlay"></div>
+    <div class="book-details">
+      <div class="book-image">
+        <img id="book-cover" src="" alt="Book Cover">
       </div>
-      <div class="singlebookview__card-details-info">
-        <div class="booktype">
-          <span class="booktype__text">Free Textbook</span>
-        </div>
-        <h1 class="singlebookview__card-details-info-title" id="book-name"></h1>
-        <h3 class="singlebookview__card-details-info-subtitle" id="book-author"></h3>
+      <div class="book-info">
+        <h1 id="book-name"></h1>
+        <h3 id="book-author"></h3>
         <p><strong>Year:</strong> <span id="book-year"></span></p>
         <p><strong>ISBN:</strong> <span id="book-isbn"></span></p>
-        <div class="singlebookview__card-description__abstract" id="book-description"></div>
+        <div id="book-description"></div>
+        <div class="pdf-button">
+          <button id="access-pdf">Access this Book</button>
+        </div>
       </div>
     </div>
-    <div class="image-viewer" id="image-viewer"></div>
-    <div class="pdf-button">
-      <button id="access-pdf">Access this Book</button>
-    </div>
   </div>
- <!-- Footer dynamically loaded -->
- <div id="footer-container"></div>
+
+  <div id="footer-container"></div>
 
   <script>
     document.addEventListener('DOMContentLoaded', loadDynamicContent);
@@ -152,45 +127,30 @@ body {
           fetch('footer.html')
         ]);
 
-        if (!menuResponse.ok) throw new Error('Menu not loaded');
-        const menuContent = await menuResponse.text();
-        document.getElementById('menu-container').innerHTML = menuContent;
-
-        if (!footerResponse.ok) throw new Error('Footer not loaded');
-        const footerContent = await footerResponse.text();
-        document.getElementById('footer-container').innerHTML = footerContent;
-
-        // Fetch and display the book details
+        document.getElementById('menu-container').innerHTML = await menuResponse.text();
+        document.getElementById('footer-container').innerHTML = await footerResponse.text();
         fetchBookDetails();
       } catch (error) {
-        console.error('Error loading dynamic content:', error);
+        console.error('Error loading content:', error);
       }
     }
 
     async function fetchBookDetails() {
       const urlParams = new URLSearchParams(window.location.search);
       const isbn = urlParams.get('ISBN');
-
-      if (!isbn) {
-        displayError('No ISBN number provided in the URL.');
-        return;
-      }
-
+      if (!isbn) return displayError('No ISBN provided.');
+      
       try {
         const [resourcesResponse1, resourcesResponse2] = await Promise.all([
           fetch('resources.json'),
           fetch('resources1.json')
         ]);
 
-        if (!resourcesResponse1.ok) throw new Error('Failed to load resources from resources.json');
-        if (!resourcesResponse2.ok) throw new Error('Failed to load resources from resources1.json');
-
         const resources1 = await resourcesResponse1.json();
         const resources2 = await resourcesResponse2.json();
-
         const allResources = [...resources1, ...resources2];
-        let bookFound = null;
 
+        let bookFound = null;
         for (const domain of allResources) {
           for (const book of domain.books) {
             if (book.ISBN === isbn) {
@@ -203,71 +163,46 @@ body {
 
         if (bookFound) {
           displayBookDetails(bookFound);
-          fetchBookDescription(isbn, bookFound.bookCover);
         } else {
-          displayError('The book which you are searching is unavailable.');
+          displayError('Book not found.');
         }
       } catch (error) {
-        console.error('Error fetching or processing resources:', error);
-        displayError('An error occurred while fetching the book details.');
-      }
-    }
-
-    async function fetchBookDescription(isbn, coverPhoto) {
-      try {
-        const descriptionResponse = await fetch('description.json');
-        const descriptions = await descriptionResponse.json();
-
-        const bookDescription = descriptions.find(desc => desc.ISBN === isbn);
-
-        if (bookDescription) {
-          const descriptionDiv = document.getElementById('book-description');
-          descriptionDiv.innerHTML = `
-            <p>${bookDescription.description.join('</p><p>')}</p>
-          `;
-        } else {
-          const descriptionDiv = document.getElementById('book-description');
-          descriptionDiv.innerHTML = `
-            <p>This book provides an in-depth exploration of various subjects related to its field. It includes practical examples, theory, and case studies that are easy to understand, making it a valuable resource for learners and professionals alike. With a clear and concise writing style, this book offers a comprehensive guide to mastering the core concepts of the topic.</p>
-          `;
-        }
-
-        const bookCover = document.getElementById('book-cover');
-        bookCover.src = coverPhoto;
-
-        document.body.style.backgroundImage = `url(${coverPhoto})`;
-      } catch (error) {
-        console.error('Error fetching or processing description:', error);
+        console.error('Error fetching book:', error);
       }
     }
 
     function displayBookDetails(book) {
       document.getElementById('book-name').textContent = book.BookName;
       document.getElementById('book-author').textContent = `By ${book.Author}`;
+      document.getElementById('book-year').textContent = book.year;
+      document.getElementById('book-isbn').textContent = book.ISBN;
+      document.getElementById('book-cover').src = book.bookCover;
+      document.body.style.backgroundImage = `url(${book.bookCover})`;
     }
 
     function displayError(message) {
-      const errorMessage = document.getElementById('book-description');
-      errorMessage.textContent = message;
+      document.getElementById('book-description').textContent = message;
     }
 
-    // Triggered on button click or other actions
-async function fetchProfileAndRedirect(isbn) {
-  const userEmail = sessionStorage.getItem('userEmail');
+    document.getElementById('access-pdf').addEventListener('click', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const isbn = urlParams.get('ISBN');
+      fetchProfileAndRedirect(isbn);
+    });
 
-  // Check if all required profile details exist in sessionStorage
-  const prnNo = sessionStorage.getItem('prn_no');
-  const rollNo = sessionStorage.getItem('roll_no');
-  const branch = sessionStorage.getItem('branch');
+    async function fetchProfileAndRedirect(isbn) {
+      const userEmail = sessionStorage.getItem('userEmail');
+      const prnNo = sessionStorage.getItem('prn_no');
+      const rollNo = sessionStorage.getItem('roll_no');
+      const branch = sessionStorage.getItem('branch');
 
-  if (!userEmail || !prnNo || !rollNo || !branch) {
-    alert('Your profile is incomplete. First complete it, then you can access the content.');
-    window.location.href = './profile1.html';
-  } else {
-    window.location.href = `./bookviewer.html?ISBN=${isbn}`;
-  }
-}
-
+      if (!userEmail || !prnNo || !rollNo || !branch) {
+        alert('Your profile is incomplete. Please complete it before accessing the book.');
+        window.location.href = './profile1.html';
+      } else {
+        window.location.href = `./bookviewer.html?ISBN=${isbn}`;
+      }
+    }
   </script>
 </body>
 </html>
