@@ -29,14 +29,15 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%; /* Ensure it spans the full width */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 30px;
+  padding: 15px 30px; /* Adjust padding if needed */
   background-color: var(--bs-primary);
   color: var(--bs-white);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  z-index: 1000; /* Ensures it stays on top of other elements */
+  z-index: 1000; /* Keeps it above other elements */
 }
 
 
