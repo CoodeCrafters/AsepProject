@@ -23,14 +23,21 @@
     }
 
     .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7); /* Overlay with 70% opacity */
-      z-index: 1;
-    }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Overlay with 70% opacity */
+  z-index: 1;
+  transform: translate(-50%, -50%); /* Center it */
+  display: none; /* Hide it by default */
+}
+
+.page-container:hover .overlay {
+  display: block; /* Show overlay when the container is hovered */
+}
+
 
     .singlebookview__card {
       position: relative;
@@ -151,7 +158,7 @@
       </div>
     </div>
   </div>
-  
+
  <!-- Footer dynamically loaded -->
  <div id="footer-container"></div>
 </div>
