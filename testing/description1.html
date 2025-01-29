@@ -22,6 +22,23 @@
       background-repeat: no-repeat;
     }
 
+    .overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Overlay with 70% opacity */
+  z-index: 1;
+  transform: translate(-50%, -50%); /* Center it */
+  display: none; /* Hide it by default */
+}
+
+.page-container:hover .overlay {
+  display: block; /* Show overlay when the container is hovered */
+}
+
+
     .singlebookview__card {
       position: relative;
       margin: 50px auto;
@@ -31,18 +48,6 @@
       border-radius: 15px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
       z-index: 2;
-    }
-
-    /* Always show overlay */
-    .singlebookview__card .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7); /* Overlay with 70% opacity */
-      z-index: 1;
-      display: block; /* Always visible */
     }
 
     .singlebookview__card-details-container {
@@ -127,37 +132,36 @@
 
     <!-- Menu bar dynamically loaded -->
     <div id="menu-container"></div>
+  <!-- Overlay -->
+  <div class="overlay"></div>
 
-    <!-- Main Card Container -->
-    <div class="singlebookview__card">
-      <!-- Always visible overlay -->
-      <div class="overlay"></div>
-
-      <div class="singlebookview__card-details-container">
-        <div class="singlebookview__card-details-image-container">
-          <img class="singlebookview__card-details-image__cover" id="book-cover" src="" alt="Book Cover">
+  <!-- Main Card Container -->
+  <div class="singlebookview__card">
+    <div class="singlebookview__card-details-container">
+      <div class="singlebookview__card-details-image-container">
+        <img class="singlebookview__card-details-image__cover" id="book-cover" src="" alt="Book Cover">
+      </div>
+      <div class="singlebookview__card-details-info">
+        <div class="booktype">
+          <svg class="booktype__icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="8" cy="8" r="8" fill="#ff9804"></circle>
+          </svg>
+          <span class="booktype__text">Free Textbook</span>
         </div>
-        <div class="singlebookview__card-details-info">
-          <div class="booktype">
-            <svg class="booktype__icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="8" cy="8" r="8" fill="#ff9804"></circle>
-            </svg>
-            <span class="booktype__text">Free Textbook</span>
-          </div>
-          <h1 class="singlebookview__card-details-info-title" id="book-name"></h1>
-          <h3 class="singlebookview__card-details-info-subtitle" id="book-author"></h3>
-          <div class="singlebookview__card-description">
-            <div class="singlebookview__card-description__abstract" id="book-description">
-              <!-- Description will be populated dynamically -->
-            </div>
+        <h1 class="singlebookview__card-details-info-title" id="book-name"></h1>
+        <h3 class="singlebookview__card-details-info-subtitle" id="book-author"></h3>
+        <div class="singlebookview__card-description">
+          <div class="singlebookview__card-description__abstract" id="book-description">
+            <!-- Description will be populated dynamically -->
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Footer dynamically loaded -->
-    <div id="footer-container"></div>
   </div>
+
+ <!-- Footer dynamically loaded -->
+ <div id="footer-container"></div>
+</div>
 
   <script>
     document.addEventListener('DOMContentLoaded', loadDynamicContent);
