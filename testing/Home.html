@@ -195,22 +195,20 @@
   color: var(--bs-white);
   padding: 15px 30px;
   text-align: center;
+  margin: 20px 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.4s ease-in-out;
   overflow: hidden;
-  max-width: 300px;
-  height: 320px;  /* Adjusted height to fit notifications */
-  position: absolute;
-  right: 15px;
-  top: 20px;
+  max-width: 600px;
+  margin: auto;
 }
 
-/* Header */
 .notification-header {
   font-size: 1.5em;
   font-weight: bold;
+  color: var(--bs-light-bg);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -225,9 +223,10 @@
 /* Notification Content */
 .notification-content {
   display: block;
-  height: 250px; /* Retained for overflow handling */
+  height: 300px; /* Fixed height for 1-2 visible notifications */
   overflow: hidden;
   position: relative;
+  width: 270px;
 }
 
 /* List Styling */
@@ -237,82 +236,31 @@
   margin: 0;
   position: absolute;
   width: 100%;
-  /* Removed animation for scrolling to rely on JS */
+  animation: scrollNotifications 10s linear infinite;
 }
 
 /* Each Notification Item */
 .notification-list li {
   font-size: 1.1em;
   font-weight: bold;
-  padding: 12px;
+  padding: 10px;
   color: #ffeb3b;
-  background: rgba(255, 255, 255, 0.15);
-  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 5px;
   text-align: center;
   text-transform: uppercase;
-  border-radius: 5px;
-  animation: blinkText 1.2s infinite alternate; /* Blinking effect */
 }
 
-/* 🔥 Blinking Effect */
+/* Blinking Effect */
 @keyframes blinkText {
   0% { color: #ffeb3b; }
   100% { color: #ffffff; }
 }
 
-/* Motivational Quotes in Cloud Shapes */
-.quote-container {
-  position: absolute;
-  left: 30px;
-  top: 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.quote {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #333;
-  background: #fff;
-  padding: 15px 20px;
-  border-radius: 30px;
-  max-width: 250px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-  position: relative;
-  text-align: center;
-  transition: transform 0.3s ease-in-out;
-}
-
-/* Cloud-like shape */
-.quote::before {
-  content: "";
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 20px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: -5px -5px 0 white;
-}
-
-/* Floating Animation */
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-.quote:nth-child(1) { animation: float 4s ease-in-out infinite; }
-.quote:nth-child(2) { animation: float 5s ease-in-out infinite; }
-.quote:nth-child(3) { animation: float 6s ease-in-out infinite; }
-
-/* Hover Effect */
-.quote:hover {
-  transform: scale(1.05);  /* Slightly less scale effect to maintain floating feel */
-  background: #f1f1f1;
+/* Auto Scroll Animation */
+@keyframes scrollNotifications {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-100%); }
 }
 
 
@@ -904,6 +852,7 @@ function toggleNotification() {
   }
 }
 
+// Auto-scrolling notifications
 function startNotificationScroll() {
   const list = document.getElementById("notificationList");
   let firstItem = list.firstElementChild.cloneNode(true);
@@ -911,7 +860,7 @@ function startNotificationScroll() {
   setInterval(() => {
     list.appendChild(firstItem);
     list.style.transition = "transform 1s ease-in-out";
-    list.style.transform = "translateY(-60px)"; // You might want to tweak this value
+    list.style.transform = "translateY(-60px)";
 
     setTimeout(() => {
       list.removeChild(list.firstElementChild);
@@ -924,7 +873,6 @@ function startNotificationScroll() {
 
 // Start scrolling when page loads
 window.onload = startNotificationScroll;
-
 
 
  // Function to handle domain click
