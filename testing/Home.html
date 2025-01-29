@@ -195,16 +195,18 @@
   color: var(--bs-white);
   padding: 15px 30px;
   text-align: center;
-  margin: 20px 10px;
+  margin: 20px 15px; /* Added right margin of 15px */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.4s ease-in-out;
   overflow: hidden;
-  max-width: 600px;
-  margin: auto;
+  width: 300px;  /* Decreased width */
+  position: fixed;  /* Fixed position for right alignment */
+  right: 15px;  /* Right margin */
 }
 
+/* Header */
 .notification-header {
   font-size: 1.5em;
   font-weight: bold;
@@ -226,7 +228,7 @@
   height: 300px; /* Fixed height for 1-2 visible notifications */
   overflow: hidden;
   position: relative;
-  width: 270px;
+  width: 270px;  /* Reduced width */
 }
 
 /* List Styling */
@@ -261,6 +263,61 @@
 @keyframes scrollNotifications {
   0% { transform: translateY(0%); }
   100% { transform: translateY(-100%); }
+}
+
+/* Motivational Quotes Container */
+.quote-container {
+  position: fixed;  /* Fixed position */
+  left: 15px;  /* 15px from the left */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 10; /* Ensure quotes stay on top */
+}
+
+.quote {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 30px;
+  max-width: 250px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Cloud-like shape */
+.quote::before {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: -5px -5px 0 white;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.quote:nth-child(1) { animation: float 4s ease-in-out infinite; }
+.quote:nth-child(2) { animation: float 5s ease-in-out infinite; }
+.quote:nth-child(3) { animation: float 6s ease-in-out infinite; }
+
+/* Hover Effect */
+.quote:hover {
+  transform: scale(1.05);  /* Slightly less scale effect to maintain floating feel */
+  background: #f1f1f1;
 }
 
 
@@ -623,7 +680,12 @@ footer {
   </div>
 </section>
 
-
+<!-- Motivational Quotes -->
+<div class="quote-container">
+  <div class="quote">"Success is not final, failure is not fatal: it is the courage to continue that counts."</div>
+  <div class="quote">"Believe in yourself, and the world will believe in you."</div>
+  <div class="quote">"You are capable of amazing things!"</div>
+</div>
 
 <footer>
   <div class="footer-container">
