@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Viewer</title>
+  <link rel="stylesheet" href="viewer.css">
+  <link rel="stylesheet" href="./headerfooter.css">
+  <script src="./headerfooter.js" defer></script>
+  <script src="./hard.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script> <!-- PDF.js -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #viewerContainer {
+      display: flex;
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
+
+    #pdfViewerContainer {
+      width: 70%;
+      height: 100%;
+      background-color: #fff;
+      border-right: 1px solid #ddd;
+      position: relative;
+    }
+
+    #commentsContainer {
+      width: 30%;
+      padding: 20px;
+      background-color: #fff;
+      position: relative;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    #loadingSpinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .disable-print {
+      display: none !important;
+    }
+
+    .loading-text {
+      margin-top: 70px;
+      font-size: 16px;
+      color: #555;
+    }
+
+    /* Comment section styles */
+    .comment-section {
+      margin-top: 30px;
+    }
+
+    .rating-container {
+      margin-top: 20px;
+    }
+
+    .stars {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .star {
+      font-size: 20px;
+      color: gold;
+      cursor: pointer;
+    }
+
+    .star.disabled {
+      color: #ccc;
+    }
+
+    #commentInput {
+      width: 100%;
+      height: 80px;
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    #submitComment {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+  <div id="viewerContainer">
+    <!-- PDF Viewer Container -->
+    <div id="pdfViewerContainer">
+      <div id="loadingSpinner"></div>
+      <canvas id="pdfCanvas"></canvas>
+    </div>
+    <!-- Comments Section -->
+    <div id="commentsContainer">
+      <div id="ratingSection" class="rating-container"></div>
+      <div id="commentsSection" class="comment-section">
+        <div id="commentsList"></div>
+        <textarea id="commentInput" placeholder="Share your comments here..."></textarea>
+        <button id="submitComment">Submit Comment</button>
+      </div>
+    </div>
+  </div>
+  <div id="footer-container"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', loadDynamicContent);
+
+    async function loadDynamicContent() {
+      try {
+        // Load the menu and footer dynamically
+        const menuResponse = await fetch('menu.html');
+        if (!menuResponse.ok) throw new Error('Menu not loaded');
+        const menuContent = await menuResponse.text();
+        document.getElementById('menu-container').innerHTML = menuContent;
+
+        const footerResponse = await fetch('footer.html');
+        if (!footerResponse.ok) throw new Error('Footer not loaded');
+        const footerContent = await footerResponse.text();
+        document.getElementById('footer-container').innerHTML = footerContent;
+
+        // Fetch the PDF URL securely
+        fetchSecurePdf();
+        fetchCommentsAndRating();
+      } catch (error) {
+        console.error('Error loading dynamic content:', error);
+      }
+    }
+
+    async function fetchSecurePdf() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const isbn = urlParams.get('ISBN');
+      const prnNo = sessionStorage.getItem('prn_no');
+
+      if (!isbn) {
+        alert('ISBN is missing in the URL');
+        return;
+      }
+
+      if (!prnNo) {
+        alert('Session expired. Please log in again.');
+        return;
+      }
+
+      try {
+        // Show loading spinner
+        document.getElementById('loadingSpinner').style.display = 'block';
+
+        const response = await fetch(`https://central-library.onrender.com/getfetchdata?isbn=${isbn}&prn_no=${prnNo}`);
+        if (!response.ok) {
+          alert('Error loading the PDF. Please try again later.');
+          return;
+        }
+
+        const pdfBlob = await response.blob(); // Get the PDF as a Blob
+        const pdfUrl = URL.createObjectURL(pdfBlob);
+
+        // Load the PDF using pdf.js
+        const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
+        renderPage(pdf, 1); // Render the first page
+      } catch (error) {
+        console.error('Error fetching secure PDF URL:', error);
+      }
+    }
+
+    async function renderPage(pdf, pageNum) {
+      const page = await pdf.getPage(pageNum);
+      const canvas = document.getElementById('pdfCanvas');
+      const context = canvas.getContext('2d');
+      const viewport = page.getViewport({ scale: 1.5 });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+
+      await page.render({
+        canvasContext: context,
+        viewport: viewport
+      }).promise;
+
+      document.getElementById('loadingSpinner').style.display = 'none'; // Hide the spinner after rendering
+    }
+
+    // Fetch and display comments and ratings
+    async function fetchCommentsAndRating() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const isbn = urlParams.get('ISBN');
+
+      // Fetch ratings
+      const reviewResponse = await fetch(`https://central-library.onrender.com/getreview?isbn=${isbn}`);
+      if (reviewResponse.ok) {
+        const reviewData = await reviewResponse.json();
+        displayRating(reviewData);
+      } else {
+        document.getElementById('ratingSection').innerHTML = 'No ratings available. Be the first to rate this book!';
+      }
+
+      // Fetch comments
+      const commentsResponse = await fetch(`https://central-library.onrender.com/getcomments?isbn=${isbn}`);
+      if (commentsResponse.ok) {
+        const commentsData = await commentsResponse.json();
+        displayComments(commentsData);
+      } else {
+        document.getElementById('commentsList').innerHTML = 'No comments available. Share your overview while reading this book.';
+      }
+    }
+
+    function displayRating(data) {
+      const ratingSection = document.getElementById('ratingSection');
+      if (data.rating) {
+        const stars = createRatingStars(data.rating);
+        ratingSection.innerHTML = `<div>Rating: ${stars}</div>`;
+      }
+    }
+
+    function createRatingStars(rating) {
+      let stars = '';
+      for (let i = 0; i < 5; i++) {
+        stars += `<span class="star ${i < rating ? '' : 'disabled'}">★</span>`;
+      }
+      return stars;
+    }
+
+    function displayComments(comments) {
+      const commentsList = document.getElementById('commentsList');
+      commentsList.innerHTML = ''; // Clear current comments
+
+      if (comments.length > 0) {
+        comments.forEach(comment => {
+          const commentDiv = document.createElement('div');
+          commentDiv.textContent = comment.text;
+          commentsList.appendChild(commentDiv);
+        });
+      } else {
+        commentsList.innerHTML = 'No comments available. Share your overview while reading this book.';
+      }
+    }
+
+    // Submit a new comment
+    document.getElementById('submitComment').addEventListener('click', async () => {
+      const isbn = new URLSearchParams(window.location.search).get('ISBN');
+      const commentText = document.getElementById('commentInput').value.trim();
+
+      if (!commentText) {
+        alert('Please enter a comment.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`https://central-library.onrender.com/addcomment?isbn=${isbn}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: commentText })
+        });
+
+        if (response.ok) {
+          alert('Comment added successfully!');
+          document.getElementById('commentInput').value = ''; // Clear input
+          fetchCommentsAndRating(); // Refresh comments section
+        } else {
+          alert('Failed to add comment.');
+        }
+      } catch (error) {
+        console.error('Error submitting comment:', error);
+      }
+    });
+
+    // Disable print, right-click, and copy functionality
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+        e.preventDefault();
+        alert('Printing is disabled for this document.');
+      }
+    });
+
+    document.getElementById('pdfCanvas').addEventListener('contextmenu', (e) => e.preventDefault());
+    document.getElementById('pdfCanvas').addEventListener('copy', (e) => e.preventDefault());
+  </script>
+</body>
+</html>
