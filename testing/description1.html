@@ -22,9 +22,25 @@
       background-repeat: no-repeat;
     }
 
-    .page-container {
-      position: relative;
-    }
+    .overlay {
+  position: absolute; /* Position it within the page-container */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Overlay with 70% opacity */
+  z-index: 1; /* Ensure it sits above the background but below the content */
+  display: none; /* Hide overlay by default */
+}
+
+.page-container {
+  position: relative; /* Set this container to position relative */
+}
+
+.page-container:hover .overlay {
+  display: block; /* Show overlay when the container is hovered */
+}
+
 
     .singlebookview__card {
       position: relative;
@@ -37,38 +53,21 @@
       z-index: 2;
     }
 
-    /* Overlay only for the image behind the card */
+    .singlebookview__card-details-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
     .singlebookview__card-details-image-container {
-      position: relative;
       flex: 1 1 40%;
       padding: 20px;
       text-align: left;
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7); /* Overlay with 70% opacity */
-      z-index: 1;
-      display: none; /* Hide by default */
-    }
-
-    .singlebookview__card-details-image-container:hover .overlay {
-      display: block; /* Show overlay when image container is hovered */
     }
 
     .singlebookview__card-details-image__cover {
       max-width: 100%;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .singlebookview__card-details-container {
-      display: flex;
-      flex-wrap: wrap;
     }
 
     .singlebookview__card-details-info {
@@ -136,13 +135,15 @@
 
     <!-- Menu bar dynamically loaded -->
     <div id="menu-container"></div>
-
+  
+    <!-- Overlay that only covers the page-container -->
+    <div class="overlay"></div>
+  
     <!-- Main Card Container -->
     <div class="singlebookview__card">
       <div class="singlebookview__card-details-container">
         <div class="singlebookview__card-details-image-container">
           <img class="singlebookview__card-details-image__cover" id="book-cover" src="" alt="Book Cover">
-          <div class="overlay"></div> <!-- Overlay here only for image -->
         </div>
         <div class="singlebookview__card-details-info">
           <div class="booktype">
@@ -161,10 +162,11 @@
         </div>
       </div>
     </div>
-
+  
     <!-- Footer dynamically loaded -->
     <div id="footer-container"></div>
   </div>
+  
 
   <script>
     document.addEventListener('DOMContentLoaded', loadDynamicContent);
