@@ -389,8 +389,6 @@ router.get('/getreview', async (req, res) => {
   }
 });
 
-// Export the router
-module.exports = router;
 
 // Start the server
 app.listen(PORT, () => {
