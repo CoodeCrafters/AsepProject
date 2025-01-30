@@ -1,0 +1,14 @@
+[
+    {
+      "name": "John Doe",
+      "email": "johndoe@example.com",
+      "query": "How can I reset my password?",
+      "timestamp": "2025-01-30T12:34:56Z"
+    },
+    {
+      "name": "Jane Smith",
+      "email": "janesmith@example.com",
+      "query": "I need assistance with my account verification.",
+      "timestamp": "2025-01-30T13:15:22Z"
+    }
+  ]
