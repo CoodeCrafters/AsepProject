@@ -120,7 +120,19 @@
       {
         "author": "Byron",
         "title": "Free MP3",
-        "id": "90058728-a1e2-4e69-92d4-791995ca5bf4"
+        "id": "90058728-a1e2-4e69-92d4-791995ca5bf4",
+        "total_duration": "192.00",
+        "genre": "Fiction",
+        "bookCover_url": "https://m.media-amazon.com/images/I/41yH6yyL6YL._AC_UF1000,1000_QL80_.jpg",
+        "year_of_published": 2024,
+        "mp3Details": [
+          {
+            "title": "Part One"
+          },
+          {
+            "title": "Part Two"
+          }
+        ]
       },
       {
         "author": "Byron",
