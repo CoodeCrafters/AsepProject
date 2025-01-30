@@ -215,7 +215,7 @@ loadDynamicContent(); // Add this line to execute the function
 
       // Function to retrieve MP3 link from backend
       function retrieveAudioFromBackend(id, mp3Link) {
-        fetch(`https://datainsertion.onrender.com/getAudiodetail?id=${id}`)
+        fetch(`https://datainsertion.onrender.com/getAudiodetail?id=${id}&title=${mp3.title}`)
           .then(response => response.json())
           .then(data => {
             if (data.link) {
