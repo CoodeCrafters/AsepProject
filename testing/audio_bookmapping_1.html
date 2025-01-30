@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Resource Details</title>
+  <link rel="stylesheet" href="./headerfooter.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .book-details {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .book-cover {
+      width: 150px;
+      height: auto;
+      border-radius: 10px;
+      margin-right: 20px;
+    }
+    .book-info {
+      flex: 1;
+    }
+    .book-info h1 {
+      margin: 0;
+      font-size: 24px;
+      color: #444;
+    }
+    .book-info p {
+      margin: 5px 0;
+      font-size: 16px;
+      color: #666;
+    }
+    .mp3-list {
+      list-style: none;
+      padding: 0;
+    }
+    .mp3-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+      transition: background 0.3s ease;
+    }
+    .mp3-list li:hover {
+      background: #f9f9f9;
+    }
+    .mp3-list li span {
+      font-size: 14px;
+      color: #555;
+    }
+    .play-button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .play-button:hover {
+      background: #0056b3;
+    }
+    .audio-player {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      padding: 10px;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .audio-player audio {
+      width: 80%;
+      margin: 0 10px;
+    }
+    .audio-player button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .audio-player button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <!-- Menu bar dynamically loaded -->
+  <div id="menu-container"></div>
+
+  <div class="container">
+    <div id="content">
+      <!-- Details will be dynamically inserted here -->
+    </div>
+  </div>
+
+ 
+  <!-- Audio Player -->
+  <div class="audio-player" id="audio-player" style="display: none;">
+    <button id="prev-button"><i class="fas fa-backward"></i></button>
+    <audio id="audio" controls></audio>
+    <button id="next-button"><i class="fas fa-forward"></i></button>
+  </div>
+ <!-- Footer dynamically loaded -->
+ <div id="footer-container"></div>
+
+  <script src="./headerfooter.js"></script>
+  <script src="./hard.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // Load the menu and footer dynamically
+async function loadDynamicContent() {
+  try {
+    const menuResponse = await fetch('menu.html');
+    if (!menuResponse.ok) throw new Error('Menu not loaded');
+    const menuContent = await menuResponse.text();
+    document.getElementById('menu-container').innerHTML = menuContent;
+
+    const footerResponse = await fetch('footer.html');
+    if (!footerResponse.ok) throw new Error('Footer not loaded');
+    const footerContent = await footerResponse.text();
+    document.getElementById('footer-container').innerHTML = footerContent;
+  } catch (error) {
+    console.error('Error loading dynamic content:', error);
+  }
+}
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+
+      if (id) {
+        fetch('./audio-resources.json')
+          .then(response => response.json())
+          .then(data => {
+            const resource = data.find(item => item.entries.some(entry => entry.id === id));
+            if (resource) {
+              const entry = resource.entries.find(entry => entry.id === id);
+              displayDetails(entry);
+            }
+          })
+          .catch(error => console.error('Error fetching JSON:', error));
+      }
+
+     function displayDetails(entry) {
+        const content = document.getElementById('content');
+        content.innerHTML = `
+          <div class="book-details">
+            <img src="${entry.bookCover_url}" alt="Book Cover" class="book-cover">
+            <div class="book-info">
+              <h1>${entry.title}</h1>
+              <p><strong>Author:</strong> ${entry.author}</p>
+              <p><strong>Genre:</strong> ${entry.genre}</p>
+              <p><strong>Year Published:</strong> ${entry.year_of_published}</p>
+              <p><strong>Duration:</strong> ${entry.total_duration} minutes</p>
+            </div>
+          </div>
+          <ul class="mp3-list">
+            ${entry.mp3Details.map(mp3 => `
+              <li>
+                <span>${mp3.title}</span>
+                <span>English</span>
+                <button class="play-button" data-id="${entry.id}" data-src="${mp3.link}"><i class="fas fa-play"></i> Play</button>
+              </li>
+            `).join('')}
+          </ul>
+        `;
+
+        const playButtons = document.querySelectorAll('.play-button');
+        playButtons.forEach(button => {
+          button.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            const mp3Link = this.getAttribute('data-src');
+            retrieveAudioFromBackend(id, mp3Link);
+          });
+        });
+
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const audio = document.getElementById('audio');
+
+        prevButton.addEventListener('click', () => {
+          audio.currentTime -= 10;
+        });
+
+        nextButton.addEventListener('click', () => {
+          audio.currentTime += 10;
+        });
+      }
+
+      // Function to retrieve MP3 link from backend
+      function retrieveAudioFromBackend(id, mp3Link) {
+        fetch(`https://datainsertion.onrender.com/getAudiodetail?id=${id}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.link) {
+              const audioPlayer = document.getElementById('audio-player');
+              const audio = document.getElementById('audio');
+              audio.src = data.link; // Use the link from the backend
+              audio.play();
+              audioPlayer.style.display = 'flex';
+            } else {
+              console.error('No MP3 link found in the response.');
+            }
+          })
+          .catch(error => {
+            console.error('Error fetching MP3 link from backend:', error);
+            // Fallback to the local MP3 link if backend fails
+            const audioPlayer = document.getElementById('audio-player');
+            const audio = document.getElementById('audio');
+            audio.src = mp3Link;
+            audio.play();
+            audioPlayer.style.display = 'flex';
+          });
+      }
+    });
+  </script>
+</body>
+</html>
