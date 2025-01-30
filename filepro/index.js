@@ -370,7 +370,7 @@ app.post('/savereview', async (req, res) => {
 });
 
 // Endpoint to get reviews for a specific ISBN
-router.get('/getreview', async (req, res) => {
+app.get('/getreview', async (req, res) => {
   const { isbn } = req.query;
 
   try {
