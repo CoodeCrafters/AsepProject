@@ -6,8 +6,8 @@
   <title>Help & Support</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="./headerfooter.css">
-<script src="headerfooter.js"></script>
-<script src="hard.js"></script>
+  <script src="headerfooter.js"></script>
+  <script src="hard.js"></script>
   <style>
     /* General Styles */
     body {
@@ -22,6 +22,12 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
+      flex-direction: column;
+    }
+
+    #menu-container, #footer-container {
+      width: 100%;
+      padding: 0 20px;
     }
 
     .help-container {
@@ -34,6 +40,7 @@
       animation: slideIn 0.8s ease-in-out;
       backdrop-filter: blur(15px);
       border: 1px solid rgba(255, 255, 255, 0.2);
+      margin-top: 30px;
     }
 
     h1 {
@@ -202,26 +209,28 @@
     <div id="successMessage" class="success-message">Query submitted successfully!</div>
     <div id="errorMessage" class="error-message">Failed to submit query. Please try again.</div>
   </div>
-<div id="footer-container"></div>
+
+  <div id="footer-container"></div>
+
   <script>
-
     // Load the menu and footer dynamically
-async function loadDynamicContent() {
-  try {
-    const menuResponse = await fetch('menu.html');
-    if (!menuResponse.ok) throw new Error('Menu not loaded');
-    const menuContent = await menuResponse.text();
-    document.getElementById('menu-container').innerHTML = menuContent;
+    async function loadDynamicContent() {
+      try {
+        const menuResponse = await fetch('menu.html');
+        if (!menuResponse.ok) throw new Error('Menu not loaded');
+        const menuContent = await menuResponse.text();
+        document.getElementById('menu-container').innerHTML = menuContent;
 
-    const footerResponse = await fetch('footer.html');
-    if (!footerResponse.ok) throw new Error('Footer not loaded');
-    const footerContent = await footerResponse.text();
-    document.getElementById('footer-container').innerHTML = footerContent;
-  } catch (error) {
-    console.error('Error loading dynamic content:', error);
-  }
-}
-loadDynamicContent();
+        const footerResponse = await fetch('footer.html');
+        if (!footerResponse.ok) throw new Error('Footer not loaded');
+        const footerContent = await footerResponse.text();
+        document.getElementById('footer-container').innerHTML = footerContent;
+      } catch (error) {
+        console.error('Error loading dynamic content:', error);
+      }
+    }
+    loadDynamicContent();
+
     document.getElementById('queryForm').addEventListener('submit', function (event) {
       event.preventDefault(); // Prevent default form submission
 
