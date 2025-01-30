@@ -341,10 +341,10 @@ const reviewSchema = new mongoose.Schema({
 // Create the BookReview model
 const BookReview = mongoose.model('BookReview', reviewSchema);
 
-// Endpoint to save a review
+// Route for saving a review (POST)
 app.post('/savereview', async (req, res) => {
-  const { isbn, comment } = req.body;
-
+  const { isbn } = req.query;  // Get ISBN from query string
+  const { comment } = req.body;  // Get comment from request body
   // Validate the incoming request
   if (!isbn) {
     return res.status(400).json({ message: 'ISBN is required' });
