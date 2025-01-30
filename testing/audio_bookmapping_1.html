@@ -215,31 +215,33 @@ function displayDetails(entry) {
 
 // Function to retrieve MP3 link from backend
 function retrieveAudioFromBackend(id, mp3Link, mp3Title) {
-    fetch(`https://datainsertion.onrender.com/getAudiodetail?id=${id}&title=${encodeURIComponent(mp3Title)}`) // Use encodeURIComponent to handle special characters in the title
-        .then(response => response.json())
-        .then(data => {
-            if (data.link) {
-                const audioPlayer = document.getElementById('audio-player');
-                const audio = document.getElementById('audio');
-                audio.src = data.link; // Use the link from the backend
-                audio.play();
-                audioPlayer.style.display = 'flex';
-            } else {
-                console.error('No MP3 link found in the response.');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching MP3 link from backend:', error);
-            // Fallback to the local MP3 link if backend fails
-            const audioPlayer = document.getElementById('audio-player');
-            const audio = document.getElementById('audio');
-            audio.src = mp3Link;
-            audio.play();
-            audioPlayer.style.display = 'flex';
-        });
-}
-});
+  fetch(`https://datainsertion.onrender.com/getAudiodetail?id=${id}&title=${encodeURIComponent(mp3Title)}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.link) {
+        // Decode the base64 link back to the original URL
+        const decodedLink = atob(data.link);
 
+        // Play the audio using the decoded link
+        const audioPlayer = document.getElementById('audio-player');
+        const audio = document.getElementById('audio');
+        audio.src = decodedLink;  // Use the decoded link
+        audio.play();
+        audioPlayer.style.display = 'flex';
+      } else {
+        console.error('No MP3 link found in the response.');
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching MP3 link from backend:', error);
+      // Fallback to the local MP3 link if backend fails
+      const audioPlayer = document.getElementById('audio-player');
+      const audio = document.getElementById('audio');
+      audio.src = mp3Link;
+      audio.play();
+      audioPlayer.style.display = 'flex';
+    });
+}
   </script>
 </body>
 </html>
