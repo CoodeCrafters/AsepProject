@@ -815,7 +815,7 @@ function searchBook() {
     const listItem = document.createElement('li');
     listItem.textContent = `${book.BookName} by ${book.Author}`;
     listItem.addEventListener('click', () => {
-      window.location.href = `./description?ISBN=${book.ISBN}`;
+      window.location.href = `./description2?ISBN=${book.ISBN}`;
     });
     dropdown.appendChild(listItem);
   });
