@@ -254,9 +254,16 @@ function retrieveAudioFromBackend(id, mp3Link, mp3Title) {
       audio.play();
       audioPlayer.style.display = 'flex';
     });
+    console.log('Base64 Link:', data.link); // Logs the base64 link to check if it’s correct
+console.log('Decoded Binary Data:', binaryData); // Logs the decoded binary data
+console.log('ArrayBuffer:', arrayBuffer); // Logs the created ArrayBuffer
+console.log('Uint8Array:', uint8Array); // Logs the Uint8Array
+console.log('Blob URL:', blobUrl); // Logs the generated Blob URL
+
 }
 
     });
+    
 
   </script>
 </body>
