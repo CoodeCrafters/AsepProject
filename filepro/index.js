@@ -342,7 +342,7 @@ const reviewSchema = new mongoose.Schema({
 const BookReview = mongoose.model('BookReview', reviewSchema);
 
 // Endpoint to save a review
-router.post('/savereview', async (req, res) => {
+app.post('/savereview', async (req, res) => {
   const { isbn, comment } = req.body;
 
   try {
