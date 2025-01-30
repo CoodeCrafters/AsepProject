@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.1.2/firebase-auth.js"></script>
+<link rel="stylesheet" href="./headerfooter.css">
+<script src="headerfooter.js"></script>
+<script src="hard.js"></script>
 
   <style>
     /* General Styling */
@@ -546,17 +549,10 @@ footer {
 </head>
 <body>
 
-  <!-- Header Section -->
-  <header class="header">
-    <div class="logo">Central E-Library</div>
-    <nav class="menu-bar">
-      <a href="./Home.html">Home</a>
-      <a href="#">Contact Us</a>
-      <a href="#">About Us</a>
-      <a href="profile.html" class="active">Profile</a>
-      <a href="#" onclick="logout()">Logout</a>
-    </nav>
-  </header>
+
+     <!-- Menu bar dynamically loaded -->
+     <div id="menu-container"></div>
+   
 
   <!-- Search Panel -->
 <!-- Search Panel -->
@@ -673,35 +669,8 @@ footer {
 
 
 
-
-<footer>
-  <div class="footer-container">
-    <div class="about-section">
-      <h2>About Us</h2>
-      <p>
-        Welcome to our library, a treasure trove of knowledge and resources. We
-        strive to foster a love for learning and reading by providing access to
-        an extensive collection of books, digital content, and community programs.
-      </p>
-    </div>
-    <div class="contact-section">
-      <h2>Contact Us</h2>
-      <p><strong>Address:</strong> Vishwakarma Institute of Technology, Bibewadi, Pune</p>
-      <p><strong>Phone:</strong>022 26004587</p>
-      <p><strong>Email:</strong> contact@ourlibrary.com</p>
-    </div>
-    <div class="social-media-section">
-      <h2>Follow Us</h2>
-      <a href="#" class="social-link">Facebook</a>
-      <a href="#" class="social-link">Twitter</a>
-      <a href="#" class="social-link">Instagram</a>
-      <a href="#" class="social-link">LinkedIn</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2024 Our Library. All Rights Reserved.</p>
-  </div>
-</footer>
+<!-- Footer dynamically loaded -->
+<div id="footer-container"></div>
 <!-- Profile Modal -->
 <div class="profile-modal-overlay" id="profile-modal">
   <div class="profile-modal">
@@ -734,6 +703,23 @@ footer {
   </div>
 </div>
   <script>
+    // Load the menu and footer dynamically
+async function loadDynamicContent() {
+  try {
+    const menuResponse = await fetch('menu.html');
+    if (!menuResponse.ok) throw new Error('Menu not loaded');
+    const menuContent = await menuResponse.text();
+    document.getElementById('menu-container').innerHTML = menuContent;
+
+    const footerResponse = await fetch('footer.html');
+    if (!footerResponse.ok) throw new Error('Footer not loaded');
+    const footerContent = await footerResponse.text();
+    document.getElementById('footer-container').innerHTML = footerContent;
+  } catch (error) {
+    console.error('Error loading dynamic content:', error);
+  }
+}
+loadDynamicContent();
     let resourceData = [];
 
 // Fetch resource data from both JSON files
