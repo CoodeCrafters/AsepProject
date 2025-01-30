@@ -317,7 +317,7 @@ app.get('/getfetchdata', async (req, res) => {
 app.get('/heartbeat', (req, res) => {
   res.status(200).send('Server is alive');
 });
-
+// Define the BookReview schema
 const reviewSchema = new mongoose.Schema({
   isbn: {
     type: String,
@@ -338,37 +338,10 @@ const reviewSchema = new mongoose.Schema({
   ],
 });
 
+// Create the BookReview model
 const BookReview = mongoose.model('BookReview', reviewSchema);
 
-module.exports = BookReview;
-
-// routes/reviewRoutes.js (Add this to the same file)
-
-router.get('/getreview', async (req, res) => {
-  const { isbn } = req.query;
-
-  try {
-    // Find the book review by ISBN
-    const bookReview = await BookReview.findOne({ isbn });
-
-    if (!bookReview) {
-      return res.status(404).json({ message: 'No reviews found for this ISBN' });
-    }
-
-    // Return the reviews along with their timestamps
-    res.status(200).json(bookReview.reviews);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error fetching reviews' });
-  }
-});
-
-module.exports = router;
-
-const router = express.Router();
-const BookReview = require('../models/BookReview'); // Import the schema
-
-// Endpoint to save review
+// Endpoint to save a review
 router.post('/savereview', async (req, res) => {
   const { isbn, comment } = req.body;
 
@@ -389,7 +362,6 @@ router.post('/savereview', async (req, res) => {
 
     // Save the review to the database
     await bookReview.save();
-
     res.status(200).json({ message: 'Review saved successfully' });
   } catch (error) {
     console.error(error);
@@ -397,6 +369,27 @@ router.post('/savereview', async (req, res) => {
   }
 });
 
+// Endpoint to get reviews for a specific ISBN
+router.get('/getreview', async (req, res) => {
+  const { isbn } = req.query;
+
+  try {
+    // Find the book review by ISBN
+    const bookReview = await BookReview.findOne({ isbn });
+
+    if (!bookReview) {
+      return res.status(404).json({ message: 'No reviews found for this ISBN' });
+    }
+
+    // Return the reviews along with their timestamps
+    res.status(200).json(bookReview.reviews);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching reviews' });
+  }
+});
+
+// Export the router
 module.exports = router;
 
 // Start the server
