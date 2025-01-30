@@ -148,6 +148,8 @@ async function loadDynamicContent() {
     console.error('Error loading dynamic content:', error);
   }
 }
+loadDynamicContent(); // Add this line to execute the function
+
 
       const urlParams = new URLSearchParams(window.location.search);
       const id = urlParams.get('id');
