@@ -213,7 +213,7 @@ function displayDetails(entry) {
     });
 }
 
-// Function to retrieve MP3 link from backend
+/// Function to retrieve MP3 link from backend
 function retrieveAudioFromBackend(id, mp3Link, mp3Title) {
   fetch(`https://datainsertion.onrender.com/getAudiodetail?id=${id}&title=${encodeURIComponent(mp3Title)}`)
     .then(response => response.json())
@@ -242,6 +242,9 @@ function retrieveAudioFromBackend(id, mp3Link, mp3Title) {
       audioPlayer.style.display = 'flex';
     });
 }
+
+});
+
   </script>
 </body>
 </html>
