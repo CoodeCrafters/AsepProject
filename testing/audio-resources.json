@@ -347,7 +347,18 @@
       {
         "author": "O’Hara, Frank",
         "title": "Ani­mals (read by Zadie Smith)",
-        "id": "ebbfd873-7054-4074-8495-875f2a95f630"
+        "id": "ebbfd873-7054-4074-8495-875f2a95f630",
+        "total_duration": "0.33",
+        "genre": "Poetry",
+        "bookCover_url": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1611550976i/54445810.jpg",
+        "year_of_published": 2018,
+        "mp3Details": [
+          {
+            "title": "Part One",
+            "duration": "0.33",
+            "link": "https://cf-hls-media.sndcdn.com/media/159660/0/31762/MWd0wqO4rLg5.128.mp3?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiKjovL2NmLWhscy1tZWRpYS5zbmRjZG4uY29tL21lZGlhLzE1OTY2MC8qLyovTVdkMHdxTzRyTGc1LjEyOC5tcDMiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3MzgyMDYwMzR9fX1dfQ__&Signature=cb5mDKjYbnv2ct~QPi3GkOBN6tikfCWEBK3gmyEoxqBNyAqEC55bA61~3CoV5SDQXQivzmcm-Y23MgbEwi1yqjlBHo4ECqdA-yLBVn-PyMlnXG9Clya14-jORDnj-LBz40ye6nBI5emTyM0HdH0xdlWoc5o39~-Wj35AsbyvBlDt-ot74twnNrlPyVWYevgt0NY-xmf76yJDLj1JT2tN3vGev0KX2608D7yFFNeCK4eZZIWHzt7iI4Le9nyRO0csAot79UGAXkv7beWn2WDs97P0Oa7A5dsqvzqQX7atbBK3V2S1lUnvfv80lV1kUeOAB~umoels9SI6UkLGZAkH7A__&Key-Pair-Id=APKAI6TU7MMXM5DG6EPQ"
+          }
+        ]
       },
       {
         "author": "Poe, Edgar Allan",
