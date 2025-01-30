@@ -10,207 +10,246 @@
   <script src="./hard.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js" integrity="sha512-ml/QKfG3+Yes6TwOzQb7aCNtJF4PUyha6R3w8pSTo/VJSywl7ZreYvvtUso7fKevpsI+pYVVwnu82YO0q3V6eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style>
+    /* General Styles */
     body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-#menu-container {
-  flex-shrink: 0;
-}
-
-.main-container {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
-  padding: 20px;
-  background-color: #f5f5f5;
-  height: 700px; /* Set the height to 700px */
-}
-
-.pdf-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.pdf-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.pdf-toolbar button {
-  margin-left: 10px;
-  padding: 8px 12px;
-  background-color: #2196f3;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.pdf-toolbar button:hover {
-  background-color: #1a78c2;
-}
-
-.pdf-toolbar .page-navigation {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.pdf-toolbar .page-navigation input {
-  width: 50px;
-  padding: 5px;
-  text-align: center;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-#pdfViewerContainer {
-  flex: 1;
-  overflow: auto;
-  position: relative;
-  padding: 20px;
-}
-
-.pdf-page {
-  margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-}
-
-.sidebar {
-  width: 300px;
-  background-color: #fff;
-  border-left: 1px solid #ddd;
-  padding: 20px;
-  overflow-y: auto;
-  height: 900px; /* Increased height */
-}
-
-.sidebar h2 {
-  font-size: 18px;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.review-section {
-  margin-bottom: 20px;
-}
-
-.review-section h3 {
-  font-size: 16px;
-  margin-bottom: 10px;
-  color: #555;
-}
-
-.stars {
-  display: flex;
-  gap: 5px;
-}
-
-.stars .star {
-  font-size: 24px;
-  color: #ddd;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.stars .star.active,
-.stars .star:hover {
-  color: #ff9800;
-}
-
-.comments-section {
-  margin-top: 20px;
-}
-
-.comments-section textarea {
-  width: 100%;
-  height: 100px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  resize: none;
-}
-
-.comments-section button {
-  padding: 10px 20px;
-  background-color: #2196f3;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.comments-section button:hover {
-  background-color: #1a78c2;
-}
-
-.comments-list {
-  margin-top: 20px;
-}
-
-.comments-list p {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 10px;
-}
-
-.loading-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.loading-container .loading-text {
-  font-size: 18px;
-  color: #333;
-  margin-top: 10px;
-}
-
-.loading-container .loading-bar {
-  width: 200px;
-  height: 4px;
-  background-color: #ddd;
-  border-radius: 2px;
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.loading-container .loading-bar::after {
-  content: '';
-  display: block;
-  width: 50%;
-  height: 100%;
-  background-color: #2196f3;
-  animation: loading 1.5s infinite ease-in-out;
-}
-
-@keyframes loading {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(200%); }
-}
-
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
+  
+    #menu-container {
+      flex-shrink: 0;
+    }
+  
+    .main-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      padding: 20px;
+      background-color: #f5f5f5;
+      height: 700px; /* Fixed height */
+    }
+  
+    .pdf-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+  
+    .pdf-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+  
+    .pdf-toolbar button {
+      margin-left: 10px;
+      padding: 10px 15px;
+      background-color: #2196f3;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+  
+    .pdf-toolbar button:hover {
+      background-color: #1a78c2;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+    .pdf-toolbar .page-navigation {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  
+    .pdf-toolbar .page-navigation input {
+      width: 60px;
+      padding: 8px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+  
+    .pdf-toolbar .page-navigation input:focus {
+      border-color: #2196f3;
+      outline: none;
+      box-shadow: 0 0 8px rgba(33, 150, 243, 0.3);
+    }
+  
+    #pdfViewerContainer {
+      flex: 1;
+      overflow: auto;
+      position: relative;
+      padding: 20px;
+    }
+  
+    .pdf-page {
+      margin-bottom: 25px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+  
+    .pdf-page:hover {
+      transform: scale(1.02);
+    }
+  
+    .sidebar {
+      width: 350px; /* Increased width */
+      background-color: #fff;
+      border-left: 1px solid #ddd;
+      padding: 25px;
+      overflow-y: auto;
+      height: 900px; /* Increased height */
+      box-shadow: -4px 0 8px rgba(0, 0, 0, 0.05);
+    }
+  
+    .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 25px;
+      color: #333;
+      font-weight: 600;
+    }
+  
+    .review-section {
+      margin-bottom: 25px;
+    }
+  
+    .review-section h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #555;
+      font-weight: 500;
+    }
+  
+    .stars {
+      display: flex;
+      gap: 8px;
+    }
+  
+    .stars .star {
+      font-size: 28px; /* Increased size */
+      color: #ddd;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+  
+    .stars .star.active,
+    .stars .star:hover {
+      color: #ff9800;
+    }
+  
+    .comments-section {
+      margin-top: 25px;
+    }
+  
+    .comments-section textarea {
+      width: 100%;
+      height: 120px; /* Increased height */
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      resize: none;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+  
+    .comments-section textarea:focus {
+      border-color: #2196f3;
+      outline: none;
+      box-shadow: 0 0 8px rgba(33, 150, 243, 0.3);
+    }
+  
+    .comments-section button {
+      padding: 12px 20px;
+      background-color: #2196f3;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+  
+    .comments-section button:hover {
+      background-color: #1a78c2;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+    .comments-list {
+      margin-top: 25px;
+    }
+  
+    .comments-list p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 15px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      border: 1px solid #eee;
+    }
+  
+    .loading-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+  
+    .loading-container .loading-text {
+      font-size: 18px;
+      color: #333;
+      margin-top: 15px;
+    }
+  
+    .loading-container .loading-bar {
+      width: 250px; /* Increased width */
+      height: 6px; /* Increased height */
+      background-color: #ddd;
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+  
+    .loading-container .loading-bar::after {
+      content: '';
+      display: block;
+      width: 50%;
+      height: 100%;
+      background-color: #2196f3;
+      animation: loading 1.5s infinite ease-in-out;
+    }
+  
+    @keyframes loading {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+  
     .fullscreen {
       position: fixed;
       top: 0;
@@ -220,11 +259,11 @@
       z-index: 1000;
       background-color: #fff;
     }
-
+  
     .fullscreen .sidebar {
       display: none;
     }
-
+  
     .fullscreen .pdf-container {
       width: 100%;
       height: 100%;
