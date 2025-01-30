@@ -345,6 +345,15 @@ const BookReview = mongoose.model('BookReview', reviewSchema);
 app.post('/savereview', async (req, res) => {
   const { isbn, comment } = req.body;
 
+  // Validate the incoming request
+  if (!isbn) {
+    return res.status(400).json({ message: 'ISBN is required' });
+  }
+
+  if (!comment) {
+    return res.status(400).json({ message: 'Comment is required' });
+  }
+
   try {
     // Check if book review already exists for the ISBN
     let bookReview = await BookReview.findOne({ isbn });
@@ -373,6 +382,11 @@ app.post('/savereview', async (req, res) => {
 app.get('/getreview', async (req, res) => {
   const { isbn } = req.query;
 
+  // Validate ISBN query parameter
+  if (!isbn) {
+    return res.status(400).json({ message: 'ISBN is required' });
+  }
+
   try {
     // Find the book review by ISBN
     const bookReview = await BookReview.findOne({ isbn });
@@ -388,7 +402,6 @@ app.get('/getreview', async (req, res) => {
     res.status(500).json({ message: 'Error fetching reviews' });
   }
 });
-
 
 // Start the server
 app.listen(PORT, () => {
