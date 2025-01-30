@@ -95,24 +95,29 @@
     }
 
     #pdfViewerContainer {
-      flex: 1;
-      overflow: auto;
-      position: relative;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center; /* Center pages horizontally */
-    }
+  flex: 1;
+  overflow: auto; /* Enable scrolling */
+  position: relative;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center pages horizontally */
+  height: 600px; /* Fixed height */
+  border: 1px solid #ddd; /* Optional: Add border for better visibility */
+  border-radius: 10px; /* Optional: Add border radius */
+  background-color: #fff; /* Optional: Add background color */
+}
 
-    .pdf-page {
-      margin-bottom: 25px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-      background-color: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      transition: transform 0.3s ease;
-      max-width: 100%; /* Ensure pages don't overflow */
-    }
+.pdf-page {
+  margin-bottom: 25px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  max-width: 100%; /* Ensure pages don't overflow horizontally */
+  max-height: 100%; /* Ensure pages don't overflow vertically */
+}
 
     .fullscreen #pdfViewerContainer {
       padding: 0; /* Remove padding in fullscreen mode */
@@ -398,21 +403,27 @@
     }
 
     async function renderAllPages() {
-      const pdfViewer = document.getElementById('pdfViewer');
-      pdfViewer.innerHTML = '';
+  const pdfViewer = document.getElementById('pdfViewer');
+  pdfViewer.innerHTML = '';
 
-      for (let i = 1; i <= totalPages; i++) {
-        const page = await pdfDoc.getPage(i);
-        const canvas = document.createElement('canvas');
-        canvas.className = 'pdf-page';
-        const viewport = page.getViewport({ scale: pdfScale });
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
+  for (let i = 1; i <= totalPages; i++) {
+    const page = await pdfDoc.getPage(i);
+    const canvas = document.createElement('canvas');
+    canvas.className = 'pdf-page';
+    const viewport = page.getViewport({ scale: pdfScale });
 
-        await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
-        pdfViewer.appendChild(canvas);
-      }
-    }
+    // Adjust canvas dimensions to fit within the container
+    const containerWidth = document.getElementById('pdfViewerContainer').clientWidth;
+    const scale = Math.min(pdfScale, containerWidth / viewport.width);
+    const scaledViewport = page.getViewport({ scale });
+
+    canvas.height = scaledViewport.height;
+    canvas.width = scaledViewport.width;
+
+    await page.render({ canvasContext: canvas.getContext('2d'), viewport: scaledViewport }).promise;
+    pdfViewer.appendChild(canvas);
+  }
+}
 
     // Zoom In
     document.getElementById('zoomIn').addEventListener('click', () => {
