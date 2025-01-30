@@ -523,7 +523,7 @@
       const isbn = urlParams.get('ISBN');
 
       try {
-        const response = await fetch(`https://central-library.onrender.com/getcomments?isbn=${isbn}`);
+        const response = await fetch(`https://central-library.onrender.com/getreview?isbn=${isbn}`);
         if (!response.ok) throw new Error('Failed to fetch comments');
 
         const comments = await response.json();
@@ -547,7 +547,7 @@
       const isbn = urlParams.get('ISBN');
 
       try {
-        const response = await fetch(`https://central-library.onrender.com/submitcomment?isbn=${isbn}`, {
+        const response = await fetch(`https://central-library.onrender.com/savereview?isbn=${isbn}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ comment }),
