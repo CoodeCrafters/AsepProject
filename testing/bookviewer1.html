@@ -523,10 +523,10 @@ document.querySelectorAll('.star').forEach(star => {
     const rating = parseInt(star.getAttribute('data-value')); // Convert to number
     const urlParams = new URLSearchParams(window.location.search);
     const isbn = urlParams.get('isbn');
-    const prn_no = sessionStorage.getItem('prn_no'); // Retrieve PRN number from session storage
+    const userId = sessionStorage.getItem('prn_no'); // Use prn_no but keep variable as userId
 
-if (!isbn || !prn_no) {
-  console.error("Missing ISBN or PRN number");
+if (!userId) {
+  alert('You must be logged in to submit a rating.');
   return;
 }
     
