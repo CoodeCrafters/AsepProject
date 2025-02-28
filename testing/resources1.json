@@ -500,6 +500,13 @@
         "ISBN": "75889002512",
         "year": 2025,
         "bookCover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMY8bfNRlW5f3_9KMNoxrc8jGk5lflZsZ4aA&s"
+      },
+      {
+        "BookName": "Python",
+        "Author": "Robert A. Beezer",
+        "ISBN": "7588900251530",
+        "year": 2024,
+        "bookCover": "https://images.tandf.co.uk/common/jackets/crclarge/978113858/9781138584204.jpg"
       }
     ]
   },
