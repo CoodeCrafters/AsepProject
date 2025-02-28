@@ -22,6 +22,7 @@
     "homepage": "https://github.com/CoodeCrafters/AsepProject#readme",
     "dependencies": {
         "body-parser": "^1.20.3",
+        "child_process": "^1.0.2",
         "cors": "^2.8.5",
         "crypto": "^1.0.1",
         "django": "^99.99.99",
