@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watermarked PDF Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #pdfViewer {
+            width: 80%;
+            height: 600px;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Fetch and View Watermarked PDF</h2>
+    
+    <label for="isbn">Enter ISBN:</label>
+    <input type="text" id="isbn" placeholder="978-3-16-148410-0">
+
+    <label for="prn">Enter PRN Number:</label>
+    <input type="text" id="prn" placeholder="123456789">
+
+    <button onclick="fetchWatermarkedPDF()">Fetch PDF</button>
+    
+    <br><br>
+    
+    <button id="downloadBtn" style="display:none;">Download PDF</button>
+    
+    <iframe id="pdfViewer"></iframe>
+
+    <script>
+        async function fetchWatermarkedPDF() {
+            const isbn = document.getElementById("isbn").value.trim();
+            const prn = document.getElementById("prn").value.trim();
+
+            if (!isbn || !prn) {
+                alert("Please enter both ISBN and PRN Number.");
+                return;
+            }
+
+            try {
+                const response = await fetch(`/getfetchdata?isbn=${isbn}&prn_no=${prn}`);
+                if (!response.ok) throw new Error("Failed to fetch PDF");
+
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+
+                // Show PDF in iframe
+                document.getElementById("pdfViewer").src = url;
+
+                // Enable download button
+                const downloadBtn = document.getElementById("downloadBtn");
+                downloadBtn.style.display = "inline-block";
+                downloadBtn.onclick = function () {
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "watermarked.pdf";
+                    document.body.appendChild(a);
+                    a.click();
+                    URL.revokeObjectURL(url);
+                };
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Error fetching PDF. Please try again.");
+            }
+        }
+    </script>
+</body>
+</html>
