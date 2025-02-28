@@ -211,105 +211,73 @@ app.post('/saveLibraryView', async (req, res) => {
 // Endpoint: /getfetchdata
 
 app.get('/getfetchdata', async (req, res) => {
-  const origin = req.get('Origin'); // Get the Origin header from the request
-
-  // Check if the request is from the allowed origin
-  if (origin !== 'https://coodecrafters.github.io') {
-    return res.status(403).send({ error: "What are u trying to access, go to hell" });
-  }
-
   try {
-    const { isbn, prn_no } = req.query;
-
-    // Validate input
-    if (!isbn || !prn_no) {
-      return res.status(400).send({ error: 'Both ISBN and PRN number are required' });
-    }
-
-    // Fetch profile data based on prn_no
-    const profile = await Profile.findOne({ prn_no });
-    if (!profile) {
-      return res.status(404).send({ error: 'Profile not found' });
-    }
-
-
-    // Fetch library view (PDF link) based on the given ISBN
-    const libraryView = await LibraryView.findOne({ isbn });
-    if (!libraryView) {
-      return res.status(404).send({ error: 'Library view not found for the given ISBN' });
-    }
-
-
-    // Directly use the pdf_link stored in the database (no decoding needed)
-    const pdfUrl = libraryView.pdf_link;
-
-    // Fetch the PDF file
-    const response = await fetch(pdfUrl);
-    if (!response.ok) {
-      console.log('Failed to fetch the PDF file');
-      return res.status(500).send({ error: 'Failed to fetch the PDF file' });
-    }
-    const pdfBytes = await response.arrayBuffer();
-
-    // Load the PDF document
-    const pdfDoc = await PDFDocument.load(pdfBytes);
-    const pages = pdfDoc.getPages();
-    const watermarkText = prn_no; // Use PRN number as watermark text
-
-    // Use the default font from pdf-lib (no specific font file)
-    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-
-    // Calculate watermark position and size based on page size and max PRN count
-    const watermarkOptions = {
-      color: rgb(0.8, 0.8, 0.8),
-      size: 7, // Font size 7
-      rotate: degrees(45), // Rotation angle
-    };
-
-    const maxWatermarks = 15; // Limit to a maximum of 15 PRN numbers
-    let xPos = 0;
-    let yPos = 0;
-
-    // Loop through each page and add the watermark
-    pages.forEach(page => {
-      const { width, height } = page.getSize();
-      const rows = Math.ceil(Math.sqrt(maxWatermarks)); // Create a grid-like pattern
-      const cols = Math.ceil(maxWatermarks / rows);
-      
-      // Calculate the spacing between the watermark texts
-      const xSpacing = width / cols;
-      const ySpacing = height / rows;
-
-      // Add watermark text for each position on the page
-      let count = 0;
-      for (let row = 0; row < rows && count < maxWatermarks; row++) {
-        for (let col = 0; col < cols && count < maxWatermarks; col++) {
-          xPos = xSpacing * col + 50; // Adjust horizontal position with padding
-          yPos = ySpacing * row + 50; // Adjust vertical position with padding
-          
-          page.drawText(watermarkText, {
-            x: xPos,
-            y: yPos,
-            font: font,
-            size: watermarkOptions.size,
-            color: watermarkOptions.color,
-            rotate: watermarkOptions.rotate,
-          });
-
-          count++;
-        }
+      const origin = req.get('Origin');
+      if (origin !== 'https://coodecrafters.github.io') {
+          return res.status(403).send({ error: "What are u trying to access, go to hell" });
       }
-    });
 
-    const watermarkedPdfBytes = await pdfDoc.save();
+      const { isbn, prn_no } = req.query;
+      if (!isbn || !prn_no) {
+          return res.status(400).send({ error: 'Both ISBN and PRN number are required' });
+      }
 
-    // Send the watermarked PDF
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'inline; filename=watermarked.pdf');
-    res.send(Buffer.from(watermarkedPdfBytes));
+      // Fetch profile data
+      const profile = await Profile.findOne({ prn_no });
+      if (!profile) return res.status(404).send({ error: 'Profile not found' });
+
+      // Fetch library view
+      const libraryView = await LibraryView.findOne({ isbn });
+      if (!libraryView) return res.status(404).send({ error: 'Library view not found' });
+
+      // Get PDF URL
+      const pdfUrl = libraryView.pdf_link;
+
+      // Stream the PDF directly
+      const pdfResponse = await fetch(pdfUrl);
+      if (!pdfResponse.ok) {
+          return res.status(500).send({ error: 'Failed to fetch the PDF file' });
+      }
+
+      // Create a new PDF document and load the streamed PDF
+      const existingPdfBytes = await pdfResponse.arrayBuffer();
+      const pdfDoc = await PDFDocument.load(existingPdfBytes);
+      const pages = pdfDoc.getPages();
+      const watermarkText = prn_no;
+
+      // Embed standard font
+      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+      // Watermark settings
+      const watermarkOptions = {
+          color: rgb(0.8, 0.8, 0.8),
+          size: 7,
+          rotate: degrees(45),
+      };
+
+      // Apply watermark while streaming
+      pages.forEach(page => {
+          const { width, height } = page.getSize();
+          page.drawText(watermarkText, {
+              x: width / 2 - 30,
+              y: height / 2,
+              font,
+              size: watermarkOptions.size,
+              color: watermarkOptions.color,
+              rotate: watermarkOptions.rotate,
+              opacity: 0.3
+          });
+      });
+
+      // Stream the modified PDF
+      const watermarkedPdfBytes = await pdfDoc.save();
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', 'inline; filename=watermarked.pdf');
+
+      res.end(Buffer.from(watermarkedPdfBytes));
   } catch (error) {
-    console.error('Error in /getfetchdata:', error);
-    res.status(500).send({ error: 'Internal server error' });
+      console.error('Error in /getfetchdata:', error);
+      res.status(500).send({ error: 'Internal server error' });
   }
 });
 
