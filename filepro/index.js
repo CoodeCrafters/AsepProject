@@ -213,77 +213,54 @@ app.post('/saveLibraryView', async (req, res) => {
 // Endpoint: /getfetchdata
 
 app.get('/getfetchdata', async (req, res) => {
-    try {
-        const origin = req.get('Origin');
-        if (origin !== 'https://coodecrafters.github.io') {
-            return res.status(403).send({ error: "Unauthorized access" });
-        }
+  try {
+      const { isbn, prn_no } = req.query;
+      if (!isbn || !prn_no) return res.status(400).send({ error: 'ISBN and PRN required' });
 
-        const { isbn, prn_no } = req.query;
-        if (!isbn || !prn_no) {
-            return res.status(400).send({ error: 'Both ISBN and PRN number are required' });
-        }
+      // Fetch PDF URL from the database
+      const libraryView = await LibraryView.findOne({ isbn });
+      if (!libraryView) return res.status(404).send({ error: 'Library view not found' });
 
-        // Fetch profile and library data
-        const profile = await Profile.findOne({ prn_no });
-        if (!profile) return res.status(404).send({ error: 'Profile not found' });
+      const pdfUrl = libraryView.pdf_link;
 
-        const libraryView = await LibraryView.findOne({ isbn });
-        if (!libraryView) return res.status(404).send({ error: 'Library view not found' });
+      // Download the PDF file
+      const response = await fetch(pdfUrl);
+      if (!response.ok) return res.status(500).send({ error: 'Failed to fetch PDF' });
 
-        // Get PDF URL
-        const pdfUrl = libraryView.pdf_link;
+      const pdfPath = `./temp_${isbn}.pdf`;
+      const pdfBuffer = await response.buffer();
+      fs.writeFileSync(pdfPath, pdfBuffer);
 
-        // Fetch the PDF stream from external source
-        const pdfResponse = await fetch(pdfUrl);
-        if (!pdfResponse.ok) {
-            return res.status(500).send({ error: 'Failed to fetch the PDF file' });
-        }
+      // **Use MuPDF to add watermark** (modifies the original PDF directly)
+      const outputPdfPath = `./watermarked_${isbn}.pdf`;
+      const watermarkText = prn_no;
 
-        // Load the original PDF
-        const existingPdfBytes = await pdfResponse.arrayBuffer();
-        const pdfDoc = await PDFDocument.load(existingPdfBytes);
+      // MuPDF `mutool draw` command for watermarking
+      const mutoolCmd = `mutool draw -F pdf -o ${outputPdfPath} -w text '${watermarkText}' ${pdfPath}`;
 
-        // Embed standard font
-        const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+      exec(mutoolCmd, (error, stdout, stderr) => {
+          if (error) {
+              console.error('MuPDF error:', stderr);
+              return res.status(500).send({ error: 'Failed to add watermark' });
+          }
 
-        // Create a Transform Stream
-        const pdfStream = new stream.PassThrough();
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', 'inline; filename=watermarked.pdf');
+          // **Stream the watermarked PDF directly**
+          res.setHeader('Content-Type', 'application/pdf');
+          res.setHeader('Content-Disposition', 'inline; filename="watermarked.pdf"');
 
-        // Stream each page separately
-        (async () => {
-            const newPdfDoc = await PDFDocument.create();
-            for (let i = 0; i < pdfDoc.getPageCount(); i++) {
-                const [copiedPage] = await newPdfDoc.copyPages(pdfDoc, [i]);
-                const { width, height } = copiedPage.getSize();
+          const fileStream = fs.createReadStream(outputPdfPath);
+          fileStream.pipe(res);
 
-                // Add watermark to the page
-                copiedPage.drawText(prn_no, {
-                    x: width / 2 - 30,
-                    y: height / 2,
-                    font,
-                    size: 10,
-                    color: rgb(0.8, 0.2, 0.2),
-                    rotate: degrees(-45),
-                    opacity: 0.5
-                });
-
-                newPdfDoc.addPage(copiedPage);
-
-                // Send each page as it's processed
-                const pdfBytes = await newPdfDoc.save();
-                pdfStream.write(Buffer.from(pdfBytes));
-            }
-            pdfStream.end(); // End the stream after all pages are processed
-        })();
-
-        pdfStream.pipe(res);
-    } catch (error) {
-        console.error('Error in /getfetchdata:', error);
-        res.status(500).send({ error: 'Internal server error' });
-    }
+          fileStream.on('close', () => {
+              // Cleanup temp files
+              fs.unlinkSync(pdfPath);
+              fs.unlinkSync(outputPdfPath);
+          });
+      });
+  } catch (error) {
+      console.error('Error:', error);
+      res.status(500).send({ error: 'Internal server error' });
+  }
 });
 
 // Define the /heartbeat endpoint
