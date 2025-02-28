@@ -214,60 +214,91 @@ app.post('/saveLibraryView', async (req, res) => {
 
 app.get('/getfetchdata', async (req, res) => {
   const origin = req.get('Origin');
-
-  // Ensure request is from allowed origin
   if (origin !== 'https://coodecrafters.github.io') {
-      return res.status(403).send({ error: "What are u trying to access, go to hell" });
+    return res.status(403).send({ error: "Unauthorized access" });
   }
 
   try {
-      const { isbn, prn_no } = req.query;
-      if (!isbn || !prn_no) {
-          return res.status(400).send({ error: 'Both ISBN and PRN number are required' });
+    const { isbn, prn_no } = req.query;
+    if (!isbn || !prn_no) {
+      return res.status(400).send({ error: 'Both ISBN and PRN number are required' });
+    }
+
+    const profile = await Profile.findOne({ prn_no });
+    if (!profile) return res.status(404).send({ error: 'Profile not found' });
+
+    const libraryView = await LibraryView.findOne({ isbn });
+    if (!libraryView) return res.status(404).send({ error: 'Library view not found' });
+
+    const pdfUrl = libraryView.pdf_link;
+    const response = await fetch(pdfUrl);
+    if (!response.ok) return res.status(500).send({ error: 'Failed to fetch the PDF file' });
+
+    const reader = response.body.getReader();
+    let chunks = [];
+    let totalSize = 0;
+
+    // **Read and store PDF in chunks**
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      chunks.push(value);
+      totalSize += value.length;
+    }
+
+    const pdfBytes = Buffer.concat(chunks, totalSize);
+    const pdfDoc = await PDFDocument.load(pdfBytes);
+    const pages = pdfDoc.getPages();
+    const watermarkText = prn_no;
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const watermarkOptions = {
+      color: rgb(0.8, 0.8, 0.8),
+      size: 7,
+      rotate: degrees(45),
+    };
+
+    const maxWatermarks = 15;
+    pages.forEach(page => {
+      const { width, height } = page.getSize();
+      const rows = Math.ceil(Math.sqrt(maxWatermarks));
+      const cols = Math.ceil(maxWatermarks / rows);
+      const xSpacing = width / cols;
+      const ySpacing = height / rows;
+
+      let count = 0;
+      for (let row = 0; row < rows && count < maxWatermarks; row++) {
+        for (let col = 0; col < cols && count < maxWatermarks; col++) {
+          const xPos = xSpacing * col + 50;
+          const yPos = ySpacing * row + 50;
+          page.drawText(watermarkText, {
+            x: xPos,
+            y: yPos,
+            font: font,
+            size: watermarkOptions.size,
+            color: watermarkOptions.color,
+            rotate: watermarkOptions.rotate,
+          });
+          count++;
+        }
       }
+    });
 
-      const libraryView = await LibraryView.findOne({ isbn });
-      if (!libraryView) return res.status(404).send({ error: 'Library view not found' });
+    // Stream PDF back to client in chunks
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'inline; filename=watermarked.pdf');
 
-      const response = await fetch(libraryView.pdf_link);
-      if (!response.ok) return res.status(500).send({ error: 'Failed to fetch PDF' });
+    const writable = res;
+    const pdfStream = await pdfDoc.save();
+    const bufferStream = Buffer.from(pdfStream);
 
-      const pdfBytes = await response.arrayBuffer();
-      const pdfDoc = await PDFDocument.load(pdfBytes);
-      const pages = pdfDoc.getPages();
-      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    for (let i = 0; i < bufferStream.length; i += 1024 * 64) { // Send in 64KB chunks
+      writable.write(bufferStream.slice(i, i + 1024 * 64));
+    }
+    writable.end();
 
-      res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Transfer-Encoding', 'chunked');
-      res.setHeader('Content-Disposition', 'inline; filename="watermarked.pdf"');
-
-      for (const page of pages) {
-          const { width, height } = page.getSize();
-          const maxWatermarks = 15;
-          const xSpacing = width / 4;
-          const ySpacing = height / 4;
-
-          for (let i = 0; i < maxWatermarks; i++) {
-              const xPos = (i % 4) * xSpacing + 30;
-              const yPos = height - (Math.floor(i / 4) * ySpacing + 50);
-              page.drawText(prn_no, {
-                  x: xPos, y: yPos, font, size: 7, color: rgb(0.8, 0.8, 0.8), rotate: degrees(45),
-              });
-          }
-
-          // Convert single-page PDF
-          const singlePagePdf = await PDFDocument.create();
-          const copiedPage = await singlePagePdf.copyPages(pdfDoc, [pages.indexOf(page)]);
-          singlePagePdf.addPage(copiedPage[0]);
-
-          const chunk = await singlePagePdf.save();
-          res.write(Buffer.from(chunk)); // Stream page chunk
-      }
-
-      res.end(); // End streaming after all pages are sent
   } catch (error) {
-      console.error('Error:', error);
-      res.status(500).send({ error: 'Internal Server Error' });
+    console.error('Error in /getfetchdata:', error);
+    res.status(500).send({ error: 'Internal server error' });
   }
 });
 
