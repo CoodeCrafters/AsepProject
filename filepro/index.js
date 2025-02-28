@@ -213,53 +213,61 @@ app.post('/saveLibraryView', async (req, res) => {
 // Endpoint: /getfetchdata
 
 app.get('/getfetchdata', async (req, res) => {
+  const origin = req.get('Origin');
+
+  // Ensure request is from allowed origin
+  if (origin !== 'https://coodecrafters.github.io') {
+      return res.status(403).send({ error: "What are u trying to access, go to hell" });
+  }
+
   try {
       const { isbn, prn_no } = req.query;
-      if (!isbn || !prn_no) return res.status(400).send({ error: 'ISBN and PRN required' });
+      if (!isbn || !prn_no) {
+          return res.status(400).send({ error: 'Both ISBN and PRN number are required' });
+      }
 
-      // Fetch PDF URL from the database
       const libraryView = await LibraryView.findOne({ isbn });
       if (!libraryView) return res.status(404).send({ error: 'Library view not found' });
 
-      const pdfUrl = libraryView.pdf_link;
-
-      // Download the PDF file
-      const response = await fetch(pdfUrl);
+      const response = await fetch(libraryView.pdf_link);
       if (!response.ok) return res.status(500).send({ error: 'Failed to fetch PDF' });
 
-      const pdfPath = `./temp_${isbn}.pdf`;
-      const pdfBuffer = await response.buffer();
-      fs.writeFileSync(pdfPath, pdfBuffer);
+      const pdfBytes = await response.arrayBuffer();
+      const pdfDoc = await PDFDocument.load(pdfBytes);
+      const pages = pdfDoc.getPages();
+      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-      // **Use MuPDF to add watermark** (modifies the original PDF directly)
-      const outputPdfPath = `./watermarked_${isbn}.pdf`;
-      const watermarkText = prn_no;
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Transfer-Encoding', 'chunked');
+      res.setHeader('Content-Disposition', 'inline; filename="watermarked.pdf"');
 
-      // MuPDF `mutool draw` command for watermarking
-      const mutoolCmd = `mutool draw -F pdf -o ${outputPdfPath} -w text '${watermarkText}' ${pdfPath}`;
+      for (const page of pages) {
+          const { width, height } = page.getSize();
+          const maxWatermarks = 15;
+          const xSpacing = width / 4;
+          const ySpacing = height / 4;
 
-      exec(mutoolCmd, (error, stdout, stderr) => {
-          if (error) {
-              console.error('MuPDF error:', stderr);
-              return res.status(500).send({ error: 'Failed to add watermark' });
+          for (let i = 0; i < maxWatermarks; i++) {
+              const xPos = (i % 4) * xSpacing + 30;
+              const yPos = height - (Math.floor(i / 4) * ySpacing + 50);
+              page.drawText(prn_no, {
+                  x: xPos, y: yPos, font, size: 7, color: rgb(0.8, 0.8, 0.8), rotate: degrees(45),
+              });
           }
 
-          // **Stream the watermarked PDF directly**
-          res.setHeader('Content-Type', 'application/pdf');
-          res.setHeader('Content-Disposition', 'inline; filename="watermarked.pdf"');
+          // Convert single-page PDF
+          const singlePagePdf = await PDFDocument.create();
+          const copiedPage = await singlePagePdf.copyPages(pdfDoc, [pages.indexOf(page)]);
+          singlePagePdf.addPage(copiedPage[0]);
 
-          const fileStream = fs.createReadStream(outputPdfPath);
-          fileStream.pipe(res);
+          const chunk = await singlePagePdf.save();
+          res.write(Buffer.from(chunk)); // Stream page chunk
+      }
 
-          fileStream.on('close', () => {
-              // Cleanup temp files
-              fs.unlinkSync(pdfPath);
-              fs.unlinkSync(outputPdfPath);
-          });
-      });
+      res.end(); // End streaming after all pages are sent
   } catch (error) {
       console.error('Error:', error);
-      res.status(500).send({ error: 'Internal server error' });
+      res.status(500).send({ error: 'Internal Server Error' });
   }
 });
 
