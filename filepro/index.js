@@ -12,6 +12,7 @@ const fs = require('fs');
 const path = require('path');
 const stream = require('stream');
 const { exec } = require('child_process');
+const Rating = require("./models/Rating");
 
 // Initialize Express app
 const app = express();
@@ -397,6 +398,83 @@ app.get('/getreview', async (req, res) => {
     res.status(500).json({ message: 'Error fetching reviews' });
   }
 });
+
+// 🔹 1️⃣ Submit a Rating (POST Request)
+app.post("/submitrating/:isbn", async (req, res) => {
+  try {
+    const { isbn } = req.params;
+    const { rating, review, userId } = req.body;
+
+    // Validate input
+    if (!rating || rating < 1 || rating > 5) {
+      return res.status(400).send({ error: "Rating must be between 1 and 5." });
+    }
+    if (!userId) {
+      return res.status(400).send({ error: "User ID is required." });
+    }
+
+    // Find existing ratings for the book
+    let bookRating = await Rating.findOne({ isbn });
+
+    if (!bookRating) {
+      bookRating = new Rating({ isbn, ratings: [] });
+    }
+
+    // Add new rating
+    bookRating.ratings.push({ rating, review, userId });
+    await bookRating.save();
+
+    res.status(201).send({ message: "Rating submitted successfully!" });
+  } catch (error) {
+    console.error("Error submitting rating:", error);
+    res.status(500).send({ error: "Internal server error." });
+  }
+});
+
+// 🔹 2️⃣ Retrieve Ratings (GET Request)
+app.get("/retrieverating/:isbn", async (req, res) => {
+  try {
+    const { isbn } = req.params;
+
+    // Find book ratings
+    const bookRating = await Rating.findOne({ isbn });
+
+    if (!bookRating) {
+      return res.status(404).send({ error: "No ratings found for this ISBN." });
+    }
+
+    // Calculate average rating
+    const ratingsArray = bookRating.ratings;
+    const avgRating =
+      ratingsArray.reduce((sum, r) => sum + r.rating, 0) / ratingsArray.length;
+
+    res.status(200).send({
+      isbn,
+      averageRating: avgRating.toFixed(2),
+      totalRatings: ratingsArray.length,
+      ratings: ratingsArray,
+    });
+  } catch (error) {
+    console.error("Error retrieving ratings:", error);
+    res.status(500).send({ error: "Internal server error." });
+  }
+});
+
+const RatingSchema = new mongoose.Schema({
+  isbn: { type: String, required: true }, // Book's ISBN number
+  ratings: [
+    {
+      rating: { type: Number, required: true, min: 1, max: 5 }, // Rating value (1-5)
+      review: { type: String, default: "" }, // Optional review text
+      userId: { type: String, required: true }, // User identifier
+      timestamp: { type: Date, default: Date.now }, // Timestamp of rating
+    },
+  ],
+});
+
+const Rating = mongoose.model("Rating", RatingSchema);
+
+module.exports = Rating;
 
 // Start the server
 app.listen(PORT, () => {
