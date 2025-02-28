@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Viewer</title>
+  <link rel="stylesheet" href="viewer.css">
+  <link rel="stylesheet" href="./headerfooter.css">
+  <script src="./headerfooter.js" defer></script>
+  <script src="./hard.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js" integrity="sha512-ml/QKfG3+Yes6TwOzQb7aCNtJF4PUyha6R3w8pSTo/VJSywl7ZreYvvtUso7fKevpsI+pYVVwnu82YO0q3V6eg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      background-color: #f5f5f5;
+    }
+
+    #menu-container {
+      flex-shrink: 0;
+    }
+
+    .main-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      padding: 20px;
+      background-color: #f5f5f5;
+      height: 700px; /* Fixed height */
+    }
+
+    .pdf-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .pdf-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .pdf-toolbar button {
+      margin-left: 10px;
+      padding: 10px 15px;
+      background-color: #2196f3;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+    }
+
+    .pdf-toolbar button:hover {
+      background-color: #1a78c2;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .pdf-toolbar .page-navigation {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pdf-toolbar .page-navigation input {
+      width: 60px;
+      padding: 8px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+
+    .pdf-toolbar .page-navigation input:focus {
+      border-color: #2196f3;
+      outline: none;
+      box-shadow: 0 0 8px rgba(33, 150, 243, 0.3);
+    }
+
+    #pdfViewerContainer {
+  flex: 1;
+  overflow: auto; /* Enable scrolling */
+  position: relative;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center pages horizontally */
+  height: 600px; /* Fixed height */
+  border: 1px solid #ddd; /* Optional: Add border for better visibility */
+  border-radius: 10px; /* Optional: Add border radius */
+  background-color: #fff; /* Optional: Add background color */
+}
+
+.pdf-page {
+  margin-bottom: 25px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  max-width: 100%; /* Ensure pages don't overflow horizontally */
+  max-height: 100%; /* Ensure pages don't overflow vertically */
+}
+
+    .fullscreen #pdfViewerContainer {
+      padding: 0; /* Remove padding in fullscreen mode */
+    }
+
+    .fullscreen .pdf-page {
+      margin-bottom: 0; /* Remove margin in fullscreen mode */
+      border-radius: 0; /* Remove border radius in fullscreen mode */
+    }
+
+    .sidebar {
+      width: 350px; /* Increased width */
+      background-color: #fff;
+      border-left: 1px solid #ddd;
+      padding: 25px;
+      overflow-y: auto;
+      height: 900px; /* Increased height */
+      box-shadow: -4px 0 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 25px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .review-section {
+      margin-bottom: 25px;
+    }
+
+    .review-section h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #555;
+      font-weight: 500;
+    }
+
+    .stars {
+      display: flex;
+      gap: 8px;
+    }
+
+    .stars .star {
+      font-size: 28px; /* Increased size */
+      color: #ddd;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .stars .star.active,
+    .stars .star:hover {
+      color: #ff9800;
+    }
+
+    .comments-section {
+      margin-top: 25px;
+    }
+
+    .comments-section textarea {
+      width: 100%;
+      height: 120px; /* Increased height */
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      resize: none;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+
+    .comments-section textarea:focus {
+      border-color: #2196f3;
+      outline: none;
+      box-shadow: 0 0 8px rgba(33, 150, 243, 0.3);
+    }
+
+    .comments-section button {
+      padding: 12px 20px;
+      background-color: #2196f3;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .comments-section button:hover {
+      background-color: #1a78c2;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .comments-list {
+      margin-top: 25px;
+    }
+
+    .comments-list p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 15px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      border: 1px solid #eee;
+    }
+
+    .loading-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .loading-container .loading-text {
+      font-size: 18px;
+      color: #333;
+      margin-top: 15px;
+    }
+
+    .loading-container .loading-bar {
+      width: 250px; /* Increased width */
+      height: 6px; /* Increased height */
+      background-color: #ddd;
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .loading-container .loading-bar::after {
+      content: '';
+      display: block;
+      width: 50%;
+      height: 100%;
+      background-color: #2196f3;
+      animation: loading 1.5s infinite ease-in-out;
+    }
+
+    @keyframes loading {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+
+    .fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+      background-color: #fff;
+    }
+
+    .fullscreen .sidebar {
+      display: none;
+    }
+
+    .fullscreen .pdf-container {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+  <div class="main-container">
+    <div class="pdf-container">
+      <div class="pdf-toolbar">
+        <div>
+          <button id="zoomIn">Zoom In</button>
+          <button id="zoomOut">Zoom Out</button>
+        </div>
+        <div class="page-navigation">
+          <button id="prevPage">Previous</button>
+          <input type="number" id="currentPage" value="1" min="1" />
+          <span id="totalPages"></span>
+          <button id="nextPage">Next</button>
+        </div>
+      </div>
+      <div id="pdfViewerContainer">
+        <div id="loadingContainer">Loading PDF...</div>
+        <canvas id="pdfCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+  <div id="footer-container"></div>
+
+  <script>
+    let pdfDoc = null, currentPage = 1, totalPages = 0, pdfScale = 1.0;
+    
+    async function loadPDF() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const isbn = urlParams.get('ISBN');
+      const prnNo = sessionStorage.getItem('prn_no');
+      if (!isbn || !prnNo) {
+        alert('Invalid request. Please log in again.');
+        return;
+      }
+      
+      try {
+        document.getElementById('loadingContainer').style.display = 'block';
+        const response = await fetch(`https://central-library.onrender.com/getfetchdata?isbn=${isbn}&prn_no=${prnNo}`);
+        if (!response.ok) throw new Error('Failed to fetch PDF');
+        const pdfBlob = await response.blob();
+        const pdfUrl = URL.createObjectURL(pdfBlob);
+        
+        pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
+        totalPages = pdfDoc.numPages;
+        document.getElementById('totalPages').textContent = `of ${totalPages}`;
+        document.getElementById('loadingContainer').style.display = 'none';
+        renderPage(currentPage);
+      } catch (error) {
+        console.error('Error loading PDF:', error);
+        alert('Failed to load PDF. Please try again later.');
+      }
+    }
+
+    async function renderPage(pageNumber) {
+      const canvas = document.getElementById('pdfCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      const page = await pdfDoc.getPage(pageNumber);
+      const viewport = page.getViewport({ scale: pdfScale });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      
+      const renderContext = {
+        canvasContext: ctx,
+        viewport: viewport
+      };
+      await page.render(renderContext).promise;
+    }
+
+    document.getElementById('prevPage').addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        document.getElementById('currentPage').value = currentPage;
+        renderPage(currentPage);
+      }
+    });
+
+    document.getElementById('nextPage').addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        document.getElementById('currentPage').value = currentPage;
+        renderPage(currentPage);
+      }
+    });
+
+    document.getElementById('currentPage').addEventListener('change', () => {
+      const page = parseInt(document.getElementById('currentPage').value);
+      if (page >= 1 && page <= totalPages) {
+        currentPage = page;
+        renderPage(currentPage);
+      }
+    });
+
+    document.getElementById('zoomIn').addEventListener('click', () => {
+      pdfScale += 0.1;
+      renderPage(currentPage);
+    });
+
+    document.getElementById('zoomOut').addEventListener('click', () => {
+      if (pdfScale > 0.5) {
+        pdfScale -= 0.1;
+        renderPage(currentPage);
+      }
+    });
+    function renderStars(rating) {
+      const stars = document.querySelectorAll('.star');
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.classList.add('active');
+        } else {
+          star.classList.remove('active');
+        }
+      });
+    }
+
+    // Star Rating Interaction
+    document.querySelectorAll('.star').forEach(star => {
+      star.addEventListener('click', async () => {
+        const rating = star.getAttribute('data-value');
+        const urlParams = new URLSearchParams(window.location.search);
+        const isbn = urlParams.get('ISBN');
+
+        try {
+          const response = await fetch(`https://central-library.onrender.com/submitrating?isbn=${isbn}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ rating }),
+          });
+
+          if (!response.ok) throw new Error('Failed to submit rating');
+
+          fetchReviews(); // Refresh ratings
+        } catch (error) {
+          console.error('Error submitting rating:', error);
+        }
+      });
+    });
+
+    async function fetchComments() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const isbn = urlParams.get('ISBN');
+
+  try {
+    const response = await fetch(`https://central-library.onrender.com/getreview?isbn=${isbn}`);
+    if (!response.ok) throw new Error('Failed to fetch comments');
+
+    const comments = await response.json();
+    const commentsList = document.getElementById('commentsList');
+
+    if (comments.length > 0) {
+      commentsList.innerHTML = comments.map(comment => `<p>${comment.comment} (Posted on: ${new Date(comment.timestamp).toLocaleString()})</p>`).join('');
+    } else {
+      commentsList.innerHTML = '<p>No comments available.</p>';
+    }
+  } catch (error) {
+    console.error('Error fetching comments:', error);
+  }
+}
+
+document.getElementById('submitComment').addEventListener('click', async () => {
+  const comment = document.getElementById('commentInput').value.trim();
+  if (!comment) return;
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const isbn = urlParams.get('ISBN');
+
+  try {
+    const response = await fetch(`https://central-library.onrender.com/savereview?isbn=${isbn}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ comment }),  // Send the comment in the body of the request
+    });
+
+    if (!response.ok) throw new Error('Failed to submit comment');
+
+    document.getElementById('commentInput').value = '';  // Clear the input after submission
+    fetchComments(); // Refresh comments list
+  } catch (error) {
+    console.error('Error submitting comment:', error);
+  }
+});
+
+
+    // Disable right-click and printing
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+        e.preventDefault();
+        alert('Printing is disabled for this document.');
+      }
+    });
+    document.addEventListener('DOMContentLoaded', loadPDF);
+  </script>
+</body>
+</html>
