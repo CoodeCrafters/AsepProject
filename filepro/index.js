@@ -211,74 +211,77 @@ app.post('/saveLibraryView', async (req, res) => {
 // Endpoint: /getfetchdata
 
 app.get('/getfetchdata', async (req, res) => {
-  try {
-      const origin = req.get('Origin');
-      if (origin !== 'https://coodecrafters.github.io') {
-          return res.status(403).send({ error: "What are u trying to access, go to hell" });
-      }
+    try {
+        const origin = req.get('Origin');
+        if (origin !== 'https://coodecrafters.github.io') {
+            return res.status(403).send({ error: "Unauthorized access" });
+        }
 
-      const { isbn, prn_no } = req.query;
-      if (!isbn || !prn_no) {
-          return res.status(400).send({ error: 'Both ISBN and PRN number are required' });
-      }
+        const { isbn, prn_no } = req.query;
+        if (!isbn || !prn_no) {
+            return res.status(400).send({ error: 'Both ISBN and PRN number are required' });
+        }
 
-      // Fetch profile data
-      const profile = await Profile.findOne({ prn_no });
-      if (!profile) return res.status(404).send({ error: 'Profile not found' });
+        // Fetch profile and library data
+        const profile = await Profile.findOne({ prn_no });
+        if (!profile) return res.status(404).send({ error: 'Profile not found' });
 
-      // Fetch library view
-      const libraryView = await LibraryView.findOne({ isbn });
-      if (!libraryView) return res.status(404).send({ error: 'Library view not found' });
+        const libraryView = await LibraryView.findOne({ isbn });
+        if (!libraryView) return res.status(404).send({ error: 'Library view not found' });
 
-      // Get PDF URL
-      const pdfUrl = libraryView.pdf_link;
+        // Get PDF URL
+        const pdfUrl = libraryView.pdf_link;
 
-      // Stream the PDF directly
-      const pdfResponse = await fetch(pdfUrl);
-      if (!pdfResponse.ok) {
-          return res.status(500).send({ error: 'Failed to fetch the PDF file' });
-      }
+        // Fetch the PDF stream from external source
+        const pdfResponse = await fetch(pdfUrl);
+        if (!pdfResponse.ok) {
+            return res.status(500).send({ error: 'Failed to fetch the PDF file' });
+        }
 
-      // Create a new PDF document and load the streamed PDF
-      const existingPdfBytes = await pdfResponse.arrayBuffer();
-      const pdfDoc = await PDFDocument.load(existingPdfBytes);
-      const pages = pdfDoc.getPages();
-      const watermarkText = prn_no;
+        // Load the original PDF
+        const existingPdfBytes = await pdfResponse.arrayBuffer();
+        const pdfDoc = await PDFDocument.load(existingPdfBytes);
 
-      // Embed standard font
-      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+        // Embed standard font
+        const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-      // Watermark settings
-      const watermarkOptions = {
-          color: rgb(0.8, 0.8, 0.8),
-          size: 7,
-          rotate: degrees(45),
-      };
+        // Create a Transform Stream
+        const pdfStream = new stream.PassThrough();
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', 'inline; filename=watermarked.pdf');
 
-      // Apply watermark while streaming
-      pages.forEach(page => {
-          const { width, height } = page.getSize();
-          page.drawText(watermarkText, {
-              x: width / 2 - 30,
-              y: height / 2,
-              font,
-              size: watermarkOptions.size,
-              color: watermarkOptions.color,
-              rotate: watermarkOptions.rotate,
-              opacity: 0.3
-          });
-      });
+        // Stream each page separately
+        (async () => {
+            const newPdfDoc = await PDFDocument.create();
+            for (let i = 0; i < pdfDoc.getPageCount(); i++) {
+                const [copiedPage] = await newPdfDoc.copyPages(pdfDoc, [i]);
+                const { width, height } = copiedPage.getSize();
 
-      // Stream the modified PDF
-      const watermarkedPdfBytes = await pdfDoc.save();
-      res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', 'inline; filename=watermarked.pdf');
+                // Add watermark to the page
+                copiedPage.drawText(prn_no, {
+                    x: width / 2 - 30,
+                    y: height / 2,
+                    font,
+                    size: 10,
+                    color: rgb(0.8, 0.2, 0.2),
+                    rotate: degrees(-45),
+                    opacity: 0.5
+                });
 
-      res.end(Buffer.from(watermarkedPdfBytes));
-  } catch (error) {
-      console.error('Error in /getfetchdata:', error);
-      res.status(500).send({ error: 'Internal server error' });
-  }
+                newPdfDoc.addPage(copiedPage);
+
+                // Send each page as it's processed
+                const pdfBytes = await newPdfDoc.save();
+                pdfStream.write(Buffer.from(pdfBytes));
+            }
+            pdfStream.end(); // End the stream after all pages are processed
+        })();
+
+        pdfStream.pipe(res);
+    } catch (error) {
+        console.error('Error in /getfetchdata:', error);
+        res.status(500).send({ error: 'Internal server error' });
+    }
 });
 
 // Define the /heartbeat endpoint
