@@ -400,7 +400,7 @@ app.get('/getreview', async (req, res) => {
 });
 
 // 🔹 1️⃣ Submit a Rating (POST Request)
-app.post("/submitrating/:isbn", async (req, res) => {
+app.post("/submitrating", async (req, res) => {
   try {
     const { isbn } = req.params;
     const { rating, review, userId } = req.body;
@@ -432,7 +432,7 @@ app.post("/submitrating/:isbn", async (req, res) => {
 });
 
 // 🔹 2️⃣ Retrieve Ratings (GET Request)
-app.get("/retrieverating/:isbn", async (req, res) => {
+app.get("/retrieverating", async (req, res) => {
   try {
     const { isbn } = req.params;
 
