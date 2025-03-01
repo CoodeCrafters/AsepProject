@@ -123,6 +123,11 @@ child_process@^1.0.2:
   resolved "https://registry.npmjs.org/child_process/-/child_process-1.0.2.tgz"
   integrity sha512-Wmza/JzL0SiWz7kl6MhIKT5ceIlnFPJX+lwUGj7Clhy5MMldsSoJR0+uvRzOS5Kv45Mq7t1PoE8TsOA9bzvb6g==
 
+contains@~0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/contains/-/contains-0.1.1.tgz"
+  integrity sha512-gYfqkG4HpF+/uC1oBvm56WPjG6oRyViz06kQyWlprPp0dYQbMhuijwFffsm1WQW8H2aS9rM6WvK1sPvGPAyTYg==
+
 content-disposition@0.5.4:
   version "0.5.4"
   resolved "https://registry.npmjs.org/content-disposition/-/content-disposition-0.5.4.tgz"
@@ -589,6 +594,13 @@ range-parser@~1.2.1:
   version "1.2.1"
   resolved "https://registry.npmjs.org/range-parser/-/range-parser-1.2.1.tgz"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
+
+rating@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/rating/-/rating-0.1.0.tgz"
+  integrity sha512-MSWJIlJSxqcNczIom6Vi30je12HnifFOgqRdkH2WhkDcHHSF1Ge1Fzc6Uvf4nUPNSthtxElsjDjreSU07XkNHw==
+  dependencies:
+    contains "~0.1.1"
 
 raw-body@2.5.2:
   version "2.5.2"
