@@ -399,80 +399,65 @@ app.get('/getreview', async (req, res) => {
   }
 });
 
-// 🔹 1️⃣ Submit a Rating (POST Request)
-app.post("/submitrating", async (req, res) => {
+
+// Define Rating Schema inline (without a separate module)
+const ratingSchema = new mongoose.Schema({
+  isbn: { type: String, required: true },
+  userId: { type: String, required: true }, // userId will be prn_no from sessionStorage
+  rating: { type: Number, required: true, min: 1, max: 5 },
+});
+
+const Rating = mongoose.model('Rating', ratingSchema);
+
+// 📌 Submit Rating Endpoint
+app.post('/submitrating', async (req, res) => {
   try {
     const { isbn } = req.params;
-    const { rating, review, userId } = req.body;
+    const { rating, userId } = req.body; // userId = prn_no from frontend sessionStorage
 
-    // Validate input
-    if (!rating || rating < 1 || rating > 5) {
-      return res.status(400).send({ error: "Rating must be between 1 and 5." });
-    }
-    if (!userId) {
-      return res.status(400).send({ error: "User ID is required." });
+    if (!rating || !userId) {
+      return res.status(400).json({ error: "Rating and userId (prn_no) are required." });
     }
 
-    // Find existing ratings for the book
-    let bookRating = await Rating.findOne({ isbn });
+    // Check if user already rated the book
+    let existingRating = await Rating.findOne({ isbn, userId });
 
-    if (!bookRating) {
-      bookRating = new Rating({ isbn, ratings: [] });
+    if (existingRating) {
+      existingRating.rating = rating;
+      await existingRating.save();
+      return res.json({ message: "Rating updated successfully" });
+    } else {
+      const newRating = new Rating({ isbn, userId, rating });
+      await newRating.save();
+      return res.json({ message: "Rating submitted successfully" });
     }
-
-    // Add new rating
-    bookRating.ratings.push({ rating, review, userId });
-    await bookRating.save();
-
-    res.status(201).send({ message: "Rating submitted successfully!" });
   } catch (error) {
     console.error("Error submitting rating:", error);
-    res.status(500).send({ error: "Internal server error." });
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
-// 🔹 2️⃣ Retrieve Ratings (GET Request)
-app.get("/retrieverating", async (req, res) => {
+// 📌 Retrieve Rating Endpoint
+app.get('/retrieverating', async (req, res) => {
   try {
     const { isbn } = req.params;
+    const ratings = await Rating.find({ isbn });
 
-    // Find book ratings
-    const bookRating = await Rating.findOne({ isbn });
-
-    if (!bookRating) {
-      return res.status(404).send({ error: "No ratings found for this ISBN." });
+    if (ratings.length === 0) {
+      return res.json({ averageRating: 0, totalRatings: 0 });
     }
 
     // Calculate average rating
-    const ratingsArray = bookRating.ratings;
-    const avgRating =
-      ratingsArray.reduce((sum, r) => sum + r.rating, 0) / ratingsArray.length;
+    const totalRatings = ratings.length;
+    const sumRatings = ratings.reduce((sum, r) => sum + r.rating, 0);
+    const averageRating = sumRatings / totalRatings;
 
-    res.status(200).send({
-      isbn,
-      averageRating: avgRating.toFixed(2),
-      totalRatings: ratingsArray.length,
-      ratings: ratingsArray,
-    });
+    res.json({ averageRating, totalRatings });
   } catch (error) {
-    console.error("Error retrieving ratings:", error);
-    res.status(500).send({ error: "Internal server error." });
+    console.error("Error retrieving rating:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
-
-const RatingSchema = new mongoose.Schema({
-  isbn: { type: String, required: true }, // Book's ISBN number
-  ratings: [
-    {
-      rating: { type: Number, required: true, min: 1, max: 5 }, // Rating value (1-5)
-      review: { type: String, default: "" }, // Optional review text
-      userId: { type: String, required: true }, // User identifier
-      timestamp: { type: Date, default: Date.now }, // Timestamp of rating
-    },
-  ],
-});
-
-module.exports = Rating;
 
 // Start the server
 app.listen(PORT, () => {
