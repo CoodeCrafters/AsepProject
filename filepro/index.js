@@ -12,7 +12,7 @@ const fs = require('fs');
 const path = require('path');
 const stream = require('stream');
 const { exec } = require('child_process');
-const Rating = require("./models/Rating");
+const Rating = require('Rating');
 
 // Initialize Express app
 const app = express();
